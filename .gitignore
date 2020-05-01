@@ -1,11 +1,13 @@
+.idea
+
 Node/node_modules
 Node/sessions
-
 Node/DB.env
-
 Node/conf
 
+Node/.babelrc
 Node/public/images/
 Node/public/js/
 
-.idea
+Node/public/image
+Node/public/js

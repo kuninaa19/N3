@@ -1,0 +1,28 @@
+{
+  "name": "node",
+  "version": "0.0.0",
+  "private": true,
+  "homepage": "/",
+  "scripts": {
+    "start": "nodemon server.js --exec babel-node"
+  },
+  "dependencies": {
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.17.0",
+    "session-file-store": "^1.4.0",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "body-parser": "1.19.0",
+    "mongoose": "5.9.2",
+    "mysql": "^2.18.1",
+    "dotenv": "^8.2.0",
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7"
+  }
+}
