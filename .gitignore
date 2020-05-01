@@ -1,0 +1,11 @@
+Node/node_modules
+Node/sessions
+
+Node/DB.env
+
+Node/conf
+
+Node/public/images/
+Node/public/js/
+
+.idea
