@@ -9,5 +9,5 @@ Node/.babelrc
 Node/public/images/
 Node/public/js/
 
-Node/public/image
-Node/public/js
+package-lock.json
+
