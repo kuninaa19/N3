@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "/",
   "scripts": {
-    "start": "nodemon server.js --exec babel-node"
+    "start": "nodemon app.js --exec babel-node"
   },
   "dependencies": {
     "gulp-babel": "^8.0.0",
