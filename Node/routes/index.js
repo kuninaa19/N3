@@ -1,10 +1,14 @@
-module.exports = function(app) {
+import express from 'express';
+const router = express.Router();
 
-  const mysql = require('../conf/dbInfo');
+import mysql from '../conf/dbInfo';
+
 
   /* GET home page. */
-  app.get('/', function (req, res) {
+router.get('/', function (req, res) {
     res.render('index');
   });
 
-};
+export default router;  // 단하나의 모듈
+// export {router}; //ES6
+// module.exports = router; // nodeJS
