@@ -1,30 +1,39 @@
-const express = require('express');
+import express from 'express';
+import logger from 'morgan';
+import path from 'path';
+import session from 'express-session';
+import methodOverride from 'method-override'; // put, delete 메소드 지원하기위해서
+
 const app = express();
-const bodyParser = require('body-parser');
-const session = require('express-session');
-// const FileStore = require('session-file-store')(session);
-// const mongoose = require('mongoose');
 
-const server = app.listen(3000, function(){
-  console.log("3000서버 가동");
-});
-
-app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
+app.set('views', path.join(__dirname, '/views'));
 
-app.use('/public', express.static(__dirname + '/public'));
+//log
+if (!module.parent) app.use(logger('dev'));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true  }));
+// serve static files
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
-// app.use(session({
-//     secret: '%^#*SIGN@*$#',
-//     resave: false,
-//     saveUninitialized: true,
-//     store: new FileStore(),
-//     //세션 2시간허용
-//     cookie: { originalMaxAge: 7.2e+6, httpOnly: true }
-// }));
+// session support
+app.use(session({
+    resave: false, // don't save session if unmodified
+    saveUninitialized: false, // don't create session until something stored
+    secret: 'some secret here'
+}));
 
-const indexRouter = require('./routes/index')(app);
+// parse request bodies (req.body) body-parser 대안
+app.use(express.urlencoded({extended: true}));
+
+// allow overriding methods in query (?_method=put)
+app.use(methodOverride('_method'));
+
+app.listen(3000, () => console.log('port 3000 Server On'));
+
+// import {router as indexRouter} from './routes/index';
+import indexRouter from './routes/index';
+import userRouter from './routes/users';
+
+app.use('/', indexRouter);
+app.use('/user', userRouter);
+
