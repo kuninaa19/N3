@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+
+#logo {
+    margin: 0 auto;
+    float: left;
+}
+#logo a{
+    /*color: gold;*/
+    /*text-decoration: none;*/
+    padding: 0 0 0 25px;
+
+}
+.logo_image{
+    width: 200px;
+    height:70px;
+    line-height:60px;/*글자의 세로폭을 늘려주는 속성*/
+    vertical-align:middle;
+    object-fit: cover;
+}
+
+ul.topnav {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+ul.topnav li {
+    float: left;
+}
+
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 25px 25px;
+    text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {
+    background-color: #555555;
+    color: white;
+}
+
+ul.topnav li a.active {
+    color: gold;
+}
+
+ul.topnav li.right {
+    float: right;
+}
+
+div#navAlign {
+    display: block;
+    float: right;
+}
