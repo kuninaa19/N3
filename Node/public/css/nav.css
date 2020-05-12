@@ -1,9 +1,11 @@
 /*class 언더바 id 낙타표기*/
 * {
     box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 body {
     margin: 0;
+    padding:0;
 }
 
 #logo {
