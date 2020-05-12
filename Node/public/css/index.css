@@ -6,13 +6,9 @@ body {
     margin: 0;
 }
 
-.menu-trigger {
-    display: none;
-}
-
 .row {
-    width: 90%;
-    margin: 10px auto;
+    width: 80%;
+    margin: 50px auto;
 }
 
 /* Clear floats after the columns */
@@ -22,20 +18,10 @@ body {
     clear: both;
 }
 
-.leftcolumn {
+.column {
     float: left;
-    width: 25%;
-    padding-left: 30px;
-    background-color: white;
-}
-
-/* Right column */
-.rightcolumn {
-    float: left;
-    width: 60%;
+    width: 100%;
     background-color: #ffffff;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 .card {
@@ -151,16 +137,8 @@ body {
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
-    .leftcolumn, .rightcolumn {
+     .column {
         width: 100%;
         padding: 0;
-    }
-}
-
-/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-@media screen and (max-width: 400px) {
-    .topnav a {
-        float: none;
-        width: 100%;
     }
 }
