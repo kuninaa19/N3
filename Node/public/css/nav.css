@@ -1,3 +1,4 @@
+/*class 언더바 id 낙타표기*/
 * {
     box-sizing: border-box;
 }
@@ -20,7 +21,7 @@ body {
     object-fit: cover;
 }
 
-ul.topnav {
+ul.top_nav {
     position: sticky;
     position: -webkit-sticky;
     top: 0;
@@ -33,11 +34,11 @@ ul.topnav {
     border-bottom: 0.5px solid #E6E6E6;
 }
 
-ul.topnav li {
+ul.top_nav li {
     float: left;
 }
 
-ul.topnav li a {
+ul.top_nav li a {
     display: block;
     font-size: 14px;
     font-weight: 600;
@@ -47,15 +48,15 @@ ul.topnav li a {
     text-decoration: none;
 }
 
-ul.topnav li a:hover:not(.active) {
+ul.top_nav li a:hover:not(.active) {
     padding-bottom:23px;
     border-bottom: 2px solid black;
 }
 
-ul.topnav li a.active {
+ul.top_nav li a.active {
 }
 
-ul.topnav li.right {
+ul.top_nav li.right {
     float: right;
 }
 
@@ -72,8 +73,8 @@ div#navAlign {
         float: none;
     }
 
-    ul.topnav li.right,
-    ul.topnav li {
+    ul.top_nav li.right,
+    ul.top_nav li {
         float: none;
     }
 
