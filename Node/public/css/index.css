@@ -6,68 +6,6 @@ body {
     margin: 0;
 }
 
-#logo {
-    margin: 0 auto;
-    float: left;
-}
-#logo a{
-    /*color: gold;*/
-    /*text-decoration: none;*/
-    padding: 0 0 0 25px;
-
-}
-.logo_image{
-    width: 200px;
-    height:70px;
-    line-height:60px;/*글자의 세로폭을 늘려주는 속성*/
-    vertical-align:middle;
-    object-fit: cover;
-}
-
-ul.topnav {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-decoration: none solid rgb(72,72,72);
-    overflow: hidden;
-    background-color: #FFFFFF;
-    border-bottom: 0.5px solid #E6E6E6;
-
-}
-
-ul.topnav li {
-    float: left;
-}
-
-ul.topnav li a {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: black;
-    text-align: center;
-    padding: 25px 25px;
-    text-decoration: none;
-}
-
-ul.topnav li a:hover:not(.active) {
-    border-bottom: 2px solid black;
-}
-
-ul.topnav li a.active {
-}
-
-ul.topnav li.right {
-    float: right;
-}
-
-div#navAlign {
-    display: block;
-    float: right;
-}
-
 .menu-trigger {
     display: none;
 }
@@ -210,33 +148,7 @@ div#navAlign {
     border-top: 1px solid whitesmoke;
 }
 
-@media screen and (max-width: 600px) {
-    #logo{
-        float: none;
-    }
-    div#navAlign {
-        float: none;
-    }
 
-    ul.topnav li.right,
-    ul.topnav li {
-        float: none;
-    }
-
-    .card .pic_cotent {
-        width: 90%;
-        height: 250px;
-        display: block;
-        margin: 0px auto;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        border-radius: 2%;
-        overflow: hidden;
-        vertical-align:middle;
-        /*object-fit: cover;*/
-    }
-}
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
     .leftcolumn, .rightcolumn {
