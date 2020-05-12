@@ -51,7 +51,6 @@ ul.top_nav li a {
 }
 
 ul.top_nav li a:hover:not(.active) {
-    padding-bottom:23px;
     border-bottom: 2px solid black;
 }
 
@@ -80,7 +79,7 @@ div#navAlign {
         float: none;
     }
 
-    .card .pic_cotent {
+    .card .pic_content {
         width: 90%;
         height: 250px;
         display: block;
