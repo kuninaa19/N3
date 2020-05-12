@@ -10,15 +10,12 @@ body {
     float: left;
 }
 #logo a{
-    /*color: gold;*/
-    /*text-decoration: none;*/
-    padding: 0 0 0 25px;
+    padding: 0;
 
 }
 .logo_image{
-    width: 200px;
+    width: 60px;
     height:70px;
-    line-height:60px;/*글자의 세로폭을 늘려주는 속성*/
     vertical-align:middle;
     object-fit: cover;
 }
@@ -29,9 +26,11 @@ ul.topnav {
     top: 0;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 0 25px 0 25px;
+    text-decoration: none solid rgb(72,72,72);
     overflow: hidden;
-    background-color: #333333;
+    background-color: #FFFFFF;
+    border-bottom: 0.5px solid #E6E6E6;
 }
 
 ul.topnav li {
@@ -40,19 +39,20 @@ ul.topnav li {
 
 ul.topnav li a {
     display: block;
-    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
     text-align: center;
     padding: 25px 25px;
     text-decoration: none;
 }
 
 ul.topnav li a:hover:not(.active) {
-    background-color: #555555;
-    color: white;
+    padding-bottom:23px;
+    border-bottom: 2px solid black;
 }
 
 ul.topnav li a.active {
-    color: gold;
 }
 
 ul.topnav li.right {
@@ -62,4 +62,32 @@ ul.topnav li.right {
 div#navAlign {
     display: block;
     float: right;
+}
+
+@media screen and (max-width: 600px) {
+    #logo{
+        float: none;
+    }
+    div#navAlign {
+        float: none;
+    }
+
+    ul.topnav li.right,
+    ul.topnav li {
+        float: none;
+    }
+
+    .card .pic_cotent {
+        width: 90%;
+        height: 250px;
+        display: block;
+        margin: 0px auto;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2%;
+        overflow: hidden;
+        vertical-align:middle;
+        /*object-fit: cover;*/
+    }
 }
