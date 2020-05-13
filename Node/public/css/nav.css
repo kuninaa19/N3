@@ -24,6 +24,7 @@ body {
 }
 
 ul.top_nav {
+    z-index: 2;
     position: sticky;
     position: -webkit-sticky;
     top: 0;
