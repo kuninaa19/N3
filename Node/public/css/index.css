@@ -131,7 +131,7 @@ input[type="submit"] {
     --searchFontSize: .75rem;
     --searchPadding: .1rem;
 
-    --searchInputBorderRadius: .125rem;
+    --searchInputBorderRadius: 0.5rem;
 
     --searchInputSearchBackgroundColor: #fff;
     --searchInputSearchColor: #42454e;
