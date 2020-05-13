@@ -32,6 +32,8 @@ app.listen(3000, () => console.log('port 3000 Server On'));
 
 // import {router as indexRouter} from './routes/index';
 import indexRouter from './routes/index';
-
 app.use('/', indexRouter);
+
+import searchRouter from "./routes/room/search";
+app.use('/search', searchRouter);
 
