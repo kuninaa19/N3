@@ -20,14 +20,17 @@
 .item {
      background-color: white;
      padding: 20px;
-     margin: 20px 0 60px 0;
+     margin: 30px 0 80px 0;
      border: 1px solid #E6E6E6;
      border-radius: 10px;
      font-size: 20px;
  }
 .item_title{
-    height: 20px;
+    height: 40px;
+    font-size: 25px;
+    font-weight: bolder;
     color: #2E2E2E;
+    text-align:center;
 }
 .item a {
     color: black;
@@ -181,7 +184,7 @@ input[type="submit"] {
     padding: 5px;
     text-align: center;
     background: #ffffff;
-    margin-top: 40px;
+    margin-top: -20px;
     color: darkgrey;
     border-top: 1px solid whitesmoke;
 }
