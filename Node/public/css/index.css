@@ -94,7 +94,13 @@ input {
     outline: 0;
     padding: 0;
 }
-
+input:focus{
+    background: #FFFFFF;
+    box-shadow: black;
+    /*border: 2px solid deepskyblue;*/
+    outline: none;
+    padding: 13px 13px 13px 54px;
+}
 input[type="search"] {
     box-sizing: content-box;
     font-size: 20px;
@@ -118,13 +124,12 @@ input[type="submit"] {
     flex-grow: 1;
 }
 
-/* modules/search.css */
-
+/*여행지검색버튼*/
 :root {
-    --searchBackgroundColor: #42454e;
+    --searchBackgroundColor: #FFFFFF;
     --searchBorderRadius: .125rem;
     --searchFontSize: .75rem;
-    --searchPadding: .5rem;
+    --searchPadding: .1rem;
 
     --searchInputBorderRadius: .125rem;
 
