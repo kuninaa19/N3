@@ -1,0 +1,56 @@
+/*class 언더바 id 낙타표기*/
+.left_side{
+    float:left;
+    width:51.4%;
+    height: 100%;
+}
+
+.middle_side{
+    float:left;
+    width:24.2%;
+    height: 100%;
+}
+.right_side{
+    float:left;
+    width:24.2%;
+    height: 100%;
+}
+
+.left_side img{
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: auto;
+    width: 100%;
+}
+.middle_side img{
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: auto;
+    width: 100%;
+}
+.right_side img{
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: auto;
+    width: 100%;
+}
+
+.footer {
+    padding: 5px;
+    text-align: center;
+    background: #ffffff;
+    margin-top: -20px;
+    color: darkgrey;
+    border-top: 1px solid whitesmoke;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .column {
+        width: 100%;
+        padding: 0;
+    }
+}
