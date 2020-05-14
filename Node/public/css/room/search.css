@@ -19,7 +19,7 @@
 .item {
     background-color: white;
     padding: 20px;
-    margin: 30px 0 80px 0;
+    margin: 20px 0 80px 0;
     border: 1px solid #E6E6E6;
     border-radius: 10px;
     font-size: 20px;
@@ -41,7 +41,6 @@
     border: 1px solid #D8D8D8;
     border-radius: 5px;
     height: 200px;
-
 }
 .tray :hover{
     cursor: pointer;
@@ -61,14 +60,33 @@
     border-radius: 5px 0 0 5px;
 }
 
-.img_desc_div {
+.img_desc {
     text-align: left;
-    padding : 20px 0 20px 15px;
-    font-size: 14px;
+    padding : 20px 15px;
+    font-size: 18px;
     width: 100%;
 }
-
-
+.img_desc .bottom{
+    height: 50%;
+    position: relative;
+}
+.img_desc .bottom_left{
+    text-align: left;
+    width:100%;
+    vertical-align: bottom;
+    position: absolute;
+    bottom: 0;
+    font-size: 16px;
+}
+.img_desc .bottom_right{
+    text-align: right;
+    width:100%;
+    position: absolute;
+    bottom: 0;
+    font-weight: bolder;
+    font-size:  20px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
 .footer {
     padding: 5px;
     text-align: center;
