@@ -40,5 +40,5 @@ import searchRouter from "./routes/room/search";
 app.use('/search', searchRouter);
 
 // 방 세부페이지 라우터
-import detailRouter from "./routes/room/search";
+import detailRouter from "./routes/room/detail";
 app.use('/rooms', detailRouter);
