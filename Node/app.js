@@ -30,10 +30,15 @@ app.use(methodOverride('_method'));
 
 app.listen(3000, () => console.log('port 3000 Server On'));
 
+
 // import {router as indexRouter} from './routes/index';
 import indexRouter from './routes/index';
 app.use('/', indexRouter);
 
+//방 검색 라우터
 import searchRouter from "./routes/room/search";
 app.use('/search', searchRouter);
 
+// 방 세부페이지 라우터
+import detailRouter from "./routes/room/search";
+app.use('/rooms', detailRouter);
