@@ -1,4 +1,5 @@
 /*class 언더바 id 낙타표기*/
+/*상단 이미지*/
 .left_side{
     float:left;
     width:51.4%;
@@ -37,7 +38,105 @@
     height: auto;
     width: 100%;
 }
+/*이미지 끝*/
 
+.row {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.left_column {
+    float: left;
+    width: 60%;
+    padding-left: 30px;
+    background-color: white;
+}
+
+.right_column {
+    float: left;
+    width: 40%;
+    background-color: #ffffff;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.item {
+    background-color: white;
+    padding: 0 20px;
+    margin: 20px 0 80px 0;
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    font-size: 20px;
+}
+.item_title{
+    height: 40px;
+    font-size: 25px;
+    font-weight: bolder;
+    color: #2E2E2E;
+    text-align:center;
+}
+.item a {
+    color: black;
+    text-decoration: none;
+}
+.tray{
+    display:flex;
+    margin: 40px auto;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    height: 200px;
+}
+.tray :hover{
+    cursor: pointer;
+}
+.card {
+    width: 40%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.card img{
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: 198px;
+    width: 100%;
+    border-radius: 5px 0 0 5px;
+}
+
+.img_desc {
+    text-align: left;
+    padding : 20px 15px;
+    font-size: 18px;
+    width: 100%;
+}
+.img_desc .bottom{
+    height: 50%;
+    position: relative;
+}
+.img_desc .bottom_left{
+    text-align: left;
+    width:100%;
+    vertical-align: bottom;
+    position: absolute;
+    bottom: 0;
+    font-size: 16px;
+}
+.img_desc .bottom_right{
+    text-align: right;
+    width:100%;
+    position: absolute;
+    bottom: 0;
+    font-weight: bolder;
+    font-size:  20px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
 .footer {
     padding: 5px;
     text-align: center;
