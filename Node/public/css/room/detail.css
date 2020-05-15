@@ -1,4 +1,5 @@
 /*class 언더바 id 낙타표기*/
+
 /*상단 이미지*/
 .left_side{
     float:left;
@@ -69,9 +70,34 @@
 .item {
     background-color: white;
     padding: 0 20px;
-    margin: 20px 0 80px 0;
+    margin: 20px 0 20px 0;
     border: 1px solid #E6E6E6;
     font-size: 20px;
+}
+.item a {
+    color: black;
+    text-decoration: none;
+}
+/*우측 item 창*/
+#leftSideTop{
+    border: 0;
+    padding-top: 1px;
+}
+
+.hotel_title{
+    margin:10px 10px 20px 10px;
+}
+
+.hotel_name{
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/*숙소 세부설명*/
+#leftSideMiddle{
+    border: 0;
+    margin-top:10px;
 }
 .item_title{
     height: 40px;
@@ -80,18 +106,8 @@
     color: #2E2E2E;
     text-align:center;
 }
-.item a {
-    color: black;
-    text-decoration: none;
-}
-.hotel_title{
-    margin:15px;
-}
-.hotel_name{
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
+
+
 .tray{
     display:flex;
     margin: 40px auto;
