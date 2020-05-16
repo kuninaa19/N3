@@ -84,7 +84,7 @@
     padding-top: 1px;
 }
 
-.hotel_title{
+.hotel_info{
     margin:10px 10px 20px 10px;
 }
 
@@ -99,6 +99,66 @@
     border: 0;
     margin-top:10px;
 }
+.hotel_description{
+    /*font-weight: bold;*/
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/*숙소 후기*/
+#leftSideBottom{
+    border: 0;
+    margin-top:10px;
+}
+.hotel_review{
+
+}
+
+#rightSideTop{
+    border: 0;
+    /*padding-top: 1px;*/
+}
+.reservation_tray{
+    /*display:flex;*/
+    margin: 10px auto;
+    padding:10px;
+    height: 70px;
+    border: 1px solid #D8D8D8;
+    border-radius: 10px;
+}
+.reservation_tray :hover{
+    cursor: pointer;
+}
+.reservation_tray .card {
+    width: 20%;
+    height: 100%;
+
+    cursor: pointer;
+}
+
+.reservation_tray .card img{
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    vertical-align: center;
+    text-align: center;
+}
+
+.calendar_btn {
+    height: 80%;
+    width: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: lighter;
+    font-size: 18px;
+    text-align: center;
+    border: 0;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .item_title{
     height: 40px;
     font-size: 25px;

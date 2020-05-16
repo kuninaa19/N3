@@ -8,11 +8,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/css/room/detail.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/modal.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+
 </head>
 <body>
 <ul class="top_nav">
@@ -115,7 +127,7 @@
     <!--        숙소 이름, 간략정보-->
     <div class="left_column">
         <div class="item" id="leftSideTop">
-            <div class="hotel_title">
+            <div class="hotel_info">
                 <div class="hotel_name">
                         프레이저 레지던스 쿠알라룸푸르 (Fraser Residence Kuala Lumpur)
                 </div>
@@ -133,18 +145,17 @@
         </div>
 <!--숙소설명-->
         <div class="item" id="leftSideMiddle">
-            <div class="hotel_title">
-                <div class="hotel_name">
-                    방설명
+            <div class="hotel_info">
+                <div class="hotel_description">
+                    <p><span>Selamat Datang Ke Malaysia!</span><br /><span>My place is located at the heart of Kuala Lumpur City Centre.</span><br /><span>It is famous for it's rooftop infinity pool with the perfect view of Kuala Lumpur.</span><br /><span>Can be accessible through public railways LRT and KTM. Only 5 minutes drive away from the city centre of Kuala Lumpur filled with tourist attraction and shopping centres.</span></p>
                 </div>
-                <div style="font-size: 16px; margin-bottom:20px">
-                    쿠알라룸푸르
-                </div>
-                <div style="font-size: 16px;">
-                    <span>인원 6명</span>&nbsp;
-                    <span>침실 1개</span>&nbsp;
-                    <span>침대 5개</span>&nbsp;
-                    <span>욕실 1개</span>
+            </div>
+            <div style="border-top: 1px #E6E6E6 solid;"></div>
+        </div>
+<!--숙소후기-->
+        <div class="item" id="leftSideBottom">
+            <div class="hotel_info">
+                <div class="hotel_review">
                 </div>
             </div>
             <div style="border-top: 1px #E6E6E6 solid;"></div>
@@ -152,8 +163,29 @@
     </div>
     <!--        숙소 결제-->
         <div class="right_column">
-            <div class="item">
+            <div class="item" id="rightSideTop">
+                <div>예약</div>
+                <div class="reservation_tray">
+                    <div style="font-size: 14px; text-align: center">
+                        체크인 &emsp;&emsp;&emsp; 체크아웃
+                    </div>
+                        <input type="button" class="calendar_btn" name="daterange" value="" />
+                </div>
+
+                <script>
+                    $(function() {
+                        $('input[name="daterange"]').daterangepicker({
+                            opens: 'left',
+                            locale :{
+                                format: 'YYYY-MM-DD'
+                            }
+                        }, function(start, end, label) {
+                            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                        });
+                    });
+                </script>
                 <div class="tray">
+
                     <div class="card">
                         <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
                     </div>
@@ -184,5 +216,6 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <!--모달처리 JS-->
 <script src="/static/js/modal.js"></script>
+<script src="/static/js/calendar.js"></script>
 </body>
 </html>
