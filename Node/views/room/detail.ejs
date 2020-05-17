@@ -161,7 +161,7 @@
         <div class="right_column">
             <div class="item">
                 <div>
-                    <div style="padding:20px 0; border-bottom: 1px solid #D8D8D8">₩25,890 / 박</div>
+                    <div class="per_day_charge">₩25,890 / 박</div>
                     <div style="margin: 20px 0 0 0; font-size: 14px">날짜</div>
                     <div class="reservation_tray">
                         <div style="font-size: 14px; text-align: center">
@@ -170,23 +170,34 @@
                         </div>
                     </div>
                 </div>
-
+<!--                요금표시-->
                 <div class="receipt">
-                    <div>
-                        <div style="float:left; width: 80%; text-align: left;">
+                    <div class="charge_detail">
                             <span >₩19,554 x 1박</span>
-                        </div>
-                    <span style="float:right; width: 20%; text-align: right;">₩19,554</span>
+                    <span class="charge">₩19,554</span>
+                    </div>
+
+                    <div class="charge_detail">
+                            <span >청소비</span>
+                        <span class="charge">₩19,554</span>
+                    </div>
+
+                    <div class="charge_detail">
+                            <span >서비스 수수료</span>
+                        <span class="charge">₩19,554</span>
+                    </div>
+
+                    <div class="charge_detail" id="chargeSum">
+                        <span >총 합계</span>
+                        <span class="charge">₩19,554</span>
                     </div>
                 </div>
-
-                <!--                예약버튼-->
+<!--                예약버튼-->
                 <div style="padding: 0 20px; margin:20px 0">
                     <input type="button" id="greenBtn" name="btn" value="예약하기" />
                 </div>
             </div>
         </div>
-
 </div>
 <div class="footer">
     <h5>Hotel reservation dummy site</h5>

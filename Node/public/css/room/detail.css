@@ -54,14 +54,14 @@
 
 .left_column {
     float: left;
-    width: 60%;
+    width: 65%;
     padding-left: 30px;
     background-color: white;
 }
 
 .right_column {
     float: left;
-    width: 40%;
+    width: 35%;
     background-color: #ffffff;
     padding-left: 20px;
     padding-right: 20px;
@@ -122,6 +122,12 @@
     height: 200px;
 }
 
+.per_day_charge{
+    font-weight: bold;
+    font-size:17px;
+    padding:15px 0;
+    border-bottom: 1px solid #D8D8D8;
+}
 /*숙소 날짜 및 가격*/
 .reservation_tray{
     margin: 10px auto;
@@ -171,12 +177,28 @@
 }
 
 .receipt{
-    border-bottom: 1px solid #E6E6E6;
-    padding : 10px 0 30px;
+    padding : 10px 0;
     font-weight: lighter;
     font-size: 14px;
 }
+.receipt .charge_detail{
+    margin: 10px 0;
+    padding : 5px 0;
+    border-bottom: 1px solid #E6E6E6;
+}
 
+#chargeSum{
+    padding : 0;
+    margin: 5px 0;
+    border-bottom: 0;
+    font-weight: bold;
+}
+
+.charge_detail .charge{
+    float:right;
+    width: 20%;
+    text-align: right;
+}
 
 .tray{
     display:flex;
