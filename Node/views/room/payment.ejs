@@ -1,13 +1,130 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
+    <title>Document</title>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <!--    폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/room/payment.css"/>
+    <!--    datePicker-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <!--    datePicker-->
 </head>
 <body>
+<div class="top_nav">
+    <div class="title">
+        <button class="back_btn" name="back_btn"><</button>
+        확인 및 결제
+    </div>
+</div>
 
+<div class="row">
+    <!--        숙소 이름, 간략정보-->
+    <div class="left_column">
+        <div class="item" id="leftSideTop">
+            <div class="hotel_info">
+                <div class="hotel_name">
+                    프레이저 레지던스 쿠알라룸푸르 (Fraser Residence Kuala Lumpur)
+                </div>
+                <div style="font-size: 16px; margin-bottom:20px">
+                    쿠알라룸푸르
+                </div>
+                <div style="font-size: 16px;">
+                    <span>인원 6명</span>&nbsp;
+                    <span>침실 1개</span>&nbsp;
+                    <span>침대 5개</span>&nbsp;
+                    <span>욕실 1개</span>
+                </div>
+            </div>
+            <div style="border-top: 1px #E6E6E6 solid;"></div>
+        </div>
+
+        <!--숙소설명-->
+        <div class="item" id="leftSideMiddle">
+            <div class="hotel_info">
+                <div class="hotel_description">
+                    <p><span>Selamat Datang Ke Malaysia!</span><br /><span>My place is located at the heart of Kuala Lumpur City Centre.</span><br /><span>It is famous for it's rooftop infinity pool with the perfect view of Kuala Lumpur.</span><br /><span>Can be accessible through public railways LRT and KTM. Only 5 minutes drive away from the city centre of Kuala Lumpur filled with tourist attraction and shopping centres.</span></p>
+                </div>
+            </div>
+            <div style="border-top: 1px #E6E6E6 solid;"></div>
+            <!--숙소위치-->
+            <div class="hotel_info">
+                <div class="hotel_map">
+
+                </div>
+            </div>
+
+        </div>
+        <!--숙소후기-->
+        <div class="item" id="leftSideBottom">
+            <div class="hotel_info">
+                <div class="hotel_review">
+                    <div style="font-weight: bold; font-size: 17px;">
+                        <span >3.9 / 5 </span>&nbsp;
+                        <span>이용후기 96</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px #E6E6E6 solid;"></div>
+        </div>
+    </div>
+    <!--        숙소 결제-->
+    <div class="right_column">
+        <div class="item">
+            <div>
+                <div class="per_day_charge">₩25,890 / 박</div>
+                <div style="margin: 20px 0 0 0; font-size: 14px">날짜</div>
+                <div class="reservation_tray">
+                    <div style="font-size: 14px; text-align: center">
+                        체크인 &emsp;&emsp;&emsp; 체크아웃
+                        <input type="button" class="calendar_btn" name="daterange" value="" />
+                    </div>
+                </div>
+            </div>
+            <!--                요금표시-->
+            <div class="receipt">
+                <div class="charge_detail">
+                    <span >₩19,554 x 1박</span>
+                    <span class="charge">₩19,554</span>
+                </div>
+
+                <div class="charge_detail">
+                    <span >청소비</span>
+                    <span class="charge">₩19,554</span>
+                </div>
+
+                <div class="charge_detail">
+                    <span >서비스 수수료</span>
+                    <span class="charge">₩19,554</span>
+                </div>
+
+                <div class="charge_detail" id="chargeSum">
+                    <span >총 합계</span>
+                    <span class="charge">₩19,554</span>
+                </div>
+            </div>
+            <!--                예약버튼-->
+            <div style="padding: 0 20px; margin:20px 0">
+                <input type="button" id="greenBtn" name="btn" value="예약하기" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <h5>Hotel reservation dummy site</h5>
+</div>
+
+<!--모달처리 JS-->
+<script src="/static/js/datepicker.js"></script>
 </body>
 </html>
