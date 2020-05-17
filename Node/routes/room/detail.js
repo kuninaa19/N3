@@ -9,8 +9,8 @@ router.get('/:number', function (req, res) {
 });
 
 //방 확인 및 결제 페이지
-router.get('/:number/payment', function (req, res) {
-    res.render('room/payment');
+router.get('/:number/reservation/payment', function (req, res) {
+    res.render('room/reservation');
 });
 
 export default router;  // 단하나의 모듈
