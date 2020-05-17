@@ -115,11 +115,15 @@
 }
 
 #rightSideTop{
-    border: 0;
-    /*padding-top: 1px;*/
+    display: block;
+    margin: 40px auto;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    height: 200px;
 }
+
+/*숙소 날짜 및 가격*/
 .reservation_tray{
-    /*display:flex;*/
     margin: 10px auto;
     padding:10px;
     height: 70px;
@@ -129,25 +133,9 @@
 .reservation_tray :hover{
     cursor: pointer;
 }
-.reservation_tray .card {
-    width: 20%;
-    height: 100%;
-
-    cursor: pointer;
-}
-
-.reservation_tray .card img{
-    display: block;
-    background-position: center center;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-    vertical-align: center;
-    text-align: center;
-}
 
 .calendar_btn {
-    height: 80%;
+    /*height: 60%;*/
     width: 100%;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: lighter;
@@ -159,12 +147,34 @@
     cursor: pointer;
 }
 
+#greenBtn{
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    border: #fbfbfb solid 1px;
+    cursor:pointer;
+    background-color: #088A85;
+    color:white;
+    padding:10px;
+    font-size:18px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    font-weight:500;
+}
 .item_title{
     height: 40px;
     font-size: 25px;
     font-weight: bolder;
     color: #2E2E2E;
     text-align:center;
+}
+
+.receipt{
+    border-bottom: 1px solid #E6E6E6;
+    padding : 10px 0 30px;
+    font-weight: lighter;
+    font-size: 14px;
 }
 
 
@@ -193,33 +203,6 @@
     border-radius: 5px 0 0 5px;
 }
 
-.img_desc {
-    text-align: left;
-    padding : 20px 15px;
-    font-size: 18px;
-    width: 100%;
-}
-.img_desc .bottom{
-    height: 50%;
-    position: relative;
-}
-.img_desc .bottom_left{
-    text-align: left;
-    width:100%;
-    vertical-align: bottom;
-    position: absolute;
-    bottom: 0;
-    font-size: 16px;
-}
-.img_desc .bottom_right{
-    text-align: right;
-    width:100%;
-    position: absolute;
-    bottom: 0;
-    font-weight: bolder;
-    font-size:  20px;
-    font-family: 'Noto Sans KR', sans-serif;
-}
 .footer {
     padding: 5px;
     text-align: center;
