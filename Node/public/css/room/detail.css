@@ -100,9 +100,12 @@
     margin-top:10px;
 }
 .hotel_description{
-    /*font-weight: bold;*/
     font-size: 16px;
     margin-bottom: 10px;
+}
+
+.hotel_map{
+
 }
 
 /*숙소 후기*/
