@@ -42,3 +42,7 @@ app.use('/search', searchRouter);
 // 방 세부페이지,확인 및 결제 라우터
 import detailRouter from "./routes/room/detail";
 app.use('/rooms', detailRouter);
+
+// 방 세부페이지,확인 및 결제 라우터
+import messageRouter from "./routes/user/message";
+app.use('/message', messageRouter);
