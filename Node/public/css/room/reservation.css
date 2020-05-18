@@ -69,51 +69,40 @@ body {
     border: 0;
 }
 
-.hotel_info{
-    margin:10px 10px 20px 10px;
+.tray{
+    display:flex;
+    margin: 40px 10px auto;
+    padding : 10px 0;
+    height: 100px;
 }
 
-.hotel_name{
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 10px;
+.card {
+    width: auto;
+    height: 80px;
 }
+
+.card img{
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: 80px;
+    width: auto;
+    border-radius: 5px;
+}
+
+.img_desc {
+    text-align: left;
+    padding : 1px 15px;
+    font-size: 15px;
+    width: auto;
+}
+/*우측 item 창*/
 
 /*숙소 세부설명*/
 #leftSideMiddle{
     border: 0;
-    margin-top:10px;
+    /*margin-top:10px;*/
 }
-.hotel_description{
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.hotel_map{
-
-}
-
-/*숙소 후기*/
-#leftSideBottom{
-    border: 0;
-    margin-top:10px;
-}
-.hotel_review{
-
-}
-
-/*우측 요금 세부정보 */
-#rightSide{
-    padding: 20px 20px;
-
-}
-
-.right_side_title{
-    font-weight: bold;
-    font-size:25px;
-    padding:15px 0;
-}
-
 /*숙소 날짜 및 가격*/
 .reservation_tray{
     margin: 10px auto;
@@ -139,6 +128,27 @@ body {
     cursor: pointer;
 }
 
+/*숙소 후기*/
+#leftSideBottom{
+    border: 0;
+    margin-top:10px;
+}
+.hotel_review{
+
+}
+
+/*우측 요금 세부정보 */
+#rightSide{
+    padding: 20px 20px;
+
+}
+
+.right_side_title{
+    font-weight: bold;
+    font-size:25px;
+    padding:15px 0;
+}
+
 .receipt{
     padding : 10px 0;
     font-weight: lighter;
@@ -149,42 +159,17 @@ body {
     padding : 10px 0;
     border-bottom: 1px solid #E6E6E6;
 }
-
-#chargeSum{
-    /*padding : 0;*/
-    margin: 5px 0;
-    border-bottom: 0;
-    font-weight: bold;
-}
-
 .charge_detail .charge{
     float:right;
     width: 20%;
     text-align: right;
 }
-
-.tray{
-    display:flex;
-    margin: 40px auto;
-    padding : 10px 0;
-    height: 100px;
+#chargeSum{
+    margin: 5px 0;
+    border-bottom: 0;
+    font-weight: bold;
 }
-
-.card {
-    width: auto;
-    height: 80px;
-}
-
-.card img{
-    display: block;
-    background-position: center center;
-    background-size: cover;
-    height: 80px;
-    width: auto;
-    border-radius: 5px;
-
-}
-
+/*우측 요금 세부정보 */
 
 .footer {
     padding: 5px;
