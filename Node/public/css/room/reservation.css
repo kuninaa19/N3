@@ -160,7 +160,21 @@ body {
     margin-top:10px;
 }
 
-
+#greenBtn{
+    border-radius: 10px;
+    height: 100%;
+    width: 30%;
+    border: #fbfbfb solid 1px;
+    cursor:pointer;
+   font-weight: bold;
+    background-color: #088A85;
+    color:white;
+    padding:15px;
+    font-size:18px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
 
 /*우측 요금 세부정보 */
 #rightSide{
