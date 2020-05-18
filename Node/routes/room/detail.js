@@ -13,6 +13,4 @@ router.get('/:number/reservation/payment', function (req, res) {
     res.render('room/reservation');
 });
 
-export default router;  // 단하나의 모듈
-// export {router}; //ES6
-// module.exports = router; // nodeJS
+export default router;
