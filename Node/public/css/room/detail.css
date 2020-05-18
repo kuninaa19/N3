@@ -60,6 +60,9 @@
 }
 
 .right_column {
+    position: sticky;
+    position: -webkit-sticky;
+    top : 60px;
     float: left;
     width: 35%;
     background-color: #ffffff;
@@ -115,14 +118,6 @@
 }
 .hotel_review{
 
-}
-
-#rightSideTop{
-    display: block;
-    margin: 40px auto;
-    border: 1px solid #D8D8D8;
-    border-radius: 5px;
-    height: 200px;
 }
 
 .per_day_charge{
