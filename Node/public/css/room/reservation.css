@@ -11,7 +11,7 @@ body {
 
 }
 .top_nav .title{
-    width: 75%;
+    width: 80%;
     margin: 30px auto;
     font-weight: bold;
     font-family: 'Noto Sans KR', sans-serif;
@@ -39,7 +39,7 @@ body {
 
 .left_column {
     float: left;
-    width: 60%;
+    width: 50%;
     background-color: white;
 }
 
@@ -48,10 +48,9 @@ body {
     position: -webkit-sticky;
     top : 0;
     float: left;
-    width: 40%;
+    width: 45%;
     background-color: #ffffff;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 5%;
 }
 
 .item {
@@ -71,7 +70,7 @@ body {
 
 .tray{
     display:flex;
-    margin: 40px 10px auto;
+    margin: 40px 0 30px;
     padding : 10px 0;
     height: 100px;
 }
@@ -101,7 +100,6 @@ body {
 /*숙소 세부설명*/
 #leftSideMiddle{
     border: 0;
-    /*margin-top:10px;*/
 }
 /*숙소 날짜 및 가격*/
 .reservation_tray{
