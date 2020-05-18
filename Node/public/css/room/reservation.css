@@ -1,0 +1,209 @@
+/*class 언더바 id 낙타표기*/
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+body {
+    margin: 0;
+    padding:0;
+}
+.top_nav {
+
+}
+.top_nav .title{
+    width: 75%;
+    margin: 30px auto;
+    font-weight: bold;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 30px;
+    padding:20px 0;
+}
+.top_nav .back_btn {
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    border: 0;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+.row {
+    width: 75%;
+    margin: 30px auto;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.left_column {
+    float: left;
+    width: 60%;
+    padding-left: 30px;
+    background-color: white;
+}
+
+.right_column {
+    position: sticky;
+    position: -webkit-sticky;
+    top : 0;
+    float: left;
+    width: 40%;
+    background-color: #ffffff;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.item {
+    background-color: white;
+    padding: 0 20px;
+    margin: 20px 0 20px 0;
+    border: 1px solid #E6E6E6;
+    font-size: 20px;
+}
+.item a {
+    color: black;
+    text-decoration: none;
+}
+/*우측 item 창*/
+#leftSideTop{
+    border: 0;
+    padding-top: 1px;
+}
+
+.hotel_info{
+    margin:10px 10px 20px 10px;
+}
+
+.hotel_name{
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/*숙소 세부설명*/
+#leftSideMiddle{
+    border: 0;
+    margin-top:10px;
+}
+.hotel_description{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.hotel_map{
+
+}
+
+/*숙소 후기*/
+#leftSideBottom{
+    border: 0;
+    margin-top:10px;
+}
+.hotel_review{
+
+}
+
+/*우측 요금 세부정보 */
+#rightSide{
+    padding: 20px 20px;
+
+}
+
+.right_side_title{
+    font-weight: bold;
+    font-size:25px;
+    padding:15px 0;
+}
+
+/*숙소 날짜 및 가격*/
+.reservation_tray{
+    margin: 10px auto;
+    padding:10px;
+    height: 70px;
+    border: 1px solid #D8D8D8;
+    border-radius: 10px;
+}
+.reservation_tray :hover{
+    cursor: pointer;
+}
+
+.calendar_btn {
+    /*height: 60%;*/
+    width: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: lighter;
+    font-size: 18px;
+    text-align: center;
+    border: 0;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.receipt{
+    padding : 10px 0;
+    font-weight: lighter;
+    font-size: 16px;
+}
+.receipt .charge_detail{
+    margin: 10px 0;
+    padding : 10px 0;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+#chargeSum{
+    /*padding : 0;*/
+    margin: 5px 0;
+    border-bottom: 0;
+    font-weight: bold;
+}
+
+.charge_detail .charge{
+    float:right;
+    width: 20%;
+    text-align: right;
+}
+
+.tray{
+    display:flex;
+    margin: 40px auto;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    height: 200px;
+}
+.tray :hover{
+    cursor: pointer;
+}
+.card {
+    width: 40%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.card img{
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: 198px;
+    width: 100%;
+    border-radius: 5px 0 0 5px;
+}
+
+.footer {
+    padding: 5px;
+    text-align: center;
+    background: #ffffff;
+    margin-top: -20px;
+    color: darkgrey;
+    border-top: 1px solid whitesmoke;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .column {
+        width: 100%;
+        padding: 0;
+    }
+}
