@@ -101,28 +101,35 @@ body {
 #leftSideMiddle{
     border: 0;
 }
+.reservation_title{
+    margin-top: 30px;
+    font-weight: bold;
+    font-size:25px;
+}
+.reservation_category{
+    margin-top: 20px;
+    font-size:14px;
+    font-weight: bold;
+}
 /*숙소 날짜 및 가격*/
 .reservation_tray{
-    margin: 10px auto;
-    padding:10px;
-    height: 70px;
-    border: 1px solid #D8D8D8;
-    border-radius: 10px;
+    width:35%;
+    height: 100%;
+    font-size: 14px;
 }
 .reservation_tray :hover{
     cursor: pointer;
 }
 
 .calendar_btn {
-    /*height: 60%;*/
     width: 100%;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: lighter;
     font-size: 18px;
-    text-align: center;
+    text-align: left;
+    padding:0;
     border: 0;
     background-color: #FFFFFF;
-    border-radius: 10px;
     cursor: pointer;
 }
 
