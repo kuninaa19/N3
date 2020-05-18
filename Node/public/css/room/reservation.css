@@ -63,6 +63,11 @@ body {
     color: black;
     text-decoration: none;
 }
+.item_title{
+    margin-top: 30px;
+    font-weight: bold;
+    font-size:25px;
+}
 /*우측 item 창*/
 #leftSideTop{
     border: 0;
@@ -101,11 +106,7 @@ body {
 #leftSideMiddle{
     border: 0;
 }
-.reservation_title{
-    margin-top: 30px;
-    font-weight: bold;
-    font-size:25px;
-}
+
 .reservation_category{
     margin-top: 20px;
     font-size:14px;
@@ -133,7 +134,7 @@ body {
     cursor: pointer;
 }
 
-/*숙소 후기*/
+/*숙소 방식*/
 #leftSideBottom{
     border: 0;
     margin-top:10px;
