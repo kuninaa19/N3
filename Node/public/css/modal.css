@@ -110,7 +110,7 @@
 #email{
     border-radius: 10px;
     border: solid lightgrey 1px;
-    background-image: url(http://rexkirby.com/kirbyandson/images/email.svg);
+    background-image: url(https://img.icons8.com/material-sharp/24/000000/email-open.png);
     background-size: 30px 30px;
     background-position: 11px 8px;
     background-repeat: no-repeat;
@@ -118,7 +118,7 @@
 
 #email:focus{
     border: 3px solid green;
-    background-image: url(http://rexkirby.com/kirbyandson/images/email.svg);
+    background-image: url(https://img.icons8.com/material-sharp/24/000000/email-open.png);
     background-size: 30px 30px;
     background-position: 11px 8px;
     background-repeat: no-repeat;
