@@ -54,8 +54,8 @@
 
 <!--        숙소 날짜 확인-->
         <div class="item" id="leftSideMiddle">
-            <div class="reservation_title">예약정보</div>
-            <div class="reservation_category">날짜</div>
+            <div class="item_title">예약정보</div>
+            <div class="reservation_category">예약날짜</div>
             <div class="reservation_tray">
                 <div>
                     <input type="button" class="calendar_btn" name="daterange" value="" />
@@ -63,6 +63,23 @@
             </div>
         </div>
         <div style="border-top: 1px #E6E6E6 solid;"></div>
+
+        <div class="item" id="messageToHost">
+            <div class="reservation_category">호스트에게 메시지 보내기</div>
+            <div class="sub_title">호스트에게 여행 목적과 도착 예정 시간을 알려주세요.
+            </div>
+                <textarea class="message"></textarea>
+        </div>
+        <div style="border-top: 1px #E6E6E6 solid;"></div>
+
+        <!--        결제수단-->
+        <div class="item" id="leftSideBottom">
+            <div class="reservation_category">결제수단</div>
+            <div class="payment">
+                <button class="btn">카카오페이</button>
+                <button class="btn">페이코</button>
+            </div>
+        </div>
     </div>
     <!--        숙소 결제-->
     <div class="right_column">
