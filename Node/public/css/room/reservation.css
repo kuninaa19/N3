@@ -169,7 +169,8 @@ body {
    font-weight: bold;
     background-color: #088A85;
     color:white;
-    padding:15px;
+    margin:20px 0;
+    padding:15px 0;
     font-size:18px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
