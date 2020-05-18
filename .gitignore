@@ -12,3 +12,4 @@ Node/public/js/
 package-lock.json
 yarn.lock
 
+Node/dist/

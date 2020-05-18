@@ -108,8 +108,8 @@ body {
 }
 
 .reservation_category{
-    margin-top: 20px;
-    font-size:14px;
+    margin-top: 30px;
+    font-size:16px;
     font-weight: bold;
 }
 /*숙소 날짜 및 가격*/
@@ -134,14 +134,33 @@ body {
     cursor: pointer;
 }
 
+/*호스트에게 메세지*/
+#messageToHost{
+    border: 0;
+    margin-bottom: 40px;
+}
+.sub_title{
+    font-size: 14px;
+    font-weight: lighter;
+    margin-top:7px;
+}
+.message {
+    width: 95%;
+    font-size: 14px;
+    font-weight: lighter;
+    margin-top:20px;
+    height:300px;
+    border-radius: 10px;
+    border : 1px solid #2E2E2E;
+}
+
 /*숙소 방식*/
 #leftSideBottom{
     border: 0;
     margin-top:10px;
 }
-.hotel_review{
 
-}
+
 
 /*우측 요금 세부정보 */
 #rightSide{
