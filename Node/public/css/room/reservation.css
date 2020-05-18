@@ -40,7 +40,6 @@ body {
 .left_column {
     float: left;
     width: 60%;
-    padding-left: 30px;
     background-color: white;
 }
 
@@ -57,7 +56,6 @@ body {
 
 .item {
     background-color: white;
-    padding: 0 20px;
     margin: 20px 0 20px 0;
     border: 1px solid #E6E6E6;
     font-size: 20px;
@@ -69,7 +67,6 @@ body {
 /*우측 item 창*/
 #leftSideTop{
     border: 0;
-    padding-top: 1px;
 }
 
 .hotel_info{
@@ -169,27 +166,25 @@ body {
 .tray{
     display:flex;
     margin: 40px auto;
-    border: 1px solid #D8D8D8;
-    border-radius: 5px;
-    height: 200px;
+    padding : 10px 0;
+    height: 100px;
 }
-.tray :hover{
-    cursor: pointer;
-}
+
 .card {
-    width: 40%;
-    height: 100%;
-    cursor: pointer;
+    width: auto;
+    height: 80px;
 }
 
 .card img{
     display: block;
     background-position: center center;
     background-size: cover;
-    height: 198px;
-    width: 100%;
-    border-radius: 5px 0 0 5px;
+    height: 80px;
+    width: auto;
+    border-radius: 5px;
+
 }
+
 
 .footer {
     padding: 5px;
