@@ -1,0 +1,106 @@
+/*class 언더바 id 낙타표기*/
+.row {
+    width: 55%;
+    margin: 30px auto;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    float: left;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.item {
+    background-color: white;
+    padding: 0 10px;
+    margin: 10px 0 80px 0;
+    border: 1px solid #E6E6E6;
+    font-size: 20px;
+}
+.item_title{
+    font-family: "Noto Sans KR";
+    font-weight: bold;
+    font-size: 20px;
+    padding: 15px 0;
+    margin-top: 10px;
+    border-bottom: 1px solid #E6E6E6;
+}
+.item a {
+    color: black;
+    text-decoration: none;
+}
+
+.tray{
+    display:flex;
+    margin: 10px 0 25px;
+    padding : 15px 0;
+    height: 80px;
+    width: 100%;
+}
+
+.tray :hover{
+    cursor: pointer;
+}
+
+
+.profile_img {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius : 25px;
+    transition: 0.3s;
+    text-align: center;
+    position:relative;
+    z-index:1;
+}
+
+.profile_img img{
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+}
+.message_info{
+    float:left;
+    text-align: left;
+    margin:0 15px;
+    padding-top:5px;
+    font-size: 14px;
+    height:100%;
+    width: 111px;
+}
+.message_detail {
+    float:left;
+    text-align: left;
+    padding-top:5px;
+    height:100%;
+    font-size: 14px;
+    width: 600px;
+}
+.margin_top{
+    margin-top:10px
+}
+.footer {
+    padding: 5px;
+    text-align: center;
+    background: #ffffff;
+    margin-top: -20px;
+    color: darkgrey;
+    border-top: 1px solid whitesmoke;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .column {
+        width: 100%;
+        padding: 0;
+    }
+}
