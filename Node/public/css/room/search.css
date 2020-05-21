@@ -16,6 +16,25 @@
     width: 100%;
     background-color: #ffffff;
 }
+#searchButton{
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: var(--searchInputButtonBackgroundColor);
+    font-weight: var(--searchInputButtonFontWeight);
+    padding :5px;
+    height: 50px;
+    cursor: pointer;
+}
+#searchButton .search_img{
+    float: left;
+    height: 30px;
+    padding:5px 0 5px 5px;
+}
+#searchButton .img_name{
+    float: left;
+    height: 30px;
+    padding:10px;
+}
 .item {
     background-color: white;
     padding: 0 20px;

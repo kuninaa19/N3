@@ -103,10 +103,17 @@
     <div class="column">
         <!--여행지 검색버튼-->
         <div class="item" id="searchBar">
-            <form action="" method="get" class="search">
+            <form action="/search" method="get" id="search">
                 <div class="form__field">
                     <input type="search" name="search" placeholder="어디로 여행가시나요?" class="form__input">
-                    <input type="image" src="https://img.icons8.com/ios-glyphs/30/000000/search.png" value="검색하기" class="button">
+                    <span id="searchButton">
+                            <span class="search_img">
+                                <img src="https://img.icons8.com/ios-glyphs/30/000000/search.png" alt="검색하기" >
+                            </span>
+                            <span class="img_name">
+                                 검색하기
+                            </span>
+                        </span>
                 </div>
             </form>
         </div>
