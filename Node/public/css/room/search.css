@@ -16,6 +16,11 @@
     width: 100%;
     background-color: #ffffff;
 }
+#searchBar{
+    padding: 20px;
+    margin: 30px 40px 0;
+}
+
 #searchButton{
     border-radius: 10px;
     font-size: 15px;
@@ -38,15 +43,12 @@
 .item {
     background-color: white;
     padding: 0 20px;
-    margin: 20px 0 80px 0;
+    margin: 20px 20px 80px;
     border: 1px solid #E6E6E6;
     border-radius: 10px;
     font-size: 20px;
 }
-#searchBar{
-    padding: 20px;
-    margin-top: 30px;
-}
+
 .item_title{
     height: 40px;
     font-size: 25px;

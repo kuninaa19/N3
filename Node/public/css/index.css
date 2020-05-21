@@ -10,6 +10,15 @@
     display: table;
     clear: both;
 }
+.column {
+    float: left;
+    width: 100%;
+    background-color: #ffffff;
+}
+#searchBar{
+    padding: 20px;
+    margin: 30px 40px 0;
+}
 #searchButton{
     border-radius: 10px;
     font-size: 15px;
@@ -29,13 +38,6 @@
     height: 30px;
     padding:10px;
 }
-
-.column {
-    float: left;
-    width: 100%;
-    background-color: #ffffff;
-}
-
 .item {
      background-color: white;
      padding: 20px;
