@@ -24,6 +24,10 @@
     border-radius: 10px;
     font-size: 20px;
 }
+#searchBar{
+    padding: 20px;
+    margin-top: 30px;
+}
 .item_title{
     height: 40px;
     font-size: 25px;
