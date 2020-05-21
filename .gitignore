@@ -7,7 +7,6 @@ Node/conf
 
 Node/.babelrc
 Node/public/images/
-Node/public/js/
 
 package-lock.json
 yarn.lock
