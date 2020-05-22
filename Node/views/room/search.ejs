@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="ko">
 <head>
-    <title>지역명 숙소</title>
+    <title><%=title%>의 숙소</title>
     <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <!--    폰트-->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="/static/css/room/search.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/modal.css"/>
@@ -93,8 +93,6 @@
             <button class="btn" id="regBtn">회원가입</button>
             <button class="btn" id="logBtn">로그인</button>
             <p></p>
-            <div class="g-signin2 google-btn" data-onsuccess="onSignIn" data-theme="dark"
-                 id="googleLogin"></div>
         </div>
     </div>
 </div>
@@ -105,13 +103,13 @@
         <div class="item" id="searchBar">
             <form action="/search" method="get" id="search">
                 <div class="form__field">
-                    <input type="search" name="search" placeholder="어디로 여행가시나요?" class="form__input">
+                    <input type="search" id="place" name="place" value="<%=title%>" placeholder="어디로 여행가시나요?" class="form__input">
                     <span id="searchButton">
                             <span class="search_img">
                                 <img src="https://img.icons8.com/ios-glyphs/30/000000/search.png" alt="검색하기" >
                             </span>
                             <span class="img_name">
-                                 검색하기
+                                 검색
                             </span>
                         </span>
                 </div>
@@ -214,8 +212,9 @@
 </div>
 
 <!--구글 로그인 버튼-->
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 <!--모달처리 JS-->
 <script src="/static/js/modal.js"></script>
+<!--검색처리 JS-->
+<script src="/static/js/room_search.js"></script>
 </body>
 </html>
