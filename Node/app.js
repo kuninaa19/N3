@@ -43,10 +43,10 @@ app.use('/search', searchRouter);
 import detailRouter from "./routes/room/detail";
 app.use('/rooms', detailRouter);
 
-// 방 세부페이지,확인 및 결제 라우터
+// 메시지 라우터
 import messageRouter from "./routes/user/message";
 app.use('/message', messageRouter);
 
-// 방 세부페이지,확인 및 결제 라우터
+// 예약한 방에 대한 라우터
 import reservationRouter from "./routes/user/trip";
 app.use('/trip', reservationRouter);
