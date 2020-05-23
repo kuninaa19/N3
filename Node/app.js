@@ -35,6 +35,10 @@ app.listen(3000, () => console.log('port 3000 Server On'));
 import indexRouter from './routes/index';
 app.use('/', indexRouter);
 
+// 인증 라우터
+import authRouter from "./routes/auth";
+app.use('/auth', authRouter);
+
 //방 검색 라우터
 import searchRouter from "./routes/room/search";
 app.use('/search', searchRouter);
