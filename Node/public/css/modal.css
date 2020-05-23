@@ -50,6 +50,7 @@
     border:0;
     outline: 0;
 }
+
 #form-main{
     width:100%;
     /*margin: 0 15px 15px 15px;*/
@@ -218,6 +219,23 @@ input:hover, input:focus {
     border-radius: 10px;
     border:0;
     outline: 0;
+}
+
+/*페이코 로그인버튼*/
+.payco_btn{
+    background-color: #fa2828;
+    color:white;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: none;
+    border: 0;
+    cursor:pointer;
+    font-size: 20px;
+    padding:0.5em 2em;
+    margin: 0 5% 10px;
+
+
 }
 @media only screen and (max-width: 580px) {
     #form-div{
