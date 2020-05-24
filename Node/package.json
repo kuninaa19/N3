@@ -7,20 +7,24 @@
     "start": "nodemon app.js --exec babel-node"
   },
   "dependencies": {
-    "gulp-babel": "^8.0.0",
-    "redis": "^3.0.2",
+    "connect-flash": "^0.1.1",
+    "cookie-session": "^1.4.0",
     "debug": "~2.6.9",
-    "method-override": "^3.0.0",
+    "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-session": "^1.17.0",
-    "session-file-store": "^1.4.0",
+    "gulp-babel": "^8.0.0",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
+    "jquery": "^3.4.1",
+    "method-override": "^3.0.0",
     "mongoose": "5.9.2",
+    "morgan": "~1.9.1",
     "mysql": "^2.18.1",
-    "dotenv": "^8.2.0",
-    "jquery": "^3.4.1"
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "redis": "^3.0.2",
+    "session-file-store": "^1.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
