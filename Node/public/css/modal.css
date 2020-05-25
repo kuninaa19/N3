@@ -234,8 +234,6 @@ input:hover, input:focus {
     font-size: 20px;
     padding:0.5em 2em;
     margin: 0 5% 10px;
-
-
 }
 @media only screen and (max-width: 580px) {
     #form-div{
