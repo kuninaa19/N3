@@ -35,7 +35,7 @@
         <div id="form-main">
             <div id="form-div">
                 <!--                    로그인모달-->
-                <form method="post" action="auth" name="login-form" id="loginForm">
+                <form method="post" action="/auth/login" name="login-form" id="loginForm">
                     <h1>로그인</h1>
                     <p class="email">
                         <input name="email" type="text" class="validate[required,custom[email]] feedback-input"
@@ -51,7 +51,7 @@
                     </div>
                 </form>
                 <!--                회원가입 모달-->
-                <form method="post" action="register" name="reg-form" id="regForm">
+                <form method="post" action="/auth/register" name="reg-form" id="regForm">
                     <h1>회원가입</h1>
                     <p class="nick_name">
                         <input name="id" type="text" class="validate[required,custom[id]] feedback-input" id="id"
@@ -71,7 +71,7 @@
                     </div>
                 </form>
                 <!--                비밀번호 재설정 모달-->
-                <form method="post" action="find_pw" name="find-pw-form" id="findPwForm">
+                <form method="post" action="/auth/pw/reset" name="find-pw-form" id="findPwForm">
                     <h1>비밀번호 재설정</h1>
                     <div>계정으로 사용하는 이메일 주소를 입력하시면, 비밀번호 재설정 링크를 전송해 드립니다.</div>
                     <p class="email">
@@ -95,7 +95,7 @@
             <p></p>
         </div>
         <button class="payco_btn">
-            <span style="letter-spacing: 0; ">PAYCO</span> 로그인
+            PAYCO 로그인
         </button>
 
     </div>
