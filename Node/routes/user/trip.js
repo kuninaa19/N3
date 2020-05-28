@@ -3,7 +3,7 @@ const router = express.Router();
 
 import mysql from '../../conf/dbInfo';
 
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
     res.render('user/trip');
 });
 

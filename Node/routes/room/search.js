@@ -3,11 +3,11 @@ const router = express.Router();
 
 import mysql from '../../conf/dbInfo';
 
-router.get('/:places', function (req, res) {
+router.get('/:places', (req, res) => {
     res.render('room/search');
 });
 
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
 
     let searchValue= req.query.place;
 
