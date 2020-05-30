@@ -1,18 +1,27 @@
 import express from 'express';
-import session from 'express-session';
-import flash from 'connect-flash';
-import passport from 'passport';
-
 import connection from '../conf/dbInfo';
-
-const LocalStrategy = require('passport-local').Strategy;
-
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('index');
+//리팩토링[JS파일만들고 주소값 넣어서 render위지 다르게 설정하기]
+const checkAuth = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.render('/');
+};
+
+
+router.get('/', checkAuth, (req, res) => {
+    const nickname = req.user.nickname;
+    res.render('index', {'nickname':nickname});
 });
 
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.session.save(function(){
+        res.redirect('/');
+    });
+});
 
 export default router;  // 단하나의 모듈
 // export {router}; //ES6
