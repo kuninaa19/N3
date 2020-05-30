@@ -26,4 +26,15 @@ router.post('/register',
         }
     ));
 
+// 페이코 로그인
+app.get('/payco',
+    passport.authenticate('payco')
+);
+
+app.get('/payco/callback',
+    passport.authenticate('payco', {
+        failureRedirect: '/',
+        successRedirect : '/'
+    })
+);
 export default router;
