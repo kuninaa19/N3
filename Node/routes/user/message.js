@@ -1,7 +1,6 @@
 import express from 'express';
+import connection from '../../conf/dbInfo';
 const router = express.Router();
-
-import mysql from '../../conf/dbInfo';
 
 const checkAuth = (req, res, next) => {
     if (req.isAuthenticated()) {

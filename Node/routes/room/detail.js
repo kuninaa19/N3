@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import mysql from '../../conf/dbInfo';
+import connection from '../../conf/dbInfo';
 
 //방 결제페이지 인증확인
 const checkAuth = (req, res, next) => {
