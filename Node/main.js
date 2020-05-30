@@ -1,3 +1,5 @@
+import path from "path";
+
 const express = require('express');
 const app = express();
 const session = require('express-session');
@@ -21,7 +23,8 @@ const checkNotAuth = (req, res, next) => {
     next();
 };
 
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -44,13 +47,17 @@ initPassport(passport);
 
 app.get('/', checkNotAuth, (req, res) => {
     //로그인 인증 실패시 다시 여기로 들어옴.
-    console.log('get join url');
 
     //req.flash() 딱한번만 (console.log() 포함)
     var message = req.flash().error;
     res.render('example.ejs', {'message': message});
 });
 
+app.post('/send_data',(req,res)=>{
+    console.log(req);
+    var resData = {'email':req.body.email,'password':req.body.password,'nickname':req.body.nickname}
+    res.json(resData);
+});
 app.get('/dashboard', checkAuth, (req, res) => {
     //passport에서   //반환된 user가 이곳에서 req.user이다.
     res.render('dashboard.ejs', {nickname: req.user.nickname});
