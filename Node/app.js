@@ -1,10 +1,19 @@
 import express from 'express';
 import logger from 'morgan';
 import path from 'path';
-import session from 'express-session';
 import methodOverride from 'method-override'; // put, delete 메소드 지원하기위해서
+import helmet from 'helmet';
+import session from 'express-session';
+import flash from 'connect-flash';
+import passport from 'passport';
+import initPassport from './conf/passport';
+//추후 redis로 변경
+import sessionStore from 'session-file-store';
+const FileStore = sessionStore(session);
 
 const app = express();
+
+app.use(helmet());
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -17,10 +26,16 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 
 // session support
 app.use(session({
-    resave: false, // don't save session if unmodified
-    saveUninitialized: false, // don't create session until something stored
-    secret: 'some secret here'
+    resave: false,
+    saveUninitialized: true,
+    secret: 'WEfh#joi!P#GTH$#(',
+    // store: new FileStore()
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+initPassport(passport);
 
 // parse request bodies (req.body) body-parser 대안
 app.use(express.urlencoded({extended: true}));
@@ -29,7 +44,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
 app.listen(3000, () => console.log('port 3000 Server On'));
-
 
 // import {router as indexRouter} from './routes/index';
 import indexRouter from './routes/index';
