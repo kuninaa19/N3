@@ -43,7 +43,6 @@
 
 .btn{
     cursor: pointer;
-
     font-size: 30px;
     background-color: white;
     border-radius: 10px;
@@ -147,6 +146,7 @@ input:hover, input:focus {
 }
 
 #button-green{
+    height:60px;
     border-radius: 20px;
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     width: 100%;
@@ -221,20 +221,22 @@ input:hover, input:focus {
     outline: 0;
 }
 
-/*페이코 로그인버튼*/
-.payco_btn{
-    background-color: #fa2828;
-    color:white;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-weight: bold;
-    text-decoration: none;
-    box-shadow: none;
-    border: 0;
-    cursor:pointer;
-    font-size: 20px;
-    padding:0.5em 2em;
-    margin: 0 5% 10px;
+/* 네이버,카카오 로그인버튼*/
+.login_api_btn{
+    float:left;
+    cursor: pointer;
+    background-color: white;
+    border:0;
+    outline: 0;
+    width: 50%;
+    height:60px;
 }
+
+.login_api_img{
+    width: 100%;
+    height:50px;
+}
+
 @media only screen and (max-width: 580px) {
     #form-div{
         left: 3%;
