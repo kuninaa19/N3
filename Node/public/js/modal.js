@@ -27,6 +27,8 @@ const underContent = document.getElementById("content");
 const regBtn = document.getElementById("regBtn");
 const logBtn = document.getElementById("logBtn");
 const findPwBtn = document.getElementById("findPwBtn");
+const kakaoBtn = document.getElementsByName("kakao");
+const naverBtn = document.getElementsByName("naver");
 
 //비번찾기
 // 비번찾기 페이지에서 로그인페이지로 이동
@@ -92,6 +94,14 @@ const closeRegModal = ()=>{
     scroll.style.overflow= "auto";
 };
 
+const kakaoAuth = ()=>{
+    location.href = "https://hotelbooking.kro.kr/auth/kakao";
+};
+
+const naverAuth = ()=>{
+    location.href = "https://hotelbooking.kro.kr/auth/naver";
+};
+
 overlay.addEventListener("click",closeLogModal);
 overlay.addEventListener("click",closeRegModal);
 closeBtn.addEventListener("click",closeLogModal);
@@ -102,3 +112,5 @@ regBtn.addEventListener("click",openRegModal);
 logBtn.addEventListener("click",openLogModal);
 findPwBtn.addEventListener("click",findPwModal);
 backToLoginBtn.addEventListener("click",openLogModal);
+kakaoBtn[0].addEventListener("click",kakaoAuth);
+naverBtn[0].addEventListener("click",naverAuth);
