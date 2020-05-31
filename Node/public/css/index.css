@@ -65,11 +65,9 @@
     height: 50%;
     margin: 0 2%;
     cursor: pointer;
-    border: 1px solid #E6E6E6;
     overflow: hidden;
     border-radius : 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
     text-align: left;
     position:relative;
     z-index:1;
@@ -109,10 +107,11 @@
     text-align: left;
     padding-left:15px;
     position: absolute;
-    bottom: 1px;
+    bottom: 0.1px;
     background-image: linear-gradient(to bottom,
-    rgba(30, 30, 30, 0) 10%,
-    rgba(30, 30, 30, 0.5) 50%,
+    rgba(30, 30, 30, 0.3) 0%,
+    rgba(30, 30, 30, 0.4) 20%,
+    rgba(30, 30, 30, 0.5) 40%,
     rgba(30, 30, 30, 1) 100%);
     /*background: rgba(0, 0, 0, 0.5); !* Black background with 0.5 opacity *!*/
     color: white;
