@@ -1,6 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import initPassport from "../conf/passport";
+
 initPassport(passport);
 
 const router = express.Router();
@@ -26,15 +27,31 @@ router.post('/register',
         }
     ));
 
-// 페이코 로그인
-app.get('/payco',
-    passport.authenticate('payco')
-);
+// 네이버 로그인
+router.get('/naver', 
+    passport.authenticate('naver', {
+    successRedirect: '/',
+    failureRedirect: '/'
+}));
 
-app.get('/payco/callback',
-    passport.authenticate('payco', {
-        failureRedirect: '/',
-        successRedirect : '/'
+router.get('/naver/callback',
+    passport.authenticate('naver', {
+        successRedirect: '/',
+        failureRedirect: '/'
     })
 );
+
+//카카오 로그인
+router.get('/kakao', 
+    passport.authenticate('kakao', {
+    successRedirect: '/',
+    failureRedirect: '/'
+}));
+
+router.get('/kakao/callback', 
+    passport.authenticate('kakao', {
+    successRedirect: '/',
+    failureRedirect: '/'
+}));
+
 export default router;
