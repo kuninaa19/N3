@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <title>숙소 등록</title>
+    <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <!--    폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/room/register.css"/>
+
+</head>
+<body>
+<div class="top_nav">
+    <div class="title">
+        <button class="back_btn" name="back_btn"><</button>
+        숙소 등록하기
+    </div>
+</div>
+
+<div class="row">
+    <!--    <form action="/host/room/register/done" accept-charset="utf-8" name="room_register" method="post">-->
+    <form>
+        <div class="left_column">
+            <!--        숙소 정보 입력-->
+            <div class="item" id="leftSideTop">
+                <div class="item_title">숙소 정보 입력</div>
+                <div class="content">
+                    <label for="hotel">
+                        <input type="text" name="name" placeholder="숙소 이름"/>
+                        <p></p>
+                        <input type="text" name="country" placeholder="국가 명"/>
+                        <p></p>
+                        <input type="text" name="country" placeholder="지역명"/>
+                    </label>
+                </div>
+                <select name="people_num">
+                    <option value="1" selected>숙박인원 1명</option>
+                    <option value="2">숙박인원 2명</option>
+                    <option value="3">숙박인원 3명</option>
+                    <option value="4">숙박인원 4명</option>
+                    <option value="5">숙박인원 5명</option>
+                    <option value="6">숙박인원 6명</option>
+                </select>
+                <select name="bedroom">
+                    <option value="1" selected>침실 1개</option>
+                    <option value="2">침실 2개</option>
+                    <option value="3">침실 3개</option>
+                    <option value="4">침실 4개</option>
+                </select>
+                <select name="bed">
+                    <option value="1" selected>침대 1개</option>
+                    <option value="2">침대 2개</option>
+                    <option value="3">침대 3개</option>
+                    <option value="4">침대 4개</option>
+                </select>
+                <select name="bathroom">
+                    <option value="1" selected>욕실 1개</option>
+                    <option value="2">욕실 2개</option>
+                    <option value="3">욕실 3개</option>
+                    <option value="4">욕실 4개</option>
+                </select>
+            </div>
+            <div style="margin-top:50px;"></div>
+
+            <!--        숙소 날짜 확인-->
+            <div class="item" id="leftSideMiddle">
+                <div class="item_title">숙소 위치</div>
+                <div id="map"></div>
+                <script>
+                    function initMap() {
+                        const hotel = {lat: 3.159210, lng: 101.705190};
+                        const map = new google.maps.Map(
+                            document.getElementById('map'), {zoom: 15, center: hotel});
+
+                        const marker = new google.maps.Marker({position: hotel, map: map});
+                    }
+                </script>
+
+            </div>
+            <div style="margin-top:50px;"></div>
+
+            <div class="item" id="leftSideBottom">
+
+                <div class="item_title">숙소 설명</div>
+                <div class="sub_title">여행자들이 숙소에 대한 정보를 얻을 수 있도록 세부정보를 입력해주세요
+                </div>
+                <textarea class="message"></textarea>
+            </div>
+            <div style="margin-top:50px;"></div>
+            <div>
+                <input type="button" id="greenBtn" name="btn" value="숙소 등록하기"/>
+            </div>
+
+        </div>
+        <!--        숙소 결제-->
+        <div class="right_column">
+            <div class="item" id="rightSideTop">
+
+                <div class="item_title">요금 세부정보</div>
+                <div class="content">
+                    <div class="charge_detail">
+                        <span>₩19,554 x 1박</span>
+                        <span class="charge"><input type="text" placeholder="1박당 숙박비"></span>
+                    </div>
+
+                    <div class="charge_detail">
+                        <span>청소비</span>
+                        <span class="charge"><input type="text" placeholder="청소비"></span>
+                    </div>
+
+                    <div class="charge_detail">
+                        <span>서비스 수수료</span>
+                        <span class="charge"><input type="text" placeholder="서비스 수수료"></span>
+                    </div>
+
+                    <div class="charge_detail" id="chargeSum">
+                        <span>총 합계</span>
+                        <span class="charge">₩19,554</span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:50px;"></div>
+
+            <!--        결제수단-->
+            <div class="item" id="leftSideBottom">
+                <div class="item_title">숙소 이미지 등록</div>
+                <div class="payment">
+                    <div name="images">
+                        <input type="file">
+                        <input type="file">
+                        <input type="file">
+                        <input type="file">
+                        <input type="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="footer">
+    <h5>Hotel reservation dummy site</h5>
+</div>
+<!--<script async defer-->
+<!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">-->
+<!--</script>-->
+</body>
+</html>
