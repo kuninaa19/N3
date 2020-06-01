@@ -77,8 +77,12 @@
         <div class="item" id="leftSideBottom">
             <div class="item_title">결제수단</div>
             <div class="payment">
-                <button class="btn">카카오페이</button>
-                <button class="btn">페이코</button>
+                <button class="btn">
+                    <img class="login_api_img" src="/static/images/payment_btn/payment_icon_yellow_medium.png">
+                </button>
+                <button class="btn" id="naverPayBtn">
+                    <img class="login_api_img" src="/static/images/payment_btn/logo_black.png">
+                </button>
             </div>
         </div>
 
@@ -120,7 +124,9 @@
 <div class="footer">
     <h5>Hotel reservation dummy site</h5>
 </div>
-
+<!--네이버페이 결제-->
+<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
+<script src="/static/js/payment/naver.js"></script>
 <!--모달처리 JS-->
 <script src="/static/js/datepicker.js"></script>
 </body>
