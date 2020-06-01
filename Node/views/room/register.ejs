@@ -69,19 +69,15 @@
             </div>
             <div style="margin-top:50px;"></div>
 
-            <!--        숙소 날짜 확인-->
+            <!--        숙소  위치 검색-->
             <div class="item" id="leftSideMiddle">
                 <div class="item_title">숙소 위치</div>
+                <div id="floating-panel">
+                    <input id="address" type="textbox" value="Malaysia">
+                    <input id="submit" type="button" value="검색하기">
+                </div>
                 <div id="map"></div>
-                <script>
-                    function initMap() {
-                        const hotel = {lat: 3.159210, lng: 101.705190};
-                        const map = new google.maps.Map(
-                            document.getElementById('map'), {zoom: 15, center: hotel});
-
-                        const marker = new google.maps.Marker({position: hotel, map: map});
-                    }
-                </script>
+                <script src="/static/js/hotel_map_register.js"></script>
             </div>
             <div style="margin-top:50px;"></div>
 
@@ -98,7 +94,7 @@
             </div>
 
         </div>
-        <!--        숙소 결제-->
+<!--        우측 요금 세부정보 지정-->
         <div class="right_column">
             <div class="item" id="rightSideTop">
                 <div class="item_title">요금 세부정보</div>
@@ -125,7 +121,7 @@
             </div>
             <div style="margin-top:50px;"></div>
 
-            <!--        결제수단-->
+<!--            숙소 이미지 등록-->
             <div class="item" id="leftSideBottom">
                 <div class="item_title">숙소 이미지 등록</div>
                 <div class="payment">
@@ -144,8 +140,8 @@
 <div class="footer">
     <h5>Hotel reservation dummy site</h5>
 </div>
-<!--<script async defer-->
-<!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">-->
-<!--</script>-->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
+</script>
 </body>
 </html>
