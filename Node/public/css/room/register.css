@@ -26,6 +26,17 @@ input {
     background: #fbfbfb;
     border: 1px solid #D3D3D3;
 }
+.charge_detail input{
+    border:0;
+    float:right;
+    width: 100px;
+    height:30px;
+    padding: 0;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+    vertical-align: top;
+    background: #ffffff;
+}
 .top_nav {
 }
 
@@ -88,7 +99,6 @@ input {
 }
 
 .content{
-    padding : 10px 0;
     font-weight: lighter;
     font-size: 16px;
 }
@@ -158,12 +168,9 @@ input {
     padding: 20px 20px;
 
 }
-
-
-
 .content .charge_detail {
     margin: 10px 0;
-    padding: 10px 0;
+    padding: 15px 0;
     border-bottom: 1px solid #E6E6E6;
 }
 .charge_detail .charge{
