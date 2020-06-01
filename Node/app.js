@@ -68,3 +68,6 @@ app.use('/message', messageRouter);
 // 예약한 방에 대한 라우터
 import reservationRouter from "./routes/user/trip";
 app.use('/trip', reservationRouter);
+
+import hostRouter  from "./routes/user/host";
+app.use('/host',hostRouter);
