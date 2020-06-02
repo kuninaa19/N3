@@ -33,11 +33,11 @@
                 <div class="item_title">숙소 정보 입력</div>
                 <div class="content">
                     <label for="hotel">
-                        <input type="text" name="name" placeholder="숙소 이름"/>
+                        <input type="text" name="hotel_name" placeholder="숙소 이름"/>
                         <p></p>
                         <input type="text" name="country" placeholder="국가 명"/>
                         <p></p>
-                        <input type="text" name="country" placeholder="지역명"/>
+                        <input type="text" name="location" placeholder="지역명"/>
                     </label>
                 </div>
                 <select name="people_num">
@@ -73,11 +73,15 @@
             <div class="item" id="leftSideMiddle">
                 <div class="item_title">숙소 위치</div>
                 <div id="floating-panel">
-                    <input id="address" type="textbox" value="Malaysia">
+                    <input id="address" type="textbox" placeholder="숙소위치를 검색해주세요">
                     <input id="submit" type="button" value="검색하기">
                 </div>
                 <div id="map"></div>
                 <script src="/static/js/hotel_map_register.js"></script>
+                <div hidden>
+                    <span id="map_let"></span>
+                    <span id="map_lng"></span>
+                </div>
             </div>
             <div style="margin-top:50px;"></div>
 
@@ -101,21 +105,21 @@
                 <div class="content">
                     <div class="charge_detail">
                         <span>1박 금액</span>
-                        <input type="text">
+                        <input type="text" value="₩">
                     </div>
                     <div class="charge_detail">
                         <span>청소비</span>
-                        <input type="text" >
+                        <input type="text" value="₩">
                     </div>
 
                     <div class="charge_detail">
                         <span>서비스 수수료</span>
-                        <input type="text" >
+                        <input type="text" value="₩">
                     </div>
 
                     <div class="charge_detail" id="chargeSum">
                         <span>총 합계</span>
-                        <span class="charge">₩19,554</span>
+                        <span class="charge">₩</span>
                     </div>
                 </div>
             </div>
@@ -140,8 +144,9 @@
 <div class="footer">
     <h5>Hotel reservation dummy site</h5>
 </div>
+<script src="/static/js/room/register.js"></script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
 </script>
 </body>
 </html>
