@@ -49,6 +49,10 @@ app.listen(3000, () => console.log('port 3000 Server On'));
 import indexRouter from './routes/index';
 app.use('/', indexRouter);
 
+//이미지 라우터
+import uploadRouter from './routes/upload';
+app.use('/image', uploadRouter);
+
 // 인증 라우터
 import authRouter from "./routes/auth";
 app.use('/auth', authRouter);
