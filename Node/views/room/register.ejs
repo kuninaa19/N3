@@ -26,7 +26,7 @@
 
 <div class="row">
     <!--    <form action="/host/room/register/done" accept-charset="utf-8" name="room_register" method="post">-->
-    <form>
+
         <div class="left_column">
             <!--        숙소 정보 입력-->
             <div class="item" id="leftSideTop">
@@ -94,11 +94,11 @@
             </div>
             <div style="margin-top:50px;"></div>
             <div>
-                <input type="button" id="greenBtn" name="btn" value="숙소 등록하기"/>
+                <input type="button" id="greenBtn" name="btn"  value="숙소 등록하기" onclick="uploadFile(); return false;">
             </div>
 
         </div>
-<!--        우측 요금 세부정보 지정-->
+        <!--        우측 요금 세부정보 지정-->
         <div class="right_column">
             <div class="item" id="rightSideTop">
                 <div class="item_title">요금 세부정보</div>
@@ -116,7 +116,7 @@
 
                     <div class="charge_detail">
                         <span>서비스 수수료</span>
-                        <input type="text"  name="charge" value="0" onkeyup="chargeDetail()">
+                        <input type="text" name="charge" value="0" onkeyup="chargeDetail()">
                         <div class="currency_mark">₩</div>
 
                     </div>
@@ -130,28 +130,29 @@
             </div>
             <div style="margin-top:50px;"></div>
 
-<!--            숙소 이미지 등록-->
+            <!--            숙소 이미지 등록-->
             <div class="item" id="leftSideBottom">
                 <div class="item_title">숙소 이미지 등록</div>
                 <div class="payment">
-                    <div name="images">
-                        <input type="file">
-                        <input type="file">
-                        <input type="file">
-                        <input type="file">
-                        <input type="file">
-                    </div>
+                    <form id="myForm" enctype="multipart/form-data">
+                        <div name="images">
+                            <input type="file">
+                            <input type="file">
+                            <input type="file">
+                            <input type="file">
+                            <input type="file">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
 </div>
 <div class="footer">
     <h5>Hotel reservation dummy site</h5>
 </div>
 <script src="/static/js/room/register.js"></script>
 <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
 </script>
 </body>
 </html>
