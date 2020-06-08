@@ -28,7 +28,7 @@ const checkNotAuth = (req, res, next) => {
     next();
 };
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -70,24 +70,21 @@ const upload = multer({
         }
     }),
 });
-app.post('/up', upload.array('img', 5), (req, res) => {
-    console.log(req.files);
+app.post('/image/upload', upload.single('img'), (req, res) => {
+    console.log(req.file);
 
     const storeImages = {
-        'image_1': req.files[0].filename,
-        'image_2': req.files[1].filename,
-        'image_3': req.files[2].filename,
-        'image_4': req.files[3].filename,
-        'image_5': req.files[4].filename,
+        'image_1': req.file.filename,
     };
 
-    connection.query('insert into `images` set ?', storeImages, (err, result) => {
+    connection.query('insert into `image` set ?', storeImages, (err, result) => {
         if (err) throw  err;
 
-        connection.query('select * from `images` where `image_1`=?', storeImages.image_1, (err, result) => {
+        connection.query('select * from `image` where `image_1`=?', storeImages.image_1, (err, result) => {
             if (err) throw  err;
 
             let resData = {
+                'key': true,
                 'imageUrl': result[0].image_1
             };
 
@@ -95,6 +92,31 @@ app.post('/up', upload.array('img', 5), (req, res) => {
         });
     });
 });
+app.post('/store',(req,res)=>{
+    console.log(req.body);
+    const info = {
+        'imageUrl': req.body._image,
+        'simple_info': JSON.stringify(req.body.simpleInfo),
+        'country':req.body._country,
+        'region':req.body._region,
+        'name':req.body._name
+    };
+
+    //
+    connection.query('insert into `example` set ?', info, (err, result) => {
+        if (err) throw  err;
+
+        const resData = {
+            'key': true,
+            'name': req.body.simpleInfo
+        };
+
+        return res.json(resData);
+
+    });
+
+});
+
 
 app.get('/', checkNotAuth, (req, res) => {
     //로그인 인증 실패시 다시 여기로 들어옴.
