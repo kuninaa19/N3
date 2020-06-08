@@ -51,7 +51,7 @@ app.use('/', indexRouter);
 
 //이미지 라우터
 import uploadRouter from './routes/upload';
-app.use('/image', uploadRouter);
+app.use('/upload', uploadRouter);
 
 // 인증 라우터
 import authRouter from "./routes/auth";
