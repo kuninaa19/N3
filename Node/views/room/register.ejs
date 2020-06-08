@@ -94,7 +94,7 @@
             </div>
             <div style="margin-top:50px;"></div>
             <div>
-                <input type="button" id="greenBtn" name="btn"  value="숙소 등록하기" onclick="uploadFile(); return false;">
+                <input type="button" id="greenBtn" name="btn"  value="숙소 등록하기" onclick="uploadImages(); return false;">
             </div>
 
         </div>
@@ -118,7 +118,6 @@
                         <span>서비스 수수료</span>
                         <input type="text" name="charge" value="0" onkeyup="chargeDetail()">
                         <div class="currency_mark">₩</div>
-
                     </div>
 
                     <div class="charge_detail" id="chargeSum">
@@ -136,11 +135,11 @@
                 <div class="payment">
                     <form id="myForm" enctype="multipart/form-data">
                         <div name="images">
-                            <input type="file">
-                            <input type="file">
-                            <input type="file">
-                            <input type="file">
-                            <input type="file">
+                            <input type="file"  name="img">
+                            <input type="file" name="img">
+                            <input type="file" name="img">
+                            <input type="file" name="img">
+                            <input type="file" name="img">
                         </div>
                     </form>
                 </div>
@@ -151,6 +150,7 @@
     <h5>Hotel reservation dummy site</h5>
 </div>
 <script src="/static/js/room/register.js"></script>
+<script src="/static/js/classes/room.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
 </script>
