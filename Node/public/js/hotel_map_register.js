@@ -33,7 +33,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
             changeLatLng(address_lat, address_lng);
 
-            alert('주소명 : ' + address + '\n\n위도 : ' + address_lat + '\n\n경도 : ' + address_lng);
+            // alert('주소명 : ' + address + '\n\n위도 : ' + address_lat + '\n\n경도 : ' + address_lng);
 
         } else {
             alert('알파벳 대문자를 사용하지않고 정확한 이름을 입력해주세요: ' + status);
