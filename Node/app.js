@@ -37,6 +37,7 @@ app.use(passport.session());
 app.use(flash());
 initPassport(passport);
 
+app.use(express.json());
 // parse request bodies (req.body) body-parser 대안
 app.use(express.urlencoded({extended: true}));
 
