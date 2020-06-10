@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-    <title><%= hotel_name %></title>
+    <title><%= rooms[0].name %></title>
     <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -64,16 +64,16 @@
         <div class="item" id="leftSideTop">
             <div class="hotel_info">
                 <div class="hotel_name">
-                    프레이저 레지던스 쿠알라룸푸르 (Fraser Residence Kuala Lumpur)
+                    <%= rooms[0].name %>
                 </div>
                 <div style="font-size: 16px; margin-bottom:20px">
-                    쿠알라룸푸르
+                    <%= rooms[0].region %>
                 </div>
                 <div style="font-size: 16px;">
-                    <span>인원 6명</span>&nbsp;
-                    <span>침실 1개</span>&nbsp;
-                    <span>침대 5개</span>&nbsp;
-                    <span>욕실 1개</span>
+                    <span>인원 <%= rooms[0].simple_info.peopleNum %>명</span>&nbsp;
+                    <span>침실 <%= rooms[0].simple_info.bedroom %>개</span>&nbsp;
+                    <span>침대 <%= rooms[0].simple_info.bed %>개</span>&nbsp;
+                    <span>욕실 <%= rooms[0].simple_info.bathroom %>개</span>
                 </div>
             </div>
             <div class="line"></div>
@@ -83,7 +83,7 @@
         <div class="item" id="leftSideMiddle">
             <div class="hotel_info">
                 <div class="hotel_description">
-                    <p><span>Selamat Datang Ke Malaysia!</span><br/><span>My place is located at the heart of Kuala Lumpur City Centre.</span><br/><span>It is famous for it's rooftop infinity pool with the perfect view of Kuala Lumpur.</span><br/><span>Can be accessible through public railways LRT and KTM. Only 5 minutes drive away from the city centre of Kuala Lumpur filled with tourist attraction and shopping centres.</span>
+                    <p><%= rooms[0].intro_info %>
                     </p>
                 </div>
             </div>
@@ -96,7 +96,15 @@
                     </div>
                 </div>
                 <div id="map"></div>
-                <script src="/static/js/hotel_map.js"></script>
+                <script>
+                    function initMap() {
+                        const hotel = {lat: <%= rooms[0].location.map_let %>, lng: <%=rooms[0].location.map_lng %>};
+                        const map = new google.maps.Map(
+                            document.getElementById('map'), {zoom: 15, center: hotel});
+
+                        const marker = new google.maps.Marker({position: hotel, map: map});
+                    }
+                </script>
             </div>
             <div class="line"></div>
         </div>
@@ -119,7 +127,7 @@
                                 <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
                             </div>
                             <div class="profile_info">
-                                <div>호스트 이름</div>
+                                <div>숙박자 이름</div>
                                 <p class="margin_top">2019년 6월 1일</p>
                             </div>
                         </div>
@@ -184,7 +192,7 @@
     <div class="right_column">
         <div class="item">
             <div>
-                <div class="per_day_charge">₩20,000 / 박</div>
+                <div class="per_day_charge">₩<%= rooms[0].value.perDay %> / 박</div>
                 <div style="margin: 20px 0 0 0; font-size: 14px">날짜</div>
                 <div class="reservation_tray">
                     <div style="font-size: 14px; text-align: center">
@@ -196,18 +204,18 @@
             <!--                요금표시-->
             <div class="receipt">
                 <div class="charge_detail">
-                    <span>₩20,000 x 1박</span>
-                    <span class="charge">₩20,000</span>
+                    <span>₩<%= rooms[0].value.perDay %> x 1박</span>
+                    <span class="charge">₩<%= rooms[0].value.perDay %></span>
                 </div>
 
                 <div class="charge_detail">
                     <span>청소비</span>
-                    <span class="charge">₩2,000</span>
+                    <span class="charge">₩<%= rooms[0].value.cleanFee %></span>
                 </div>
 
                 <div class="charge_detail">
                     <span>서비스 수수료</span>
-                    <span class="charge">무료</span>
+                    <span class="charge">₩<%= rooms[0].value.serviceFee %></span>
                 </div>
 
                 <div class="charge_detail" id="chargeSum">
@@ -229,6 +237,8 @@
 <!--모달처리 JS-->
 <script src="/static/js/modal.js"></script>
 <script src="/static/js/datepicker.js"></script>
+
+<script src="/static/js/room/search.js"></script>
 <!--구글 맵스-->
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
