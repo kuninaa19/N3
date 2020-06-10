@@ -1,5 +1,6 @@
 import express from 'express';
 import connection from '../../conf/dbInfo';
+
 const router = express.Router();
 
 const checkAuth = (req, res, next) => {
@@ -15,11 +16,10 @@ const checkAuth = (req, res, next) => {
 //     res.render('user/message',{'nickname':nickname});
 // });
 
-// 호스트 방 등록
-router.get('/room/register',  (req, res) => {
+// 호스트 방 등록 페이지
+router.get('/room/register', (req, res) => {
 
     res.render('room/register');
 });
-
 
 export default router;

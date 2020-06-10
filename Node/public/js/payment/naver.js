@@ -1,5 +1,6 @@
 var oPay = Naver.Pay.create({
     "mode": "production", // development or production
+    // 네이버페이에서 제공하는 임의 클라이언트ID
     "clientId": "u86j4ripEt8LRfPGzQ8" // clientId
 });
 
@@ -8,8 +9,8 @@ var elNaverPayBtn = document.getElementById("naverPayBtn");
 
 elNaverPayBtn.addEventListener("click", function () {
     oPay.open({
-        "merchantUserKey": "example",
-        "merchantPayKey": "example",
+        "merchantUserKey": ".",
+        "merchantPayKey": ".",
         "productName": "호텔",
         "totalPayAmount": "1000",
         "taxScopeAmount": "1000",
