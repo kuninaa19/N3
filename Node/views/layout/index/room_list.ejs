@@ -1,0 +1,14 @@
+<div class="item" style="border: 0px">
+    <div class="item_title">숙소</div>
+    <div class="tray">
+        <%rooms.forEach(function (val) { %>
+            <div class="card">
+                <img src="/static/images/rooms/<%=val.image%>"/>
+                <div class="card_info">
+                    <div class="card_name"><%=val.name%></div>
+                    <div><%=val.region%></div>
+                </div>
+            </div>
+        <% })%>
+    </div>
+</div>
