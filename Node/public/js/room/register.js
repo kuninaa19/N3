@@ -3,26 +3,28 @@
 // uploadImages() 파일 업로드
 // uploadInfo() 이미지 업로드후에 모든 정보 업로드
 
-function totalCheck(charge) {
+const totalCheck = charge => {
     let total = 0;
-    for (let i = 0; i < 3; i++) {
-        if (isNaN(parseInt(charge[i].value))) {
+
+    charge.forEach(v =>{
+        if (isNaN(parseInt(v.value))) {
             total += 0;
         } else {
-            total += parseInt(charge[i].value)
+            total += parseInt(v.value)
         }
-    }
-    return total;
-}
+    });
 
-function chargeDetail() {
+    return total;
+};
+
+const chargeDetail = () => {
     let charge = document.getElementsByName('charge');
     let total;
 
     total = totalCheck(charge);
 
     document.getElementById('chargeAll').innerText = total;
-}
+};
 
 // 이미지 저장
 function uploadImages() {
