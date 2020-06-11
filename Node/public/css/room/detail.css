@@ -264,7 +264,11 @@
     width: 20%;
     text-align: right;
 }
-
+.currency_mark{
+    float:right;
+    width: 20%;
+    text-align: right;
+}
 .footer {
     padding: 5px;
     text-align: center;
