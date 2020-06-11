@@ -205,22 +205,27 @@
             <div class="receipt">
                 <div class="charge_detail">
                     <span>₩<%= rooms.value.perDay %> x 1박</span>
-                    <span class="charge">₩<%= rooms.value.perDay %></span>
+                    <span class="charge"><%= rooms.value.perDay %></span>
+                    <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail">
                     <span>청소비</span>
-                    <span class="charge">₩<%= rooms.value.cleanFee %></span>
+                    <span class="charge"><%= rooms.value.cleanFee %></span>
+                    <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail">
                     <span>서비스 수수료</span>
-                    <span class="charge">₩<%= rooms.value.serviceFee %></span>
+                    <span class="charge" name="value"><%= rooms.value.serviceFee %></span>
+                    <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail" id="chargeSum">
                     <span>총 합계</span>
-                    <span class="charge">₩22,000</span>
+                    <span class="charge" id="total"></span>
+                    <span class="currency_mark">₩</span>
+
                 </div>
             </div>
             <!--                예약버튼-->
@@ -238,10 +243,10 @@
 <script src="/static/js/modal.js"></script>
 <script src="/static/js/datepicker.js"></script>
 
-<script src="/static/js/room/search.js"></script>
+<script src="/static/js/room/detail.js"></script>
 <!--구글 맵스-->
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
-</script>
+<!--<script async defer-->
+<!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">-->
+<!--</script>-->
 </body>
 </html>
