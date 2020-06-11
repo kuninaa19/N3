@@ -32,7 +32,8 @@ const checkIsAuthenticated = (req, res, next) => {
         row[0].value = JSON.parse(row[0].value);
         row[0].simple_info = JSON.parse(row[0].simple_info);
         row[0].location = JSON.parse(row[0].location);
-
+        row[0].intro_info = row[0].intro_info.replace(/\n/g, '<br/>'); // 설명부분 엔터적용되서 나오도록 변경
+        
         res.render('room/detail', {'rooms': row});
     });
 };
