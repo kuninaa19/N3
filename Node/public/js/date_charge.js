@@ -32,15 +32,17 @@ const diffDate = (start, end) => {
     const diffTime = Math.floor(diff / (1000 * 60 * 60 * 24));
 
     if (diffTime === 0) {
+        changeDate(diffTime + 1);
         changeCharge(diffTime + 1);
 
     } else {
+        changeDate(diffTime);
         changeCharge(diffTime);
     }
 };
 
 //날짜 변경에 따라서 순수 숙박요금 변경
-const changeCharge = (diff) => {
+const changeCharge = diff => {
     let charge = document.getElementsByClassName("charge")[0]; // 변경되는 순수 숙박비
     let perDayCost = document.getElementById("per_day_cost").innerHTML; // 순수 하루 숙박비
 
@@ -51,6 +53,12 @@ const changeCharge = (diff) => {
     totalCheck();
 };
 
+const changeDate = diff => {
+    let perDate = document.getElementById("per_date"); // 숙박일정에 따라 몇박인지 숫자 변경
+    let str = `x ${String(diff)}박`;
+
+    perDate.innerHTML = str;
+};
 
 //숙박 합계요금 정산
 const totalCheck = () => {
