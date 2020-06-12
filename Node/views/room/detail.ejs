@@ -204,7 +204,8 @@
             <!--                요금표시-->
             <div class="receipt">
                 <div class="charge_detail">
-                    <span>₩<%= rooms.value.perDay %> x 1박</span>
+                    <span id="per_day_cost">₩<%= rooms.value.perDay %></span>
+                    <span id="per_date">x 1박</span>
                     <span class="charge"><%= rooms.value.perDay %></span>
                     <span class="currency_mark">₩</span>
                 </div>
@@ -241,9 +242,10 @@
 
 <!--모달처리 JS-->
 <script src="/static/js/modal.js"></script>
-<script src="/static/js/datepicker.js"></script>
 
-<script src="/static/js/room/detail.js"></script>
+<!--일정 그리고 숙박요금 계산-->
+<script src="/static/js/date_charge.js"></script>
+
 <!--구글 맵스-->
 <!--<script async defer-->
 <!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">-->
