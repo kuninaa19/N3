@@ -34,7 +34,7 @@
         <% }else{ %>
             <li><a href="/message">메시지</a></li>
             <li><a href="/trip">여행</a></li>
-            <li><a><%=nickname%></a></li>
+            <li><a><%= nickname %></a></li>
             <li><a href="/logout">로그아웃</a></li>
         <% } %>
     </div>
@@ -46,15 +46,15 @@
 <!-- 숙소 이미지-->
 <div>
     <div class="left_side">
-        <img src="/static/images/rooms/<%=images[0].image_1%>"/>
+        <img src="/static/images/rooms/<%= images[0].image_1 %>"/>
     </div>
     <div class="middle_side">
-        <img src="/static/images/rooms/<%=images[0].image_2%>"/>
-        <img src="/static/images/rooms/<%=images[0].image_3%>"/>
+        <img src="/static/images/rooms/<%= images[0].image_2 %>"/>
+        <img src="/static/images/rooms/<%= images[0].image_3 %>"/>
     </div>
     <div class="right_side">
-        <img src="/static/images/rooms/<%=images[0].image_4%>"/>
-        <img src="/static/images/rooms/<%=images[0].image_5%>"/>
+        <img src="/static/images/rooms/<%= images[0].image_4 %>"/>
+        <img src="/static/images/rooms/<%= images[0].image_5 %>"/>
     </div>
 </div>
 
@@ -98,7 +98,7 @@
                 <div id="map"></div>
                 <script>
                     function initMap() {
-                        const hotel = {lat: <%= rooms.location.map_let %>, lng: <%=rooms.location.map_lng %>};
+                        const hotel = {lat: <%= rooms.location.map_let %>, lng: <%= rooms.location.map_lng %>};
                         const map = new google.maps.Map(
                             document.getElementById('map'), {zoom: 15, center: hotel});
 
@@ -231,7 +231,12 @@
             </div>
             <!--                예약버튼-->
             <div style="padding: 0 20px; margin:20px 0">
-                <input type="button" id="greenBtn" name="btn" value="예약하기"/>
+                <form action="/rooms/<%= rooms.id %>/reservation/payment" id="frm">
+                    <input type="hidden" name="checkin" value="">
+                    <input type="hidden" name="checkout" value="">
+                    <input type="hidden" name="date" value="">
+                    <input type="button" id="greenBtn" name="btn" value="예약하기"/>
+                </form>
             </div>
         </div>
     </div>
@@ -246,9 +251,12 @@
 <!--일정 그리고 숙박요금 계산-->
 <script src="/static/js/date_charge.js"></script>
 
+<!--이 페이지에서 작동하는 JS-->
+<script src="/static/js/room/detail.js"></script>
+
 <!--구글 맵스-->
-<!--<script async defer-->
-<!--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">-->
-<!--</script>-->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
+</script>
 </body>
 </html>
