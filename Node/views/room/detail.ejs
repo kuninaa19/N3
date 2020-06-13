@@ -232,6 +232,7 @@
             <!--                예약버튼-->
             <div style="padding: 0 20px; margin:20px 0">
                 <form action="/rooms/<%= rooms.id %>/reservation/payment" id="frm">
+                    <input type="hidden" name="room_num" value="<%= rooms.id %>">
                     <input type="hidden" name="checkin" value="">
                     <input type="hidden" name="checkout" value="">
                     <input type="hidden" name="date" value="">
