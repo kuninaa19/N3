@@ -218,12 +218,16 @@ body {
     width: 20%;
     text-align: right;
 }
+.currency_mark{
+    float:right;
+    width: 20%;
+    text-align: right;
+}
 #chargeSum{
     margin: 5px 0;
     border-bottom: 0;
     font-weight: bold;
 }
-/*우측 요금 세부정보 */
 
 .footer {
     padding: 5px;
