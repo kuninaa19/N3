@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/room/reservation.css"/>
     <!--    datePicker-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -32,18 +32,23 @@
 <div class="row">
     <!--        숙소 날짜 및 결제 -->
     <div class="left_column">
-<!--        숙소 간략정보-->
+        <!--        숙소 간략정보-->
         <div class="item" id="leftSideTop">
             <div class="tray">
                 <div class="card">
-                    <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
+                    <img src="/static/images/rooms/<%= rooms[0].image %>"/>
                 </div>
                 <div class="img_desc">
                     <div>
-                        <b>프레이저 레지던스 쿠알라룸푸르 (Fraser Residence Kuala Lumpur)</b>
+                        <b><%= rooms[0].name %></b>
                     </div>
                     <div style="font-size: 14px">
-                        <p>인원 6명  침실 1개  침대 5개  욕실 1개</p>
+                        <p>
+                            <span>인원 <%= rooms[0].simple_info.peopleNum %>명</span>&nbsp;
+                            <span>침실 <%= rooms[0].simple_info.bedroom %>개</span>&nbsp;
+                            <span>침대 <%= rooms[0].simple_info.bed %>개</span>&nbsp;
+                            <span>욕실 <%= rooms[0].simple_info.bathroom %>개</span>
+                        </p>
                     </div>
                     <div style="font-size: 14px">
                         <b>3.9 / 5 </b> <span>좋아요 (이용후기 96개)</span>
@@ -53,13 +58,13 @@
         </div>
         <div style="border-top: 1px #E6E6E6 solid;"></div>
 
-<!--        숙소 날짜 확인-->
+        <!--        숙소 날짜 확인-->
         <div class="item" id="leftSideMiddle">
             <div class="item_title">예약정보</div>
             <div class="reservation_category">예약날짜</div>
             <div class="reservation_tray">
                 <div>
-                    <input type="button" class="calendar_btn" name="daterange" value="" />
+                    <input type="button" class="calendar_btn" name="daterange" value=""/>
                 </div>
             </div>
         </div>
@@ -69,7 +74,7 @@
             <div class="reservation_category">호스트에게 메시지 보내기</div>
             <div class="sub_title">호스트에게 여행 목적과 도착 예정 시간을 알려주세요.
             </div>
-                <textarea class="message"></textarea>
+            <textarea class="message"></textarea>
         </div>
         <div style="border-top: 1px #E6E6E6 solid;"></div>
 
@@ -88,34 +93,40 @@
 
         <div style="border-top: 1px #E6E6E6 solid;"></div>
         <div>
-            <input type="button" id="greenBtn" name="btn" value="확인 및 결제" />
+            <input type="button" id="greenBtn" name="btn" value="확인 및 결제"/>
         </div>
 
     </div>
     <!--        숙소 결제-->
     <div class="right_column">
         <div class="item" id="rightSide">
-                <div class="right_side_title">요금 세부정보</div>
+            <div class="right_side_title">요금 세부정보</div>
             <!--                요금표시-->
             <div class="receipt">
                 <div class="charge_detail">
-                    <span >₩19,554 x 1박</span>
-                    <span class="charge">₩19,554</span>
+
+                    <span id="per_day_cost">₩<%= rooms[0].value.perDay %></span>
+                    <span id="per_date">x <%= reservationInfo.date %>박</span>
+                    <span class="charge"><%= reservationInfo.perDayFee %></span>
+                    <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail">
-                    <span >청소비</span>
-                    <span class="charge">₩19,554</span>
+                    <span>청소비</span>
+                    <span class="charge"><%= rooms[0].value.cleanFee %></span>
+                    <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail">
-                    <span >서비스 수수료</span>
-                    <span class="charge">₩19,554</span>
+                    <span>서비스 수수료</span>
+                    <span class="charge"><%= rooms[0].value.serviceFee %></span>
+                    <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail" id="chargeSum">
-                    <span >총 합계</span>
-                    <span class="charge">₩19,554</span>
+                    <span>총 합계</span>
+                    <span class="charge" id="total"></span>
+                    <span class="currency_mark">₩</span>
                 </div>
             </div>
         </div>
@@ -127,7 +138,8 @@
 <!--네이버페이 결제-->
 <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
 <script src="/static/js/payment/naver.js"></script>
-<!--모달처리 JS-->
-<script src="/static/js/datepicker.js"></script>
+
+<!--일정 그리고 숙박요금 계산-->
+<script src="/static/js/room/reservation.js"></script>
 </body>
 </html>
