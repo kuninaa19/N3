@@ -1,8 +1,18 @@
-//diffDate() 입실날짜와 퇴실날짜 차이 계산
-//changeCharge() 날짜 변경에 따라서 순수 숙박요금 변경
+// getUrlParams() 예약하려는 체크인 체크아웃 날짜 값 가져오기(쿼리스트링)
+// diffDate() 입실날짜와 퇴실날짜 차이 계산
+// changeCharge() 날짜 변경에 따라서 순수 숙박요금 변경
 // totalCheck() 숙박 합계요금 정산
 
+function getUrlParams() {
+    let params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+        params[key] = value;
+    });
+    return params;
+}
+
 $(function () {
+    let info = getUrlParams();
     $('input[name="daterange"]').daterangepicker({
         autoApply: true,
         minDate: new Date(),
@@ -10,7 +20,9 @@ $(function () {
         opens: 'center',
         locale: {
             format: 'YYYY/MM/DD'
-        }
+        },
+        startDate: info.checkin,
+        endDate: info.checkout
     }, function (start, end, label) {
         // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         // console.log(document.getElementsByClassName("calendar_btn")[0].valueOf());
