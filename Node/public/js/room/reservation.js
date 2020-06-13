@@ -17,15 +17,10 @@ $(function () {
         const startDay = start.format('YYYY-MM-DD');
         const endDay = end.format('YYYY-MM-DD');
 
-        //form checkin, checkout 값 변경
-        let formCheckIn = document.getElementsByName("checkin")[0];
-        let formCheckOut = document.getElementsByName("checkout")[0];
-        formCheckIn.value=startDay;
-        formCheckOut.value=endDay;
-
         diffDate(startDay, endDay);
     });
 });
+
 
 // 입실날짜와 퇴실날짜 차이 계산
 const diffDate = (start, end) => {
@@ -65,10 +60,6 @@ const changeDate = diff => {
     let str = `x ${String(diff)}박`;
 
     perDate.innerHTML = str;
-
-    // form name="date" 에 저장
-    let formDate = document.getElementsByName("date")[0];
-    formDate.value=diff;
 };
 
 //숙박 합계요금 정산
