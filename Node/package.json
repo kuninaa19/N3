@@ -18,7 +18,7 @@
     "gulp-babel": "^8.0.0",
     "helmet": "^3.22.0",
     "http-errors": "~1.6.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "method-override": "^3.0.0",
     "mongoose": "5.9.2",
     "morgan": "~1.9.1",
@@ -29,14 +29,15 @@
     "passport-local": "^1.0.0",
     "passport-naver": "^1.0.6",
     "redis": "^3.0.2",
-    "sequelize": "^5.21.10",
+    "request": "^2.88.2",
+    "sequelize": "^5.21.12",
     "session-file-store": "^1.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.7",
-    "@babel/node": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/node": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1"
   }
