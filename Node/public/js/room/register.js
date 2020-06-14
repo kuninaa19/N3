@@ -40,7 +40,7 @@ function uploadImages() {
         xhr.send(formData);
     });
 
-    uploadImage.then(function (response) {
+    uploadImage.then((response) => {
         let result = JSON.parse(response);
         console.log(result);
         if (result.key === true) {
@@ -84,7 +84,7 @@ function uploadInfo(image) {
         xhr.send(JSON.stringify(roomInfo));
     });
 
-    info.then(function (response) {
+    info.then((response) =>{
         let result = JSON.parse(response);
 
         let roomNumber = result.roomNum;
