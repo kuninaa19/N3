@@ -11,7 +11,7 @@ const passport = require('passport');
 const initPassport = require('./conf/passport');
 const FileStore = require('session-file-store')(session);
 const multer = require('multer'); // 이미지저장
-
+var request = require('request');
 
 const checkAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
@@ -48,6 +48,51 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 initPassport(passport);
 
+app.post('/payment/ready', (req, res) => {
+    console.log(req.body);
+
+    let headers = {
+        'Authorization': 'KakaoAK '+'9cdd4ba5aa509a003c197ffca4301f62',
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    };
+
+    let params = {
+        'cid': 'TC0ONETIME',
+        'partner_order_id': '423423',
+        'partner_user_id': 'Chan',
+        'item_name': '장동옥',
+        'quantity': 1,
+        'total_amount': 20000,
+        'vat_amount': 200,
+        'tax_free_amount': 0,
+        'approval_url': 'https://hotelbooking.kro.kr/payment/approve',
+        'fail_url': 'https://hotelbooking.kro.kr/payment/fail',
+        'cancel_url': 'https://hotelbooking.kro.kr/payment/cancel',
+    };
+
+    let options = {
+        url: 'https://kapi.kakao.com/v1/payment/ready',
+        method: 'POST',
+        headers: headers,
+        form: params
+    };
+
+    function callback(error, response, body) {
+        // console.log(error);
+        if (!error && response.statusCode == 200) {
+            // console.log(body);
+            let res = JSON.parse(body);
+            // console.log(res.next_redirect_pc_url);
+            console.log(body);
+            return body;
+        }
+    }
+
+    let url = request(options, callback);
+    console.log("url");
+    return url;
+});
+
 app.get('/example', (req, res) => {
 
     res.render('promise_example.ejs');
@@ -60,6 +105,8 @@ app.get('/example/1', (req, res) => {
     res.json(resData);
 
 });
+
+//이미지 업로드
 const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
@@ -72,49 +119,39 @@ const upload = multer({
 });
 app.post('/image/upload', upload.single('img'), (req, res) => {
     console.log(req.file);
-
     const storeImages = {
         'image_1': req.file.filename,
     };
-
     connection.query('insert into `image` set ?', storeImages, (err, result) => {
         if (err) throw  err;
-
         connection.query('select * from `image` where `image_1`=?', storeImages.image_1, (err, result) => {
             if (err) throw  err;
-
             let resData = {
                 'key': true,
                 'imageUrl': result[0].image_1
             };
-
             return res.json(resData);
         });
     });
 });
-app.post('/store',(req,res)=>{
+
+app.post('/store', (req, res) => {
     console.log(req.body);
     const info = {
         'imageUrl': req.body._image,
         'simple_info': JSON.stringify(req.body.simpleInfo),
-        'country':req.body._country,
-        'region':req.body._region,
-        'name':req.body._name
+        'country': req.body._country,
+        'region': req.body._region,
+        'name': req.body._name
     };
-
-    //
     connection.query('insert into `example` set ?', info, (err, result) => {
         if (err) throw  err;
-
         const resData = {
             'key': true,
             'name': req.body.simpleInfo
         };
-
         return res.json(resData);
-
     });
-
 });
 
 
@@ -127,13 +164,8 @@ app.get('/', checkNotAuth, (req, res) => {
 });
 
 app.post('/send_data', (req, res) => {
-    console.log(req);
     var resData = {'email': req.body.email, 'password': req.body.password, 'nickname': req.body.nickname}
     res.json(resData);
-});
-app.get('/dashboard', checkAuth, (req, res) => {
-    //passport에서   //반환된 user가 이곳에서 req.user이다.
-    res.render('dashboard.ejs', {nickname: req.user.nickname});
 });
 
 app.get('/logout', (req, res) => {
