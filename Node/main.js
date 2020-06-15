@@ -2,6 +2,7 @@ import path from "path";
 
 import connection from './conf/dbInfo';
 import bCrypt from "bcrypt";
+import config from './conf/config';
 
 const express = require('express');
 const app = express();
@@ -11,7 +12,8 @@ const passport = require('passport');
 const initPassport = require('./conf/passport');
 const FileStore = require('session-file-store')(session);
 const multer = require('multer'); // 이미지저장
-var request = require('request');
+// var request = require('request');
+const request = require('request-promise-native');
 
 const checkAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
@@ -52,7 +54,7 @@ app.post('/payment/ready', (req, res) => {
     console.log(req.body);
 
     let headers = {
-        'Authorization': 'KakaoAK '+'9cdd4ba5aa509a003c197ffca4301f62',
+        'Authorization': 'KakaoAK ' + config.oauth.kakao.admin_key,
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     };
 
@@ -77,20 +79,60 @@ app.post('/payment/ready', (req, res) => {
         form: params
     };
 
+    // 오리지날 request 모듈 콜백 비동기라 return은 안됨
+  /*
     function callback(error, response, body) {
         // console.log(error);
-        if (!error && response.statusCode == 200) {
-            // console.log(body);
+        if (!error && response.statusCode === 200) {
             let res = JSON.parse(body);
             // console.log(res.next_redirect_pc_url);
             console.log(body);
             return body;
         }
     }
+    request(options, callback);
+    */
+  
+  //promise를 통한 return 값 전달
+/*
+    function get_info(){
+        return new Promise(function(resolve, reject){
+            request(options, function (error, response, body) {
+                // in addition to parsing the value, deal with possible errors
+                if (error) return reject(error);
+                try {
+                    // JSON.parse() can throw an exception if not valid JSON
+                    resolve(JSON.parse(body));
+                } catch(e) {
+                    reject(e);
+                }
+            });
+        });
+    }
 
-    let url = request(options, callback);
-    console.log("url");
-    return url;
+    get_info().then(function(val) {
+        console.log(val);
+        // return val;
+        return res.json(val);
+    }).catch(function(err) {
+        console.err(err);
+    });
+*/
+
+    /*async function get_info(){
+        try {
+            let result = await request(options, function (error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    return JSON.parse(body);
+                }
+            });
+            return res.send(result);
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+    get_info();*/
 });
 
 app.get('/example', (req, res) => {
