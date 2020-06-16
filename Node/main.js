@@ -89,18 +89,11 @@ app.get('/payment/approve',(req,res)=>{
     get_info();
 });
 
+// 결제 취소시 창 닫기
 app.get('/payment/cancel',(req,res)=>{
-
-
-   function closeWindow() {
-        self.opener=self;
-        window.close();
-   }
-
-   return closeWindow();
-
-
+    res.send("<script>window.close();</script>");
 });
+
 app.post('/payment/ready', (req, res) => {
     console.log(req.body);
 
@@ -175,14 +168,15 @@ app.post('/payment/ready', (req, res) => {
         try {
             let result = await request(options, function (error, response, body) {
                 if (!error && response.statusCode === 200) {
-                    let fa = JSON.parse(body)
-                    return fa;
+                    // let fa = JSON.parse(body)
+                    return body;
                 }
             });
+            console.log(result);
             //세션에 tid(결제 고유 번호) 저장 - 없으면 결제 승인완료 안됨
             req.session.tid = JSON.parse(result).tid;
             req.session.save(function () {
-                return res.send(result);
+                return res.json(JSON.parse(result));
             });
         }
         catch (e) {
