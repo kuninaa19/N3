@@ -50,6 +50,57 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 initPassport(passport);
 
+app.get('/payment/approve',(req,res)=>{
+
+    let headers = {
+        'Authorization': 'KakaoAK ' + config.oauth.kakao.admin_key,
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    };
+
+    let params = {
+        'cid': 'TC0ONETIME',
+        'tid':req.session.tid,
+        'partner_order_id': 'test',
+        'partner_user_id': 'test',
+        'pg_token':req.query.pg_token
+    };
+
+    let options = {
+        url: 'https://kapi.kakao.com/v1/payment/approve',
+        method: 'POST',
+        headers: headers,
+        form: params
+    };
+
+    async function get_info(){
+        try {
+            let result = await request(options, function (error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    return JSON.parse(body);
+                }
+            });
+            //처리완료되면 창닫고 예약페이지로 이동
+            return res.send(result);
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+    get_info();
+});
+
+app.get('/payment/cancel',(req,res)=>{
+
+
+   function closeWindow() {
+        self.opener=self;
+        window.close();
+   }
+
+   return closeWindow();
+
+
+});
 app.post('/payment/ready', (req, res) => {
     console.log(req.body);
 
@@ -60,15 +111,16 @@ app.post('/payment/ready', (req, res) => {
 
     let params = {
         'cid': 'TC0ONETIME',
-        'partner_order_id': '423423',
-        'partner_user_id': 'Chan',
-        'item_name': '장동옥',
+        'partner_order_id': 'test',
+        'partner_user_id': 'test',
+        'item_name': req.body.hotel_name,
         'quantity': 1,
-        'total_amount': 20000,
-        'vat_amount': 200,
+        'total_amount': req.body.price,
+        'vat_amount': 1000,
         'tax_free_amount': 0,
         'approval_url': 'https://hotelbooking.kro.kr/payment/approve',
         'fail_url': 'https://hotelbooking.kro.kr/payment/fail',
+        // 'cancel_url': 'https://hotelbooking.kro.kr/payment/cancel',
         'cancel_url': 'https://hotelbooking.kro.kr/payment/cancel',
     };
 
@@ -119,20 +171,25 @@ app.post('/payment/ready', (req, res) => {
     });
 */
 
-    /*async function get_info(){
+    async function get_info(){
         try {
             let result = await request(options, function (error, response, body) {
                 if (!error && response.statusCode === 200) {
-                    return JSON.parse(body);
+                    let fa = JSON.parse(body)
+                    return fa;
                 }
             });
-            return res.send(result);
+            //세션에 tid(결제 고유 번호) 저장 - 없으면 결제 승인완료 안됨
+            req.session.tid = JSON.parse(result).tid;
+            req.session.save(function () {
+                return res.send(result);
+            });
         }
         catch (e) {
             console.log(e)
         }
     }
-    get_info();*/
+    get_info();
 });
 
 app.get('/example', (req, res) => {
