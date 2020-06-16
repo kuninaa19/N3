@@ -18,7 +18,7 @@ const totalCheck = charge => {
 };
 
 const chargeDetail = () => {
-    let charge = document.getElementsByName('charge');
+    const charge = document.getElementsByName('charge');
     let total;
 
     total = totalCheck(charge);
@@ -29,11 +29,11 @@ const chargeDetail = () => {
 // 이미지 저장
 function uploadImages() {
     const uploadImage = new Promise((resolve, reject) => {
-        let xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open("POST", "https://hotelbooking.kro.kr/upload/images", true);
 
-        let formElement = document.getElementById('myForm');
-        let formData = new FormData(formElement);
+        const formElement = document.getElementById('myForm');
+        const formData = new FormData(formElement);
 
         xhr.onload = () => resolve(xhr.responseText);
         xhr.onerror = () => reject(xhr.statusText);
@@ -41,7 +41,7 @@ function uploadImages() {
     });
 
     uploadImage.then((response) => {
-        let result = JSON.parse(response);
+        const result = JSON.parse(response);
         console.log(result);
         if (result.key === true) {
             return uploadInfo(result.image);
@@ -85,9 +85,9 @@ function uploadInfo(image) {
     });
 
     info.then((response) =>{
-        let result = JSON.parse(response);
+        const result = JSON.parse(response);
 
-        let roomNumber = result.roomNum;
+        const roomNumber = result.roomNum;
         if (result.key === true) {
             location.href = `https://hotelbooking.kro.kr/rooms/${roomNumber}`;
         }

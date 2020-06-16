@@ -3,16 +3,16 @@
 // changeCharge() 날짜 변경에 따라서 순수 숙박요금 변경
 // totalCheck() 숙박 합계요금 정산
 
-function getUrlParams() {
-    let params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+const getUrlParams= ()=> {
+    const params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,  (str, key, value) => {
         params[key] = value;
     });
     return params;
-}
+};
 
 $(function () {
-    let info = getUrlParams();
+    const info = getUrlParams();
     $('input[name="daterange"]').daterangepicker({
         autoApply: true,
         minDate: new Date(),
@@ -57,7 +57,7 @@ const diffDate = (start, end) => {
 
 //날짜 변경에 따라서 순수 숙박요금 변경
 const changeCharge = diff => {
-    let charge = document.getElementsByClassName("charge")[0]; // 변경되는 순수 숙박비
+    const charge = document.getElementsByClassName("charge")[0]; // 변경되는 순수 숙박비
     let perDayCost = document.getElementById("per_day_cost").innerHTML; // 순수 하루 숙박비
 
     perDayCost = perDayCost.replace('₩', "");
@@ -68,16 +68,16 @@ const changeCharge = diff => {
 };
 
 const changeDate = diff => {
-    let perDate = document.getElementById("per_date"); // 숙박일정에 따라 몇박인지 숫자 변경
-    let str = `x ${String(diff)}박`;
+    const perDate = document.getElementById("per_date"); // 숙박일정에 따라 몇박인지 숫자 변경
+    const str = `x ${String(diff)}박`;
 
     perDate.innerHTML = str;
 };
 
 //숙박 합계요금 정산
 const totalCheck = () => {
-    let total = document.getElementById("total");
-    let charge = document.getElementsByClassName("charge");
+    const total = document.getElementById("total");
+    const charge = document.getElementsByClassName("charge");
 
     let totalCharge = 0;
 
