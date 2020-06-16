@@ -33,7 +33,7 @@ const checkIsAuthenticated = (req, res, next) => {
         row[0].location = JSON.parse(row[0].location);
         row[0].intro_info = row[0].intro_info.replace(/\n/g, '<br/>'); // 설명부분 엔터적용되서 나오도록 변경
 
-        let roomInfo = row[0];
+        const roomInfo = row[0];
 
         // 이미지 검색
         const sql = 'select * from `images` where image_1 = ?';
@@ -59,7 +59,7 @@ router.get('/:number', checkIsAuthenticated, (req, res) => {
         row[0].location = JSON.parse(row[0].location);
         row[0].intro_info = row[0].intro_info.replace(/\n/g, '<br/>'); // 설명부분 엔터적용되서 나오도록 변경
 
-        let roomInfo = row[0];
+        const roomInfo = row[0];
 
         // 이미지 검색
         const sql = 'select * from `images` where image_1 = ?';
