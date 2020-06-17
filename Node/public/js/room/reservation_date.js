@@ -1,14 +1,28 @@
 // getUrlParams() 예약하려는 체크인 체크아웃 날짜 값 가져오기(쿼리스트링)
+// formSet() 결제버튼누를때 정보를 주기위한 폼정보 초기입력
 // diffDate() 입실날짜와 퇴실날짜 차이 계산
 // changeCharge() 날짜 변경에 따라서 순수 숙박요금 변경
 // totalCheck() 숙박 합계요금 정산
 
-const getUrlParams= ()=> {
+
+const getUrlParams = () => {
     const params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,  (str, key, value) => {
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, (str, key, value) => {
         params[key] = value;
     });
+    formSet(params);
+
     return params;
+};
+
+const formSet = (params) => {
+    const formCheckIn = document.getElementsByName("checkin")[0];
+    const formCheckOut = document.getElementsByName("checkout")[0];
+    const formDate = document.getElementsByName("day")[0];
+
+    formCheckIn.value = params.checkin;
+    formCheckOut.value = params.checkout;
+    formDate.value = params.day;
 };
 
 $(function () {
@@ -28,6 +42,12 @@ $(function () {
         // console.log(document.getElementsByClassName("calendar_btn")[0].valueOf());
         const startDay = start.format('YYYY-MM-DD');
         const endDay = end.format('YYYY-MM-DD');
+
+        //form checkin, checkout 값 변경
+        const formCheckIn = document.getElementsByName("checkin")[0];
+        const formCheckOut = document.getElementsByName("checkout")[0];
+        formCheckIn.value = startDay;
+        formCheckOut.value = endDay;
 
         diffDate(startDay, endDay);
     });
@@ -72,6 +92,10 @@ const changeDate = diff => {
     const str = `x ${String(diff)}박`;
 
     perDate.innerHTML = str;
+
+    // form name="date" 에 저장
+    const formDate = document.getElementsByName("day")[0];
+    formDate.value = diff;
 };
 
 //숙박 합계요금 정산
