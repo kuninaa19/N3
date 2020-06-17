@@ -6,7 +6,7 @@
 const totalCheck = charge => {
     let total = 0;
 
-    charge.forEach(v =>{
+    charge.forEach(v => {
         if (isNaN(parseInt(v.value))) {
             total += 0;
         } else {
@@ -27,7 +27,7 @@ const chargeDetail = () => {
 };
 
 // 이미지 저장
-function uploadImages() {
+const uploadImages = () => {
     const uploadImage = new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "https://hotelbooking.kro.kr/upload/images", true);
@@ -47,10 +47,10 @@ function uploadImages() {
             return uploadInfo(result.image);
         }
     })
-}
+};
 
 //이미지 업로드후에 모든 정보 업로드
-function uploadInfo(image) {
+const uploadInfo = (image) => {
     const info = new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "https://hotelbooking.kro.kr/upload/info", true);
@@ -84,7 +84,7 @@ function uploadInfo(image) {
         xhr.send(JSON.stringify(roomInfo));
     });
 
-    info.then((response) =>{
+    info.then((response) => {
         const result = JSON.parse(response);
 
         const roomNumber = result.roomNum;
@@ -92,4 +92,4 @@ function uploadInfo(image) {
             location.href = `https://hotelbooking.kro.kr/rooms/${roomNumber}`;
         }
     })
-}
+};
