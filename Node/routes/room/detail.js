@@ -79,7 +79,7 @@ router.get('/:number/reservation/payment', (req, res) => {
     const formData = {
         // 'checkIn': req.query.checkin,
         // 'checkOut': req.query.checkout,
-        'date': req.query.date,
+        'day': req.query.day,
         'perDayFee':""
     };
 
@@ -92,7 +92,7 @@ router.get('/:number/reservation/payment', (req, res) => {
         row[0].value = JSON.parse(row[0].value);
 
         // 날짜가 적용된 숙박요금(청소비 제외)
-        formData.perDayFee=row[0].value.perDay*formData.date;
+        formData.perDayFee=row[0].value.perDay*formData.day;
 
         res.render('room/reservation', {'rooms': row, 'reservationInfo': formData});
     });
