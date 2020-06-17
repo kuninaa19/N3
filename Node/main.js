@@ -50,74 +50,88 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 initPassport(passport);
 
-app.get('/payment/approve',(req,res)=>{
+app.get('/payment/approve', (req, res) => {
 
-    let headers = {
+    const headers = {
         'Authorization': 'KakaoAK ' + config.oauth.kakao.admin_key,
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     };
 
-    let params = {
+    const params = {
         'cid': 'TC0ONETIME',
-        'tid':req.session.tid,
+        'tid': req.session.tid,
         'partner_order_id': 'test',
-        'partner_user_id': 'test',
-        'pg_token':req.query.pg_token
+        'partner_user_id': 'test',//req.user.email
+        'pg_token': req.query.pg_token
     };
 
-    let options = {
+    const options = {
         url: 'https://kapi.kakao.com/v1/payment/approve',
         method: 'POST',
         headers: headers,
         form: params
     };
 
-    async function get_info(){
+    async function get_info() {
         try {
-            let result = await request(options, function (error, response, body) {
+            const result = await request(options, (error, response, body) => {
                 if (!error && response.statusCode === 200) {
                     return JSON.parse(body);
                 }
             });
-            //처리완료되면 창닫고 예약페이지로 이동
-            return res.send(result);
-        }
-        catch (e) {
+            //처리완료되면 DB에 예약 내용저장
+            // 창닫고 예약페이지로 이동
+            let val = JSON.parse(result);
+
+            val.date = JSON.stringify(req.session.date);
+            val.amount = JSON.stringify(val.amount);
+            const sql = 'insert into `order` set ?';
+            connection.query(sql, val, (err, result) => {
+                if (err) throw  err;
+
+                res.send("<script>opener.location.href=`https://hotelbooking.kro.kr/rooms/13`; window.close();</script>");
+            });
+
+        } catch (e) {
             console.log(e)
         }
     }
+
     get_info();
 });
 
 // 결제 취소시 창 닫기
-app.get('/payment/cancel',(req,res)=>{
+app.get('/payment/cancel', (req, res) => {
     res.send("<script>window.close();</script>");
+});
+
+// 결제 실패시 알림창 뜨고 다시 시도
+app.get('/payment/fail', (req, res) => {
+    res.send("<script>alert('다시 시도해 주세요'); window.close();</script>");
 });
 
 app.post('/payment/ready', (req, res) => {
     console.log(req.body);
 
-    let headers = {
+    const headers = {
         'Authorization': 'KakaoAK ' + config.oauth.kakao.admin_key,
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     };
 
-    let params = {
+    const params = {
         'cid': 'TC0ONETIME',
         'partner_order_id': 'test',
-        'partner_user_id': 'test',
+        'partner_user_id': 'test',//req.user.email
         'item_name': req.body.hotel_name,
-        'quantity': 1,
+        'quantity': req.body.quantity, //상품수량
         'total_amount': req.body.price,
-        'vat_amount': 1000,
         'tax_free_amount': 0,
         'approval_url': 'https://hotelbooking.kro.kr/payment/approve',
         'fail_url': 'https://hotelbooking.kro.kr/payment/fail',
-        // 'cancel_url': 'https://hotelbooking.kro.kr/payment/cancel',
         'cancel_url': 'https://hotelbooking.kro.kr/payment/cancel',
     };
 
-    let options = {
+    const options = {
         url: 'https://kapi.kakao.com/v1/payment/ready',
         method: 'POST',
         headers: headers,
@@ -125,64 +139,67 @@ app.post('/payment/ready', (req, res) => {
     };
 
     // 오리지날 request 모듈 콜백 비동기라 return은 안됨
-  /*
-    function callback(error, response, body) {
-        // console.log(error);
-        if (!error && response.statusCode === 200) {
-            let res = JSON.parse(body);
-            // console.log(res.next_redirect_pc_url);
-            console.log(body);
-            return body;
-        }
-    }
-    request(options, callback);
-    */
-  
-  //promise를 통한 return 값 전달
-/*
-    function get_info(){
-        return new Promise(function(resolve, reject){
-            request(options, function (error, response, body) {
-                // in addition to parsing the value, deal with possible errors
-                if (error) return reject(error);
-                try {
-                    // JSON.parse() can throw an exception if not valid JSON
-                    resolve(JSON.parse(body));
-                } catch(e) {
-                    reject(e);
-                }
+    /*
+      function callback(error, response, body) {
+          // console.log(error);
+          if (!error && response.statusCode === 200) {
+              let res = JSON.parse(body);
+              // console.log(res.next_redirect_pc_url);
+              console.log(body);
+              return body;
+          }
+      }
+      request(options, callback);
+      */
+
+    //promise를 통한 return 값 전달
+    /*
+        function get_info(){
+            return new Promise(function(resolve, reject){
+                request(options, function (error, response, body) {
+                    // in addition to parsing the value, deal with possible errors
+                    if (error) return reject(error);
+                    try {
+                        // JSON.parse() can throw an exception if not valid JSON
+                        resolve(JSON.parse(body));
+                    } catch(e) {
+                        reject(e);
+                    }
+                });
             });
+        }
+
+        get_info().then(function(val) {
+            console.log(val);
+            // return val;
+            return res.json(val);
+        }).catch(function(err) {
+            console.err(err);
         });
-    }
+    */
 
-    get_info().then(function(val) {
-        console.log(val);
-        // return val;
-        return res.json(val);
-    }).catch(function(err) {
-        console.err(err);
-    });
-*/
-
-    async function get_info(){
+    async function get_info() {
         try {
-            let result = await request(options, function (error, response, body) {
+            const result = await request(options, (error, response, body) => {
                 if (!error && response.statusCode === 200) {
                     // let fa = JSON.parse(body)
                     return body;
                 }
             });
-            console.log(result);
+
+            const val = JSON.parse(result);
             //세션에 tid(결제 고유 번호) 저장 - 없으면 결제 승인완료 안됨
-            req.session.tid = JSON.parse(result).tid;
-            req.session.save(function () {
-                return res.json(JSON.parse(result));
+            req.session.tid = val.tid;
+            // 예약하려는 날짜 저장
+            req.session.date = req.body.date;
+            req.session.save(() => {
+                return res.json(val.next_redirect_pc_url);
             });
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e)
         }
     }
+
     get_info();
 });
 
