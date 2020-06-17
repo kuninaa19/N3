@@ -40,7 +40,7 @@
                 </div>
                 <div class="img_desc">
                     <div>
-                        <b><%= rooms[0].name %></b>
+                        <b id="hotel_name"><%= rooms[0].name %></b>
                     </div>
                     <div style="font-size: 14px">
                         <p>
@@ -82,10 +82,10 @@
         <div class="item" id="leftSideBottom">
             <div class="item_title">결제수단</div>
             <div class="payment">
-                <button class="btn">
+                <button class="btn" id="kakaoPayBtn" value="nonClicked">
                     <img class="login_api_img" src="/static/images/payment_btn/payment_icon_yellow_medium.png">
                 </button>
-                <button class="btn" id="naverPayBtn">
+                <button class="btn" id="naverPayBtn" value="nonClicked">
                     <img class="login_api_img" src="/static/images/payment_btn/logo_black.png">
                 </button>
             </div>
@@ -93,7 +93,10 @@
 
         <div style="border-top: 1px #E6E6E6 solid;"></div>
         <div>
-            <input type="button" id="greenBtn" name="btn" value="확인 및 결제"/>
+            <input type="hidden" name="checkin" value="">
+            <input type="hidden" name="checkout" value="">
+            <input type="hidden" name="day" value="">
+            <input type="button" id="paymentBtn" value="확인 및 결제"/>
         </div>
 
     </div>
@@ -104,9 +107,8 @@
             <!--                요금표시-->
             <div class="receipt">
                 <div class="charge_detail">
-
                     <span id="per_day_cost">₩<%= rooms[0].value.perDay %></span>
-                    <span id="per_date">x <%= reservationInfo.date %>박</span>
+                    <span id="per_date">x <%= reservationInfo.day %>박</span>
                     <span class="charge"><%= reservationInfo.perDayFee %></span>
                     <span class="currency_mark">₩</span>
                 </div>
@@ -137,9 +139,18 @@
 </div>
 <!--네이버페이 결제-->
 <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
+
+<!--결제버튼-->
 <script src="/static/js/payment/naver.js"></script>
+<script src="/static/js/payment/kakao.js"></script>
+
+<!--결제정보 관련 클래스-->
+<script src="/static/js/classes/payment.js"></script>
 
 <!--일정 그리고 숙박요금 계산-->
-<script src="/static/js/room/reservation.js"></script>
+<script src="/static/js/room/reservation_date.js"></script>
+
+<!--예약 결제하기-->
+<script src="/static/js/room/reservation_payment.js"></script>
 </body>
 </html>
