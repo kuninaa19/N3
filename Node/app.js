@@ -79,6 +79,3 @@ app.use('/host',hostRouter);
 
 import kakaoPayRouter  from "./routes/payment/kakao_pay";
 app.use('/kakao',kakaoPayRouter);
-
-import naverPayRouter  from "./routes/payment/kakao_pay";
-app.use('/naver',naverPayRouter);
