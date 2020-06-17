@@ -18,10 +18,10 @@ $(function () {
         const endDay = end.format('YYYY-MM-DD');
 
         //form checkin, checkout 값 변경
-        let formCheckIn = document.getElementsByName("checkin")[0];
-        let formCheckOut = document.getElementsByName("checkout")[0];
-        formCheckIn.value=startDay;
-        formCheckOut.value=endDay;
+        const formCheckIn = document.getElementsByName("checkin")[0];
+        const formCheckOut = document.getElementsByName("checkout")[0];
+        formCheckIn.value = startDay;
+        formCheckOut.value = endDay;
 
         diffDate(startDay, endDay);
     });
@@ -50,7 +50,7 @@ const diffDate = (start, end) => {
 
 //날짜 변경에 따라서 순수 숙박요금 변경
 const changeCharge = diff => {
-    let charge = document.getElementsByClassName("charge")[0]; // 변경되는 순수 숙박비
+    const charge = document.getElementsByClassName("charge")[0]; // 변경되는 순수 숙박비
     let perDayCost = document.getElementById("per_day_cost").innerHTML; // 순수 하루 숙박비
 
     perDayCost = perDayCost.replace('₩', "");
@@ -61,25 +61,24 @@ const changeCharge = diff => {
 };
 
 const changeDate = diff => {
-    let perDate = document.getElementById("per_date"); // 숙박일정에 따라 몇박인지 숫자 변경
-    let str = `x ${String(diff)}박`;
+    const perDate = document.getElementById("per_date"); // 숙박일정에 따라 몇박인지 숫자 변경
+    const str = `x ${String(diff)}박`;
 
     perDate.innerHTML = str;
 
     // form name="date" 에 저장
-    let formDate = document.getElementsByName("date")[0];
-    formDate.value=diff;
+    const formDate = document.getElementsByName("day")[0];
+    formDate.value = diff;
 };
 
 //숙박 합계요금 정산
 const totalCheck = () => {
-    let total = document.getElementById("total");
-    let charge = document.getElementsByClassName("charge");
+    const total = document.getElementById("total");
+    const charge = document.getElementsByClassName("charge");
 
     let totalCharge = 0;
 
     for (let i = 0; i < 3; i++) {
-
         if (isNaN(parseInt(charge[i].innerHTML))) {
             totalCharge += 0;
         } else {
@@ -102,7 +101,7 @@ const makeReservation = () => {
     const formCheckOut = document.getElementsByName("checkout")[0].value;
 
     if (formCheckIn === formCheckOut) {
-           alert('체크인과 체크아웃 날짜를 다르게 해주세요');
+        alert('체크인과 체크아웃 날짜를 다르게 해주세요');
     } else {
         document.getElementById('frm').submit();
     }
