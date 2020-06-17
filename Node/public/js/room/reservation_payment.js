@@ -1,4 +1,17 @@
 // kakaoPay() 결제 링크 전송(카카오페이)
+const paymentBtn = document.getElementById("paymentBtn");
+
+paymentBtn.addEventListener("click",  () =>{
+    if(kakaoBtn.value === "clicked") {
+        kakaoPay();
+    }
+    else if(elNaverPayBtn.value==="clicked"){
+        // naverPay();
+
+    }else{
+        alert('결제수단을 선택해 주세요');
+    }
+});
 
 const kakaoPay = () => {
     const payment = new Promise((resolve, reject) => {
