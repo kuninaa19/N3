@@ -16,8 +16,8 @@ router.post('/payment/ready', (req, res) => {
 
     const params = {
         'cid': 'TC0ONETIME',
-        'partner_order_id': 'test',
-        'partner_user_id': 'test', //req.user.email로 변경
+        'partner_order_id': req.body.host_name,
+        'partner_user_id': req.user.nickname,
         'item_name': req.body.hotel_name,
         'quantity': req.body.day, //상품수량 - 며칠 묵는지
         'total_amount': req.body.price,
@@ -44,15 +44,15 @@ router.post('/payment/ready', (req, res) => {
             });
 
             const val = JSON.parse(result);
+
             //세션에 tid(결제 고유 번호) 저장 - 없으면 결제 승인완료 안됨
             req.session.tid = val.tid;
             // 예약하려는 날짜 저장
             req.session.date = req.body.date;
             // 호스트에게 보내는 메세지 임시 저장
             req.session.message = req.body.message;
-
-            // 결제하려는 숙박 현재 가격 저장
-            // req.session.price = req.body.price;
+            // 결제하려는 숙소 주인닉네임 저장
+            req.session.host_name = req.body.host_name;
 
             req.session.save(() => {
                 return res.json(val.next_redirect_pc_url);
@@ -99,8 +99,8 @@ router.get('/payment/approve', (req, res) => {
     const params = {
         'cid': 'TC0ONETIME',
         'tid': req.session.tid,
-        'partner_order_id': 'test',
-        'partner_user_id': 'test',//req.user.email
+        'partner_order_id': req.session.host_name,
+        'partner_user_id': req.user.nickname,
         'pg_token': req.query.pg_token
     };
 
@@ -133,7 +133,7 @@ router.get('/payment/approve', (req, res) => {
                 delete req.session.tid;
                 delete req.session.date;
                 delete req.session.message;
-                // delete req.session.price;
+                delete req.session.host_name;
 
                 req.session.save(() => {
                     // 창닫고 예약페이지로 이동

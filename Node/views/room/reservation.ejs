@@ -72,9 +72,9 @@
 
         <div class="item" id="messageToHost">
             <div class="reservation_category">호스트에게 메시지 보내기</div>
-            <div class="sub_title">호스트에게 여행 목적과 도착 예정 시간을 알려주세요.
+            <div class="sub_title"><%=rooms[0].host_name%>님에게 여행 목적과 도착 예정 시간을 알려주세요.
             </div>
-            <textarea class="message"></textarea>
+            <textarea class="message" placeholder="안녕하세요!"></textarea>
         </div>
         <div style="border-top: 1px #E6E6E6 solid;"></div>
 
@@ -93,6 +93,7 @@
             <input type="hidden" name="checkin" value="">
             <input type="hidden" name="checkout" value="">
             <input type="hidden" name="day" value="">
+            <input type="hidden" name="host_name" value="<%=rooms[0].host_name%>">
             <input type="button" id="paymentBtn" value="확인 및 결제"/>
         </div>
 

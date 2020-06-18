@@ -74,7 +74,7 @@ router.get('/:number/reservation/payment', (req, res) => {
         'perDayFee': ""
     };
 
-    const sql = 'select `id`,`name`,`region`,`simple_info`,`value`,`image` from `room` where id = ?';
+    const sql = 'select `id`,`name`,`region`,`simple_info`,`value`,`image`,`host_name` from `room` where id = ?';
     connection.query(sql, searchValue, (err, row) => {
         if (err) throw  err;
 

@@ -18,7 +18,9 @@ const kakaoPay = () => {
         xhr.open('POST', baseUrl + '/kakao/payment/ready', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        const hotel_name = document.getElementById("hotel_name").innerHTML;
+        const hotelName = document.getElementById("hotel_name").innerHTML;
+
+        const hostName = document.getElementsByName("host_name")[0].value;
 
         const price = document.getElementById("total").innerHTML;
 
@@ -31,7 +33,7 @@ const kakaoPay = () => {
 
         const message = document.querySelector(".message").value;
 
-        const payInfo = new paymentInfo(hotel_name, price, date, day, message);
+        const payInfo = new paymentInfo(hotelName, hostName, price, date, day, message);
 
         xhr.onload = () => resolve(xhr.responseText);
         xhr.onerror = () => reject(xhr.statusText);
