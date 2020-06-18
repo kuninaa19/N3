@@ -35,8 +35,6 @@ const naverBtn = document.getElementsByName("naver");
 const backToLoginBtn = document.getElementById("go_login");
 // 비번찾기 페이지에서 언더바 삭제
 const underLine= document.getElementsByClassName("bottom_line");
-//구글 로그인 버튼
-const googleLogBtn = document.getElementById("googleLogin");
 
 const openLogModal = ()=>{
     modal.classList.remove("hidden");
@@ -52,7 +50,6 @@ const openLogModal = ()=>{
     scroll.style.overflow= "hidden";
     modalSize.style.height="70%";
     underContent.classList.remove("hidden");
-    googleLogBtn.classList.remove("hidden");
     underLine[0].style.display="inline-block";
 };
 const openRegModal = ()=>{
@@ -68,7 +65,6 @@ const openRegModal = ()=>{
     scroll.style.overflow= "hidden";
     modalSize.style.height="80%";
     underContent.classList.remove("hidden");
-    googleLogBtn.classList.remove("hidden");
     underLine[0].style.display="inline-block";
 };
 const findPwModal = ()=>{
@@ -77,7 +73,6 @@ const findPwModal = ()=>{
     findPwContent.classList.remove("hidden");
 
     underContent.classList.add("hidden");
-    googleLogBtn.classList.add("hidden");
     modalSize.style.height="50%";
     underLine[0].style.display="none";
 };
