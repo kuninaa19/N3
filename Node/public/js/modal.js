@@ -36,6 +36,7 @@ const backToLoginBtn = document.getElementById("go_login");
 // 비번찾기 페이지에서 언더바 삭제
 const underLine= document.getElementsByClassName("bottom_line");
 
+//로그인
 const openLogModal = ()=>{
     modal.classList.remove("hidden");
 
@@ -52,6 +53,8 @@ const openLogModal = ()=>{
     underContent.classList.remove("hidden");
     underLine[0].style.display="inline-block";
 };
+
+//회원가입
 const openRegModal = ()=>{
     modal.classList.remove("hidden");
 
@@ -67,14 +70,15 @@ const openRegModal = ()=>{
     underContent.classList.remove("hidden");
     underLine[0].style.display="inline-block";
 };
+//비밀번호 찾기
 const findPwModal = ()=>{
     logContent.classList.add("hidden");
     regContent.classList.add("hidden");
     findPwContent.classList.remove("hidden");
 
     underContent.classList.add("hidden");
-    modalSize.style.height="50%";
-    underLine[0].style.display="none";
+    modalSize.style.height="70%";
+    underLine[0].style.display="inline-block";
 };
 const closeLogModal = ()=>{
     modal.classList.add("hidden");
