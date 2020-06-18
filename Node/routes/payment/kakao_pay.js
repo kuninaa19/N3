@@ -20,7 +20,7 @@ router.post('/payment/ready', (req, res) => {
         'partner_user_id': 'test', //req.user.email로 변경
         'item_name': req.body.hotel_name,
         'quantity': req.body.day, //상품수량 - 며칠 묵는지
-        'total_amount': req.body.price.total,
+        'total_amount': req.body.price,
         'vat_amount': 0,
         'tax_free_amount': 0,
         'approval_url': 'https://hotelbooking.kro.kr/kakao/payment/approve',
@@ -48,10 +48,11 @@ router.post('/payment/ready', (req, res) => {
             req.session.tid = val.tid;
             // 예약하려는 날짜 저장
             req.session.date = req.body.date;
-            // 결제하려는 숙박 현재 가격 저장
-            req.session.price = req.body.price;
             // 호스트에게 보내는 메세지 임시 저장
             req.session.message = req.body.message;
+
+            // 결제하려는 숙박 현재 가격 저장
+            // req.session.price = req.body.price;
 
             req.session.save(() => {
                 return res.json(val.next_redirect_pc_url);
@@ -131,12 +132,12 @@ router.get('/payment/approve', (req, res) => {
                 // 세션 삭제
                 delete req.session.tid;
                 delete req.session.date;
-                delete req.session.price;
                 delete req.session.message;
+                // delete req.session.price;
 
                 req.session.save(() => {
                     // 창닫고 예약페이지로 이동
-                    res.send("<script>opener.location.href=`https://hotelbooking.kro.kr/rooms/13`; window.close();</script>");
+                    res.send("<script>opener.location.href=`https://hotelbooking.kro.kr/trip`; window.close();</script>");
                 });
             });
         } catch (e) {

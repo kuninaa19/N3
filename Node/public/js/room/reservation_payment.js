@@ -20,12 +20,7 @@ const kakaoPay = () => {
 
         const hotel_name = document.getElementById("hotel_name").innerHTML;
 
-        const price = {
-            stayFee: document.getElementsByClassName('charge')[0].innerHTML,
-            cleanFee: document.getElementsByClassName('charge')[1].innerHTML,
-            serviceFee: document.getElementsByClassName('charge')[2].innerHTML,
-            total: document.getElementById("total").innerHTML
-        };
+        const price = document.getElementById("total").innerHTML;
 
         const date = {
             startDay: document.getElementsByName("checkin")[0].value,
