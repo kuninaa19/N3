@@ -3,6 +3,10 @@ import connection from '../../conf/dbInfo';
 import config from '../../conf/config';
 import request from 'request-promise-native';
 // import request from 'request';
+import moment from 'moment';
+
+require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
 
 const router = express.Router();
 
@@ -126,18 +130,30 @@ router.get('/payment/approve', (req, res) => {
             val.amount = JSON.stringify(val.amount);
 
             const sql = 'insert into `order` set ?';
-            connection.query(sql, val, (err, result) => {
+            connection.query(sql, val, (err, row) => {
                 if (err) throw  err;
 
-                // 세션 삭제
-                delete req.session.tid;
-                delete req.session.date;
-                delete req.session.message;
-                delete req.session.host_name;
+                const sendMessage = {
+                    room_id: row.insertId,
+                    user_name: req.user.nickname,
+                    host_name: req.session.host_name,
+                    message: req.session.message,
+                    time: moment().format('YYYY-MM-DD HH:mm:ss')
+                };
 
-                req.session.save(() => {
-                    // 창닫고 예약페이지로 이동
-                    res.send("<script>opener.location.href=`https://hotelbooking.kro.kr/trip`; window.close();</script>");
+                const sql = 'insert into `message` set ?';
+                connection.query(sql, sendMessage, (err, row) => {
+                    if (err) throw  err;
+                    // 세션 삭제
+                    delete req.session.tid;
+                    delete req.session.date;
+                    delete req.session.message;
+                    delete req.session.host_name;
+
+                    req.session.save(() => {
+                        // 창닫고 예약페이지로 이동
+                        res.send("<script>opener.location.href=`https://hotelbooking.kro.kr/trip`; window.close();</script>");
+                    });
                 });
             });
         } catch (e) {
