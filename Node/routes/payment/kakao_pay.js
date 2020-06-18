@@ -152,7 +152,7 @@ router.get('/payment/approve', (req, res) => {
 
                     req.session.save(() => {
                         // 창닫고 예약페이지로 이동
-                        res.send("<script>opener.location.href=`https://hotelbooking.kro.kr/trip`; window.close();</script>");
+                        res.send("<script>opener.location.replace('https://hotelbooking.kro.kr/trip'); window.close();</script>");
                     });
                 });
             });
