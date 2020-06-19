@@ -24,9 +24,8 @@ router.get('/', checkAuth, (req, res) => {
         });
         console.log(row);
 
-        const count = row.length;
+        res.render('user/trip', {'nickname': nickname, 'rooms': row});
 
-        res.render('user/trip', {'nickname': nickname, 'rooms': row, 'count': count});
     });
 });
 
