@@ -22,7 +22,7 @@
     <div id="navAlign">
         <li><a>메시지</a></li>
         <li><a href="/trip">여행</a></li>
-        <li><a><%=nickname%></a></li>
+        <li><a><%= nickname %></a></li>
         <li><a href="/logout">로그아웃</a></li>
     </div>
 </ul>
@@ -32,22 +32,23 @@
         <div class="item_title">메시지</div>
 
         <div class="item" style="border: 0">
-            <div class="tray">
-                <div class="profile_img">
-                    <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
-                </div>
-                <div class="message_info">
-                        <div>호스트 이름</div>
-                        <p class="margin_top">2019년 6월 1일</p>
-                </div>
-                <div class="message_detail">
-                    <div style="width: 100%;">
-                        <div>채팅</div>
-                        <p class="margin_top">Hoàn Kiếm, Hà Nội, 베트남 (2019년 5월 29일 - 2019년 5월 31일)</p>
+            <% message.forEach((val)=> { %>
+                <div class="tray">
+                    <div class="profile_img">
+                        <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
+                    </div>
+                    <div class="message_info">
+                        <div>호스트 이름 or 방문자이름</div>
+                        <p class="margin_top"><%= val.time %></p>
+                    </div>
+                    <div class="message_detail">
+                        <div style="width: 100%;">
+                            <div><%= val.message %></div>
+                            <p class="margin_top">쿠알라룸푸르, 말레이시아 (<%= val.date.startDay %> - <%= val.date.endDay %>)</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            <% }) %>
             <div class="tray">
                 <div class="profile_img">
                     <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
