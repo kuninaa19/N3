@@ -21,7 +21,7 @@
     <div id="navAlign">
         <li><a href="/message">메시지</a></li>
         <li><a>여행</a></li>
-        <li><a><%=nickname%></a></li>
+        <li><a><%= nickname %></a></li>
         <li><a href="/logout">로그아웃</a></li>
     </div>
 </ul>
@@ -31,32 +31,28 @@
         <!--        숙소 리스트 출력-->
         <div class="item" style="border: 0px">
             <div class="item_title">여행</div>
-            <div class="tray">
-                <div class="card">
-                    <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
-                    <div class="card_info">
-                        <div class="date">5월 29일 - 5월 31일</div>
-                        <b>쿠알라룸푸르</b>
-                        <p style="font-size: 14px">보텍스 스위트 KLCC 바이 이다리스</p>
+            <% if(count !== 0) { %>
+                <% for(let i = 0; i < (count / 3) + 1; i++){ %>
+                    <div class="tray">
+                        <% for(let j = 0; j < (count / 3 * i) + 1; i++){ %>
+                            <div class="card">
+                                <img src="/static/images/rooms/<%= rooms[i * j].image %>"/>
+                                <div class="card_info">
+                                    <div class="date"><%= rooms[j].date.startDay %> - <%= rooms[j].date.endDay %></div>
+                                    <b><%= rooms[j].region %></b>
+                                    <p style="font-size: 14px"><%= rooms[j].item_name %></p>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                <% } %>
+            <% } else{ %>
+                <div class="tray">
+                    <div class="empty_card">
+                        아직 예약된 내역이 없네요
                     </div>
                 </div>
-                <div class="card">
-                    <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
-                    <div class="card_info">
-                        <div class="date">5월 29일 - 5월 31일</div>
-                        <b>쿠알라룸푸르</b>
-                        <p style="font-size: 14px">보텍스 스위트 KLCC 바이 이다리스</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
-                    <div class="card_info">
-                        <div class="date">5월 29일 - 5월 31일</div>
-                        <b>쿠알라룸푸르</b>
-                        <p style="font-size: 14px">보텍스 스위트 KLCC 바이 이다리스</p>
-                    </div>
-                </div>
-            </div>
+            <% } %>
         </div>
 
     </div>

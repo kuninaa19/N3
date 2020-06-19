@@ -76,6 +76,20 @@
     margin-bottom: 10px;
 }
 
+.empty_card{
+    width: 100%;
+    height: auto;
+    margin: 2% 2% auto;
+    border: 1px solid #E6E6E6;
+    overflow: hidden;
+    position:relative;
+    z-index:1;
+    font-family: "Noto Sans KR";
+    font-size: 35px;
+    text-align: center;
+    padding : 170px;
+}
+
 .footer {
     padding: 5px;
     text-align: center;
