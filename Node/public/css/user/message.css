@@ -14,22 +14,21 @@
 .column {
     float: left;
     width: 100%;
+    height:100%;
     background-color: #ffffff;
 }
 
 .item {
     background-color: white;
-    padding: 0 10px;
-    margin: 10px 0 80px 0;
+    margin-bottom: 80px;
     border: 1px solid #E6E6E6;
     font-size: 20px;
 }
 .item_title{
     font-family: "Noto Sans KR";
-    font-weight: bold;
-    font-size: 20px;
-    padding: 15px 0;
-    margin-top: 10px;
+    font-size: 30px;
+    padding: 10px 0;
+    margin: 0 2% auto;
     border-bottom: 1px solid #E6E6E6;
 }
 .item a {
@@ -39,16 +38,13 @@
 
 .tray{
     display:flex;
-    margin: 10px 0 25px;
-    padding : 15px 0;
-    height: 80px;
-    width: 100%;
+    margin: 30px 2% auto;
+    padding: 0 1%;
 }
 
 .tray :hover{
     cursor: pointer;
 }
-
 
 .profile_img {
     width: 50px;
@@ -70,11 +66,13 @@
 .message_info{
     float:left;
     text-align: left;
-    margin:0 15px;
+    margin:0 2rem;
     padding-top:5px;
     font-size: 14px;
     height:100%;
-    width: 111px;
+    width: 15%;
+    color: #484848;
+
 }
 .message_detail {
     float:left;
@@ -82,18 +80,25 @@
     padding-top:5px;
     height:100%;
     font-size: 14px;
-    width: 600px;
+    width: 70%;
+    color: #767676;
 }
 .margin_top{
     margin-top:10px
 }
-.footer {
-    padding: 5px;
+
+.empty_card{
+    width: 100%;
+    height: auto;
+    margin: 2% 2% auto;
+    overflow: hidden;
+    position:relative;
+    z-index:1;
+    font-family: "Noto Sans KR";
+    font-size: 35px;
     text-align: center;
-    background: #ffffff;
-    margin-top: -20px;
-    color: darkgrey;
-    border-top: 1px solid whitesmoke;
+    padding : 135px;
+    /*border: 1px solid #E6E6E6;*/
 }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
