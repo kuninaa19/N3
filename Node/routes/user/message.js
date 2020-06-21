@@ -46,38 +46,35 @@ router.get('/', checkAuth, (req, res) => {
     const nickname = req.user.nickname;
 
     //메시지 최초 10개 전달
-    const sql = 'select  a.* ,b.aid, b.date, b.item_name from `message` AS `a` INNER JOIN `order` AS `b` WHERE a.user_name = ? OR a.host_name = ?  GROUP BY a.time ORDER BY a.time DESC LIMIT 10';
+    const sql = 'select  a.*, b.date, b.item_name from `message` AS `a` INNER JOIN `order` AS `b` WHERE a.user_name = ? OR a.host_name = ?  GROUP BY a.time ORDER BY a.time DESC LIMIT 10';
     connection.query(sql, [nickname, nickname], (err, row) => {
         if (err) throw  err;
 
-        console.log('1순위 시간', moment(row[0].time).subtract(9, 'hours'));
-        console.log('LLLL 변환', moment(row[0].time).subtract(9, 'hours').format('LLLL'));
-        console.log('현재시간', moment().format());
+        // 대화하는 상대방 아이디
+        let opponent = [];
 
-        // 숙박 날짜만 가져와서 재저장
-        row.forEach((val) => {
-            val.date = JSON.parse(val.date);
+        for (let i = 0; i < row.length; i++) {
+            // 숙박날짜 JSON 파싱
+            row[i].date = JSON.parse(row[i].date);
+
+            // 년,월,일 한글 변환 적용
+            row[i].date.startDay = moment(row[i].date.startDay).format('LL');
+            row[i].date.endDay = moment(row[i].date.endDay).format('LL');
 
             // mysql에 저장된 시간에서 9시간을 빼고 비교해야 정확한 결과값이 나온다.
+            row[i].time = moment(row[i].time).subtract(9, 'hours').fromNow();
 
-            val.time = moment(val.time).subtract(9, 'hours').fromNow();
+            // 접속자가 집주인이면 방문객 이름, 접속자가 방문객이면 집주인 이름
+            if (row[i].host_name === nickname) {
+                opponent[i] = row[i].user_name;
+            } else {
+                opponent[i] = row[i].host_name;
+            }
+        }
+        console.log(row);
 
-            // relativeTime.push(moment(val.time).subtract(9, 'hours').fromNow());
-            // // 접속자가 호스트라면
-            // if(val.host_name===nickname){
-            //
-            // }
-            // else{
-            //
-            // }
-        });
-
-        console.log('상대시간', moment('2020-06-19 19:57',"YYYY-MM-DD HH:mm").fromNow());
-
-
-        res.render('user/message', {'nickname': nickname, 'message': row});
+        res.render('user/message', {'nickname': nickname, 'message': row, 'opponent': opponent});
     });
-
 });
 
 export default router;
