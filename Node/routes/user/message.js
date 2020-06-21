@@ -46,7 +46,7 @@ router.get('/', checkAuth, (req, res) => {
     const nickname = req.user.nickname;
 
     //메시지 최초 10개 전달
-    const sql = 'select  a.*, b.date, b.item_name from `message` AS `a` INNER JOIN `order` AS `b` WHERE a.user_name = ? OR a.host_name = ?  GROUP BY a.time ORDER BY a.time DESC LIMIT 10';
+    const sql = 'select  a.*, b.date, b.item_name,c.country,c.region from `message` AS `a` INNER JOIN `order` AS `b` INNER JOIN `room` AS `c` WHERE a.user_name = ? OR a.host_name = ? AND b.item_name = c.name  GROUP BY a.time ORDER BY a.time DESC LIMIT 10';
     connection.query(sql, [nickname, nickname], (err, row) => {
         if (err) throw  err;
 
@@ -64,7 +64,8 @@ router.get('/', checkAuth, (req, res) => {
             // mysql에 저장된 시간에서 9시간을 빼고 비교해야 정확한 결과값이 나온다.
             row[i].time = moment(row[i].time).subtract(9, 'hours').fromNow();
 
-            // 접속자가 집주인이면 방문객 이름, 접속자가 방문객이면 집주인 이름
+            // 접속자가 집주인이면 방문객 이름, 접속자가 방문객이면
+            // 집주인 이름
             if (row[i].host_name === nickname) {
                 opponent[i] = row[i].user_name;
             } else {
