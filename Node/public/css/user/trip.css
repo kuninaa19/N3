@@ -90,13 +90,6 @@
     /*border: 1px solid #E6E6E6;*/
 }
 
-.footer {
-    padding: 5px;
-    text-align: center;
-    background: #ffffff;
-    color: darkgrey;
-    border-top: 1px solid whitesmoke;
-}
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
