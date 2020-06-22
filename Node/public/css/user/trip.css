@@ -40,9 +40,9 @@
     margin: 30px auto;
 }
 .card {
-    width: 50%;
-    height: 50%;
-    margin: 0 2% auto;
+    width: 29%;
+    height: 29%;
+    margin: 0 2%;
     cursor: pointer;
     border: 1px solid #E6E6E6;
     overflow: hidden;
