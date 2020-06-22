@@ -17,7 +17,7 @@ router.get('/', checkAuth, (req, res) => {
     const nickname = req.user.nickname;
 
     //숙소 예약 정보가져옴 날짜순으로 정렬해야할지 구매순으로 정렬해야할지 생각
-    const sql = 'select a.id, a.item_name, a.date, b.region, b.image from `order` AS `a` INNER JOIN `room` AS `b` WHERE a.partner_user_id = ? AND a.item_name = b.name GROUP BY a.id ORDER BY a.id DESC';
+    const sql = 'select a.id, a.aid, a.item_name, a.date, b.region, b.image from `order` AS `a` INNER JOIN `room` AS `b` WHERE a.partner_user_id = ? AND a.item_name = b.name GROUP BY a.id ORDER BY a.id DESC';
     connection.query(sql, nickname, (err, row) => {
         if (err) throw  err;
 
@@ -32,6 +32,10 @@ router.get('/', checkAuth, (req, res) => {
 
         res.render('user/trip', {'nickname': nickname, 'rooms': row});
     });
+});
+
+router.get('/:number', checkAuth, (req, res) => {
+
 });
 
 export default router;

@@ -36,7 +36,7 @@
                     <% if (i % 3 === 0) { %>
                     <div class="tray">
                         <% } %>
-                        <div class="card">
+                        <div class="card" onclick="detailTrip('<%= rooms[i].aid %>')">
                             <img src="/static/images/rooms/<%= rooms[i].image %>"/>
                             <div class="card_info">
                                 <div class="date"><%= rooms[i].date.startDay %> - <%= rooms[i].date.endDay %></div>
@@ -63,5 +63,7 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <!--모달처리 JS-->
 <script src="/static/js/modal.js"></script>
+<!--여행관련 JS-->
+<script src="/static/js/user/trip.js"></script>
 </body>
 </html>
