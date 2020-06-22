@@ -1,5 +1,8 @@
 import express from 'express';
 import connection from '../../conf/dbInfo';
+import moment from 'moment';
+import timezone from 'moment-timezone';
+moment.tz.setDefault("Asia/Seoul");
 
 const router = express.Router();
 
@@ -21,6 +24,10 @@ router.get('/', checkAuth, (req, res) => {
         // 숙박 날짜만 가져와서 재저장
         row.forEach(function (val) {
             val.date = JSON.parse(val.date);
+
+            // 년,월,일 한글 변환 적용
+            val.date.startDay = moment(val.date.startDay).format('LL');
+            val.date.endDay = moment(val.date.endDay).format('LL');
         });
 
         res.render('user/trip', {'nickname': nickname, 'rooms': row});
