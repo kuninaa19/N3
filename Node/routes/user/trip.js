@@ -30,12 +30,13 @@ router.get('/', checkAuth, (req, res) => {
             val.date.endDay = moment(val.date.endDay).format('LL');
         });
 
-        res.render('user/trip', {'nickname': nickname, 'rooms': row});
+        res.render('user/trip/index', {'nickname': nickname, 'rooms': row});
     });
 });
 
-router.get('/:number', checkAuth, (req, res) => {
+router.get('/:aid', checkAuth, (req, res) => {
 
+    res.render('user/trip/detail', {'nickname': nickname, 'rooms': row});
 });
 
 export default router;
