@@ -31,19 +31,22 @@
         <div class="item" style="border: 0px">
             <div class="item_title">여행</div>
             <% if(rooms.length !== 0) { %>
-                <% for(let i = 0; i < (count / 3) + 1; i++){ %>
+                <% let ck = 0; %>
+                <% for(let i = 0; i < rooms.length; i++) { %>
+                    <% if (i % 3 === 0) { %>
                     <div class="tray">
-                        <% for(let j = 0; j < (count / 3 * i) + 1; i++){ %>
-                            <div class="card">
-                                <img src="/static/images/rooms/<%= rooms[i * j].image %>"/>
-                                <div class="card_info">
-                                    <div class="date"><%= rooms[j].date.startDay %> - <%= rooms[j].date.endDay %></div>
-                                    <b><%= rooms[j].region %></b>
-                                    <p style="font-size: 14px"><%= rooms[j].item_name %></p>
-                                </div>
-                            </div>
                         <% } %>
+                        <div class="card">
+                            <img src="/static/images/rooms/<%= rooms[i].image %>"/>
+                            <div class="card_info">
+                                <div class="date"><%= rooms[i].date.startDay %> - <%= rooms[i].date.endDay %></div>
+                                <b><%= rooms[i].region %></b>
+                                <p style="font-size: 14px"><%= rooms[i].item_name %></p>
+                            </div>
+                        </div>
+                        <% if (++ck % 3 === 0){ %>
                     </div>
+                    <% } %>
                 <% } %>
             <% } else{ %>
                 <div class="tray">
