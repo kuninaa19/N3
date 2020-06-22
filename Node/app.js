@@ -29,7 +29,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     secret: 'WEfh#joi!P#GTH$#(',
-    // store: new FileStore()
+    store: new FileStore()
 }));
 
 app.use(passport.initialize());
@@ -74,8 +74,10 @@ app.use('/message', messageRouter);
 import reservationRouter from "./routes/user/trip";
 app.use('/trip', reservationRouter);
 
+// 호스트의 방 등록 라우터
 import hostRouter  from "./routes/user/host";
 app.use('/host',hostRouter);
 
+//카카오페이 API 연동 라우터
 import kakaoPayRouter  from "./routes/payment/kakao_pay";
 app.use('/kakao',kakaoPayRouter);
