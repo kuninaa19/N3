@@ -35,8 +35,9 @@ router.get('/', checkAuth, (req, res) => {
 });
 
 router.get('/:aid', checkAuth, (req, res) => {
+    const nickname = req.user.nickname;
 
-    res.render('user/trip/detail', {'nickname': nickname, 'rooms': row});
+    res.render('user/trip/detail',{'nickname': nickname});
 });
 
 export default router;
