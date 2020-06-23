@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <title>여행 세부정보</title>
+    <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--    폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/user/trip/detail.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
+</head>
+<body>
+<ul class="top_nav">
+    <li id="logo"><a href="/" class="active"><img class="logo_image"
+                                                  src="https://img.icons8.com/doodle/48/000000/log-cabin.png"></a></li>
+    <div id="navAlign">
+        <li><a href="/message">메시지</a></li>
+        <li><a>여행</a></li>
+        <li><a><%= nickname %></a></li>
+        <li><a href="/logout">로그아웃</a></li>
+    </div>
+</ul>
+
+<div class="row">
+    <!--    숙소 예약 정보-->
+    <div class="left_column">
+        <div class="item" id="leftSideTop">
+            <div class="hotel_info">
+                <div class="hotel_name">
+                    호텔명
+                </div>
+                <div style="font-size: 16px; margin-bottom:20px">
+                    쿠알라룸푸르
+                </div>
+                <div style="font-size: 16px;">
+                    <span>인원 1명</span>
+                    <span>인원 1명</span>
+                    <span>인원 1명</span>
+                    <span>인원 1명</span>
+                </div>
+            </div>
+            <div class="line"></div>
+
+        </div>
+        <!--숙소설명-->
+        <div class="item" id="leftSideMiddle">
+            <div class="hotel_info">
+                <div class="hotel_description">
+                    <p>설ㄴ명
+                    </p>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <div class="line"></div>
+        </div>
+
+        <!--숙소후기-->
+        <div class="item" id="leftSideBottom">
+            <div class="hotel_info">
+                <div class="hotel_review">
+                    <div style="font-weight: bold; font-size: 17px;">
+                        <span>3.9 / 5 </span>&nbsp;
+                        <span>이용후기 96</span>
+                    </div>
+                </div>
+                <div class="line"></div>
+
+                <div class="tray">
+                    <div>
+                        <div class="review_profile">
+                            <div class="profile_img">
+                                <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
+                            </div>
+                            <div class="profile_info">
+                                <div>숙박자 이름</div>
+                                <p class="margin_top">2019년 6월 1일</p>
+                            </div>
+                        </div>
+                        <div class="review_detail">
+                            <div>
+                                <div class="margin_top">채팅내용 ㄱㄷ쟈ㅐ렂채채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용
+                                    ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대대ㅑㄹㅈ대
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+
+                <div class="tray">
+                    <div>
+                        <div class="review_profile">
+                            <div class="profile_img">
+                                <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
+                            </div>
+                            <div class="profile_info">
+                                <div>호스트 이름</div>
+                                <p class="margin_top">2019년 6월 1일</p>
+                            </div>
+                        </div>
+                        <div class="review_detail">
+                            <div>
+                                <div class="margin_top">채팅내용 ㄱㄷ쟈ㅐ렂채채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용
+                                    ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대대ㅑㄹㅈ대
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+    <!--    숙소 위치-->
+    <div class="right_column">
+        <div id="map"></div>
+        <script>
+            function initMap() {
+                const hotel = {lat: 37.335662, lng: 127.940080};
+                const map = new google.maps.Map(
+                    document.getElementById('map'), {zoom: 10, center: hotel});
+
+                const marker = new google.maps.Marker({position: hotel, map: map});
+            }
+        </script>
+    </div>
+</div>
+
+
+<!--모달처리 JS-->
+<script src="/static/js/modal.js"></script>
+
+<!--여행관련 JS-->
+
+
+<!--구글 맵스-->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
+</script>
+</body>
+</html>
