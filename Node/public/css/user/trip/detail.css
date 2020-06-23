@@ -9,8 +9,7 @@ html, body {
 
 .row {
     width: 100%;
-    max-height: 650px;
-    height: 100%;
+    height: 90%;
 }
 
 .row:after {
@@ -20,7 +19,7 @@ html, body {
 }
 
 .left_column {
-    padding: 0.8%;
+    padding: 0.8% 0.8% 0;
     float: left;
     width: 40%;
     height: 100%;
@@ -72,7 +71,7 @@ html, body {
     margin-top: 10px;
     padding: 20px;
     width: 100%;
-    height: 90%;
+    height: 100%;
 }
 
 .hotel_name {
@@ -134,6 +133,16 @@ html, body {
 .date {
     font-size: 15px;
     margin-bottom: 10px;
+}
+
+.related_active {
+    padding: 2rem 10px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.related_active:hover {
+    background-color: whitesmoke;
 }
 
 .line {
