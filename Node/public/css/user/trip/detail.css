@@ -20,15 +20,124 @@ html, body {
 }
 
 .left_column {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 60px;
-    padding: 0 1%;
+    padding: 0.8%;
     float: left;
-    width: 38%;
+    width: 40%;
+    height: 100%;
     background-color: #EBEBEB;
+}
+
+.item {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.item a {
+    color: black;
+    text-decoration: none;
+}
+
+.reservation_header {
+    padding: 15px 0;
+    align-content: center;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.tray {
+    float: left;
+    width: 100%;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.hotel_img {
+    width: 100%;
+    height: 50%;
+}
+
+.hotel_img img {
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    margin-top: 10px;
+    padding: 20px;
+    width: 100%;
+    height: 90%;
+}
+
+.hotel_name {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.check_time {
+    display: flex;
+    width: 100%;
+    max-height: 300px;
+    padding: 25px 0;
+}
+
+.check_time .name {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.check_time .date {
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.check_time .time {
+    font-size: 25px;
+}
+
+.check_in {
+    height: 100%;
+    width: 48%;
+}
+
+.check_out {
+    padding-left: 4%;
+    border-left: 1px solid #DDDDDD;
+    height: 100%;
+    width: 52%;
+}
+
+.reserved_date {
+    font-size: 12px;
+    color: #717171;
+}
+
+.related_table {
+    padding: 20px 0;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.related_number {
+    padding-top: 15px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.date {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.line {
+    border-bottom: 1px solid #E6E6E6;
 }
 
 .right_column {
@@ -43,151 +152,6 @@ html, body {
     height: 100%;
 }
 
-.item {
-    background-color: white;
-    padding: 0 20px;
-    margin: 20px 0 20px 0;
-    border: 1px solid #E6E6E6;
-    font-size: 20px;
-}
-
-.item a {
-    color: black;
-    text-decoration: none;
-}
-
-/*우측 item 창*/
-#leftSideTop {
-    border: 0;
-    padding-top: 1px;
-}
-
-.line {
-    margin: 10px;
-    border-bottom: 1px solid #E6E6E6;
-}
-
-.hotel_name {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-/*숙소 세부설명*/
-#leftSideMiddle {
-    border: 0;
-    margin-top: 10px;
-}
-
-.hotel_description {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-/*숙소 후기*/
-#leftSideBottom {
-    border: 0;
-    margin-top: 10px;
-}
-
-.hotel_review {
-    padding-bottom: 5px;
-}
-
-.tray {
-    display: flex;
-    margin: 20px 0;
-    height: 100%;
-    width: 100%;
-    font-size: 14px;
-}
-
-.review_profile {
-    height: 50px;
-    width: 100%;
-}
-
-.profile_img {
-    float: left;
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    border-radius: 25px;
-    transition: 0.3s;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-.profile_img img {
-    display: block;
-    background-position: center center;
-    background-size: cover;
-    height: 50px;
-    width: 50px;
-    float: left;
-}
-
-.profile_info {
-    float: left;
-    text-align: left;
-    margin: 0 15px;
-    padding-top: 5px;
-    height: 100%;
-    width: 100px;
-}
-
-.review_detail {
-    float: bottom;
-    text-align: left;
-    padding-top: 5px;
-    /*height:100%;*/
-    width: 100%;
-}
-
-.margin_top {
-    margin-top: 10px
-}
-
-#leftSideBottom .line {
-    margin: 10px 0 0;
-    border-bottom: 1px solid #E6E6E6;
-}
-
-/*right_column*/
-.per_day_charge {
-    font-weight: bold;
-    font-size: 17px;
-    padding: 15px 0;
-    border-bottom: 1px solid #D8D8D8;
-}
-
-/*숙소 날짜 및 가격*/
-.reservation_tray {
-    margin: 10px auto;
-    padding: 10px;
-    height: 70px;
-    border: 1px solid #D8D8D8;
-    border-radius: 10px;
-}
-
-.reservation_tray :hover {
-    cursor: pointer;
-}
-
-.calendar_btn {
-    width: 100%;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: lighter;
-    font-size: 18px;
-    text-align: center;
-    border: 0;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
     .column {
         width: 100%;
