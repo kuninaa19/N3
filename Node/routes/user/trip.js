@@ -2,6 +2,7 @@ import express from 'express';
 import connection from '../../conf/dbInfo';
 import moment from 'moment';
 import timezone from 'moment-timezone';
+
 moment.tz.setDefault("Asia/Seoul");
 
 const router = express.Router();
@@ -36,8 +37,32 @@ router.get('/', checkAuth, (req, res) => {
 
 router.get('/:aid', checkAuth, (req, res) => {
     const nickname = req.user.nickname;
+    const searchValue = req.params.aid;
 
-    res.render('user/trip/detail',{'nickname': nickname});
+    const sql = 'select a.date, a.tid, a.amount, a.id AS message_id, b.location,b.name,b.id AS room_id, b.image from `order` AS `a` INNER JOIN `room` AS `b` WHERE a.aid = ? AND a.item_name = b.name';
+    connection.query(sql, [searchValue], (err, row) => {
+        if (err) throw  err;
+
+        // 숙박 날짜만 가져와서 재저장
+        row.forEach(function (val) {
+            // 가격관련 JSON 파싱
+            val.amount = JSON.parse(val.amount);
+
+            // 날짜 JSON 파싱
+            val.date = JSON.parse(val.date);
+
+            // 장소 위,경도 값 JSON 파싱
+            val.location = JSON.parse(val.location);
+
+            console.log(moment(val.date.startDay).format('dd'));
+            // 년,월,일 한글 변환 적용
+            val.date.startDay = moment(val.date.startDay).format('MMM Do (dd)');
+            val.date.endDay = moment(val.date.endDay).format('MMM Do (dd)');
+
+        });
+
+        res.render('user/trip/detail', {'nickname': nickname, 'roomInfo': row});
+    });
 });
 
 export default router;
