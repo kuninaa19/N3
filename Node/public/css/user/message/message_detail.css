@@ -27,7 +27,6 @@ html,body{
 
 .item {
     background-color: white;
-    margin-bottom: 20px;
     border: 1px solid #E6E6E6;
     font-size: 20px;
     height:100%;
@@ -35,7 +34,7 @@ html,body{
 
 .item_title {
     font-family: "Noto Sans KR";
-    font-size: 20px;
+    font-size: 18px;
     padding: 10px 0;
     border-bottom: 1px solid #E6E6E6;
 }
@@ -47,7 +46,7 @@ html,body{
 
 .tray {
     display: flex;
-    height: 90%;
+    height: 85%;
     overflow-y : auto;
 }
 
