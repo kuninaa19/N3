@@ -72,10 +72,19 @@ router.get('/', checkAuth, (req, res) => {
                 opponent[i] = row[i].host_name;
             }
         }
-        console.log(row);
 
         res.render('user/message/message_index', {'nickname': nickname, 'message': row, 'opponent': opponent});
     });
+});
+
+// 채팅창(메시지 상세페이지)
+router.get('/:message_id', checkAuth, (req, res) => {
+    const nickname = req.user.nickname;
+    const searchValue = req.params.message_id;
+
+
+    res.render('user/message/message_detail', {'nickname': nickname});
+
 });
 
 export default router;
