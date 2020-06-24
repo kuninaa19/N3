@@ -31,7 +31,7 @@ router.get('/', checkAuth, (req, res) => {
             val.date.endDay = moment(val.date.endDay).format('LL');
         });
 
-        res.render('user/trip/index', {'nickname': nickname, 'rooms': row});
+        res.render('user/trip/trip_index', {'nickname': nickname, 'rooms': row});
     });
 });
 
@@ -61,7 +61,7 @@ router.get('/:aid', checkAuth, (req, res) => {
 
         });
 
-        res.render('user/trip/detail', {'nickname': nickname, 'roomInfo': row});
+        res.render('user/trip/trip_detail', {'nickname': nickname, 'roomInfo': row});
     });
 });
 
