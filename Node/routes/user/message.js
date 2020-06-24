@@ -74,7 +74,7 @@ router.get('/', checkAuth, (req, res) => {
         }
         console.log(row);
 
-        res.render('user/message', {'nickname': nickname, 'message': row, 'opponent': opponent});
+        res.render('user/message/message_index', {'nickname': nickname, 'message': row, 'opponent': opponent});
     });
 });
 
