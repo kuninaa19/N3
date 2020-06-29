@@ -135,8 +135,8 @@ router.get('/payment/approve', (req, res) => {
 
                 const sendMessage = {
                     room_id: row.insertId,
-                    sender: req.user.nickname,
-                    recipient: req.session.host_name,
+                    user_name: req.user.nickname,
+                    host_name: req.session.host_name,
                     message: req.session.message,
                     time: moment().format('YYYY-MM-DD HH:mm:ss')
                 };
