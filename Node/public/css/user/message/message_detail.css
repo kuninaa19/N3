@@ -77,8 +77,8 @@ html, body {
 }
 
 .profile_img {
-    width: 50px;
-    height: 50px;
+    width: 36px;
+    height: 36px;
     overflow: hidden;
     border-radius: 25px;
     text-align: center;
@@ -90,8 +90,8 @@ html, body {
     display: block;
     background-position: center center;
     background-size: cover;
-    height: 50px;
-    width: 50px;
+    height: 36px;
+    width: 36px;
 }
 
 .message_info {
