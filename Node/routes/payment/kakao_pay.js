@@ -144,15 +144,30 @@ router.get('/payment/approve', (req, res) => {
                 const sql = 'insert into `message` set ?';
                 connection.query(sql, sendMessage, (err, row) => {
                     if (err) throw  err;
-                    // 세션 삭제
-                    delete req.session.tid;
-                    delete req.session.date;
-                    delete req.session.message;
-                    delete req.session.host_name;
 
-                    req.session.save(() => {
-                        // 창닫고 예약페이지로 이동
-                        res.send("<script>opener.location.replace('https://hotelbooking.kro.kr/trip'); window.close();</script>");
+                    const sendChat = {
+                        message_id : row.insertId,
+                        room_id : sendMessage.room_id,
+                        sender : sendMessage.user_name,
+                        content: sendMessage.message,
+                        time: sendMessage.time
+                    };
+
+                    //채팅창 DB에도 저장
+                    const sql = 'insert into `chat` set ?';
+                    connection.query(sql, sendChat, (err, row) => {
+                        if (err) throw  err;
+
+                        // 세션 삭제
+                        delete req.session.tid;
+                        delete req.session.date;
+                        delete req.session.message;
+                        delete req.session.host_name;
+
+                        req.session.save(() => {
+                            // 창닫고 예약페이지로 이동
+                            res.send("<script>opener.location.replace('https://hotelbooking.kro.kr/trip'); window.close();</script>");
+                        });
                     });
                 });
             });
