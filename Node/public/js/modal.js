@@ -49,7 +49,7 @@ const openLogModal = ()=>{
     logBtn.classList.add("hidden");
 
     scroll.style.overflow= "hidden";
-    modalSize.style.height="70%";
+    modalSize.style.height="500px";
     underContent.classList.remove("hidden");
     underLine[0].style.display="inline-block";
 };
@@ -66,7 +66,7 @@ const openRegModal = ()=>{
     logBtn.classList.remove("hidden");
 
     scroll.style.overflow= "hidden";
-    modalSize.style.height="80%";
+    modalSize.style.height="570px";
     underContent.classList.remove("hidden");
     underLine[0].style.display="inline-block";
 };
@@ -77,7 +77,7 @@ const findPwModal = ()=>{
     findPwContent.classList.remove("hidden");
 
     underContent.classList.add("hidden");
-    modalSize.style.height="70%";
+    modalSize.style.height="500px%";
     underLine[0].style.display="inline-block";
 };
 const closeLogModal = ()=>{
