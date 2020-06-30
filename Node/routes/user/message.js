@@ -46,7 +46,7 @@ router.get('/', checkAuth, (req, res) => {
     const nickname = req.user.nickname;
 
     //메시지 최초 10개 전달
-    const sql = 'select  a.*, b.date, b.item_name,c.country,c.region from `message` AS `a` INNER JOIN `order` AS `b` INNER JOIN `room` AS `c` WHERE a.user_name = ? OR a.host_name = ? AND b.item_name = c.name  GROUP BY a.time ORDER BY a.time DESC LIMIT 10';
+    const sql = 'select  a.*, b.date, b.item_name,c.country,c.region from `message` AS `a` INNER JOIN `order` AS `b` INNER JOIN `room` AS `c` ON a.user_name = ? OR a.host_name = ? WHERE a.room_id = b.id AND b.item_name = c.name   GROUP BY a.time ORDER BY a.time DESC LIMIT 10';
     connection.query(sql, [nickname, nickname], (err, row) => {
         if (err) throw  err;
 
