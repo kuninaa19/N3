@@ -107,6 +107,11 @@ html, body {
     width: 36px;
 }
 
+.chat_view {
+    margin-left: 10px;
+    width: 100%
+}
+
 .message_info {
     text-align: left;
     padding: 0.3rem 0;
@@ -129,6 +134,7 @@ html, body {
     text-align: left;
     padding: 0.3rem 0;
     font-size: 16px;
+    font-weight: 500;
     color: #767676;
     word-break: break-all;
 }
