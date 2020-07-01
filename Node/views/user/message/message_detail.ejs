@@ -34,37 +34,21 @@
             <div class="tray">
                 <div class="content">
                     <% for(let i = 0; i < LLTime.length; i++) { %>
+                        <!-- 가장 첫뻔쨰  -->
                         <% if(i === 0) { %>
+                            <!-- 날짜 표기 -->
                             <div class="dateNotation">
-                                <%= LLTime[0] %>
+                                <%= LLTime[i] %>
                             </div>
-
-                            <div class="message_form" data-item-id="<%= contents[i].id %>">
-                                <div class="message_inbox">
-                                    <div style="padding-top:0.3rem">
-                                        <div class="profile_img">
-                                            <img src="https://img.icons8.com/ios-filled/52/000000/user-male-circle.png"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="chat_view">
-                                        <div>
-                                            <div class="message_info">
-                                                <span class="name"><%= contents[i].sender %></span>
-                                                <span class="time"><%= contents[i].time %></span>
-                                            </div>
-                                        </div>
-                                        <div class="message_detail">
-                                            <%= contents[0].content %>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <% include ../../layout/user/message_item %>
+                            <!-- 시간대가 동일할시 날짜 표기x-->
                         <% } else if(LLTime[i - 1] === LLTime[i]){ %>
-
+                            <% include ../../layout/user/message_item %>
                         <% } else { %>
-
+                            <div class="dateNotation">
+                                <%= LLTime[i] %>
+                            </div>
+                            <% include ../../layout/user/message_item %>
                         <% } %>
                     <% } %>
                 </div>
