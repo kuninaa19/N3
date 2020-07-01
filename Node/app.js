@@ -10,6 +10,7 @@ import initPassport from './conf/passport';
 //추후 redis로 변경
 import sessionStore from 'session-file-store';
 const FileStore = sessionStore(session);
+import socket from "./socket_io";
 
 const app = express();
 
@@ -44,7 +45,8 @@ app.use(express.urlencoded({extended: true}));
 // allow overriding methods in query (?_method=put)
 app.use(methodOverride('_method'));
 
-app.listen(3000, () => console.log('port 3000 Server On'));
+const server = app.listen(3000, () => console.log('port 3000 Server On'));
+const io = socket(server);
 
 // import {router as indexRouter} from './routes/index';
 import indexRouter from './routes/index';
@@ -75,9 +77,9 @@ import reservationRouter from "./routes/user/trip";
 app.use('/trip', reservationRouter);
 
 // 호스트의 방 등록 라우터
-import hostRouter  from "./routes/user/host";
-app.use('/host',hostRouter);
+import hostRouter from "./routes/user/host";
+app.use('/host', hostRouter);
 
 //카카오페이 API 연동 라우터
-import kakaoPayRouter  from "./routes/payment/kakao_pay";
-app.use('/kakao',kakaoPayRouter);
+import kakaoPayRouter from "./routes/payment/kakao_pay";
+app.use('/kakao', kakaoPayRouter);
