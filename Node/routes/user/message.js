@@ -1,13 +1,8 @@
 import express from 'express';
 import connection from '../../conf/dbInfo';
-
-const router = express.Router();
-
-// 시간관련 모듈
 import moment from 'moment';
+import timezone from 'moment-timezone'; // require('moment-timezone');
 
-require('moment-timezone');
-// import timezone from 'moment-timezone';
 moment.tz.setDefault("Asia/Seoul");
 
 // 시간 45분 -> 60분 일 22시간 -> 24시간
@@ -33,6 +28,8 @@ moment.updateLocale('ko', {
         yy: "%d 년"
     }
 });
+
+const router = express.Router();
 
 const checkAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
@@ -86,8 +83,6 @@ router.get('/:message_id', checkAuth, (req, res) => {
     connection.query(sql, [searchValue, nickname, nickname], (err, row) => {
         if (err) throw  err;
 
-        console.log(row, '결과');
-
         // 대화하는 상대방 아이디
         let opponent;
 
@@ -108,8 +103,6 @@ router.get('/:message_id', checkAuth, (req, res) => {
             row[i].time = moment(row[i].time).subtract(9, 'hours').format('LT');
         }
 
-        console.log(row, '결과');
-
         res.render('user/message/message_detail', {
             'nickname': nickname,
             'contents': row,
@@ -117,7 +110,6 @@ router.get('/:message_id', checkAuth, (req, res) => {
             'opponent': opponent
         });
     });
-
 });
 
 export default router;
