@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-    <title>- 님과 채팅</title>
+    <title><%= opponent %> 님과 채팅</title>
     <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -30,10 +30,50 @@
 <div class="row">
     <div class="column">
         <div class="item" style="border-top: 0">
-            <div class="item_title">- 님과의 채팅</div>
+            <div class="item_title"><%= opponent %> 님과의 채팅</div>
             <div class="tray">
                 <div class="content">
+                    <% for(let i = 0; i < LLTime.length; i++) { %>
+                        <% if(i === 0) { %>
+                            <div class="dateNotation">
+                                <%= LLTime[0] %>
+                            </div>
 
+                            <div class="message_form" data-item-id="<%= contents[i].id %>">
+                                <div class="message_inbox">
+                                    <div>
+                                        <div class="profile_img">
+                                            <img src="https://img.icons8.com/ios-filled/52/000000/user-male-circle.png"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat_view">
+                                        <div>
+                                            <div class="message_info">
+                                                <span class="name"><%= contents[i].sender %></span>
+                                                <span class="time"><%= contents[i].time %></span>
+                                            </div>
+                                        </div>
+                                        <div class="message_detail">
+                                            <%= contents[0].content %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <% } else if(LLTime[i - 1] === LLTime[i]){ %>
+
+                        <% } else { %>
+
+                        <% } %>
+                    <% } %>
+                </div>
+                <div class="send_chat">
+                    <textarea class="text_window" id="messageInput" placeholder="메시지를 입력하세요." cols="20"
+                              rows="1"></textarea>
+                    <span class="sending">
+                        <button type="button" aria-atomic="보내기" id="sendBtn"></button>
+                    </span>
                 </div>
             </div>
         </div>
