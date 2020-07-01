@@ -40,7 +40,7 @@ html, body {
     position: fixed;
     width: 50%;
     font-size: 18px;
-    padding: 0.7rem;
+    padding: 1rem;
     border-bottom: 1px solid #E6E6E6;
     height: 50px;
 }
@@ -61,6 +61,7 @@ html, body {
     bottom: 72px;
     width: 50%;
     overflow-y: auto;
+    overflow-x: hidden;
     box-sizing: border-box;
 }
 
@@ -71,12 +72,24 @@ html, body {
     font-weight: bold;
 }
 
+.message_form :after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 .message_form {
+    padding: 1rem 0;
+    overflow: hidden;
+}
+
+.message_inbox {
+    padding: 0 1rem;
     display: flex;
-    margin: 1rem;
 }
 
 .profile_img {
+    float: left;
     width: 36px;
     height: 36px;
     overflow: hidden;
@@ -84,10 +97,10 @@ html, body {
     text-align: center;
     position: relative;
     z-index: 1;
+    margin: auto 0;
 }
 
 .profile_img img {
-    display: block;
     background-position: center center;
     background-size: cover;
     height: 36px;
@@ -95,25 +108,29 @@ html, body {
 }
 
 .message_info {
-    float: left;
     text-align: left;
-    margin: 0 2rem;
-    padding-top: 5px;
-    font-size: 14px;
-    height: 100%;
-    width: 15%;
+    padding: 0.3rem 0;
+    vertical-align: center;
+    font-size: 15px;
+    font-weight: bold;
     color: #484848;
+}
 
+.message_info .name {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.message_info .time {
+    font-weight: lighter;
 }
 
 .message_detail {
-    float: left;
     text-align: left;
-    padding-top: 5px;
-    height: 100%;
-    font-size: 14px;
-    width: 70%;
+    padding: 0.3rem 0;
+    font-size: 16px;
     color: #767676;
+    word-break: break-all;
 }
 
 .send_chat {
