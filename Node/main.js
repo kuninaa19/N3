@@ -8,7 +8,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const FileStore = require('session-file-store')(session);
 
-import socket from './socketio';
+import socket from './socket_io';
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.set('views', __dirname + '/views');
