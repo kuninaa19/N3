@@ -87,10 +87,12 @@
     font-size: 14px;
     width: 70%;
     color: #767676;
+    word-break:break-all;
 }
 
 .margin_top {
-    margin-top: 10px
+    margin-top: 10px;
+    word-break:break-all;
 }
 
 .empty_card {
