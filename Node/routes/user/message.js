@@ -79,7 +79,7 @@ router.get('/:message_id', checkAuth, (req, res) => {
     const nickname = req.user.nickname;
     const searchValue = req.params.message_id;
 
-    const sql = 'select  a.user_name,a.host_name,b.* from `message` AS `a` INNER JOIN `chat` AS `b` ON a.room_id=b.room_id AND a.id=b.message_id WHERE a.room_id=? AND a.user_name=? OR a.host_name=? ORDER BY b.id asc';
+    const sql = 'select  a.user_name,a.host_name,b.* from `message` AS `a` INNER JOIN `chat` AS `b` ON a.room_id=b.room_id WHERE a.room_id=? AND a.user_name=? OR a.host_name=? ORDER BY b.id asc';
     connection.query(sql, [searchValue, nickname, nickname], (err, row) => {
         if (err) throw  err;
 

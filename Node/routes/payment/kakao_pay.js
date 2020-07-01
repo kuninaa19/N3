@@ -146,7 +146,6 @@ router.get('/payment/approve', (req, res) => {
                     if (err) throw  err;
 
                     const sendChat = {
-                        message_id : row.insertId,
                         room_id : sendMessage.room_id,
                         sender : sendMessage.user_name,
                         content: sendMessage.message,
