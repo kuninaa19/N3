@@ -82,8 +82,41 @@ router.get('/:message_id', checkAuth, (req, res) => {
     const nickname = req.user.nickname;
     const searchValue = req.params.message_id;
 
+    const sql = 'select  a.user_name,a.host_name,b.* from `message` AS `a` INNER JOIN `chat` AS `b` ON a.room_id=b.room_id AND a.id=b.message_id WHERE a.room_id=? AND a.user_name=? OR a.host_name=? ORDER BY b.id desc';
+    connection.query(sql, [searchValue, nickname, nickname], (err, row) => {
+        if (err) throw  err;
 
-    res.render('user/message/message_detail', {'nickname': nickname});
+        console.log(row, '결과');
+
+        // 대화하는 상대방 아이디
+        let opponent;
+
+        if (row[0].host_name === nickname) {
+            opponent = row[0].user_name;
+        } else {
+            opponent = row[0].host_name;
+        }
+
+        // 날짜만 가져오기위한 배열
+        let LLTime = [];
+
+        for (let i = 0; i < row.length; i++) {
+            // 날짜만 가져오기
+            LLTime[i] = moment(row[i].time).subtract(9, 'hours').format('LL');
+
+            // 년,월,일 한글 변환 적용
+            row[i].time = moment(row[i].time).subtract(9, 'hours').format('LT');
+        }
+
+        console.log(row, '결과');
+
+        res.render('user/message/message_detail', {
+            'nickname': nickname,
+            'contents': row,
+            'LLTime': LLTime,
+            'opponent': opponent
+        });
+    });
 
 });
 
