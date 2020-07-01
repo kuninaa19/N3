@@ -33,24 +33,7 @@
             <div class="item_title"><%= opponent %> 님과의 채팅</div>
             <div class="tray">
                 <div class="content">
-                    <% for(let i = 0; i < LLTime.length; i++) { %>
-                        <!-- 가장 첫뻔쨰  -->
-                        <% if(i === 0) { %>
-                            <!-- 날짜 표기 -->
-                            <div class="dateNotation">
-                                <%= LLTime[i] %>
-                            </div>
-                            <% include ../../layout/user/message_item %>
-                            <!-- 시간대가 동일할시 날짜 표기x-->
-                        <% } else if(LLTime[i - 1] === LLTime[i]){ %>
-                            <% include ../../layout/user/message_item %>
-                        <% } else { %>
-                            <div class="dateNotation">
-                                <%= LLTime[i] %>
-                            </div>
-                            <% include ../../layout/user/message_item %>
-                        <% } %>
-                    <% } %>
+                    <% include ../../layout/user/message_list %>
                 </div>
                 <div class="send_chat">
                     <textarea class="text_window" id="messageInput" placeholder="메시지를 입력하세요." cols="20"
