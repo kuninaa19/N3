@@ -7,10 +7,10 @@ import session from 'express-session';
 import flash from 'connect-flash';
 import passport from 'passport';
 import initPassport from './conf/passport';
+import socket from "./socket_io";
 //추후 redis로 변경
 import sessionStore from 'session-file-store';
 const FileStore = sessionStore(session);
-import socket from "./socket_io";
 
 const app = express();
 
@@ -46,7 +46,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
 const server = app.listen(3000, () => console.log('port 3000 Server On'));
-const io = socket(server);
+socket(server);
 
 // import {router as indexRouter} from './routes/index';
 import indexRouter from './routes/index';
