@@ -32,6 +32,7 @@
         <div class="item" style="border: 0">
             <div class="item_title">메시지</div>
             <% if(message.length !== 0) { %>
+            <div class="hover">
                 <% for(let i = 0; i < opponent.length; i++) { %>
                     <div class="tray" onclick="detailMessage(<%= message[i].room_id %>)">
                         <div class="profile_img">
@@ -49,6 +50,7 @@
                         </div>
                     </div>
                 <% } %>
+            </div>
             <% } else{ %>
                 <div class="tray">
                     <div class="empty_card">

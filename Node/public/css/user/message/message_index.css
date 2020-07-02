@@ -25,11 +25,6 @@
     font-size: 20px;
 }
 
-.item :hover:not(.item_title,.empty_card) {
-    cursor: pointer;
-    background-color: whitesmoke;
-}
-
 .item_title {
     font-family: "Noto Sans KR";
     font-size: 30px;
@@ -41,6 +36,11 @@
 .item a {
     color: black;
     text-decoration: none;
+}
+
+.hover :hover {
+    cursor: pointer;
+    background-color: whitesmoke;
 }
 
 .tray {
