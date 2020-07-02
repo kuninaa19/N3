@@ -36,6 +36,7 @@ const checkAuth = (req, res, next) => {
         return next();
     }
     //모달창 열기로 변경해야됨
+    res.send("<script>alert('접속할 수 없는 페이지 입니다.'); history.go(-1);</script>");
 };
 
 // 유저 로그인했을때만 메시지페이지
@@ -83,32 +84,37 @@ router.get('/:message_id', checkAuth, (req, res) => {
     connection.query(sql, [searchValue, nickname, nickname], (err, row) => {
         if (err) throw  err;
 
-        // 대화하는 상대방 아이디
-        let opponent;
-
-        if (row[0].host_name === nickname) {
-            opponent = row[0].user_name;
-        } else {
-            opponent = row[0].host_name;
+        if(row.length === 0){
+            res.send("<script>alert('접속할 수 없는 페이지 입니다.'); history.go(-1);</script>");
         }
+        else{
+            // 대화하는 상대방 아이디
+            let opponent;
 
-        // 날짜만 가져오기위한 배열
-        let LLTime = [];
+            if (row[0].host_name === nickname) {
+                opponent = row[0].user_name;
+            } else {
+                opponent = row[0].host_name;
+            }
 
-        for (let i = 0; i < row.length; i++) {
-            // 날짜만 가져오기
-            LLTime[i] = moment(row[i].time).subtract(9, 'hours').format('LL');
+            // 날짜만 가져오기위한 배열
+            let LLTime = [];
 
-            // 년,월,일 한글 변환 적용
-            row[i].time = moment(row[i].time).subtract(9, 'hours').format('LT');
+            for (let i = 0; i < row.length; i++) {
+                // 날짜만 가져오기
+                LLTime[i] = moment(row[i].time).subtract(9, 'hours').format('LL');
+
+                // 년,월,일 한글 변환 적용
+                row[i].time = moment(row[i].time).subtract(9, 'hours').format('LT');
+            }
+
+            res.render('user/message/message_detail', {
+                'nickname': nickname,
+                'contents': row,
+                'LLTime': LLTime,
+                'opponent': opponent
+            });
         }
-
-        res.render('user/message/message_detail', {
-            'nickname': nickname,
-            'contents': row,
-            'LLTime': LLTime,
-            'opponent': opponent
-        });
     });
 });
 
