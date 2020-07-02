@@ -83,3 +83,7 @@ app.use('/host', hostRouter);
 //카카오페이 API 연동 라우터
 import kakaoPayRouter from "./routes/payment/kakao_pay";
 app.use('/kakao', kakaoPayRouter);
+
+// 없는 페이지 혹은 오류
+import errorRouter from "./routes/error";
+app.use(errorRouter);

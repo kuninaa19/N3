@@ -1,0 +1,43 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.row {
+    width: 80%;
+    height: auto;
+    margin: 50px auto;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    float: left;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.empty_card {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    font-family: "Noto Sans KR";
+    font-size: 35px;
+    text-align: center;
+    padding: 135px;
+}
+
+.size_up {
+    margin-bottom: 2rem;
+    font-size: 50px;
+}
