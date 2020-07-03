@@ -159,6 +159,7 @@ html, body {
     border-radius: 8px;
     resize: none;
     overflow: hidden;
+    border: 2px solid black;
 }
 
 #messageInput {
