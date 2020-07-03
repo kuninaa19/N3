@@ -31,11 +31,7 @@ module.exports = (app) => {
 
         // 클라이언트가 채팅 내용 전송
         socket.on('msg', (data) => {
-            console.log('data', data);
-            // console.log('room', socket.rooms[data.room_id]);
-            // const room_id = data.room_id;
-            //
-            const info = {
+            const msgInfo = {
                 room_id: data.room_id,
                 sender: data.sender,
                 content: data.content,
@@ -43,12 +39,18 @@ module.exports = (app) => {
             };
 
             const sql = 'insert into `chat` set ?';
-            connection.query(sql, info, (err, row) => {
+            connection.query(sql, msgInfo, (err, row) => {
                 if (err) throw  err;
 
+                msgInfo.LLtime = moment(msgInfo.time).format('LL');
+                msgInfo.LTtime = moment(msgInfo.time).format('LT');
 
-                // socket.emit('aa', '채팅방여러분께 안녕');
-                socket.broadcast.to(info.room_id).emit('aa', '채팅방여러분께 안녕');
+                io.in(msgInfo.room_id).emit('msg', msgInfo); //자기자신포함 채팅방 전원에게 전송
+            });
+
+            const forUpdateSql = 'UPDATE message SET message=?,time=? WHERE room_id = ?';
+            connection.query(forUpdateSql, [msgInfo.content,msgInfo.time,msgInfo.room_id], (err, row) => {
+                if (err) throw  err;
             });
         });
 
