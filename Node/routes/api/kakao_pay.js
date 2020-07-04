@@ -73,7 +73,6 @@ const storeMessages = (data) => {
         connection.query(sql, data, (err, row) => {
             if (err) throw  err;
 
-            console.log('insertMessage');
             resolve(true);
         });
     }).catch(error => {
@@ -90,7 +89,6 @@ const storeMessages = (data) => {
         const sql = 'insert into `chat` set ?';
         connection.query(sql, sendChat, (err, row) => {
             if (err) throw  err;
-            console.log('chat');
 
             resolve(true);
             reject();
@@ -135,7 +133,7 @@ const approvePayment = async (options, req, res) => {
         //JSON 문자열로 바꿔서 넣어야 JSON형태 저장가능
         orderValue.amount = JSON.stringify(orderValue.amount);
 
-        console.log('approveVal', orderValue);
+        // console.log('approveVal', orderValue);
 
         //완료된 결제 db저장후 주문정보전달
         const orderId = await completePayment(orderValue);
@@ -148,6 +146,7 @@ const approvePayment = async (options, req, res) => {
             time: moment().format('YYYY-MM-DD HH:mm:ss')
         };
 
+        //메시지 DB 저장
         await storeMessages(message);
 
         // 세션 삭제
@@ -157,9 +156,6 @@ const approvePayment = async (options, req, res) => {
         delete req.session.host_name;
 
         req.session.save(() => {
-            // 창닫고 예약페이지로 이동
-            console.log('dd');
-            // res.send("<script>parent.detectLng(); window.close();</script>");
             res.send("<script>opener.location.replace('https://hotelbooking.kro.kr/trip'); window.close();</script>");
         });
     } catch (e) {
