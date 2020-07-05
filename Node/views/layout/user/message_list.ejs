@@ -22,8 +22,19 @@
                         <span class="time"><%= contents[i].time %></span>
                     </div>
                 </div>
-                <div class="message_detail">
-                    <%= contents[i].content %>
+                <div>
+                    <% if(contents[i].sender === nickname){ %>
+                        <div class="message_detail" id="me">
+                            <%= contents[i].content %>
+                        </div>
+                    <% } else{ %>
+                        <div class="message_detail <%= contents[i].lang %>">
+                            <%= contents[i].content %>
+                        </div>
+                        <div class="translateBtn">
+                            <input type="button" class="img_button">
+                        </div>
+                    <% } %>
                 </div>
             </div>
         </div>
