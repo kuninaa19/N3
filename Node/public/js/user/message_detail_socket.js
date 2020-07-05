@@ -80,7 +80,7 @@ const makeMessageBox = (data) => {
         // 보낸사람과 접속한 유저아이디 동일할때는 번역버튼x
         if (data.sender !== userName) {
             //언어 클래스 메시지에 추가
-            messageDetailNode.setAttribute('langCode',"null");
+            messageDetailNode.setAttribute('langCode', "null");
 
             const translateBtn = document.createElement('div');
             translateBtn.className = "translate_btn";
@@ -91,6 +91,8 @@ const makeMessageBox = (data) => {
 
             translateBtn.appendChild(imgButtonNode);
             messageDetailExternalNode.appendChild(translateBtn);
+
+            translateBtn.addEventListener("click", function(e){checkLng(this)}, false);
         }
 
         const chatNode = document.createElement('div');
@@ -106,7 +108,7 @@ const makeMessageBox = (data) => {
     Promise.all([inboxProfile, inboxChatView]).then((values) => {
         const messageFormNode = document.createElement('div');
         messageFormNode.className = "message_form";
-        messageFormNode.setAttribute('data-item-id',data.item_id);
+        messageFormNode.setAttribute('data-item-id', data.item_id);
 
         const messageInboxNode = document.createElement('div');
         messageInboxNode.className = "message_inbox";
