@@ -155,7 +155,7 @@ html, body {
     max-width: 100%;
 }
 
-.translateBtn {
+.translate_btn {
     float: right;
     line-height: 24px;
     padding: 0.2rem 0 0;
@@ -163,7 +163,7 @@ html, body {
     min-width: 24px;
 }
 
-.img_button {
+#imgButton {
     background: url("https://img.icons8.com/color/24/000000/translation.png") no-repeat;
     border: none;
     width: 24px;
@@ -193,10 +193,6 @@ html, body {
     resize: none;
     overflow: hidden;
     border: 2px solid black;
-}
-
-#messageInput {
-
 }
 
 .sending {
