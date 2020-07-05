@@ -12,6 +12,7 @@ const getLastPath = url => {
 const room = getLastPath(window.location.pathname);
 const sendBtn = document.getElementById('sendBtn');
 const chatView = document.querySelector('.content');
+const userName = document.getElementById('userName').innerText;
 
 window.onload = () => {
     chatView.scrollTop = chatView.scrollHeight;
@@ -27,7 +28,7 @@ sendBtn.addEventListener("click", function () {
     } else {
         const msgInfo = {
             room_id: room,
-            sender: document.getElementById('userName').innerHTML,
+            sender: userName,
             content: message.value
         };
 
@@ -84,6 +85,7 @@ const makeMessageBox = (data) => {
 
     //실 채팅내용과 시간, 유저이름 표기
     const inboxChatView = new Promise((resolve, reject) => {
+        //class= message_info
         const infoNameNode = document.createElement('span');
         const infoTimeNode = document.createElement('span');
         infoNameNode.className = "name";
@@ -103,18 +105,40 @@ const makeMessageBox = (data) => {
 
         const externalNode = document.createElement('div');
         externalNode.appendChild(messageInfoNode);
+        //class= message_info
+
+        // class= message_detail
+        const messageDetailExternalNode = document.createElement('div');
 
         const messageDetailNode = document.createElement('div');
         messageDetailNode.className = "message_detail";
 
         const msgNode = document.createTextNode(data.content);
+
         messageDetailNode.appendChild(msgNode);
+        messageDetailExternalNode.appendChild(messageDetailNode);
+
+        // 보낸사람과 접속한 유저아이디 동일할때는 번역버튼x
+        if (data.sender !== userName) {
+            //언어 클래스 메시지에 추가
+            messageDetailNode.className += " ko";
+
+            const translateBtn = document.createElement('div');
+            translateBtn.className = "translateBtn";
+
+            const imgButtonNode = document.createElement('input');
+            imgButtonNode.type = "button";
+            imgButtonNode.className = "img_button";
+
+            translateBtn.appendChild(imgButtonNode);
+            messageDetailExternalNode.appendChild(translateBtn);
+        }
 
         const chatNode = document.createElement('div');
         chatNode.className = "chat_view";
 
         chatNode.appendChild(externalNode);
-        chatNode.appendChild(messageDetailNode);
+        chatNode.appendChild(messageDetailExternalNode);
 
         resolve(chatNode);
     });
