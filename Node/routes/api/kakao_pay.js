@@ -156,12 +156,17 @@ const approvePayment = async (options, req, res) => {
         delete req.session.host_name;
 
         req.session.save(() => {
-            res.send("<script>opener.location.replace('https://hotelbooking.kro.kr/trip'); window.close();</script>");
+            const room_id = message.room_id;
+            const msg = message.message;
+
+            // 파파고 언어감지 메소드 실행요청
+            res.send(`<script>opener.location.href='javascript:detectLng(${room_id},"${msg}");'; window.close();</script>`);
         });
     } catch (e) {
         console.log(e)
     }
 };
+
 router.get('/payment/approve', (req, res) => {
     const headers = {
         'Authorization': 'KakaoAK ' + config.oauth.kakao.admin_key,
