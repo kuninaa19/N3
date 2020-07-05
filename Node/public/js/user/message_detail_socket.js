@@ -104,6 +104,7 @@ const makeMessageBox = (data) => {
     Promise.all([inboxProfile, inboxChatView]).then((values) => {
         const messageFormNode = document.createElement('div');
         messageFormNode.className = "message_form";
+        messageFormNode.setAttribute('data-item-id',data.item_id);
 
         const messageInboxNode = document.createElement('div');
         messageInboxNode.className = "message_inbox";

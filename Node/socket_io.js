@@ -45,6 +45,8 @@ module.exports = (app) => {
                 msgInfo.LLtime = moment(msgInfo.time).format('LL');
                 msgInfo.LTtime = moment(msgInfo.time).format('LT');
 
+                msgInfo.item_id =row.insertId;
+
                 io.in(msgInfo.room_id).emit('msg', msgInfo); //자기자신포함 채팅방 전원에게 전송
             });
 
