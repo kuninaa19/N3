@@ -80,12 +80,14 @@ const makeMessageBox = (data) => {
         // 보낸사람과 접속한 유저아이디 동일할때는 번역버튼x
         if (data.sender !== userName) {
             //언어 클래스 메시지에 추가
+            messageDetailNode.setAttribute('langCode',"null");
+
             const translateBtn = document.createElement('div');
-            translateBtn.className = "translateBtn";
+            translateBtn.className = "translate_btn";
 
             const imgButtonNode = document.createElement('input');
             imgButtonNode.type = "button";
-            imgButtonNode.className = "img_button";
+            imgButtonNode.id = "imgBtn";
 
             translateBtn.appendChild(imgButtonNode);
             messageDetailExternalNode.appendChild(translateBtn);
