@@ -61,8 +61,16 @@ html, body {
     top: 120px;
     bottom: 72px;
     width: 50%;
-    overflow : hidden auto;
+    overflow: hidden auto;
     box-sizing: border-box;
+}
+
+.ko {
+    background-color: navajowhite;
+}
+
+.en {
+    background-color: red;
 }
 
 .dateNotation {
@@ -131,11 +139,36 @@ html, body {
 }
 
 .message_detail {
+    float: left;
     text-align: left;
     padding: 0.3rem 0;
     font-size: 16px;
+    line-height: 24px;
+    height: 100%;
     color: #2E2E2E;
     word-break: break-all;
+    width: 100%;
+    max-width: 95%;
+}
+
+#me {
+    max-width: 100%;
+}
+
+.translateBtn {
+    float: right;
+    line-height: 24px;
+    padding: 0.2rem 0 0;
+    width: 24px;
+    min-width: 24px;
+}
+
+.img_button {
+    background: url("https://img.icons8.com/color/24/000000/translation.png") no-repeat;
+    border: none;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
 }
 
 .send_chat {
