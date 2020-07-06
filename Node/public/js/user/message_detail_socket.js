@@ -80,7 +80,16 @@ const makeMessageBox = (data) => {
         // 보낸사람과 접속한 유저아이디 동일할때는 번역버튼x
         if (data.sender !== userName) {
             //언어 클래스 메시지에 추가
-            messageDetailNode.setAttribute('langCode', "null");
+            messageDetailNode.setAttribute('langCode', "none");
+            messageDetailNode.setAttribute('translate','no');
+
+            //번역을위한 숨겨진 클래스
+            const hiddenMessageDetailNode = document.createElement('div');
+            hiddenMessageDetailNode.className = "message_detail";
+            hiddenMessageDetailNode.setAttribute('langCode', "none");
+            hiddenMessageDetailNode.setAttribute('hidden','true');
+
+            messageDetailExternalNode.appendChild(hiddenMessageDetailNode);
 
             const translateBtn = document.createElement('div');
             translateBtn.className = "translate_btn";
@@ -93,6 +102,9 @@ const makeMessageBox = (data) => {
             messageDetailExternalNode.appendChild(translateBtn);
 
             translateBtn.addEventListener("click", function(e){forTranslation(this)}, false);
+        }
+        else{
+            messageDetailNode.id ="me";
         }
 
         const chatNode = document.createElement('div');
