@@ -1,8 +1,6 @@
 <% for(let i = 0; i < LLTime.length; i++) { %>
-    <!-- 가장 첫뻔째  -->
     <% if(i === 0) { %>
         <div class="dateNotation"><%= LLTime[i] %></div>
-        <!-- 시간대가 동일할시 날짜 표기x-->
     <% } else if(LLTime[i - 1] === LLTime[i]){ %>
         <div class="dateNotation" hidden><%= LLTime[i] %></div>
     <% } else { %>
@@ -29,7 +27,7 @@
                         </div>
                     <% } else{ %>
                         <div class="message_detail" langCode="<%= contents[i].lang %>" translate="no"><%= contents[i].content %></div>
-                        <div class="message_detail" langCode="null" hidden></div>
+                        <div class="message_detail" langCode="none" hidden></div>
                         <div class="translate_btn">
                             <input type="button" id="imgBtn">
                         </div>
