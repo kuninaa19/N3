@@ -28,9 +28,8 @@
                             <%= contents[i].content %>
                         </div>
                     <% } else{ %>
-                        <div class="message_detail" langCode="<%= contents[i].lang %>">
-                            <%= contents[i].content %>
-                        </div>
+                        <div class="message_detail" langCode="<%= contents[i].lang %>" translate="no"><%= contents[i].content %></div>
+                        <div class="message_detail" langCode="null" hidden></div>
                         <div class="translate_btn">
                             <input type="button" id="imgBtn">
                         </div>
