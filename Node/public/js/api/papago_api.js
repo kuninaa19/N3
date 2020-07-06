@@ -18,9 +18,9 @@ const detectLng = (data) => {
     });
     detect.then((response) => {
         const data = JSON.parse(response);
-        if(data.key==='afterPayment'){
-            location.href='/trip';
-        }else{
+        if (data.key === 'afterPayment') {
+            location.href = '/trip';
+        } else {
             return data.key;
         }
     }).catch(error => {
@@ -28,28 +28,19 @@ const detectLng = (data) => {
     });
 };
 
-const translateLng = () => {
-    const detect = new Promise((resolve, reject) => {
+const translateLng = (data) => {
+    return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
 
         xhr.open("POST", "https://hotelbooking.kro.kr/papago/translate", true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        const chat = {
-            room_id:id,
-            message:e
-        };
+        const chat = data;
 
-        xhr.onload = () => resolve(xhr.responseText);
+        xhr.onload = () => resolve(JSON.parse(xhr.responseText));
         xhr.onerror = () => reject(xhr.statusText);
 
         xhr.send(JSON.stringify(chat));
-    });
-    detect.then((response) => {
-        const data = JSON.parse(response);
-        if(data.key===true){
-            location.href='/trip';
-        }
     }).catch(error => {
         console.log(`에러발생: ${error}`);
     });
