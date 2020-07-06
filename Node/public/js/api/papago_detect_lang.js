@@ -1,17 +1,14 @@
 // 파파고 언어감지 API AJAX 요청
 // detectLng(x,y) 결제승인이후 전송할 메시지에 대한 언어감지
 
-const detectLng = (id,msg) => {
+const detectLng = (data) => {
     const detect = new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
 
         xhr.open("POST", "https://hotelbooking.kro.kr/papago/detectLangs", true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        const chat = {
-          room_id:id,
-          message:msg
-        };
+        const chat = data;
 
         xhr.onload = () => resolve(xhr.responseText);
         xhr.onerror = () => reject(xhr.statusText);

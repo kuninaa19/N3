@@ -156,11 +156,17 @@ const approvePayment = async (options, req, res) => {
         delete req.session.host_name;
 
         req.session.save(() => {
-            const room_id = message.room_id;
-            const msg = message.message;
+            delete message.time;
+            delete message.user_name;
+            delete message.host_name;
+
+            message.key = 'afterPayment';
+
+            // 문자열로 변환해줘야함 res.send에 string 인식되는듯
+            const data = JSON.stringify(message);
 
             // 파파고 언어감지 메소드 실행요청
-            res.send(`<script>opener.location.href='javascript:detectLng(${room_id},"${msg}");'; window.close();</script>`);
+            res.send(`<script>opener.location.href='javascript:detectLng(${data});'; window.close();</script>`);
         });
     } catch (e) {
         console.log(e)
