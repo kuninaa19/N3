@@ -6,17 +6,32 @@ import request from 'request-promise-native';
 const router = express.Router();
 
 // 언어감지된 값 저장
-const storeLng = (room_id, result) => {
-    return new Promise((resolve, reject) => {
-        const sql = 'UPDATE chat SET lang = ? WHERE room_id = ?';
-        connection.query(sql, [result, room_id], (err, row) => {
-            if (err) throw  err;
+const storeLng = (data, result) => {
+    // 멤버로 키를 가지고 있는지 확인
+    if ("key" in data) {
+        return new Promise((resolve, reject) => {
+            const sql = 'UPDATE chat SET lang = ? WHERE room_id = ?';
+            connection.query(sql, [result, data.room_id], (err, row) => {
+                if (err) throw  err;
 
-            resolve(true);
+                console.log('data.key have');
+                resolve(true);
+            });
+        }).catch(error => {
+            console.log(`storeMessage 에러 발생: ${error}`);
         });
-    }).catch(error => {
-        console.log(`storeMessage 에러 발생: ${error}`);
-    });
+    } else {
+        return new Promise((resolve, reject) => {
+            const sql = 'UPDATE chat SET lang = ? WHERE room_id = ? AND id = ?';
+            connection.query(sql, [result, data.room_id, data.item_id], (err, row) => {
+                if (err) throw  err;
+
+                resolve(true);
+            });
+        }).catch(error => {
+            console.log(`storeMessage 에러 발생: ${error}`);
+        });
+    }
 };
 
 //언어감지 API
@@ -34,12 +49,13 @@ const detectLng = async (data, options, req, res) => {
         });
         const val = JSON.parse(result);
 
-        await storeLng(data.room_id, val.langCode);
+        await storeLng(data, val.langCode);
 
-        if(data.key==='afterPayment'){
-            res.send({key: true});
+        if ("key" in data) {
+            res.json({key: data.key});
+        } else {
+            res.json({key: val.langCode});
         }
-        // res.send("<script>parent.after(val); </script>");
     } catch (e) {
         console.log(e)
     }

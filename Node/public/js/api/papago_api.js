@@ -18,14 +18,15 @@ const detectLng = (data) => {
     });
     detect.then((response) => {
         const data = JSON.parse(response);
-        if(data.key===true){
+        if(data.key==='afterPayment'){
             location.href='/trip';
+        }else{
+            return data.key;
         }
     }).catch(error => {
         console.log(`에러발생: ${error}`);
     });
 };
-
 
 const translateLng = () => {
     const detect = new Promise((resolve, reject) => {
