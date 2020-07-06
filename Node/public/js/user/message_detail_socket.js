@@ -92,7 +92,7 @@ const makeMessageBox = (data) => {
             translateBtn.appendChild(imgButtonNode);
             messageDetailExternalNode.appendChild(translateBtn);
 
-            translateBtn.addEventListener("click", function(e){checkLng(this)}, false);
+            translateBtn.addEventListener("click", function(e){forTranslation(this)}, false);
         }
 
         const chatNode = document.createElement('div');
