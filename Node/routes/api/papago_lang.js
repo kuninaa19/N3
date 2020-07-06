@@ -6,28 +6,25 @@ import request from 'request-promise-native';
 const router = express.Router();
 
 // 언어감지된 값 저장
-const storeLng = (data, result) => {
+const storeLng = (val, data, res) => {
     // 멤버로 키를 가지고 있는지 확인
     if ("key" in data) {
         return new Promise((resolve, reject) => {
             const sql = 'UPDATE chat SET lang = ? WHERE room_id = ?';
-            connection.query(sql, [result, data.room_id], (err, row) => {
+            connection.query(sql, [val.langCode, data.room_id], (err, row) => {
                 if (err) throw  err;
-
-                console.log('data.key have');
-                resolve(true);
             });
+            resolve(res.json({key: data.key}));
         }).catch(error => {
             console.log(`storeMessage 에러 발생: ${error}`);
         });
     } else {
         return new Promise((resolve, reject) => {
             const sql = 'UPDATE chat SET lang = ? WHERE room_id = ? AND id = ?';
-            connection.query(sql, [result, data.room_id, data.item_id], (err, row) => {
+            connection.query(sql, [val.langCode, data.room_id, data.item_id], (err, row) => {
                 if (err) throw  err;
-
-                resolve(true);
             });
+            resolve(res.json(val));
         }).catch(error => {
             console.log(`storeMessage 에러 발생: ${error}`);
         });
@@ -49,13 +46,8 @@ const detectLng = async (data, options, req, res) => {
         });
         const val = JSON.parse(result);
 
-        await storeLng(data, val.langCode);
+        await storeLng(val, data, res);
 
-        if ("key" in data) {
-            res.json({key: data.key});
-        } else {
-            res.json({key: val.langCode});
-        }
     } catch (e) {
         console.log(e)
     }
@@ -98,8 +90,8 @@ const transLng = async (data, options, req, res) => {
         const parsedResult = JSON.parse(result);
 
         const transMsg = {
-            msg : parsedResult.message.result.translatedText,
-            target : options.form.target
+            msg: parsedResult.message.result.translatedText,
+            target: options.form.target
         };
 
         return res.json(transMsg);

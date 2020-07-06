@@ -3,7 +3,7 @@
 // translateLng() 언어번역
 
 const detectLng = (data) => {
-    const detect = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
 
         xhr.open("POST", "https://hotelbooking.kro.kr/papago/detectLangs", true);
@@ -15,13 +15,12 @@ const detectLng = (data) => {
         xhr.onerror = () => reject(xhr.statusText);
 
         xhr.send(JSON.stringify(chat));
-    });
-    detect.then((response) => {
+    }).then((response) => {
         const data = JSON.parse(response);
         if (data.key === 'afterPayment') {
             location.href = '/trip';
         } else {
-            return data.key;
+            return data.langCode;
         }
     }).catch(error => {
         console.log(`에러발생: ${error}`);
