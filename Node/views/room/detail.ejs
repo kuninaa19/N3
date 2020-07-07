@@ -236,25 +236,16 @@
     <h5>Hotel reservation dummy site</h5>
 </div>
 
-<!--maps API -->
-<script>
-    function initMap() {
-        const hotel = {lat: <%= rooms.location.map_let %>, lng: <%= rooms.location.map_lng %>};
-        const map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 15, center: hotel});
+<!--maps API 관련 코드 -->
+<script src="/static/js/hotel_map.js"></script>
 
-        const marker = new google.maps.Marker({position: hotel, map: map});
-    }
-</script>
 <!--모달처리 JS-->
 <script src="/static/js/modal.js"></script>
 
 <!--일정 그리고 숙박요금 계산 JS-->
 <script src="/static/js/room/detail.js"></script>
 
-<!--구글 맵스-->
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
-</script>
+<!--구글 맵스 API-->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok"></script>
 </body>
 </html>
