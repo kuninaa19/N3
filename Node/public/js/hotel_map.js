@@ -1,15 +1,7 @@
 // getLatLng() DB에 저장된 위도경도 가져오기
 // initMap()  구글맵스 API 위치 초기화
 
-const getLastPath = url => {
-    const rLastPath = /\/([a-zA-Z0-9._]+)(?:\?.*)?$/;
-    return rLastPath.test(url) && RegExp.$1;
-};
-
-const params = getLastPath(window.location.pathname);
-const hotelName = document.getElementsByClassName('hotel_name')[0].innerText;
-
-const getLatLng = async (params) => {
+const getLatLng = async () => {
     return new Promise((resolve, reject) => {
         const baseUrl = "https://hotelbooking.kro.kr";
 
@@ -18,8 +10,7 @@ const getLatLng = async (params) => {
         xhr.setRequestHeader("Content-Type", "application/json");
 
         const data = {
-            code: params,
-            hotelName: hotelName
+            hotelName: document.getElementsByClassName('hotel_name')[0].innerText
         };
 
         xhr.onload = () => resolve(xhr.responseText);
@@ -33,7 +24,8 @@ const getLatLng = async (params) => {
 
 // 구글지도 위치 초기화
 const initMap = async () => {
-    const hotelLocation = await getLatLng(params);
+    const hotelLocation = await getLatLng();
+    console.log(hotelLocation);
 
     const hotel = {lat: parseFloat(hotelLocation.map_let), lng: parseFloat(hotelLocation.map_lng)};
     // const hotel = {lat: 3.1530914, lng: 101.7051983};
@@ -60,4 +52,7 @@ const initMap = async () => {
 
 window.onload = () => {
     initMap();
+
+    // 페이지 접속시 숙박 총요금 계산 (detail.js)
+    totalCheck();
 };

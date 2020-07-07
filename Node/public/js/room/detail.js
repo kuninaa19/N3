@@ -88,11 +88,6 @@ const totalCheck = () => {
     total.innerText = totalCharge;
 };
 
-// 페이지 접속시 숙박 총요금 계산
-window.onload = () => {
-    totalCheck();
-};
-
 const reservationBtn = document.getElementById("greenBtn");
 
 // 예약일자 지정후 폼전송
