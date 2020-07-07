@@ -96,18 +96,19 @@
     <!--    숙소 위치-->
     <div class="right_column">
         <div id="map"></div>
-        <script>
-            function initMap() {
-                const hotel = {lat: <%= roomInfo[0].location.map_let %>, lng: <%= roomInfo[0].location.map_lng %>};
-                const map = new google.maps.Map(
-                    document.getElementById('map'), {zoom: 15, center: hotel});
-
-                const marker = new google.maps.Marker({position: hotel, map: map});
-            }
-        </script>
     </div>
 </div>
 
+<!--maps API -->
+<script>
+    function initMap() {
+        const hotel = {lat: <%= roomInfo[0].location.map_let %>, lng: <%= roomInfo[0].location.map_lng %>};
+        const map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 15, center: hotel});
+
+        const marker = new google.maps.Marker({position: hotel, map: map});
+    }
+</script>
 
 <!--모달처리 JS-->
 <script src="/static/js/modal.js"></script>

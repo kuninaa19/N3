@@ -77,7 +77,6 @@
                     <input id="submit" type="button" value="검색하기">
                 </div>
                 <div id="map"></div>
-                <script src="/static/js/hotel_map_register.js"></script>
                 <div hidden>
                     <span id="map_let"></span>
                     <span id="map_lng"></span>
@@ -149,8 +148,13 @@
 <div class="footer">
     <h5>Hotel reservation dummy site</h5>
 </div>
+<!--Geocoding API-->
+<script async defer src="/static/js/hotel_map_register.js"></script>
+<!--숙소정보담는 클래스-->
 <script src="/static/js/classes/room.js"></script>
+<!-- 숙소 등록 JS-->
 <script src="/static/js/room/register.js"></script>
+<!--Maps API-->
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
 </script>
