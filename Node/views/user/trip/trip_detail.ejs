@@ -38,7 +38,7 @@
                 </div>
                 <div class="content">
                     <div class="reserved_date">
-                        <%=roomInfo[0].date.startDay%> – <%=roomInfo[0].date.endDay%>
+                        <%= roomInfo[0].date.startDay %> – <%= roomInfo[0].date.endDay %>
                     </div>
                     <div class="hotel_name">
                         <%= roomInfo[0].name %>
@@ -60,7 +60,7 @@
                                 체크아웃
                             </div>
                             <div class="date">
-                                <%=roomInfo[0].date.endDay%>
+                                <%= roomInfo[0].date.endDay %>
                             </div>
                             <div class="time">
                                 오후 12:00
@@ -99,16 +99,8 @@
     </div>
 </div>
 
-<!--maps API -->
-<script>
-    function initMap() {
-        const hotel = {lat: <%= roomInfo[0].location.map_let %>, lng: <%= roomInfo[0].location.map_lng %>};
-        const map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 15, center: hotel});
-
-        const marker = new google.maps.Marker({position: hotel, map: map});
-    }
-</script>
+<!--maps API 관련 코드 -->
+<script  src="/static/js/hotel_map.js"></script>
 
 <!--모달처리 JS-->
 <script src="/static/js/modal.js"></script>
@@ -116,9 +108,7 @@
 <!--여행관련 JS-->
 <script src="/static/js/user/trip.js"></script>
 
-<!--구글 맵스-->
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok&callback=initMap">
-</script>
+<!--구글 맵스 API-->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq4C8917Pxr1jaL8LAMhaIKwASCPRYpok"></script>
 </body>
 </html>
