@@ -68,6 +68,10 @@ app.use('/search', searchRouter);
 import detailRouter from "./routes/room/detail";
 app.use('/rooms', detailRouter);
 
+// 위치정보 전달 라우터
+import locationRouter from "./routes/room/location";
+app.use('/location', locationRouter);
+
 // 메시지 라우터
 import messageRouter from "./routes/user/message";
 app.use('/message', messageRouter);
