@@ -18,7 +18,7 @@ const detectLng = (data) => {
     }).then((response) => {
         const data = JSON.parse(response);
         if (data.key === 'afterPayment') {
-            location.href = '/trip';
+            location.replace('/trip');
         } else {
             return data.langCode;
         }
