@@ -8,10 +8,9 @@ const checkAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
-    //모달창 열기로 변경해야됨
-    const params = req.params.number;
-    const url = '/rooms/' + params;
-    res.redirect(url);
+    // const params = req.params.number;
+    // const url = '/rooms/' + params;
+    res.send(`<script>  alert('로그인후 결제가능합니다'); history.go(-1);</script>`);
 };
 
 // 방 세부페이지로 진입 (로그인유무에 따라서 마지막에 약간 다른 처리)
@@ -63,8 +62,7 @@ router.get('/:number', checkIsAuthenticated, (req, res) => {
 });
 
 //방 확인 및 결제 페이지
-// router.get('/:number/reservation/payment',checkAuth, (req, res)=> {
-router.get('/:number/reservation/payment', (req, res) => {
+router.get('/:number/reservation/payment', checkAuth, (req, res) => {
     const searchValue = req.params.number; // 호텔 번호
 
     const formData = {
