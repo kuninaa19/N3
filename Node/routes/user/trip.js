@@ -54,7 +54,8 @@ router.get('/:aid', checkAuth, (req, res) => {
             // 장소 위,경도 값 JSON 파싱
             val.location = JSON.parse(val.location);
 
-            console.log(moment(val.date.startDay).format('dd'));
+            val.reservedDay = moment(val.date.startDay).format('YYYY/MM/DD');
+
             // 년,월,일 한글 변환 적용
             val.date.startDay = moment(val.date.startDay).format('MMM Do (dd)');
             val.date.endDay = moment(val.date.endDay).format('MMM Do (dd)');
