@@ -10,6 +10,7 @@ moment.tz.setDefault("Asia/Seoul");
 
 const router = express.Router();
 
+// -- /payment/ready 메서드
 //결제준비
 const readyPayment = async (options, req, res) => {
     try {
@@ -36,35 +37,7 @@ const readyPayment = async (options, req, res) => {
     }
 };
 
-router.post('/payment/ready', (req, res) => {
-    const headers = {
-        'Authorization': 'KakaoAK ' + config.oauth.kakao.admin_key,
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-    };
-
-    const params = {
-        'cid': 'TC0ONETIME',
-        'partner_order_id': req.body.host_name,
-        'partner_user_id': req.user.nickname,
-        'item_name': req.body.hotel_name,
-        'quantity': req.body.day, //상품수량 - 며칠 묵는지
-        'total_amount': req.body.price,
-        'vat_amount': 0,
-        'tax_free_amount': 0,
-        'approval_url': 'https://hotelbooking.kro.kr/kakao/payment/approve',
-        'fail_url': 'https://hotelbooking.kro.kr/kakao/payment/fail',
-        'cancel_url': 'https://hotelbooking.kro.kr/kakao/payment/cancel',
-    };
-
-    const options = {
-        url: 'https://kapi.kakao.com/v1/payment/ready',
-        method: 'POST',
-        headers: headers,
-        form: params
-    };
-
-    readyPayment(options, req, res);
-});
+// -- /payment/approve 메서드
 
 // 메시지,채팅 DB 저장
 const storeMessages = (data) => {
@@ -172,6 +145,68 @@ const approvePayment = async (options, req, res) => {
         console.log(e)
     }
 };
+// -- /payment/cancel 메서드
+// DB저장된 주문 정보 삭제
+const deleteOrder = (data) => {
+    return new Promise(resolve => {
+        const sql = 'DELETE from `order` WHERE tid=? AND item_name=?';
+        connection.query(sql, [data.tid, data.item_name], (err, row) => {
+            if (err) throw  err;
+
+            resolve();
+        });
+    }).catch(error => {
+        console.log(`completePayment() 에러 발생: ${error}`);
+    });
+};
+
+// 결제 취소요청
+const cancelPayment = async (options, req, res) => {
+    try {
+        const result = await request(options, (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                return body;
+            }
+        });
+        const orderValue = JSON.parse(result);
+
+        //처리완료되면 DB에 예약 삭제
+        await deleteOrder(orderValue);
+
+        res.json({key: 'done'});
+    } catch (e) {
+        console.log(e)
+    }
+};
+router.post('/payment/ready', (req, res) => {
+    const headers = {
+        'Authorization': 'KakaoAK ' + config.oauth.kakao.admin_key,
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    };
+
+    const params = {
+        'cid': 'TC0ONETIME',
+        'partner_order_id': req.body.host_name,
+        'partner_user_id': req.user.nickname,
+        'item_name': req.body.hotel_name,
+        'quantity': req.body.day, //상품수량 - 며칠 묵는지
+        'total_amount': req.body.price,
+        'vat_amount': 0,
+        'tax_free_amount': 0,
+        'approval_url': 'https://hotelbooking.kro.kr/kakao/payment/approve',
+        'fail_url': 'https://hotelbooking.kro.kr/kakao/payment/fail',
+        'cancel_url': 'https://hotelbooking.kro.kr/kakao/payment/cancel',
+    };
+
+    const options = {
+        url: 'https://kapi.kakao.com/v1/payment/ready',
+        method: 'POST',
+        headers: headers,
+        form: params
+    };
+
+    readyPayment(options, req, res);
+});
 
 router.get('/payment/approve', (req, res) => {
     const headers = {
@@ -197,7 +232,34 @@ router.get('/payment/approve', (req, res) => {
     approvePayment(options, req, res);
 });
 
-// 결제 취소시 창 닫기
+// 결제에 대한 취소
+router.delete('/payment/cancel', (req, res) => {
+    const data = req.body;
+
+    const headers = {
+        'Authorization': 'KakaoAK ' + config.oauth.kakao.admin_key,
+        // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    };
+
+    const params = {
+        'cid': 'TC0ONETIME',
+        'tid': data.tid,
+        'cancel_amount': data.amount,
+        'cancel_tax_free_amount': 0,
+    };
+
+    const options = {
+        url: 'https://kapi.kakao.com/v1/payment/cancel',
+        method: 'POST',
+        headers: headers,
+        form: params
+    };
+
+    cancelPayment(options, req, res);
+    // res.send("<script> window.close(); </script>");
+});
+
+// 결제창열린상태에서 취소시 창 닫기
 router.get('/payment/cancel', (req, res) => {
     res.send("<script> window.close(); </script>");
 });
