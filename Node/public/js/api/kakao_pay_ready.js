@@ -1,4 +1,4 @@
-// kakaoPay() 결제 링크 전송(카카오페이)
+// kakaoPayReady() 결제 링크 전송(카카오페이)
 
 //카카오페이 버튼
 const kakaoBtn = document.getElementById("kakaoPayBtn");
@@ -16,14 +16,14 @@ kakaoBtn.addEventListener("click", () => {
 
 paymentBtn.addEventListener("click", () => {
     if (kakaoBtn.value === "clicked") {
-        kakaoPay();
+        kakaoPayReady();
     } else {
         alert('결제수단을 선택해 주세요');
     }
 });
 
 
-const kakaoPay = () => {
+const kakaoPayReady = () => {
     const payment = new Promise((resolve, reject) => {
         const baseUrl = "https://hotelbooking.kro.kr";
 
