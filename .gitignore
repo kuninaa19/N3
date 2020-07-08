@@ -2,7 +2,8 @@
 
 Node/node_modules
 Node/sessions
-Node/DB.env
+Node/env/DB.env
+Node/env/redis.env
 Node/conf
 
 Node/.babelrc
