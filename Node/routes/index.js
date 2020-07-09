@@ -30,6 +30,7 @@ router.get('/', checkAuth, (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+    res.clearCookie('accessToken');
     req.logout();
     req.session.save(function () {
         res.redirect('/');
