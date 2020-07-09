@@ -7,20 +7,14 @@ import passport from 'passport';
 import initPassport from './conf/passport';
 import flash from 'connect-flash';
 import socket from "./socket_io";
-import redis from 'redis';
+import redisClient from './redis';
 import connectRedis from 'connect-redis';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
-dotenv.config({path: path.join(__dirname, './env/redis.env')});
 
 const app = express();
 
 const redisStore = connectRedis(session);
-const redisClient = redis.createClient({
-    host: process.env.REDIS_HOST,
-    port: 6379
-});
 
 app.use(helmet());
 
@@ -31,7 +25,6 @@ app.set('views', path.join(__dirname, '/views'));
 if (!module.parent) app.use(logger('dev'));
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
-
 
 app.use(session({
     store: new redisStore({
