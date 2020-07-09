@@ -28,30 +28,41 @@ router.post('/register',
     ));
 
 // 네이버 로그인
-router.get('/naver', 
-    passport.authenticate('naver', {
-    successRedirect: '/',
-    failureRedirect: '/'
-}));
+router.get('/naver',
+    passport.authenticate('naver'));
 
 router.get('/naver/callback',
     passport.authenticate('naver', {
-        successRedirect: '/',
         failureRedirect: '/'
-    })
+    }), function (req, res) {
+        const accessToken = req.user.accessToken;
+        const options = { //3분
+            maxAge: 1.8e+6,
+            secure: true
+        };
+        res.cookie(`accessToken`, accessToken, options);
+
+        res.redirect('/');
+    }
 );
 
 //카카오 로그인
-router.get('/kakao', 
-    passport.authenticate('kakao', {
-    successRedirect: '/',
-    failureRedirect: '/'
-}));
+router.get('/kakao',
+    passport.authenticate('kakao'));
 
-router.get('/kakao/callback', 
+router.get('/kakao/callback',
     passport.authenticate('kakao', {
-    successRedirect: '/',
-    failureRedirect: '/'
-}));
+        failureRedirect: '/'
+    }), function (req, res) {
+        const accessToken = req.user.accessToken;
+        const options = { //30분
+            maxAge: 1.8e+6,
+            secure: true
+        };
+        res.cookie(`accessToken`, accessToken, options);
+
+        res.redirect('/');
+    }
+);
 
 export default router;
