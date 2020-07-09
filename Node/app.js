@@ -3,16 +3,24 @@ import logger from 'morgan';
 import path from 'path';
 import methodOverride from 'method-override'; // put, delete 메소드 지원하기위해서
 import helmet from 'helmet';
-import session from 'express-session';
-import flash from 'connect-flash';
 import passport from 'passport';
 import initPassport from './conf/passport';
+import flash from 'connect-flash';
 import socket from "./socket_io";
-//추후 redis로 변경
-import sessionStore from 'session-file-store';
-const FileStore = sessionStore(session);
+import redis from 'redis';
+import connectRedis from 'connect-redis';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+dotenv.config({path: path.join(__dirname, './env/redis.env')});
 
 const app = express();
+
+const redisStore = connectRedis(session);
+const redisClient = redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: 6379
+});
 
 app.use(helmet());
 
@@ -22,15 +30,19 @@ app.set('views', path.join(__dirname, '/views'));
 //log
 if (!module.parent) app.use(logger('dev'));
 
-// serve static files
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
-// session support
+
 app.use(session({
+    store: new redisStore({
+        client: redisClient,
+        prefix: "session:",
+        db: 0
+    }),
+    saveUninitialized: false,
     resave: false,
-    saveUninitialized: true,
-    secret: 'WEfh#joi!P#GTH$#(',
-    store: new FileStore()
+    secret: process.env.SESSION_KEY,
+    cookie: {maxAge: 1.21e+9, Secure: true} //2주
 }));
 
 app.use(passport.initialize());
@@ -39,8 +51,8 @@ app.use(flash());
 initPassport(passport);
 
 app.use(express.json());
-// parse request bodies (req.body) body-parser 대안
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 
 // allow overriding methods in query (?_method=put)
 app.use(methodOverride('_method'));
