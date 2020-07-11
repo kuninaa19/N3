@@ -3,28 +3,29 @@ import connection from '../conf/dbInfo';
 
 const router = express.Router();
 
-
 //리팩토링[JS파일만들고 주소값 넣어서 render위지 다르게 설정하기]
 const checkAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
-    }
-    const sql = 'select * from `room` limit 4';
-    connection.query(sql,(err, result) => {
-        if (err) throw  err;
+    } else {
+        const sql = 'select * from `room` limit 4';
+        connection.query(sql, (err, result) => {
+            if (err) throw  err;
+            const flash = req.flash('error');
 
-        res.render('index', {'rooms':result});
-    });
+            res.render('index', {'rooms': result, 'message': flash});
+        });
+    }
 };
 
 router.get('/', checkAuth, (req, res) => {
     const nickname = req.user.nickname;
 
     const sql = 'select * from `room` limit 4';
-    connection.query(sql,(err, result) => {
+    connection.query(sql, (err, result) => {
         if (err) throw  err;
 
-        res.render('index', {'nickname': nickname,'rooms':result});
+        res.render('index', {'nickname': nickname, 'rooms': result});
 
     });
 });

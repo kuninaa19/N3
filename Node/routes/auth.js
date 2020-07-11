@@ -33,8 +33,9 @@ router.get('/naver',
 
 router.get('/naver/callback',
     passport.authenticate('naver', {
-        failureRedirect: '/'
-    }), function (req, res) {
+        failureRedirect: '/',
+        failureFlash: true
+    }), (req, res) => {
         const accessToken = req.user.accessToken;
         const options = { //3분
             maxAge: 1.8e+6,
@@ -52,8 +53,9 @@ router.get('/kakao',
 
 router.get('/kakao/callback',
     passport.authenticate('kakao', {
-        failureRedirect: '/'
-    }), function (req, res) {
+        failureRedirect: '/',
+        failureFlash: true
+    }), (req, res) => {
         const accessToken = req.user.accessToken;
         const options = { //30분
             maxAge: 1.8e+6,

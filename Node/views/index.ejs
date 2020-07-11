@@ -27,7 +27,7 @@
         <% }else{ %>
             <li><a href="/message">메시지</a></li>
             <li><a href="/trip">여행</a></li>
-            <li><a><%=nickname%></a></li>
+            <li><a><%= nickname %></a></li>
             <li><a href="/logout">로그아웃</a></li>
         <% } %>
     </div>
@@ -97,14 +97,18 @@
             </div>
         </div>
         <!--숙소-->
-            <% include layout/index/room_list.ejs %>
-
+        <% include layout/index/room_list.ejs %>
     </div>
 </div>
 <div class="footer">
     <h5>Hotel reservation dummy site</h5>
 </div>
-
+<% if(typeof message !== "undefined") { %>
+    <script>
+        const message = "<%= message %>";
+        if (message !== "") alert(message);
+    </script>
+<% } %>
 <!--모달처리 JS-->
 <script src="/static/js/modal.js"></script>
 <!--검색처리 JS-->
