@@ -2,6 +2,7 @@ import express from 'express';
 import connection from '../../conf/dbInfo';
 import moment from 'moment';
 import timezone from 'moment-timezone';
+import checkToken from '../token_method'; // 토큰 검증,재발급 관련 메서드
 
 moment.tz.setDefault("Asia/Seoul");
 
@@ -14,9 +15,7 @@ const checkAuth = (req, res, next) => {
     res.send("<script>alert('로그인후 접속 가능합니다.'); history.go(-1);</script>");
 };
 
-router.get('/', checkAuth, (req, res) => {
-    const nickname = req.user.nickname;
-
+const searchTripInfo = (nickname, res)=>{
     //숙소 예약 정보가져옴 날짜순으로 정렬해야할지 구매순으로 정렬해야할지 생각
     const sql = 'select a.id, a.aid, a.item_name, a.date, b.region, b.image from `order` AS `a` INNER JOIN `room` AS `b` WHERE a.partner_user_id = ? AND a.item_name = b.name GROUP BY a.id ORDER BY a.id DESC';
     connection.query(sql, nickname, (err, row) => {
@@ -33,6 +32,14 @@ router.get('/', checkAuth, (req, res) => {
 
         res.render('user/trip/trip_index', {'nickname': nickname, 'rooms': row});
     });
+};
+
+router.get('/', checkAuth, async (req, res) => {
+    const nickname = req.user.nickname;
+
+    await checkToken(req,res);
+
+    searchTripInfo(nickname,res);
 });
 
 router.get('/:aid', checkAuth, (req, res) => {
