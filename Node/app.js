@@ -35,7 +35,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     secret: process.env.SESSION_KEY,
-    cookie: {maxAge: 1.21e+9, Secure: true} //2주
+    cookie: {maxAge: 5.256e+9, Secure: true} //2달
 }));
 
 app.use(passport.initialize());

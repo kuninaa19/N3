@@ -37,8 +37,8 @@ router.get('/naver/callback',
         failureFlash: true
     }), (req, res) => {
         const accessToken = req.user.accessToken;
-        const options = { //3분
-            maxAge: 1.8e+6,
+        const options = { //2시간
+            maxAge: 7.2e+6,
             secure: true
         };
         res.cookie(`accessToken`, accessToken, options);
@@ -57,8 +57,8 @@ router.get('/kakao/callback',
         failureFlash: true
     }), (req, res) => {
         const accessToken = req.user.accessToken;
-        const options = { //30분
-            maxAge: 1.8e+6,
+        const options = { //2시간 (네이버 1시간 카카오 6시간)
+            maxAge: 7.2e+6,
             secure: true
         };
         res.cookie(`accessToken`, accessToken, options);
