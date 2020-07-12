@@ -99,8 +99,11 @@ const verifyToken = async (data, req, res) => {
             }
         } else {
             console.log('로그아웃');
-            delete req.session;
-            delete res.cookie.accessToken;
+            res.clearCookie('accessToken');
+            req.logout();
+            req.session.save(function () {
+                res.redirect('/');
+            });
         }
     }
 };
@@ -164,7 +167,11 @@ const getToken = async (data, req,res) => {
         // req.user.refreshToken = "val.refresh_token";
 
         if(val.error){ // 리프레시토큰 오류 네이버
-            console.log('로그아웃');
+            res.clearCookie('accessToken');
+            req.logout();
+            req.session.save(function () {
+                res.redirect('/');
+            });
         }
 
         const time = (val.expires_in)*1000;
@@ -183,7 +190,12 @@ const getToken = async (data, req,res) => {
         }
     } catch (e) {
         // 리프레시 만료 혹은 리프레시 변조 => 사용자 로그아웃(카카오만)
-        console.log(e);
+        // console.log(e);
+        res.clearCookie('accessToken');
+        req.logout();
+        req.session.save(function () {
+            res.redirect('/');
+        });
     }
 };
 
