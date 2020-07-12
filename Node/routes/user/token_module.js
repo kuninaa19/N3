@@ -1,4 +1,4 @@
-import config from "../conf/config";
+import config from "../../conf/config";
 import request from "request-promise-native";
 
 // 어느 플랫폼의 토큰인지 확인
