@@ -2,6 +2,8 @@ import express from 'express';
 import connection from '../../conf/dbInfo';
 import moment from 'moment';
 import timezone from 'moment-timezone'; // require('moment-timezone');
+import request from 'request-promise-native';
+import config from "../../conf/config";
 
 moment.tz.setDefault("Asia/Seoul");
 
@@ -39,11 +41,83 @@ const checkAuth = (req, res, next) => {
     res.send("<script>alert('접속할 수 없는 페이지 입니다.'); history.go(-1);</script>");
 };
 
-// 유저 로그인했을때만 메시지페이지
-router.get('/', checkAuth, (req, res) => {
-    const nickname = req.user.nickname;
+// verifyToken() 내부 API 요청 옵션 설정
+const setOptions = (data) => {
+    return new Promise((resolve, reject) => {
+        if (data.platform === 'naver') {
+            const options = {
+                url: 'https://openapi.naver.com/v1/nid/me',
+                headers: {
+                    'Authorization': `'Bearer ${data.token}`,
+                    // 'Authorization': `Bearer 32ro32rj32orj32i3jr23iorj32or32o`,
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                },
+                method: 'GET',
+            };
+            resolve(options);
 
-    //메시지 최초 10개 전달
+        } else if (data.platform === 'kakao') {
+
+            const options = {
+                url: 'https://kapi.kakao.com/v1/user/access_token_info',
+                headers: {
+                    'Authorization': `Bearer ${data.token}`,
+                    // 'Authorization': `Bearer 32ro32rj32orj32i3jr23iorj32or32o`,
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                },
+                method: 'GET',
+            };
+            resolve(options);
+        }
+    })
+};
+
+// 유효한 토큰인지 검사
+const verifyToken = async (data) => {
+    try {
+        const options = await setOptions(data);
+
+        const result = await request(options, async (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                return body;
+            }
+        });
+
+        const val = JSON.parse(result);
+        console.log('인증성공', val);
+        //
+        // if (data.platform === 'naver') {
+        //     if (val.message === 'success') {
+        //         return;
+        //     } else {
+        //         console.log(val); // 메시지 성공확인만 하면 되는데 혹시모르니까 로그남김
+        //     }
+        // } else if (data.platform === 'kakao') {
+        //
+        // }
+    } catch (e) {
+        console.log('토큰 만료 혹은 잘못된 토큰 => 토큰인증 필요');
+
+        if (e.statusCode === 400 || e.statusCode === 401) {
+            const msgData = JSON.parse(e.error);
+
+            // code => kakao, resultcode => naver
+            if (msgData.code === -401 || msgData.code === -2 || msgData.resultcode === '024') {
+                console.log('토큰 재발급');
+                await getToken();
+            }
+        } else {
+            console.log('로그아웃');
+        }
+    }
+};
+
+const getToken = () => {
+
+};
+
+//메시지 최초 10개 전달
+const searchMessages = (nickname, res) => {
     const sql = 'select  a.*, b.date, b.item_name,c.country,c.region from `message` AS `a` INNER JOIN `order` AS `b` INNER JOIN `room` AS `c` ON a.user_name = ? OR a.host_name = ? WHERE a.room_id = b.id AND b.item_name = c.name   GROUP BY a.time ORDER BY a.time DESC LIMIT 10';
     connection.query(sql, [nickname, nickname], (err, row) => {
         if (err) throw  err;
@@ -71,8 +145,38 @@ router.get('/', checkAuth, (req, res) => {
             }
         }
 
-        res.render('user/message/message_index', {'nickname': nickname, 'message': row, 'opponent': opponent});
+        res.render('user/message/message_index', {
+            'nickname': nickname,
+            'message': row,
+            'opponent': opponent
+        });
     });
+};
+
+// 유저 로그인했을때만 메시지페이지
+router.get('/', checkAuth, async (req, res) => {
+    const nickname = req.user.nickname;
+    console.log(req.cookies.accessToken);
+    console.log(req.session);
+
+    const data = {
+        token: req.cookies.accessToken,
+        platform: req.user.way
+    };
+
+    if (data.platform !== 'general') {
+        if (data.token) {
+            console.log('토큰 있음');
+            // 정보가져옴 유효하지않으면 재발급
+            await verifyToken(data,res);
+        } else {
+            console.log('토큰 없음');
+            // 토큰재발급 정보가져옴
+            // await getToken(data);
+        }
+    }
+
+    searchMessages(nickname, res);
 });
 
 // 채팅창(메시지 상세페이지)
@@ -84,10 +188,9 @@ router.get('/:message_id', checkAuth, (req, res) => {
     connection.query(sql, [searchValue, nickname, nickname], (err, row) => {
         if (err) throw  err;
 
-        if(row.length === 0){
+        if (row.length === 0) {
             res.send("<script>alert('접속할 수 없는 페이지 입니다.'); history.go(-1);</script>");
-        }
-        else{
+        } else {
             // 대화하는 상대방 아이디
             let opponent;
 
