@@ -42,7 +42,7 @@ const checkAuth = (req, res, next) => {
 };
 
 // verifyToken() 내부 API 요청 옵션 설정
-const setOptions = (data) => {
+const setVerifyTokenOptions = (data) => {
     return new Promise((resolve, reject) => {
         if (data.platform === 'naver') {
             const options = {
@@ -73,9 +73,9 @@ const setOptions = (data) => {
 };
 
 // 유효한 토큰인지 검사
-const verifyToken = async (data) => {
+const verifyToken = async (data, req, res) => {
     try {
-        const options = await setOptions(data);
+        const options = await setVerifyTokenOptions(data);
 
         const result = await request(options, async (error, response, body) => {
             if (!error && response.statusCode === 200) {
@@ -85,16 +85,7 @@ const verifyToken = async (data) => {
 
         const val = JSON.parse(result);
         console.log('인증성공', val);
-        //
-        // if (data.platform === 'naver') {
-        //     if (val.message === 'success') {
-        //         return;
-        //     } else {
-        //         console.log(val); // 메시지 성공확인만 하면 되는데 혹시모르니까 로그남김
-        //     }
-        // } else if (data.platform === 'kakao') {
-        //
-        // }
+
     } catch (e) {
         console.log('토큰 만료 혹은 잘못된 토큰 => 토큰인증 필요');
 
@@ -104,16 +95,96 @@ const verifyToken = async (data) => {
             // code => kakao, resultcode => naver
             if (msgData.code === -401 || msgData.code === -2 || msgData.resultcode === '024') {
                 console.log('토큰 재발급');
-                await getToken();
+                await getToken(data, req,res);
             }
         } else {
             console.log('로그아웃');
+            delete req.session;
+            delete res.cookie.accessToken;
         }
     }
 };
+// getToken() 내부 API 요청 옵션 설정
+const setGetTokenOptions = async (data, req) => {
+    return new Promise((resolve, reject) => {
+        console.log('setGetTokenOptions');
+        console.log(req.session);
+        console.log(req.user.refreshToken);
 
-const getToken = () => {
+        if (data.platform === 'naver') {
+            const params = {
+                grant_type: 'refresh_token',
+                client_id: config.oauth.naver.client_id,
+                refresh_token: req.user.refreshToken,
+                client_secret: config.oauth.naver.client_secret
+            };
 
+            const options = {
+                url: 'https://nid.naver.com/oauth2.0/token',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'},
+                method: 'POST',
+                form: params
+            };
+            resolve(options);
+
+        } else if (data.platform === 'kakao') {
+            const params = {
+                grant_type: 'refresh_token',
+                client_id: config.oauth.kakao.rest_api_key,
+                refresh_token: req.user.refreshToken,
+                client_secret: config.oauth.kakao.client_secret
+            };
+
+            const options = {
+                url: 'https://kauth.kakao.com/oauth/token',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'},
+                method: 'POST',
+                form: params
+            };
+            resolve(options);
+        }
+    })
+};
+
+// 만료되었거나 토큰이 안맞는 아이디에 대해서 리프레쉬토큰으로 액세스토큰 발급
+const getToken = async (data, req,res) => {
+    try {
+        const options = await setGetTokenOptions(data, req);
+        console.log(options);
+        console.log('토큰 재발급시도');
+
+        const result = await request(options, async (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                return body;
+            }
+        });
+
+        const val = JSON.parse(result);
+        console.log('토큰 재발급 성공', val);
+        // req.user.refreshToken = "val.refresh_token";
+
+        if(val.error){ // 리프레시토큰 오류 네이버
+            console.log('로그아웃');
+        }
+
+        const time = (val.expires_in)*1000;
+        const cookieOptions = { // 초기로그인과 다르게 발급받는 만료시간에 맞게 저장 (네이버 1시간 카카오 6시간)
+            maxAge: time,
+            secure: true
+        };
+        res.cookie(`accessToken`, val.access_token, cookieOptions);
+
+        if(val.refresh_token){
+            req.user.refreshToken = val.refresh_token;
+            req.session.cookie.maxAge = 5.256e+9;
+
+            req.session.save(function () {
+            });
+        }
+    } catch (e) {
+        // 리프레시 만료 혹은 리프레시 변조 => 사용자 로그아웃(카카오만)
+        console.log(e);
+    }
 };
 
 //메시지 최초 10개 전달
@@ -168,11 +239,11 @@ router.get('/', checkAuth, async (req, res) => {
         if (data.token) {
             console.log('토큰 있음');
             // 정보가져옴 유효하지않으면 재발급
-            await verifyToken(data,res);
+            await verifyToken(data, req, res);
         } else {
             console.log('토큰 없음');
             // 토큰재발급 정보가져옴
-            // await getToken(data);
+            await getToken(data, req,res);
         }
     }
 
