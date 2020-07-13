@@ -1,5 +1,6 @@
 import config from "../../conf/config";
 import request from "request-promise-native";
+import jwt from 'jsonwebtoken';
 
 // 어느 플랫폼의 토큰인지 확인
 const checkToken = async (req, res) => {
@@ -9,11 +10,78 @@ const checkToken = async (req, res) => {
     };
 
     if (data.platform !== 'general') {
-        if (data.token) { // 토큰 유무 확인
+        if (data.token) { // 액세스 토큰 유무 확인
             await verifyToken(data, req, res); // 정보가져옴 유효하지않으면 재발급
         } else {
             await getToken(data, req, res); // 토큰재발급 정보가져옴
         }
+    } else {
+        if (data.token) { // local JWT 토큰 유무 확인
+            await verifyJwtToken(data, req, res); // 정보가져옴 유효하지않으면 재발급
+        } else {
+            await getJwtToken(data, req, res); // 토큰재발급 정보가져옴
+        }
+    }
+};
+
+// JWT토큰 인증요청전송[local]
+const verifyJwtToken = async (data, req, res) => {
+    try {
+        const options = {
+            url: 'https://hotelbooking.kro.kr/auth/jwt',
+            headers: {
+                'Authorization': `Bearer ${data.token}`,
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            method: 'POST',
+        };
+
+        const result = await request(options, async (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                return body;
+            }
+        });
+        const val = JSON.parse(result);
+        console.log('인증성공', val);
+
+    } catch (e) {
+        console.log('토큰 만료 혹은 잘못된 토큰 => 토큰인증 필요');
+        if (e.statusCode === 400 || e.statusCode === 401) {
+            console.log('토큰 재발급');
+            await getJwtToken(data, req, res);
+        } else {
+            console.log('로그아웃');
+            res.clearCookie('accessToken');
+            req.logout();
+            req.session.save(function () {
+                res.redirect('/');
+            });
+        }
+    }
+};
+
+//JwtToken얻기 [local]
+const getJwtToken = async (data, req, res) => {
+    try {
+        if (req.session.refreshToken) {
+            jwt.sign(req.user, config.JWT_SECRET, (err, token) => {
+                const options = { //30분
+                    maxAge: 1.8e+6,
+                    secure: true,
+                    httpOnly: true
+                };
+
+                res.cookie(`accessToken`, token, options);
+            });
+        } else {
+            // 리프레시 만료 => 사용자 로그아웃
+            res.clearCookie('accessToken');
+            req.logout();
+            req.session.save(function () {
+                res.redirect('/');
+            });
+        }
+    } catch (e) {
     }
 };
 
