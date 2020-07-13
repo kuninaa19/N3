@@ -5,7 +5,6 @@ Node/sessions
 Node/env/DB.env
 Node/env/redis.env
 Node/conf/config.json
-Node/conf/passport.js
 
 Node/.babelrc
 Node/public/images/
