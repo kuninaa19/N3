@@ -1,0 +1,186 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+.row {
+    font-family: "Nanum Gothic";
+    width: 70%;
+    margin: 45px auto;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.left_column {
+    padding: 0 0.8%;
+    float: left;
+    width: 30%;
+    border: #E6E6E6 solid 1px;
+}
+
+.item {
+    background-color: white;
+    float: left;
+    width: 100%;
+    padding: 30px 20px;
+}
+
+.item a {
+    color: black;
+    text-decoration: none;
+}
+
+.profile_tray {
+    display: flex;
+    padding: 10px 0;
+}
+
+.profile_img {
+    float: left;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 25px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-left: 20px;
+}
+
+.profile_img img {
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+
+.user_name {
+    margin-left: 40px;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 50px;
+    text-align: center;
+}
+
+.user_info_category {
+    text-align: left;
+    line-height: 40px;
+    font-size: 1rem;
+    margin: 5px 0;
+    padding: 5px;
+    width: 100%;
+    font-weight: bold;
+    float: bottom;
+}
+
+.line {
+    margin: 20px 0;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.right_column {
+    float: right;
+    width: 68%;
+    margin-left: 2%;
+    border: #E6E6E6 solid 1px;
+}
+
+.review_category {
+    display: flex;
+}
+
+#rightSide {
+    padding: 0;
+}
+
+.item_title {
+    font-size: 16px;
+    padding: 10px 0;
+    line-height: 40px;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    align-content: center;
+}
+
+#borderLine {
+    background-color: #EBEBEB;
+    border-bottom: 1px #E6E6E6 solid;
+    border-left: 1px #E6E6E6 solid;
+
+}
+
+button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.tray {
+    display: flex;
+    padding: 30px;
+}
+
+.card {
+    width: 110px;
+    height: 80px;
+}
+
+.card img {
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: 80px;
+    width: 110px;
+    border-radius: 5px;
+}
+
+.img_desc {
+    float: left;
+    text-align: left;
+    margin: 0 1.5rem;
+    font-size: 14px;
+    width: 60%;
+    color: #484848;
+}
+
+.img_desc .interval {
+    line-height: 40px;
+}
+
+.review_btn {
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#reviewBtn {
+    height: 50%;
+    border-radius: 5px;
+    background-color: #088A85;
+    color: white;
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+.right_line {
+    border-bottom: 1px solid #E6E6E6;
+}
+
+@media screen and (max-width: 800px) {
+    .column {
+        width: 100%;
+        padding: 0;
+    }
+}

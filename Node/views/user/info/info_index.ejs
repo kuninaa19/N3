@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/user/message/message_detail.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/user/info/info_index.css"/>
 </head>
 
 <body>
@@ -28,8 +28,48 @@
 </ul>
 
 <div class="row">
-    <div class="column">
-        <div class="item" style="border-top: 0">
+    <div class="left_column">
+        <div class="item">
+            <div class="profile_tray">
+                <div class="profile_img">
+                    <img src="https://img.icons8.com/ios-filled/256/000000/user-male-circle.png"/>
+                </div>
+                <div class="user_name">
+                    <%= nickname %>
+                </div>
+            </div>
+            <div class="line"></div>
+            <button class="user_info_category">
+                내정보 변경
+            </button>
+            <button class="user_info_category">
+                회원탈퇴
+            </button>
+        </div>
+    </div>
+    <div class="right_column">
+        <div class="item" id="rightSide">
+            <div class="review_category">
+                <button class="item_title">작성가능한 후기</button>
+                <button class="item_title" id="borderLine">작성했던 후기</button>
+            </div>
+            <div class="tray">
+                <div class="card">
+                    <img src="/static/images/rooms/1591765939773.jpg"/>
+                </div>
+                <div class="img_desc">
+                    <div class="interval" style="font-weight: bold">
+                        레갈리아 모던 스튜디오
+                    </div>
+                    <div class="interval">
+                        6월 25일 (목) – 6월 27일 (토)
+                    </div>
+                </div>
+                <div class="review_btn">
+                    <button id="reviewBtn">후기작성하기</button>
+                </div>
+            </div>
+            <div class="right_line"></div>
 
         </div>
     </div>
