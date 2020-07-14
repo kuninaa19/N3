@@ -12,6 +12,20 @@ import connectRedis from 'connect-redis';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 
+import indexRouter from './routes/index';
+import uploadRouter from './routes/upload';
+import authRouter from "./routes/auth";
+import searchRouter from "./routes/room/search";
+import detailRouter from "./routes/room/detail";
+import locationRouter from "./routes/room/location";
+import messageRouter from "./routes/user/message";
+import reservationRouter from "./routes/user/trip";
+import hostRouter from "./routes/user/host";
+import infoRouter from "./routes/user/info";
+import kakaoPayRouter from "./routes/api/kakao_pay";
+import papagoRouter from "./routes/api/papago_lang";
+import errorRouter from "./routes/error";
+
 const app = express();
 
 const redisStore = connectRedis(session);
@@ -53,50 +67,16 @@ app.use(methodOverride('_method'));
 const server = app.listen(3000, () => console.log('port 3000 Server On'));
 socket(server);
 
-// import {router as indexRouter} from './routes/index';
-import indexRouter from './routes/index';
 app.use('/', indexRouter);
-
-//이미지 라우터
-import uploadRouter from './routes/upload';
-app.use('/upload', uploadRouter);
-
-// 인증 라우터
-import authRouter from "./routes/auth";
-app.use('/auth', authRouter);
-
-//방 검색 라우터
-import searchRouter from "./routes/room/search";
-app.use('/search', searchRouter);
-
-// 방 세부페이지,확인 및 결제 라우터
-import detailRouter from "./routes/room/detail";
-app.use('/rooms', detailRouter);
-
-// 위치정보 전달 라우터
-import locationRouter from "./routes/room/location";
-app.use('/location', locationRouter);
-
-// 메시지 라우터
-import messageRouter from "./routes/user/message";
-app.use('/message', messageRouter);
-
-// 예약한 방에 대한 라우터
-import reservationRouter from "./routes/user/trip";
-app.use('/trip', reservationRouter);
-
-// 호스트의 방 등록 라우터
-import hostRouter from "./routes/user/host";
-app.use('/host', hostRouter);
-
-//카카오페이 API 연동 라우터
-import kakaoPayRouter from "./routes/api/kakao_pay";
-app.use('/kakao', kakaoPayRouter);
-
-//파파고 API 연동 라우터
-import papagoRouter from "./routes/api/papago_lang";
-app.use('/papago', papagoRouter);
-
-// 없는 페이지 혹은 오류
-import errorRouter from "./routes/error";
-app.use(errorRouter);
+app.use('/upload', uploadRouter); //이미지 라우터
+app.use('/auth', authRouter);// 인증 라우터
+app.use('/search', searchRouter); //방 검색 라우터
+app.use('/rooms', detailRouter); // 방 세부페이지,확인 및 결제 라우터
+app.use('/location', locationRouter); // 위치정보 전달 라우터
+app.use('/message', messageRouter); // 메시지 라우터
+app.use('/trip', reservationRouter); // 예약한 방에 대한 라우터
+app.use('/host', hostRouter); // 호스트의 방 등록 라우터
+app.use('/info', infoRouter); // 유저 프로필 페이지 라우터
+app.use('/kakao', kakaoPayRouter); //카카오페이 API 연동 라우터
+app.use('/papago', papagoRouter); //파파고 API 연동 라우터
+app.use(errorRouter);// 없는 페이지 혹은 오류

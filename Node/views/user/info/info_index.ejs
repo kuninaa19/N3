@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <title><%= nickname %> 님의 프로필</title>
+    <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--    폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/user/message/message_detail.css"/>
+</head>
+
+<body>
+<ul class="top_nav">
+    <li id="logo"><a href="/" class="active"><img class="logo_image"
+                                                  src="https://img.icons8.com/doodle/48/000000/log-cabin.png"></a></li>
+    <div id="navAlign">
+        <li><a href="/message">메시지</a></li>
+        <li><a href="/trip">여행</a></li>
+        <li><a href="/info" id="userName"><%= nickname %></a></li>
+        <li><a href="/logout">로그아웃</a></li>
+    </div>
+</ul>
+
+<div class="row">
+    <div class="column">
+        <div class="item" style="border-top: 0">
+
+        </div>
+    </div>
+</div>
+<!--이페이지 클릭관련, 페이지접속 초기설정 JS-->
+<script src="/static/js/user/info_index.js"></script>
+</body>
+</html>
