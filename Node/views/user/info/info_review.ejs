@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <title><%= nickname %> 님의 프로필</title>
+    <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--    폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/user/info/info_review.css"/>
+</head>
+
+<body>
+<ul class="top_nav">
+    <li id="logo"><a href="/" class="active"><img class="logo_image"
+                                                  src="https://img.icons8.com/doodle/48/000000/log-cabin.png"></a></li>
+    <div id="navAlign">
+        <li><a href="/message">메시지</a></li>
+        <li><a href="/trip">여행</a></li>
+        <li><a href="/info" id="userName"><%= nickname %></a></li>
+        <li><a href="/logout">로그아웃</a></li>
+    </div>
+</ul>
+
+<div class="row">
+    <div class="left_column">
+        <div class="item">
+            <div class="profile_tray">
+                <div class="profile_img">
+                    <img src="https://img.icons8.com/ios-filled/256/000000/user-male-circle.png"/>
+                </div>
+                <div class="user_name">
+                    <%= nickname %>
+                </div>
+            </div>
+            <div class="line"></div>
+            <button class="user_info_category">
+                내정보 변경
+            </button>
+            <button class="user_info_category">
+                회원탈퇴
+            </button>
+        </div>
+    </div>
+    <div class="right_column">
+        <div class="item" id="rightSide">
+            <div class="review_category">
+                <button class="item_title"id="borderLine">작성가능한 후기</button>
+                <button class="item_title">작성했던 후기</button>
+            </div>
+            <div class="tray">
+                    <div>
+                        <div class="review_profile">
+                            <div class="profile_info">
+                                <div class="hotel_name">레갈리아 모던 스튜디오</div>
+                                <div class="review_stars">별점 : 5점</div>
+                            </div>
+                        </div>
+                        <div class="review_detail">
+                                <div>채팅내용 ㄱㄷ쟈ㅐ렂채채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용
+                                    ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대대ㅑㄹㅈ대
+                                </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="right_line"></div>
+            <div class="tray">
+                <div>
+                    <div class="review_profile">
+                        <div class="profile_info">
+                            <div class="hotel_name">레갈리아 모던 스튜디오</div>
+                            <div class="review_stars">별점 : 5점</div>
+                        </div>
+                    </div>
+                    <div class="review_detail">
+                        <div>채팅내용 ㄱㄷ쟈ㅐ렂채채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용
+                            ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대대ㅑㄹㅈ대
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right_line"></div>
+        </div>
+    </div>
+</div>
+<!--이페이지 클릭관련, 페이지접속 초기설정 JS-->
+<script src="/static/js/user/info/info_review.js"></script>
+</body>
+</html>

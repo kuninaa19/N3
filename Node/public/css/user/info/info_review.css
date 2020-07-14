@@ -1,0 +1,200 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.row {
+    font-family: "Nanum Gothic";
+    width: 70%;
+    margin: 45px auto;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.left_column {
+    padding: 0 0.8%;
+    float: left;
+    width: 30%;
+    border: #E6E6E6 solid 1px;
+}
+
+.item {
+    background-color: white;
+    float: left;
+    width: 100%;
+    padding: 30px 20px;
+}
+
+.item a {
+    color: black;
+    text-decoration: none;
+}
+
+.profile_tray {
+    display: flex;
+    padding: 10px 0;
+}
+
+.profile_img {
+    float: left;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 25px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-left: 10px;
+}
+
+.profile_img img {
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+
+.user_name {
+    width: 65%;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 50px;
+    text-align: center;
+}
+
+.user_info_category {
+    text-align: left;
+    line-height: 40px;
+    font-size: 1rem;
+    margin: 5px 0;
+    padding: 5px;
+    width: 100%;
+    font-weight: bold;
+    float: bottom;
+}
+
+.line {
+    margin: 20px 0;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.right_column {
+    float: right;
+    width: 68%;
+    margin-left: 2%;
+    border: #E6E6E6 solid 1px;
+}
+
+.review_category {
+    display: flex;
+}
+
+#rightSide {
+    padding: 0;
+}
+
+.item_title {
+    font-size: 16px;
+    padding: 10px 0;
+    line-height: 40px;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    align-content: center;
+}
+
+#borderLine {
+    background-color: #EBEBEB;
+    border-bottom: 1px #E6E6E6 solid;
+    border-right: 1px #E6E6E6 solid;
+}
+
+.img_desc {
+    text-align: left;
+    margin: 0 1.5rem;
+    font-size: 14px;
+    width: 60%;
+    color: #484848;
+}
+
+.img_desc .interval {
+    line-height: 40px;
+}
+
+.tray {
+    display: flex;
+    padding: 30px;
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+}
+
+.tray ::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.review_profile {
+    line-height: 40px;
+    width: 100%;
+}
+
+.profile_info {
+    display: flex;
+    float: left;
+    height: 100%;
+    width: 100%;
+}
+
+.hotel_name {
+    float: left;
+    font-weight: bold;
+    font-size: 16px;
+    width: 80%;
+}
+
+.review_stars {
+    float: right;
+    font-weight: bold;
+    font-size: 15px;
+    width: 20%;
+    text-align: right;
+    padding: 0 10px;
+}
+
+.review_detail {
+    float: bottom;
+    text-align: left;
+    padding: 10px 0;
+    width: 100%;
+    word-break: break-all;
+}
+
+.right_line {
+    border-bottom: 1px solid #E6E6E6;
+}
+
+@media screen and (max-width: 800px) {
+    .column {
+        width: 100%;
+        padding: 0;
+    }
+}
