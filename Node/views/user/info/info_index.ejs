@@ -28,25 +28,7 @@
 </ul>
 
 <div class="row">
-    <div class="left_column">
-        <div class="item">
-            <div class="profile_tray">
-                <div class="profile_img">
-                    <img src="https://img.icons8.com/ios-filled/256/000000/user-male-circle.png"/>
-                </div>
-                <div class="user_name">
-                    <%= nickname %>
-                </div>
-            </div>
-            <div class="line"></div>
-            <button class="user_info_category">
-                내정보 변경
-            </button>
-            <button class="user_info_category">
-                회원탈퇴
-            </button>
-        </div>
-    </div>
+    <% include ../../layout/user/user_info_column %>
     <div class="right_column">
         <div class="item" id="rightSide">
             <div class="review_category">
