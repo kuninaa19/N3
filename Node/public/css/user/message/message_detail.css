@@ -65,14 +65,6 @@ html, body {
     box-sizing: border-box;
 }
 
-.ko {
-    background-color: navajowhite;
-}
-
-.en {
-    background-color: red;
-}
-
 .dateNotation {
     text-align: center;
     padding-top: 1.5rem;
