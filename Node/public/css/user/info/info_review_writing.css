@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+}
+
+.row {
+    font-family: "Nanum Gothic";
+    width: 100%;
+}
+
+.nav_bar {
+    display: flex;
+    font-size: 18px;
+    padding: 1rem 0.5rem;
+    font-weight: bold;
+    border-bottom: 1px solid #bcbcbc;
+    background-color: #fbfbfb;
+}
+
+.tray {
+    display: flex;
+    padding: 30px 40px;
+    width: 100%;
+}
+
+.card {
+    width: 90px;
+    height: 70px;
+
+}
+
+.card img {
+    display: block;
+    background-position: center center;
+    background-size: cover;
+    width: 90px;
+    height: 70px;
+    border-radius: 5px;
+}
+
+.img_desc {
+    float: left;
+    text-align: left;
+    margin: 0 2rem;
+    font-size: 14px;
+    font-weight: bold;
+    width: 90%;
+    color: #484848;
+    height: 65px;
+}
+
+.img_desc .interval {
+    line-height: 32px;
+}
+
+.right_line {
+    text-align: center;
+}
+
+.right_line:after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.rate_box {
+    display: flex;
+    font-weight: bold;
+    width: 100%;
+    height: 32px;
+    color: #484848;
+}
+
+#rate {
+    line-height: 30px;
+    font-size: 16px;
+    text-align: center;
+    width: 90px;
+    height: 32px;
+    color: #484848;
+    margin-right: 20px;
+}
+
+.btn_box {
+
+}
+
+.rate_star {
+    background-image: url("https://img.icons8.com/color/32/000000/star--v1.png");
+    width: 32px;
+    height: 32px;
+    margin: 0 0.1rem;
+    background-color: white;
+}
+
+.active_rate_star {
+    background-image: url("https://img.icons8.com/fluent/32/000000/star.png");
+    width: 32px;
+    height: 32px;
+    margin: 0 0.1rem;
+    background-color: white;
+}
+
+.message {
+    width: 100%;
+    margin: 20px auto;
+    font-size: 14px;
+    font-weight: lighter;
+    height: 250px;
+    border-radius: 10px;
+    border: 1px solid #bcbcbc;
+}
+
+.btn_tray {
+    float: right;
+    padding: 30px 40px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.confirm {
+    border: 1px solid #088A85;
+    border-radius: 5px;
+    margin: 0 5px;
+    padding: 5px;
+    float: right;
+}
+
+.close {
+    border: 1px solid #767676;
+    border-radius: 5px;
+    margin: 0 5px;
+    float: right;
+    padding: 5px;
+
+
+}
