@@ -13,11 +13,12 @@ const checkAuth = (req, res, next) => {
     res.send("<script>alert('접속할 수 없는 페이지 입니다.'); history.go(-1);</script>");
 };
 
+//작성가능한 리뷰리스트 갸져오기
 const getAvailableReviewList = (nickname) => {
     return new Promise((resolve, reject) => {
         // 유저가 숙박한적이있는지 확인 + 리뷰를 작성했는지 확인
         const sql = 'SELECT a.id, a.item_name, a.date,b.image, b.id as room_id FROM `order` as `a` INNER JOIN `room` as `b` ON a.item_name = b.name WHERE a.partner_user_id = ? AND a.id NOT IN (SELECT c.order_id FROM `review` as `c` WHERE c.user_name = ?)';
-        connection.query(sql, [nickname,nickname], (err, row) => {
+        connection.query(sql, [nickname, nickname], (err, row) => {
             if (err) throw  err;
 
             // 숙박 날짜만 가져와서 재저장
@@ -28,6 +29,19 @@ const getAvailableReviewList = (nickname) => {
                 val.date.startDay = moment(val.date.startDay).format('LL');
                 val.date.endDay = moment(val.date.endDay).format('LL');
             });
+            resolve(row);
+        });
+    });
+};
+
+// 리뷰작성한 리스트가져오기
+const getReviewList = (nickname) => {
+    return new Promise((resolve, reject) => {
+        // 유저가 숙박한적이있는지 확인 + 리뷰를 작성했는지 확인
+        const sql = 'SELECT room_name,score,content FROM `review` WHERE user_name = ?';
+        connection.query(sql, nickname, (err, row) => {
+            if (err) throw  err;
+
             resolve(row);
         });
     });
@@ -48,8 +62,9 @@ router.get('/review', checkAuth, async (req, res) => {
 
     await checkToken(req, res);
 
+    const reviewInfo = await getReviewList(nickname);
 
-    res.render('user/info/info_review', {'nickname': nickname});
+    res.render('user/info/info_review', {'nickname': nickname, 'reviewList': reviewInfo});
 });
 
 export default router;
