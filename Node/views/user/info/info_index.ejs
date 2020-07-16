@@ -35,24 +35,33 @@
                 <button class="item_title">작성가능한 후기</button>
                 <button class="item_title" id="borderLine">작성했던 후기</button>
             </div>
-            <div class="tray">
-                <div class="card">
-                    <img src="/static/images/rooms/1591765939773.jpg"/>
-                </div>
-                <div class="img_desc">
-                    <div class="interval" style="font-weight: bold">
-                        레갈리아 모던 스튜디오
+            <% if(reviewList.length !== 0) { %>
+                <% reviewList.forEach(function (val) { %>
+                    <div class="tray">
+                        <div class="card">
+                            <img src="/static/images/rooms/<%= val.image %>"/>
+                        </div>
+                        <div class="img_desc">
+                            <div class="interval" style="font-weight: bold">
+                                <%= val.item_name %>
+                            </div>
+                            <div class="interval">
+                                <%= val.date.startDay %> – <%= val.date.endDay %>
+                            </div>
+                        </div>
+                        <div class="review_btn">
+                            <button id="reviewBtn" data-item-id="<%= val.room_id %>">후기작성하기</button>
+                        </div>
                     </div>
-                    <div class="interval">
-                        6월 25일 (목) – 6월 27일 (토)
+                    <div class="right_line"></div>
+                <% }) %>
+            <% } else{ %>
+                <div class="empty_tray">
+                    <div class="empty_card">
+                        작성가능한 후기가 없어요
                     </div>
                 </div>
-                <div class="review_btn">
-                    <button id="reviewBtn">후기작성하기</button>
-                </div>
-            </div>
-            <div class="right_line"></div>
-
+            <% } %>
         </div>
     </div>
 </div>
