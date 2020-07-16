@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <title>hotelbooking</title>
+    <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--    폰트-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/user/info/info_review_writing.css"/>
+</head>
+
+<body>
+<div class="nav_bar">
+    리뷰작성
+</div>
+
+<div class="row">
+    <div class="tray">
+        <div class="card">
+            <img src="/static/images/rooms/1591766496979.jpg"/>
+        </div>
+        <div class="img_desc">
+            <div class="interval">
+                호텔이름
+            </div>
+            <div class="interval">
+                말레이시아
+            </div>
+        </div>
+    </div>
+    <div class="right_line"></div>
+
+    <div class="tray">
+        <div class="rate_box">
+            <div id="rate">
+                평점
+            </div>
+            <div class="btn_box">
+                <button type="button" class="rate_star" rate="1"></button>
+                <button type="button" class="rate_star" rate="2"></button>
+                <button type="button" class="rate_star" rate="3"></button>
+                <button type="button" class="rate_star" rate="4"></button>
+                <button type="button" class="rate_star" rate="5"></button>
+            </div>
+        </div>
+    </div>
+    <div class="right_line"></div>
+    <div class="tray">
+        <textarea class="message" placeholder="여행자들이 숙소에 대한 정보를 얻을 수 있도록 세부정보를 입력해주세요."></textarea>
+    </div>
+    <div class="right_line"></div>
+    <div class="btn_tray">
+        <button type="button" class="confirm">확인</button>
+        <button type="button" class="close">닫기</button>
+    </div>
+</div>
+<!--이페이지 클릭관련, 페이지접속 초기설정 JS-->
+<script src="/static/js/user/info/info_review_writing.js"></script>
+</body>
+</html>
