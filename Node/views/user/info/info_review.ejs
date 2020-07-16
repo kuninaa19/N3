@@ -35,38 +35,30 @@
                 <button class="item_title" id="borderLine">작성가능한 후기</button>
                 <button class="item_title">작성했던 후기</button>
             </div>
-            <div class="tray">
-                <div>
-                    <div class="review_profile">
-                        <div class="profile_info">
-                            <div class="hotel_name">레갈리아 모던 스튜디오</div>
-                            <div class="review_stars">별점 : 5점</div>
+            <% if(reviewList.length !== 0) { %>
+                <% reviewList.forEach(function (val) { %>
+                    <div class="tray">
+                        <div style="width: 100%">
+                            <div class="review_profile">
+                                <div class="profile_info">
+                                    <div class="hotel_name"><%= val.room_name %>></div>
+                                    <div class="review_stars">별점 : <%= val.score %>점</div>
+                                </div>
+                            </div>
+                            <div class="review_detail">
+                                <div><%= val.content %></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="review_detail">
-                        <div>채팅내용 ㄱㄷ쟈ㅐ렂채채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용
-                            ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대대ㅑㄹㅈ대
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="right_line"></div>
-            <div class="tray">
-                <div>
-                    <div class="review_profile">
-                        <div class="profile_info">
-                            <div class="hotel_name">레갈리아 모던 스튜디오</div>
-                            <div class="review_stars">별점 : 5점</div>
-                        </div>
-                    </div>
-                    <div class="review_detail">
-                        <div>채팅내용 ㄱㄷ쟈ㅐ렂채채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용
-                            ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대대ㅑㄹㅈ대
-                        </div>
+                    <div class="right_line"></div>
+                <% }) %>
+            <% } else{ %>
+                <div class="empty_tray">
+                    <div class="empty_card">
+                        작성했던 후기가 없어요
                     </div>
                 </div>
-            </div>
-            <div class="right_line"></div>
+            <% } %>
         </div>
     </div>
 </div>
