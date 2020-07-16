@@ -182,6 +182,7 @@ button {
 
 .review_detail {
     float: bottom;
+    line-height: 40px;
     text-align: left;
     padding: 10px 0;
     width: 100%;
