@@ -159,14 +159,14 @@ button {
     line-height: 40px;
 }
 
-.review_btn {
+.review_btn_box {
     float: right;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#reviewBtn {
+.review_btn {
     height: 50%;
     border-radius: 5px;
     background-color: #088A85;
