@@ -14,11 +14,25 @@ writtenReviewBtn.addEventListener("click", function () {
 
 const popUp = (e) => {
     const itemId = e.getAttribute('data-item-id');
+    const url = "/info/review/writing";
+    const option = "width = 700, height = 600, top = 35%, left = 100%, location = no";
 
-    var url = "/info/review/writing";
-    var name = "hotelbooking";
-    var option = "width = 700, height = 600, top = 35%, left = 100%, location = no";
-    window.open(url, name, option);
+    window.open(url, " ", option);
+
+    const form = document.createElement("form");
+    form.setAttribute("method", "POST");
+    form.setAttribute("target", " ");
+    form.setAttribute("action", url);
+
+    const roomData = document.createElement("input");
+    result.setAttribute("type", "hidden");
+    result.setAttribute("name", "item");
+    result.setAttribute("value", itemId);
+
+    form.appendChild(roomData);
+    document.body.appendChild(form);
+
+    form.submit();
 };
 
 Array.prototype.forEach.call(makeReviewBtn, (btn) => {
