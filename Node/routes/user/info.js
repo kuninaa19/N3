@@ -33,7 +33,6 @@ const getAvailableReviewList = (nickname) => {
                 val.date.endDay = moment(val.date.endDay).format('LL');
             });
 
-            console.log(row);
             resolve(row);
         });
     });
