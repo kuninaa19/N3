@@ -2,6 +2,9 @@ import express from 'express';
 import connection from '../../conf/dbInfo';
 import checkToken from "./token_module";
 import moment from "moment";
+import moment_timezone from 'moment-timezone';
+
+moment.tz.setDefault("Asia/Seoul");
 
 const router = express.Router();
 
@@ -29,6 +32,8 @@ const getAvailableReviewList = (nickname) => {
                 val.date.startDay = moment(val.date.startDay).format('LL');
                 val.date.endDay = moment(val.date.endDay).format('LL');
             });
+
+            console.log(row);
             resolve(row);
         });
     });
@@ -47,24 +52,76 @@ const getReviewList = (nickname) => {
     });
 };
 
-router.get('/', checkAuth, async (req, res) => {
-    const nickname = req.user.nickname;
+// 작성할 숙소리뷰정보에 대해 가져오기
+const getRoomInfo = (roomId) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT image,name,country FROM `room` WHERE id = ?';
+        connection.query(sql, roomId, (err, row) => {
+            if (err) throw  err;
 
+            resolve(row);
+        });
+    })
+};
+
+// 작성된 리뷰 저장
+const storeReview = (data) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'insert into `review` set ?';
+        connection.query(sql, data, (err, row) => {
+            if (err) throw  err;
+
+            resolve(true);
+        });
+    }).catch(error => {
+        console.log(`storeReview 에러 발생: ${error}`);
+        return false;
+    });
+};
+
+//내정보 메인페이지
+router.get('/', checkAuth, async (req, res) => {
     await checkToken(req, res);
 
+    const nickname = req.user.nickname;
     const reviewInfo = await getAvailableReviewList(nickname);
 
     res.render('user/info/info_index', {'nickname': nickname, 'reviewList': reviewInfo});
 });
 
+// 내정보 작성했던 리뷰 목록 페이지
 router.get('/review', checkAuth, async (req, res) => {
-    const nickname = req.user.nickname;
-
     await checkToken(req, res);
 
+    const nickname = req.user.nickname;
     const reviewInfo = await getReviewList(nickname);
 
     res.render('user/info/info_review', {'nickname': nickname, 'reviewList': reviewInfo});
+});
+
+// 리뷰작성페이지
+router.post('/review/writing', checkAuth, async (req, res) => {
+    // await checkToken(req, res);
+    const nickname = req.user.nickname;
+    const roomId = req.body.room;
+    const orderId = req.body.order;
+
+    const roomInfo = await getRoomInfo(roomId);
+
+    res.render('user/info/info_review_writing', {'nickname': nickname, 'roomInfo': roomInfo, 'orderId': orderId});
+});
+
+// 작성된 리뷰 저장
+router.post('/review/storage', async (req, res) => {
+    await checkToken(req, res);
+
+    const reviewData = req.body;
+    reviewData.user_name = req.user.nickname;
+    reviewData.date = moment().format('YYYY-MM-DD HH:mm:ss');
+
+    const result = await storeReview(reviewData);
+
+    res.json({key: result});
 });
 
 export default router;
