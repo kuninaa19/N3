@@ -23,14 +23,14 @@
 <div class="row">
     <div class="tray">
         <div class="card">
-            <img src="/static/images/rooms/1591766496979.jpg"/>
+            <img src="/static/images/rooms/<%=roomInfo[0].image%>"/>
         </div>
         <div class="img_desc">
             <div class="interval">
-                호텔이름
+                <%=roomInfo[0].name%>
             </div>
             <div class="interval">
-                말레이시아
+                <%=roomInfo[0].country%>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
     </div>
     <div class="right_line"></div>
     <div class="btn_tray">
-        <button type="button" class="confirm">확인</button>
+        <button type="button" class="confirm" data-order-id="<%=orderId%>">확인</button>
         <button type="button" class="close">닫기</button>
     </div>
 </div>
