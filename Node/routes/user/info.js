@@ -100,7 +100,8 @@ router.get('/review', checkAuth, async (req, res) => {
 
 // 리뷰작성페이지
 router.post('/review/writing', checkAuth, async (req, res) => {
-    // await checkToken(req, res);
+    await checkToken(req, res);
+
     const nickname = req.user.nickname;
     const roomId = req.body.room;
     const orderId = req.body.order;
