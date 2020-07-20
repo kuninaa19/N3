@@ -133,7 +133,8 @@
 }
 
 .hotel_review{
-    padding-bottom: 5px;
+    padding-bottom: 10px;
+    line-height: 25px;
 }
 
 .tray{
@@ -192,6 +193,25 @@
 #leftSideBottom .line{
     margin:10px 0 0;
     border-bottom : 1px solid #E6E6E6;
+}
+
+.empty_tray {
+    display: flex;
+    margin: 0 2%;
+    padding: 2% 1%;
+}
+
+.empty_card {
+    width: 100%;
+    height: auto;
+    margin: 2% 2% auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    font-family: "Noto Sans KR";
+    font-size: 35px;
+    text-align: center;
+    padding: 30px;
 }
 
 /*right_column*/
