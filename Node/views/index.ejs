@@ -13,7 +13,8 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/modal.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/modal/login_modal.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/modal/search_modal.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/search_form.css"/>
 </head>
 <body>
@@ -53,6 +54,7 @@
                     </div>
                 </div>
             </form>
+            <% include ./layout/searchModal %>
         </div>
         <!--여행지 추천-->
         <div class="item" style="border: 0px">
