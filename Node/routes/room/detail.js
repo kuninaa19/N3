@@ -14,20 +14,8 @@ const checkAuth = (req, res, next) => {
     res.send(`<script>  alert('로그인후 결제가능합니다'); history.go(-1);</script>`);
 };
 
-//방 세부페이지 로그인확인
-const checkIsAuthenticated = (req, res, next) => {
-    //인증허가됨
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        const searchValue = req.params.number; // 호텔 번호
-
-        roomInfo("guest", searchValue, res);
-    }
-};
-
 // 방 세부페이지정보 가져오기
-const roomDetail = (nickname, searchValue) => {
+const roomDetail = (searchValue) => {
     return new Promise((resolve, reject) => {
         // 숙소정보 가져옴
         const sql = 'SELECT * FROM `room` as a INNER JOIN `images` as b ON a.image = b.image_1  WHERE a.id = ?';
@@ -68,19 +56,32 @@ const roomReview = (searchValue) => {
 };
 
 //방 세부 페이지 (쿼리스트링 지역이름 + 호텔방 이름)
-router.get('/:number', checkIsAuthenticated, async (req, res) => {
-    const nickname = req.user.nickname; // 유저 아이디
+router.get('/:number', async (req, res) => {
     const searchValue = req.params.number; // 호텔 번호
 
-    const detail = await roomDetail(nickname, searchValue);
+    const detail = await roomDetail(searchValue);
     const roomName = detail.name;
     const review = await roomReview(roomName);
 
-    if (nickname === "guest") {
-        res.render('room/detail', {'roomsInfo': detail, 'roomsReview': review});
+    let averageScore = 0;
+    review.forEach((val) => {
+        averageScore += val.score;
+    });
+
+    if (req.isAuthenticated()) {
+        const nickname = req.user.nickname; // 유저 아이디
+
+        res.render('room/detail', {
+            'roomsInfo': detail,
+            'roomsReview': review,
+            'nickname': nickname,
+            'average': averageScore
+        });
     } else {
-        res.render('room/detail', {'roomsInfo': detail, 'roomsReview': review, 'nickname': nickname});
+        res.render('room/detail', {'roomsInfo': detail, 'roomsReview': review, 'average': averageScore});
     }
+
+
 });
 
 //방 확인 및 결제 페이지
