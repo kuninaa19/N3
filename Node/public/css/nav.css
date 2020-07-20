@@ -27,7 +27,7 @@ body {
 }
 
 ul.top_nav {
-    z-index: 2;
+    z-index: 5;
     height: 70px;
     position: sticky;
     position: -webkit-sticky;
