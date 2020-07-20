@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-    <title><%= rooms.name %></title>
+    <title><%= roomsInfo.name %></title>
     <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -46,15 +46,15 @@
 <!-- 숙소 이미지-->
 <div>
     <div class="left_side">
-        <img src="/static/images/rooms/<%= images[0].image_1 %>"/>
+        <img src="/static/images/rooms/<%= roomsInfo.image_1 %>"/>
     </div>
     <div class="middle_side">
-        <img src="/static/images/rooms/<%= images[0].image_2 %>"/>
-        <img src="/static/images/rooms/<%= images[0].image_3 %>"/>
+        <img src="/static/images/rooms/<%= roomsInfo.image_2 %>"/>
+        <img src="/static/images/rooms/<%= roomsInfo.image_3 %>"/>
     </div>
     <div class="right_side">
-        <img src="/static/images/rooms/<%= images[0].image_4 %>"/>
-        <img src="/static/images/rooms/<%= images[0].image_5 %>"/>
+        <img src="/static/images/rooms/<%= roomsInfo.image_4 %>"/>
+        <img src="/static/images/rooms/<%= roomsInfo.image_5 %>"/>
     </div>
 </div>
 
@@ -64,16 +64,16 @@
         <div class="item" id="leftSideTop">
             <div class="hotel_info">
                 <div class="hotel_name">
-                    <%= rooms.name %>
+                    <%= roomsInfo.name %>
                 </div>
                 <div style="font-size: 16px; margin-bottom:20px">
-                    <%= rooms.region %>
+                    <%= roomsInfo.region %>
                 </div>
                 <div style="font-size: 16px;">
-                    <span>인원 <%= rooms.simple_info.peopleNum %>명</span>&nbsp;
-                    <span>침실 <%= rooms.simple_info.bedroom %>개</span>&nbsp;
-                    <span>침대 <%= rooms.simple_info.bed %>개</span>&nbsp;
-                    <span>욕실 <%= rooms.simple_info.bathroom %>개</span>
+                    <span>인원 <%= roomsInfo.simple_info.peopleNum %>명</span>&nbsp;
+                    <span>침실 <%= roomsInfo.simple_info.bedroom %>개</span>&nbsp;
+                    <span>침대 <%= roomsInfo.simple_info.bed %>개</span>&nbsp;
+                    <span>욕실 <%= roomsInfo.simple_info.bathroom %>개</span>
                 </div>
             </div>
             <div class="line"></div>
@@ -83,7 +83,7 @@
         <div class="item" id="leftSideMiddle">
             <div class="hotel_info">
                 <div class="hotel_description">
-                    <p><%- rooms.intro_info %>
+                    <p><%- roomsInfo.intro_info %>
                     </p>
                 </div>
             </div>
@@ -103,79 +103,51 @@
         <!--숙소후기-->
         <div class="item" id="leftSideBottom">
             <div class="hotel_info">
-                <div class="hotel_review">
-                    <div style="font-weight: bold; font-size: 17px;">
-                        <span>3.9 / 5 </span>&nbsp;
-                        <span>이용후기 96</span>
-                    </div>
-                </div>
-                <div class="line"></div>
-
-                <div class="tray">
-                    <div>
-                        <div class="review_profile">
-                            <div class="profile_img">
-                                <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
-                            </div>
-                            <div class="profile_info">
-                                <div>숙박자 이름</div>
-                                <p class="margin_top">2019년 6월 1일</p>
-                            </div>
+                <% if(roomsReview.length !== 0){ %>
+                    <div class="hotel_review">
+                        <div style="font-weight: bold; font-size: 17px;">
+                            <span> 평점 <%= average %> / 5 </span>&nbsp;
+                            <span>후기 <%= roomsReview.length %></span>
                         </div>
-                        <div class="review_detail">
-                            <div>
-                                <div class="margin_top">채팅내용 ㄱㄷ쟈ㅐ렂채채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용
-                                    ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대대ㅑㄹㅈ대
+                    </div>
+                    <div class="line"></div>
+                    <% roomsReview.forEach((val)=>{ %>
+                        <div class="tray">
+                            <div style="width:100%">
+                                <div class="review_profile">
+                                    <div class="profile_img">
+                                        <img src="https://img.icons8.com/ios-filled/256/000000/user-male-circle.png"/>
+                                    </div>
+                                    <div class="profile_info">
+                                        <div><%= val.user_name %></div>
+                                        <p class="margin_top"><%= val.date %></p>
+                                    </div>
+                                </div>
+                                <div class="review_detail">
+                                    <div>
+                                        <div class="margin_top"><%= val.content %>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="line"></div>
+                    <% }) %>
+                <% } else{ %>
+                        <div class="hotel_review">
+                            <div style="font-weight: bold; font-size: 17px;">
+                                <span> 평점 - </span>&nbsp;
+                                <span> 후기 0 </span>
+                            </div>
+                        </div>
+                    <div class="line"></div>
+                    <div class="empty_tray">
+                        <div class="empty_card">
+                            작성된 후기가 없어요
+                        </div>
                     </div>
-                </div>
-                <div class="line"></div>
+                <% } %>
 
-                <div class="tray">
-                    <div>
-                        <div class="review_profile">
-                            <div class="profile_img">
-                                <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
-                            </div>
-                            <div class="profile_info">
-                                <div>호스트 이름</div>
-                                <p class="margin_top">2019년 6월 1일</p>
-                            </div>
-                        </div>
-                        <div class="review_detail">
-                            <div>
-                                <div class="margin_top">채팅내용 ㄱㄷ쟈ㅐ렂채채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용
-                                    ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대대ㅑㄹㅈ대
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="line"></div>
-
-                <div class="tray">
-                    <div>
-                        <div class="review_profile">
-                            <div class="profile_img">
-                                <img src="/static/images/kuala_lumpur/fraser_residencd/7e52f5f525ecde6621034f731b49a1e8.jpg"/>
-                            </div>
-                            <div class="profile_info">
-                                <div>호스트 이름</div>
-                                <p class="margin_top">2019년 6월 1일</p>
-                            </div>
-                        </div>
-                        <div class="review_detail">
-                            <div>
-                                <div class="margin_top">채팅내용 ㄱㄷ쟈ㅐ렂채채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용
-                                    ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대채팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대팅내용 ㄱㄷ쟈ㅐ렂대ㅑㄹㅈ대대ㅑㄹㅈ대
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="line"></div>
             </div>
         </div>
     </div>
@@ -183,7 +155,7 @@
     <div class="right_column">
         <div class="item">
             <div>
-                <div class="per_day_charge">₩<%= rooms.value.perDay %> / 박</div>
+                <div class="per_day_charge">₩<%= roomsInfo.value.perDay %> / 박</div>
                 <div style="margin: 20px 0 0 0; font-size: 14px">날짜</div>
                 <div class="reservation_tray">
                     <div style="font-size: 14px; text-align: center">
@@ -195,21 +167,21 @@
             <!--                요금표시-->
             <div class="receipt">
                 <div class="charge_detail">
-                    <span id="per_day_cost">₩<%= rooms.value.perDay %></span>
+                    <span id="per_day_cost">₩<%= roomsInfo.value.perDay %></span>
                     <span id="per_date">x 1박</span>
-                    <span class="charge"><%= rooms.value.perDay %></span>
+                    <span class="charge"><%= roomsInfo.value.perDay %></span>
                     <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail">
                     <span>청소비</span>
-                    <span class="charge"><%= rooms.value.cleanFee %></span>
+                    <span class="charge"><%= roomsInfo.value.cleanFee %></span>
                     <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail">
                     <span>서비스 수수료</span>
-                    <span class="charge"><%= rooms.value.serviceFee %></span>
+                    <span class="charge"><%= roomsInfo.value.serviceFee %></span>
                     <span class="currency_mark">₩</span>
                 </div>
 
@@ -222,7 +194,7 @@
             </div>
             <!--                예약버튼-->
             <div style="padding: 0 20px; margin:20px 0">
-                <form action="/rooms/<%= rooms.id %>/reservation/payment" id="frm">
+                <form action="/rooms/<%= roomsInfo.id %>/reservation/payment" id="frm">
                     <input type="hidden" name="checkin" value="">
                     <input type="hidden" name="checkout" value="">
                     <input type="hidden" name="day" value="">
