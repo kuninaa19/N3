@@ -162,7 +162,6 @@
 }
 
 .profile_img img{
-    display: block;
     background-position: center center;
     background-size: cover;
     height: 50px;
@@ -175,7 +174,8 @@
     margin:0 15px;
     padding-top:5px;
     height:100%;
-    width: 100px;
+    width: 20%;
+    max-width: 30%;
 }
 
 .review_detail{
