@@ -34,7 +34,7 @@
     </div>
 </ul>
 <% if(typeof nickname === "undefined") { %>
-    <% include ./layout/modal %>
+    <% include ./layout/modal/login_modal %>
 <% } %>
 <!--본문-->
 <div class="row">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </form>
-            <% include ./layout/searchModal %>
+            <% include ./layout/modal/search_modal %>
         </div>
         <!--여행지 추천-->
         <div class="item" style="border: 0px">
