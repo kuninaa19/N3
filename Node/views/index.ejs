@@ -36,24 +36,28 @@
 <% if(typeof nickname === "undefined") { %>
     <% include ./layout/modal/login_modal %>
 <% } %>
+
 <!--본문-->
 <div class="row">
     <div class="column">
         <!--여행지 검색버튼-->
-        <div class="item" id="searchBar">
-            <form action="/search" method="get" id="search">
-                <div class="form__field">
-                    <input type="search" id="place" name="place" placeholder="어디로 여행가시나요?" class="form__input">
-                    <div id="searchButton">
+        <div id="searchBar">
+            <div class="item">
+                <form action="/search" method="get" id="search">
+                    <div class="form__field">
+                        <input type="search" id="place" name="place" placeholder="어디로 여행가시나요?" class="form__input">
+                        <div id="searchButton">
                             <span class="search_img">
                                 <img src="https://img.icons8.com/ios-glyphs/30/000000/search.png" alt="검색하기">
                             </span>
-                        <span class="img_name">
+                            <span class="img_name">
                                  검색
                             </span>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <% include ./layout/modal/search_modal %>
         </div>
         <!--여행지 추천-->
         <div class="item" style="border: 0px">
@@ -112,6 +116,7 @@
 <% } %>
 <!--모달처리 JS-->
 <script src="/static/js/modal/login_modal.js"></script>
+<script src="/static/js/modal/search_modal.js"></script>
 <!--검색처리 JS-->
 <script src="/static/js/room_search.js"></script>
 <!--메인페이지 JS-->
