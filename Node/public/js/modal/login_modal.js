@@ -4,12 +4,12 @@
 const scroll = document.querySelector("body");
 
 // 모달 작동 + 웹페이지 모달 제외부분 검은화면
-const modal = document.querySelector(".modal");
-const overlay = modal.querySelector(".modal_overlay");
+const loginModal = document.querySelector(".login_modal");
+const overlay = loginModal.querySelector(".modal_overlay");
 // 모달 닫기버튼
-const closeBtn = modal.querySelector("button");
+const closeBtn = loginModal.querySelector("button");
 // 모달 각 페이지마다 크기 다르게 변경
-const modalSize = modal.querySelector(".modal_content");
+const modalSize = loginModal.querySelector(".modal_content");
 
 // 인덱스페이지에서 회원가입 혹은 로그인 버튼  (모달활성화)
 const openLogBtn=document.getElementById("openLogin");
@@ -38,7 +38,7 @@ const underLine= document.getElementsByClassName("bottom_line");
 
 //로그인
 const openLogModal = ()=>{
-    modal.classList.remove("hidden");
+    loginModal.classList.remove("hidden");
 
     regContent.classList.add("hidden");
     findPwContent.classList.add("hidden");
@@ -56,7 +56,7 @@ const openLogModal = ()=>{
 
 //회원가입
 const openRegModal = ()=>{
-    modal.classList.remove("hidden");
+    loginModal.classList.remove("hidden");
 
     logContent.classList.add("hidden");
     findPwContent.classList.add("hidden");
@@ -81,13 +81,13 @@ const findPwModal = ()=>{
     underLine[0].style.display="inline-block";
 };
 const closeLogModal = ()=>{
-    modal.classList.add("hidden");
+    loginModal.classList.add("hidden");
     logContent.classList.remove("hidden");
     logBtn.classList.remove("hidden");
     scroll.style.overflow= "auto";
 };
 const closeRegModal = ()=>{
-    modal.classList.add("hidden");
+    loginModal.classList.add("hidden");
     regContent.classList.remove("hidden");
     regBtn.classList.remove("hidden");
     scroll.style.overflow= "auto";
