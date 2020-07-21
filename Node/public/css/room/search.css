@@ -1,10 +1,8 @@
-/*class 언더바 id 낙타표기*/
 .row {
     width: 80%;
     margin: 30px auto;
 }
 
-/* Clear floats after the columns */
 .row:after {
     content: "";
     display: table;
@@ -18,8 +16,9 @@
 }
 
 #searchBar {
-    padding: 10px 10px 10px 20px;
-    margin: 30px 40px 80px;
+    padding: 10px;
+    margin: 50px 40px 80px;
+    position: relative;
 }
 
 #searchButton {
@@ -41,6 +40,15 @@
     float: left;
     height: 20px;
     padding: 6px;
+}
+
+#searchBar .item {
+    background-color: white;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    font-size: 20px;
 }
 
 .item {
@@ -124,16 +132,10 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-.empty_tray {
-    display: flex;
-    margin: 0 2%;
-    padding: 2% 1%;
-}
-
 .empty_card {
     width: 100%;
     height: auto;
-    margin: 2% 2% auto;
+    margin: 2% 0;
     overflow: hidden;
     position: relative;
     z-index: 1;
@@ -141,7 +143,6 @@
     font-size: 35px;
     text-align: center;
     padding: 115px 0;
-    /*border: 1px solid #E6E6E6;*/
 }
 
 .footer {
@@ -150,7 +151,7 @@
     background: #ffffff;
     color: darkgrey;
     width: 100%;
-    bottom:0;
+    bottom: 0;
     border-top: 1px solid whitesmoke;
 }
 

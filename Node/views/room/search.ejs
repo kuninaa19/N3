@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/room/search.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/modal/login_modal.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/modal/search_modal.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/search_form.css"/>
 </head>
 <body>
@@ -39,21 +40,24 @@
 <div class="row">
     <div class="column">
         <!--여행지 검색버튼-->
-        <div class="item" id="searchBar">
-            <form action="/search" method="get" id="search">
-                <div class="form__field">
-                    <input type="search" id="place" name="place" value="<%= title %>" placeholder="어디로 여행가시나요?"
-                           autocomplete="off" class="form__input">
-                    <span id="searchButton">
+        <div id="searchBar">
+            <div class="item">
+                <form action="/search" method="get" id="search">
+                    <div class="form__field">
+                        <input type="search" id="place" name="place" value="<%= title %>" placeholder="어디로 여행가시나요?" autocomplete="off"
+                               class="form__input">
+                        <div id="searchButton">
                             <span class="search_img">
                                 <img src="https://img.icons8.com/ios-glyphs/30/000000/search.png" alt="검색하기">
                             </span>
                             <span class="img_name">
                                  검색
                             </span>
-                        </span>
-                </div>
-            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <% include ../layout/modal/search_modal %>
         </div>
 
         <!--        숙소 리스트 출력-->
@@ -67,6 +71,7 @@
 <!--구글 로그인 버튼-->
 <!--모달처리 JS-->
 <script src="/static/js/modal/login_modal.js"></script>
+<script src="/static/js/modal/search_modal.js"></script>
 <!--검색처리 JS-->
 <script src="/static/js/room_search.js"></script>
 <!--검색페이지 JS-->
