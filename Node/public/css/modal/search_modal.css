@@ -43,6 +43,7 @@
 }
 .country_box{
     display: flex;
+    cursor: pointer;
 }
 
 .country_flag{
