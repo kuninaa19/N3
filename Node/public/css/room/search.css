@@ -111,6 +111,7 @@
     position: absolute;
     bottom: 0;
     font-size: 16px;
+    font-weight: bold;
 }
 
 .img_desc .bottom_right {

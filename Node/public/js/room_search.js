@@ -3,27 +3,24 @@
 
 const search = document.getElementById("searchButton");
 
-const checkTyping = ()=>{
+const checkTyping = () => {
     let place = document.getElementById("place").value;
     let count = place.length;
 
-    if(count!==0){
+    if (count !== 0) {
         return true;
-    }
-    else{
+    } else {
         document.getElementById("place").focus();
         return false;
     }
 };
 
-const roomSearch = ()=>{
+const roomSearch = () => {
     let key = checkTyping();
 
-    if(key){
+    if (key) {
         document.getElementById("search").submit();
     }
-
 };
 
-
-search.addEventListener("click",roomSearch);
+search.addEventListener("click", roomSearch);
