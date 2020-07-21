@@ -195,21 +195,12 @@
     border-bottom : 1px solid #E6E6E6;
 }
 
-.empty_tray {
-    display: flex;
-    margin: 0 2%;
-    padding: 2% 1%;
-}
-
 .empty_card {
     width: 100%;
-    height: auto;
-    margin: 2% 2% auto;
-    overflow: hidden;
-    position: relative;
+    margin: 2% 0;
     z-index: 1;
     font-family: "Noto Sans KR";
-    font-size: 35px;
+    font-size: 25px;
     text-align: center;
     padding: 30px;
 }
