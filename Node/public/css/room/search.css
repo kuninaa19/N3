@@ -16,29 +16,33 @@
     width: 100%;
     background-color: #ffffff;
 }
-#searchBar{
+
+#searchBar {
     padding: 10px 10px 10px 20px;
     margin: 30px 40px 80px;
 }
 
-#searchButton{
+#searchButton {
     border-radius: 10px;
     font-size: 15px;
     background-color: var(--searchInputButtonBackgroundColor);
     font-weight: var(--searchInputButtonFontWeight);
-    padding :5px;
+    padding: 5px;
     height: 40px;
     cursor: pointer;
 }
-#searchButton .search_img{
+
+#searchButton .search_img {
     float: left;
     height: 40px;
 }
-#searchButton .img_name{
+
+#searchButton .img_name {
     float: left;
     height: 20px;
-    padding:6px;
+    padding: 6px;
 }
+
 .item {
     background-color: white;
     padding: 0 20px;
@@ -48,34 +52,38 @@
     font-size: 20px;
 }
 
-.item_title{
+.item_title {
     height: 40px;
     font-size: 25px;
     font-weight: bolder;
     color: #2E2E2E;
-    text-align:center;
+    text-align: center;
 }
+
 .item a {
     color: black;
     text-decoration: none;
 }
-.tray{
-    display:flex;
+
+.tray {
+    display: flex;
     margin: 40px auto;
     border: 1px solid #D8D8D8;
     border-radius: 5px;
     height: 200px;
 }
-.tray :hover{
+
+.tray :hover {
     cursor: pointer;
 }
+
 .card {
     width: 40%;
     height: 100%;
     cursor: pointer;
 }
 
-.card img{
+.card img {
     display: block;
     background-position: center center;
     background-size: cover;
@@ -86,36 +94,62 @@
 
 .img_desc {
     text-align: left;
-    padding : 20px 15px;
+    padding: 20px 15px;
     font-size: 18px;
     width: 100%;
 }
-.img_desc .bottom{
+
+.img_desc .bottom {
     height: 50%;
     position: relative;
 }
-.img_desc .bottom_left{
+
+.img_desc .bottom_left {
     text-align: left;
-    width:100%;
+    width: 100%;
     vertical-align: bottom;
     position: absolute;
     bottom: 0;
     font-size: 16px;
 }
-.img_desc .bottom_right{
+
+.img_desc .bottom_right {
     text-align: right;
-    width:100%;
+    width: 100%;
     position: absolute;
     bottom: 0;
     font-weight: bolder;
-    font-size:  20px;
+    font-size: 20px;
     font-family: 'Noto Sans KR', sans-serif;
 }
+
+.empty_tray {
+    display: flex;
+    margin: 0 2%;
+    padding: 2% 1%;
+}
+
+.empty_card {
+    width: 100%;
+    height: auto;
+    margin: 2% 2% auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 35px;
+    text-align: center;
+    padding: 115px 0;
+    /*border: 1px solid #E6E6E6;*/
+}
+
 .footer {
     padding: 5px;
     text-align: center;
     background: #ffffff;
     color: darkgrey;
+    width: 100%;
+    bottom:0;
     border-top: 1px solid whitesmoke;
 }
 

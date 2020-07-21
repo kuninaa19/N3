@@ -1,24 +1,32 @@
-<div class="item" style="border: 0px">
-    <%rooms.forEach(function (val) { %>
-        <div class="tray" onclick="roomDetail(<%=val.id%>)">
-            <div class="card">
-                <img src="/static/images/rooms/<%=val.image%>"/>
-            </div>
-            <div class="img_desc">
-                <div>
-                    <b><%=val.name%></b>
-                    <p><%=val.region%></p>
+<% if(rooms.length !== 0){ %>
+    <div class="item" style="border: 0px">
+        <% rooms.forEach(function (val) { %>
+            <div class="tray" onclick="roomDetail(<%= val.id %>)">
+                <div class="card">
+                    <img src="/static/images/rooms/<%= val.image %>"/>
                 </div>
+                <div class="img_desc">
+                    <div>
+                        <b><%= val.name %></b>
+                        <p><%= val.region %></p>
+                    </div>
 
-                <div class="bottom">
-                    <div class="bottom_left">
-                        <b>3.9 / 5 </b> 좋아요 (이용후기 0개)
-                    </div>
-                    <div class="bottom_right">
-                        ₩<%=val.value%> / 1박
+                    <div class="bottom">
+                        <div class="bottom_left">
+                            <b>3.9 / 5 </b> 좋아요 (이용후기 0개)
+                        </div>
+                        <div class="bottom_right">
+                            ₩<%= val.value %> / 1박
+                        </div>
                     </div>
                 </div>
             </div>
+        <% }) %>
+    </div>
+<% } else{ %>
+    <div class="empty_tray">
+        <div class="empty_card">
+            숙박가능한 숙소가 없어요
         </div>
-    <% })%>
-</div>
+    </div>
+<% } %>
