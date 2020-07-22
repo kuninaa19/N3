@@ -18,7 +18,7 @@ const checkAuth = (req, res, next) => {
 const roomDetail = (searchValue) => {
     return new Promise((resolve, reject) => {
         // 숙소정보 가져옴
-        const sql = 'SELECT * FROM `room` as a INNER JOIN `images` as b ON a.image = b.image_1  WHERE a.id = ?';
+        const sql = 'SELECT a.*, b.image_1, b.image_2, b.image_3, b.image_4, b.image_5 FROM `room` as a INNER JOIN `images` as b ON a.image = b.image_1  WHERE a.id = ?';
         connection.query(sql, searchValue, (err, row) => {
             if (err) throw  err;
 
@@ -63,6 +63,8 @@ router.get('/:number', async (req, res) => {
     const roomName = detail.name;
     const review = await roomReview(roomName);
 
+    console.log(detail);
+    console.log(review);
     let averageScore = 0;
     review.forEach((val) => {
         averageScore += val.score;
