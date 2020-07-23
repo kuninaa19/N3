@@ -19,7 +19,6 @@ const checkSignIn = (inputData, done) => {
         }
         // 아이디없음
         if (row.length === 0) {
-            console.log('checkSignIn : success');
             signUp(inputData, done);
             //아이디 있음
         } else if (row[0].email === inputData.email) {
@@ -74,7 +73,7 @@ const signUp = (inputData, done) => {
         });
     } else {
         const user = {
-            // email: inputData.email,
+            email: inputData.email,
             nickname: inputData.nickname,
             way: inputData.way,
         };
@@ -165,6 +164,7 @@ const initPassport = (passport) => {
         },
         function (accessToken, refreshToken, profile, done) {
             const user = {
+                // 'id':profile._json.id
                 'email': profile._json.kakao_account.email,
                 'nickname': profile.username,
                 'way': profile.provider,
