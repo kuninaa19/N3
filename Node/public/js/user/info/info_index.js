@@ -1,6 +1,7 @@
 const userInfoBtn = document.querySelectorAll('.user_info_category'); // 좌측 유저 개인정보 카테고리
 const writtenReviewBtn = document.getElementById('borderLine'); // 작성했떤 리뷰페이지로 이동
 const makeReviewBtn = document.querySelectorAll('.review_btn'); // 리뷰작성버튼
+const withdrawalBtn = document.getElementById('withdrawal'); // 회원탈퇴버튼
 
 userInfoBtn[0].addEventListener("click", function () {
 });
@@ -10,6 +11,30 @@ userInfoBtn[1].addEventListener("click", function () {
 
 writtenReviewBtn.addEventListener("click", function () {
     location.href = '/info/review';
+});
+
+withdrawalBtn.addEventListener("click",function () {
+    return new Promise((resolve, reject) => {
+        const baseUrl = "https://hotelbooking.kro.kr";
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('DELETE', baseUrl + '/auth/withdrawal', true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = () => resolve(xhr.responseText);
+        xhr.onerror = () => reject(xhr.statusText);
+
+        xhr.send();
+    }).then((response) => {
+        const result = JSON.parse(response);
+
+        if(result.key===true){
+            alert('회원탈퇴되었습니다.');
+            location.replace("/");
+        }else{
+            alert('다시 시도해주세요');
+        }
+    });
 });
 
 const popUp = (e) => {
