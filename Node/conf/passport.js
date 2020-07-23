@@ -12,23 +12,27 @@ const NaverStrategy = require('passport-naver').Strategy;
 const checkSignIn = (inputData, done) => {
     connection.query('select * from `users` where `email` = ?', inputData.email, (err, row) => {
         if (err) {
-            console.log('err :' + err);
-            throw err;
+            console.log('checkSignIn : failure',err);
+
+            return done(null, false, {message: ` 이메일을 사요엥 동의해주세요`});
+            // throw err;
         }
         // 아이디없음
         if (row.length === 0) {
+            console.log('checkSignIn : success');
             signUp(inputData, done);
             //아이디 있음
         } else if (row[0].email === inputData.email) {
             if (row[0].way === 'general') {
-                return done(null, {message: `이미 가입된 회원입니다.`});
-            }else{
+                return done(null, false, {message: `이미 가입된 회원입니다.`});
+            } else {
                 // [naver,kakao] 로그인
                 signIn(row, inputData, done);
             }
         }
     });
 };
+
 // 로컬 로그인 회원가입확인
 const checkLocalSignIn = (inputData, done) => {
     connection.query('select * from `users` where `email` = ?', inputData.email, (err, row) => {
@@ -85,7 +89,7 @@ const signUp = (inputData, done) => {
 // naver kakao 로그인
 const signIn = (dbRow, inputData, done) => {
     if (dbRow[0].way === inputData.way) {
-            return done(null, inputData);
+        return done(null, inputData);
     } else {
         return done(null, false, {message: `이미 ${dbRow[0].way}로 가입된 회원입니다.`});
     }
@@ -97,16 +101,15 @@ const initPassport = (passport) => {
     opts.secretOrKey = config.JWT_SECRET;
 
     passport.use(new JwtStrategy(opts, (jwtPayload, next) => {
-        console.log('payload received',jwtPayload);
+        console.log('payload received', jwtPayload);
         connection.query('select * from `users` where `nickname` = ?', jwtPayload.nickname, (err, row) => {
             if (err) {
                 console.log('err :' + err);
                 throw err;
             }
-            if(row.length===0){
-                next(null,false);
-            }
-            else {
+            if (row.length === 0) {
+                next(null, false);
+            } else {
                 next(null, jwtPayload);
             }
         });
