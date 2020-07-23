@@ -2,6 +2,7 @@ import request from "request-promise-native";
 import connection from "../conf/dbInfo";
 import config from "../conf/config";
 
+// 유저정보 DB 삭제
 const deleteUser = (data, req, res) => {
     return new Promise((resolve, reject) => {
         const sql = 'DELETE FROM `users` WHERE nickname = ?';
@@ -20,18 +21,38 @@ const deleteUser = (data, req, res) => {
         return false;
     });
 };
-const setOptions = (token) => {
-    const options = {
-        url: 'https://kapi.kakao.com/v1/user/unlink',
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-        }
-    };
-    return options;
+
+// 플랫폼별 다른 request 옵션 설정
+const setOptions = (data) => {
+    if (data.platform === 'kakao') {
+        const options = {
+            url: 'https://kapi.kakao.com/v1/user/unlink',
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${data.token}`,
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        };
+        return options;
+    } else {
+        const options = {
+            url: 'https://nid.naver.com/oauth2.0/token',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            params: {
+                'access_token': data.token,
+                'client_id': config.oauth.naver.client_id,
+                'client_secret': config.oauth.naver.client_secret,
+                'grant_type': 'delete'
+            }
+        };
+        return options;
+    }
 };
 
+// 카카오와 네이버 플랫폼 연결해제
 const unlink = async (options) => {
     try {
         await request(options, (error, response, body) => {
@@ -58,10 +79,9 @@ const userWithdrawal = async (req, res) => {
 
         return result;
     } else {
-        const options = await setOptions(data.token); // 옵션설정
-        const key = await unlink(options); // 카카오 링크해제
+        const options = await setOptions(data); // 옵션설정
+        const key = await unlink(options); //  링크해제
 
-        console.log(key);
         if (key) {
             const result = await deleteUser(data.nickname, req, res); // 일반로그인 회원젇보 삭제
 
