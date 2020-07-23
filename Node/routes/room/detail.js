@@ -97,13 +97,19 @@ router.get('/:number/reservation/payment', checkAuth, (req, res) => {
         'perDayFee': ""
     };
 
-    const sql = 'SELECT `id`,`name`,`region`,`simple_info`,`value`,`image`,`host_name` FROM `room` WHERE id = ?';
+    const sql = 'SELECT a.*,COUNT(DISTINCT b.room_id) as count, SUM(b.score) as score FROM `room` as a INNER JOIN `review` as b ON a.id = b.room_id WHERE a.id = ?';
     connection.query(sql, searchValue, (err, row) => {
         if (err) throw  err;
 
         // 하루 숙박비 값만 가져와서 재저장
         row[0].simple_info = JSON.parse(row[0].simple_info);
         row[0].value = JSON.parse(row[0].value);
+
+        if (row[0].count === 0) {
+            row[0].score = 0;
+        } else {
+            row[0].score = (row[0].score / row[0].count);
+        }
 
         // 날짜가 적용된 숙박요금(청소비 제외)
         formData.perDayFee = row[0].value.perDay * formData.day;
