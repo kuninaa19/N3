@@ -4,6 +4,8 @@ import initPassport from "../conf/passport";
 import config from "../conf/config";
 import jwt from 'jsonwebtoken';
 import randToken from 'rand-token';
+import checkToken from "./user/token_module";
+import userWithdrawal from "./withdrawal_module";
 
 initPassport(passport);
 
@@ -42,8 +44,6 @@ router.post('/login',
     }), (req, res) => localLogin(req, res)
 );
 
-//로그인을해도 메인화면으로 가는건 동일하지만 로그인시에는 닉네임이 떠야함
-
 router.post('/register',
     passport.authenticate(
         'local-register',
@@ -52,6 +52,19 @@ router.post('/register',
             failureFlash: true
         }), (req, res) => localLogin(req, res)
 );
+
+router.delete('/withdrawal', async (req, res) => {
+    try {
+        await checkToken(req, res);
+
+        const result = await userWithdrawal(req, res);
+        res.json({key: result});
+    } catch (e) {
+        console.log(e);
+
+        res.json({key: false});
+    }
+});
 
 // 네이버 로그인
 router.get('/naver',
