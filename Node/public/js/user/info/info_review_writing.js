@@ -36,7 +36,7 @@ const checkRate = async () => {
 };
 
 //리뷰작성폼 전송
-const sendReview = (reviewRate, orderId) => {
+const sendReview = (reviewRate, exId) => {
     return new Promise((resolve, reject) => {
         const baseUrl = "https://hotelbooking.kro.kr";
 
@@ -45,7 +45,8 @@ const sendReview = (reviewRate, orderId) => {
         xhr.setRequestHeader("Content-Type", "application/json");
 
         const data = {
-            order_id: orderId,
+            room_id: exId.room,
+            order_id: exId.order,
             score: reviewRate,
             room_name: document.querySelector('.interval').innerText,
             content: document.querySelector('.message').value
@@ -72,9 +73,12 @@ const readyToSend = async (e) => {
     const rate = await checkRate();
 
     if (rate) {
-        const orderId = e.target.getAttribute('data-order-id');
+        const exId = {
+            order: e.target.getAttribute('data-order-id'),
+            room: e.target.getAttribute('data-room-id')
+        };
 
-        await sendReview(rate, orderId);
+        await sendReview(rate, exId);
     }
 };
 

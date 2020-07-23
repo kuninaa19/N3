@@ -108,7 +108,12 @@ router.post('/review/writing', checkAuth, async (req, res) => {
 
     const roomInfo = await getRoomInfo(roomId);
 
-    res.render('user/info/info_review_writing', {'nickname': nickname, 'roomInfo': roomInfo, 'orderId': orderId});
+    res.render('user/info/info_review_writing', {
+        'nickname': nickname,
+        'roomInfo': roomInfo,
+        'orderId': orderId,
+        'roomId': roomId
+    });
 });
 
 // 작성된 리뷰 저장
