@@ -1,9 +1,9 @@
-import express from 'express';
-import passport from 'passport';
+import express from "express";
+import passport from "passport";
 import initPassport from "../conf/passport";
 import config from "../conf/config";
-import jwt from 'jsonwebtoken';
-import randToken from 'rand-token';
+import jwt from "jsonwebtoken";
+import randToken from "rand-token";
 import checkToken from "./user/token_module";
 import userWithdrawal from "./withdrawal_module";
 

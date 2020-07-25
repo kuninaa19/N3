@@ -1,5 +1,5 @@
-import express from 'express';
-import connection from '../conf/dbInfo';
+import express from "express";
+import connection from "../conf/dbInfo";
 import path from "path";
 import multer from "multer";
 
@@ -49,7 +49,6 @@ router.post('/images', upload.array('img', 5), (req, res) => {
 
 // 방 정보 전체 업로드
 router.post('/info', (req, res) => {
-    console.log(req.body);
     const info = {
         'name': req.body.name,
         'country': req.body.country,
@@ -60,7 +59,7 @@ router.post('/info', (req, res) => {
         'value': JSON.stringify(req.body.value),
         'image': req.body.image,
         // 'host_name':req.user.nickname
-        'host_name':'Xerar' // 로그인없이 등록 할 수 있도록 수정
+        'host_name': 'Xerar' // 로그인없이 등록 할 수 있도록 수정
     };
 
     const sql = 'insert into `room` set ?';
@@ -69,7 +68,7 @@ router.post('/info', (req, res) => {
 
         const resData = {
             'key': true,
-            'roomNum':result.insertId
+            'roomNum': result.insertId
         };
 
         return res.json(resData);
