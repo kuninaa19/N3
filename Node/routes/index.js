@@ -1,34 +1,33 @@
-import express from 'express';
-import connection from '../conf/dbInfo';
+import express from "express";
+import connection from "../conf/dbInfo";
+import asyncHandler from "express-async-handler";
 
 const router = express.Router();
 
-//리팩토링[JS파일만들고 주소값 넣어서 render위지 다르게 설정하기]
-const checkAuth = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        const sql = 'select * from `room` limit 4';
-        connection.query(sql, (err, result) => {
+// 메인페이지 하단 숙소카드를 위한 숙소정보가져오기
+const getRoomList = () => {
+    return new Promise(resolve => {
+        const sql = 'SELECT id,image,name,region FROM `room` ORDER BY id DESC LIMIT 4';
+        connection.query(sql, (err, row) => {
             if (err) throw  err;
-            const flash = req.flash('error');
-
-            res.render('index', {'rooms': result, 'message': flash});
+            return resolve(row);
         });
-    }
+    });
 };
 
-router.get('/', checkAuth, (req, res) => {
-    const nickname = req.user.nickname;
+router.get('/', asyncHandler(async (req, res) => {
+    const result = await getRoomList();
 
-    const sql = 'select * from `room` limit 4';
-    connection.query(sql, (err, result) => {
-        if (err) throw  err;
+    if (req.isAuthenticated()) {
+        const nickname = req.user.nickname;
 
         res.render('index', {'nickname': nickname, 'rooms': result});
+    } else {
+        const flash = req.flash('error');
 
-    });
-});
+        res.render('index', {'rooms': result, 'message': flash});
+    }
+}));
 
 router.get('/logout', (req, res) => {
     res.clearCookie('accessToken');
@@ -38,6 +37,4 @@ router.get('/logout', (req, res) => {
     });
 });
 
-export default router;  // 단하나의 모듈
-// export {router}; //ES6
-// module.exports = router; // nodeJS
+export default router;
