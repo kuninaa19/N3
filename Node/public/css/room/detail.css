@@ -1,47 +1,49 @@
-/*class 언더바 id 낙타표기*/
-
 /*상단 이미지*/
-.left_side{
-    float:left;
-    width:51.4%;
+.left_side {
+    float: left;
+    width: 51.4%;
     height: 100%;
 }
 
-.middle_side{
-    float:left;
-    width:24.2%;
-    height: 100%;
-}
-.right_side{
-    float:left;
-    width:24.2%;
+.middle_side {
+    float: left;
+    width: 24.2%;
     height: 100%;
 }
 
-.left_side img{
+.right_side {
+    float: left;
+    width: 24.2%;
+    height: 100%;
+}
+
+.left_side img {
     display: block;
     background-position: center center;
     background-size: contain;
     width: 100%;
-    height:460px;
-    max-height:460px;
+    height: 460px;
+    max-height: 460px;
 }
-.middle_side img{
+
+.middle_side img {
     display: block;
     background-position: center center;
     background-size: contain;
     height: 230px;
-    max-height:230px;
+    max-height: 230px;
     width: 100%;
 }
-.right_side img{
+
+.right_side img {
     display: block;
     background-position: center center;
     background-size: contain;
     height: 230px;
-    max-height:230px;
+    max-height: 230px;
     width: 100%;
 }
+
 /*이미지 끝*/
 
 .row {
@@ -65,7 +67,7 @@
 .right_column {
     position: sticky;
     position: -webkit-sticky;
-    top : 60px;
+    top: 60px;
     float: left;
     width: 35%;
     background-color: #ffffff;
@@ -80,74 +82,81 @@
     border: 1px solid #E6E6E6;
     font-size: 20px;
 }
+
 .item a {
     color: black;
     text-decoration: none;
 }
+
 /*우측 item 창*/
-#leftSideTop{
+#leftSideTop {
     border: 0;
     padding-top: 1px;
 }
 
-.hotel_info{
-    margin:10px 10px 20px 10px;
-}
-.line{
-    margin:10px;
-    border-bottom : 1px solid #E6E6E6;
+.hotel_info {
+    margin: 10px 10px 20px 10px;
 }
 
-.hotel_name{
-    font-weight: bold;
-    font-size: 20px;
+.line {
+    margin: 10px;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.hotel_name {
+    font-weight: 500;
+    font-size: 26px;
     margin-bottom: 10px;
+    line-height: 26px;
 }
 
 /*숙소 세부설명*/
-#leftSideMiddle{
+#leftSideMiddle {
     border: 0;
-    margin-top:10px;
+    margin-top: 10px;
 }
-.hotel_description{
+
+.hotel_description {
     font-size: 16px;
+    line-height: 26px;
     margin-bottom: 10px;
 }
 
 #map {
-    width:100%;
-    height:400px;
-    clear:both;
+    width: 100%;
+    height: 400px;
+    clear: both;
     margin-bottom: 40px;
 }
-.location{
-    font-weight: bold;
+
+.location {
+    font-weight: 600;
     padding: 7px 0 14px;
     font-size: 17px;
 }
 
 /*숙소 후기*/
-#leftSideBottom{
+#leftSideBottom {
     border: 0;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
-.hotel_review{
+.hotel_review {
     padding-bottom: 10px;
     line-height: 25px;
 }
 
-.tray{
-    display:flex;
+.tray {
+    display: flex;
     margin: 20px 0;
     height: 100%;
     width: 100%;
     font-size: 14px;
 }
 
-.review_profile{
+.review_profile {
     height: 50px;
-    width:100%;
+    width: 100%;
 }
 
 .profile_img {
@@ -155,79 +164,81 @@
     width: 50px;
     height: 50px;
     overflow: hidden;
-    border-radius : 25px;
-    transition: 0.3s;
+    border-radius: 25px;
     text-align: center;
-    position:relative;
-    z-index:1;
+    position: relative;
+    z-index: 1;
 }
 
-.profile_img img{
+.profile_img img {
     background-position: center center;
     background-size: cover;
     height: 50px;
     width: 50px;
     float: left;
 }
-.profile_info{
+
+.profile_info {
     float: left;
     text-align: left;
-    margin:0 15px;
-    padding-top:5px;
-    height:100%;
+    margin: 0 15px;
+    padding-top: 5px;
+    height: 100%;
     width: 20%;
     max-width: 30%;
 }
 
-.review_detail{
+.review_detail {
     float: bottom;
     text-align: left;
-    padding-top:5px;
+    padding-top: 5px;
     /*height:100%;*/
     width: 100%;
 }
 
-.margin_top{
-    margin-top:10px
+.margin_top {
+    margin-top: 10px
 }
-#leftSideBottom .line{
-    margin:10px 0 0;
-    border-bottom : 1px solid #E6E6E6;
+
+#leftSideBottom .line {
+    margin: 10px 0 0;
+    border-bottom: 1px solid #E6E6E6;
 }
 
 .empty_card {
     width: 100%;
     margin: 2% 0;
     z-index: 1;
-    font-family: "Noto Sans KR";
     font-size: 25px;
     text-align: center;
     padding: 30px;
 }
 
 /*right_column*/
-.per_day_charge{
-    font-weight: bold;
-    font-size:17px;
-    padding:15px 0;
+.per_day_charge {
+    font-weight: 600;
+    font-size: 17px;
+    padding: 15px 0;
     border-bottom: 1px solid #D8D8D8;
 }
+
 /*숙소 날짜 및 가격*/
-.reservation_tray{
+.reservation_tray {
     margin: 10px auto;
-    padding:10px;
+    padding: 10px;
     height: 70px;
     border: 1px solid #D8D8D8;
     border-radius: 10px;
 }
-.reservation_tray :hover{
+
+.reservation_tray :hover {
     cursor: pointer;
 }
 
 .calendar_btn {
     width: 100%;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: lighter;
+    margin-top: 5px;
+    font-weight: 400;
     font-size: 18px;
     text-align: center;
     border: 0;
@@ -236,50 +247,49 @@
     cursor: pointer;
 }
 
-#greenBtn{
+#greenBtn {
     border-radius: 5px;
     height: 100%;
     width: 100%;
     border: #fbfbfb solid 1px;
-    cursor:pointer;
+    cursor: pointer;
     background-color: #088A85;
-    color:white;
-    padding:10px;
-    font-size:18px;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-    font-weight:500;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
 }
 
-.receipt{
-    padding : 10px 0;
-    font-weight: lighter;
-    font-size: 14px;
+.receipt {
+    padding: 10px 0;
+    font-size: 15px;
 }
-.receipt .charge_detail{
+
+.receipt .charge_detail {
     margin: 10px 0;
-    padding : 5px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #E6E6E6;
 }
 
-#chargeSum{
-    padding : 0;
+#chargeSum {
+    padding: 0;
     margin: 5px 0;
     border-bottom: 0;
     font-weight: bold;
 }
 
-.charge_detail .charge{
-    float:right;
+.charge_detail .charge {
+    float: right;
     width: 20%;
     text-align: right;
 }
-.currency_mark{
-    float:right;
+
+.currency_mark {
+    float: right;
     width: 20%;
     text-align: right;
 }
+
 .footer {
     padding: 5px;
     text-align: center;
