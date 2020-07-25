@@ -31,7 +31,7 @@ const kakaoPayReady = () => {
         xhr.open('POST', baseUrl + '/kakao/payment/ready', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        const hotelName = document.getElementById("hotel_name").innerHTML;
+        const hotelName = document.getElementById("hotelName").innerHTML;
 
         const hostName = document.getElementsByName("host_name")[0].value;
 
