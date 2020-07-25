@@ -1,24 +1,23 @@
-/*class 언더바 id 낙타표기*/
 * {
     box-sizing: border-box;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
+
 body {
     margin: 0;
-    padding:0;
+    padding: 0;
+    font-weight: 300;
 }
-.top_nav {
 
-}
-.top_nav .title{
+.title {
     width: 80%;
     margin: 30px auto;
-    font-weight: bold;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
     font-size: 30px;
-    padding:20px 0;
+    padding: 20px 0;
 }
-.top_nav .back_btn {
+
+.back_btn {
     font-weight: bold;
     font-size: 30px;
     text-align: center;
@@ -26,6 +25,7 @@ body {
     background-color: #FFFFFF;
     cursor: pointer;
 }
+
 .row {
     width: 75%;
     margin: 30px auto;
@@ -46,7 +46,7 @@ body {
 .right_column {
     position: sticky;
     position: -webkit-sticky;
-    top : 0;
+    top: 0;
     float: left;
     width: 45%;
     background-color: #ffffff;
@@ -59,174 +59,179 @@ body {
     border: 1px solid #E6E6E6;
     font-size: 20px;
 }
+
 .item a {
     color: black;
     text-decoration: none;
 }
-.item_title{
-    margin-top: 30px;
-    font-weight: bold;
-    font-size:25px;
+
+.item_title {
+    margin: 25px 0 15px;
+    font-size: 20px;
+    font-weight: 600;
 }
+
 /*우측 item 창*/
-#leftSideTop{
+#leftSideTop {
     border: 0;
 }
 
-.tray{
-    display:flex;
+.tray {
+    display: flex;
     margin: 40px 0 30px;
-    padding : 10px 0;
     height: 100px;
 }
 
 .card {
     width: auto;
-    height: 80px;
+    height: 100px;
 }
 
-.card img{
+.card img {
     display: block;
     background-position: center center;
     background-size: cover;
-    height: 80px;
+    height: 100px;
     width: auto;
     border-radius: 5px;
 }
 
 .img_desc {
     text-align: left;
-    padding : 1px 15px;
+    padding: 1px 15px;
     font-size: 15px;
     width: auto;
 }
+
+#hotelName {
+    font-weight: 600;
+}
+
 /*우측 item 창*/
 
 /*숙소 세부설명*/
-#leftSideMiddle{
+#leftSideMiddle {
     border: 0;
 }
 
-.reservation_category{
-    margin-top: 30px;
-    font-size:16px;
-    font-weight: bold;
-}
+
 /*숙소 날짜 및 가격*/
-.reservation_tray{
-    width:35%;
+.reservation_tray {
+    width: 37%;
     height: 100%;
     font-size: 14px;
 }
-.reservation_tray :hover{
+
+.reservation_tray :hover {
     cursor: pointer;
 }
 
 .calendar_btn {
     width: 100%;
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: lighter;
     font-size: 18px;
     text-align: left;
-    padding:0;
+    padding: 0;
     border: 0;
     background-color: #FFFFFF;
     cursor: pointer;
 }
 
 /*호스트에게 메세지*/
-#messageToHost{
+#messageToHost {
     border: 0;
     margin-bottom: 40px;
 }
-.sub_title{
+
+.sub_title {
     font-size: 14px;
     font-weight: lighter;
-    margin-top:7px;
+    margin-top: 7px;
 }
+
 .message {
     width: 95%;
     font-size: 14px;
     font-weight: lighter;
-    margin-top:20px;
-    height:300px;
-    padding:3%;
+    margin-top: 20px;
+    height: 300px;
+    padding: 3%;
     border-radius: 10px;
-    border : 1px solid #2E2E2E;
+    border: 1px solid #2E2E2E;
 }
 
 /*숙소 방식*/
-#leftSideBottom{
+#leftSideBottom {
     border: 0;
-    margin-top:10px;
+    margin-top: 10px;
 }
-.payment .btn{
-    /*float:left;*/
-    margin:20px 10px 0 0;
+
+.payment .btn {
     cursor: pointer;
-    width:100px;
-    height:54px;
+    width: 100px;
+    height: 54px;
     border-radius: 1rem;
     background-color: white;
     border: 0;
     outline: 0;
 }
 
-.login_api_img{
-    margin-top:0.1rem;
+.login_api_img {
+    margin-top: 0.1rem;
     width: 80px;
-    height:35px;
+    height: 35px;
 }
-#paymentBtn{
+
+#paymentBtn {
     border-radius: 10px;
     height: 100%;
     width: 30%;
     border: #fbfbfb solid 1px;
-    cursor:pointer;
-   font-weight: bold;
+    cursor: pointer;
+    font-weight: bold;
     background-color: #088A85;
-    color:white;
-    margin:20px 0;
-    padding:15px 0;
-    font-size:18px;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
+    color: white;
+    margin: 20px 0;
+    padding: 15px 0;
+    font-size: 18px;
 }
 
 /*우측 요금 세부정보 */
-#rightSide{
+#rightSide {
     padding: 20px 20px;
 
 }
 
-.right_side_title{
-    font-weight: bold;
-    font-size:25px;
-    padding:15px 0;
+.right_side_title {
+    font-weight: 600;
+    font-size: 25px;
+    padding: 15px 0;
 }
 
-.receipt{
-    padding : 10px 0;
-    font-weight: lighter;
+.receipt {
+    padding: 10px 0;
     font-size: 16px;
 }
-.receipt .charge_detail{
+
+.receipt .charge_detail {
     margin: 10px 0;
-    padding : 10px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #E6E6E6;
 }
-.charge_detail .charge{
-    float:right;
+
+.charge_detail .charge {
+    float: right;
     width: 20%;
     text-align: right;
 }
-.currency_mark{
-    float:right;
+
+.currency_mark {
+    float: right;
     width: 20%;
     text-align: right;
 }
-#chargeSum{
+
+#chargeSum {
     margin: 5px 0;
     border-bottom: 0;
     font-weight: bold;
