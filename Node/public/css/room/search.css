@@ -150,9 +150,12 @@
     text-align: center;
     background: #ffffff;
     color: darkgrey;
-    width: 100%;
-    bottom: 0;
     border-top: 1px solid whitesmoke;
+}
+
+.footer a {
+    text-decoration: none;
+    color: black;
 }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
