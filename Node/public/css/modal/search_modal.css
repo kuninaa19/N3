@@ -53,6 +53,11 @@
     padding: 5px 0 5px 10px;
 }
 
+.country_flag img {
+    width: 38px;
+    height: 38px;
+}
+
 .country_name {
     padding: 10px 0 10px 5px;
     text-align: left;
