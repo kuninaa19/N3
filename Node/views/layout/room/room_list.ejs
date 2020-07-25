@@ -1,5 +1,5 @@
 <% if(rooms.length !== 0){ %>
-    <div class="item" style="border: 0px">
+    <div class="item" style="border: 0">
         <% rooms.forEach(function (val) { %>
             <div class="tray" onclick="roomDetail(<%= val.id %>)">
                 <div class="card">
@@ -7,7 +7,7 @@
                 </div>
                 <div class="img_desc">
                     <div>
-                        <b><%= val.name %></b>
+                        <div class="hotel_name"><%= val.name %></div>
                         <p><%= val.region %></p>
                     </div>
 
@@ -24,7 +24,7 @@
         <% }) %>
     </div>
 <% } else{ %>
-        <div class="empty_card">
-            숙박가능한 숙소가 없어요
-        </div>
+    <div class="empty_card">
+        숙박가능한 숙소가 없어요
+    </div>
 <% } %>
