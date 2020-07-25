@@ -18,8 +18,8 @@
     height: 100%;
     position: fixed;
     top: 0;
-    left :0;
-    bottom:0;
+    left: 0;
+    bottom: 0;
 }
 
 .search_modal_content {
@@ -41,24 +41,25 @@
     color: #2E2E2E;
     font-weight: bold;
 }
-.country_box{
+
+.country_box {
     display: flex;
     cursor: pointer;
 }
 
-.country_flag{
+.country_flag {
     width: 58px;
-    height:48px;
-    padding : 5px 0 5px 10px;
+    height: 48px;
+    padding: 5px 0 5px 10px;
 }
 
 .country_name {
-    font-family: "Noto Sans KR";
     padding: 10px 0 10px 5px;
     text-align: left;
     width: 100%;
     display: block;
     line-height: 28px;
+    font-weight: 400;
 }
 
 .hidden {
