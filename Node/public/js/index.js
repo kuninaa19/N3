@@ -5,7 +5,7 @@ const roomDetail = value => {
 
 // 여행지 숙소 리스트 페이지로 이동
 const searchPlace = (e) => {
-    const location = e.getElementsByTagName('b')[0].innerText;
+    const location = e.getElementsByClassName('desc_spacing')[0].innerText;
     window.location.href = `https://hotelbooking.kro.kr/search?place=${location}`;
 };
 
