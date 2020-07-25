@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <title><%= roomsInfo.name %></title>
-    <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
+    <link rel="shortcut icon" type="image⁄x-icon" href="/static/images/logo/logo-cabin.png">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -10,7 +10,7 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
     <!--    폰트-->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/static/css/room/detail.css"/>
@@ -25,8 +25,11 @@
 </head>
 <body>
 <ul class="top_nav">
-    <li id="logo"><a href="/" class="active"><img class="logo_image"
-                                                  src="https://img.icons8.com/doodle/48/000000/log-cabin.png"></a></li>
+    <li id="logo">
+        <a href="/" class="active">
+            <img class="logo_image" src="/static/images/logo/logo-cabin.png">
+        </a>
+    </li>
     <div id="navAlign">
         <% if(typeof nickname === "undefined") { %>
             <li><a id="openLogin">로그인</a></li>
@@ -83,8 +86,7 @@
         <div class="item" id="leftSideMiddle">
             <div class="hotel_info">
                 <div class="hotel_description">
-                    <p><%- roomsInfo.intro_info %>
-                    </p>
+                    <%- roomsInfo.intro_info %>
                 </div>
             </div>
             <div class="line"></div>
@@ -134,16 +136,16 @@
                         <div class="line"></div>
                     <% }) %>
                 <% } else{ %>
-                        <div class="hotel_review">
-                            <div style="font-weight: bold; font-size: 17px;">
-                                <span> 평점 - </span>&nbsp;
-                                <span> 후기 0 </span>
-                            </div>
+                    <div class="hotel_review">
+                        <div style="font-weight: bold; font-size: 17px;">
+                            <span> 평점 - </span>&nbsp;
+                            <span> 후기 0 </span>
                         </div>
+                    </div>
                     <div class="line"></div>
-                        <div class="empty_card">
-                            작성된 후기가 없어요
-                        </div>
+                    <div class="empty_card">
+                        작성된 후기가 없어요
+                    </div>
                 <% } %>
 
             </div>

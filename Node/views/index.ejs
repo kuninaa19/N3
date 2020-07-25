@@ -8,8 +8,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--    폰트-->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
@@ -19,8 +19,11 @@
 </head>
 <body>
 <ul class="top_nav">
-    <li id="logo"><a href="/" class="active"><img class="logo_image"
-                                                  src="/static/images/logo/logo-cabin.png"></a></li>
+    <li id="logo">
+        <a href="/" class="active">
+            <img class="logo_image" src="/static/images/logo/logo-cabin.png">
+        </a>
+    </li>
     <div id="navAlign">
         <% if(typeof nickname === "undefined") { %>
             <li><a id="openLogin">로그인</a></li>

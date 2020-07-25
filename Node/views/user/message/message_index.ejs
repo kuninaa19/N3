@@ -2,13 +2,13 @@
 <html lang="ko">
 <head>
     <title>메시지</title>
-    <link rel="shortcut icon" type="image⁄x-icon" href="https://img.icons8.com/doodle/48/000000/log-cabin.png">
+    <link rel="shortcut icon" type="image⁄x-icon" href="/static/images/logo/logo-cabin.png">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--    폰트-->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css"/>
@@ -17,8 +17,11 @@
 
 <body>
 <ul class="top_nav">
-    <li id="logo"><a href="/" class="active"><img class="logo_image"
-                                                  src="https://img.icons8.com/doodle/48/000000/log-cabin.png"></a></li>
+    <li id="logo">
+        <a href="/" class="active">
+            <img class="logo_image" src="/static/images/logo/logo-cabin.png">
+        </a>
+    </li>
     <div id="navAlign">
         <li><a href="/message">메시지</a></li>
         <li><a href="/trip">여행</a></li>
@@ -32,25 +35,26 @@
         <div class="item" style="border: 0">
             <div class="item_title">메시지</div>
             <% if(message.length !== 0) { %>
-            <div class="hover">
-                <% for(let i = 0; i < opponent.length; i++) { %>
-                    <div class="tray" onclick="detailMessage(<%= message[i].room_id %>)">
-                        <div class="profile_img">
-                            <img src="https://img.icons8.com/ios-filled/52/000000/user-male-circle.png"/></div>
-                        <div class="message_info">
-                            <div><%= opponent[i] %></div>
-                            <p class="margin_top"><%= message[i].time %></p>
-                        </div>
-                        <div class="message_detail">
-                            <div style="width: 100%;">
-                                <div><%= message[i].message %></div>
-                                <p class="margin_top"><%= message[i].region%>, <%= message[i].country%> (<%= message[i].date.startDay %>
-                                    - <%= message[i].date.endDay %>)</p>
+                <div class="hover">
+                    <% for(let i = 0; i < opponent.length; i++) { %>
+                        <div class="tray" onclick="detailMessage(<%= message[i].room_id %>)">
+                            <div class="profile_img">
+                                <img src="https://img.icons8.com/ios-filled/52/000000/user-male-circle.png"/></div>
+                            <div class="message_info">
+                                <div><%= opponent[i] %></div>
+                                <p class="margin_top"><%= message[i].time %></p>
+                            </div>
+                            <div class="message_detail">
+                                <div style="width: 100%;">
+                                    <div><%= message[i].message %></div>
+                                    <p class="margin_top"><%= message[i].region %>, <%= message[i].country %>
+                                        (<%= message[i].date.startDay %>
+                                        - <%= message[i].date.endDay %>)</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <% } %>
-            </div>
+                    <% } %>
+                </div>
             <% } else{ %>
                 <div class="tray">
                     <div class="empty_card">
