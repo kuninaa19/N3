@@ -26,6 +26,7 @@
     font-size: 15px;
     background-color: var(--searchInputButtonBackgroundColor);
     font-weight: var(--searchInputButtonFontWeight);
+    margin: 5px 0;
     padding: 5px;
     height: 40px;
     cursor: pointer;
@@ -39,7 +40,7 @@
 #searchButton .img_name {
     float: left;
     height: 20px;
-    padding: 6px;
+    padding: 4px 7px;
 }
 
 #searchBar .item {
