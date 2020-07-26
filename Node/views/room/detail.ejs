@@ -108,8 +108,8 @@
                 <% if(roomsReview.length !== 0){ %>
                     <div class="hotel_review">
                         <div style="font-weight: bold; font-size: 17px;">
-                            <span> 평점 <%= average %> / 5 </span>&nbsp;
-                            <span>후기 <%= roomsReview.length %></span>
+                            <span> 평점 <%= scoreCount[0].score %> </span>&nbsp;
+                            <span>후기 <%= scoreCount[0].count %></span>
                         </div>
                     </div>
                     <div class="line"></div>
