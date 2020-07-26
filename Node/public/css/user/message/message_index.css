@@ -87,6 +87,15 @@
     word-break: break-all;
 }
 
+.message_content {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    font-size: 16px;
+    text-overflow: ellipsis;
+}
+
 .margin_top {
     margin-top: 10px;
     word-break: break-all;
