@@ -1,10 +1,8 @@
-/*class 언더바 id 낙타표기*/
 .row {
     width: 85%;
     margin: 30px auto;
 }
 
-/* Clear floats after the columns */
 .row:after {
     content: "";
     display: table;
@@ -22,10 +20,10 @@
     border: 1px solid #E6E6E6;
     border-radius: 10px;
     font-size: 16px;
+    font-weight: 400;
 }
 
 .item_title{
-    font-family: "Noto Sans KR";
     font-size: 30px;
     padding: 10px 0;
     margin: 0 2% auto;
@@ -83,7 +81,6 @@
     overflow: hidden;
     position:relative;
     z-index:1;
-    font-family: "Noto Sans KR";
     font-size: 35px;
     text-align: center;
     padding : 130px;
