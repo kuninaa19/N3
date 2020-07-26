@@ -40,7 +40,7 @@ const roomDetail = (searchValue) => {
 // 숙소 후기 가져오기
 const roomReview = (searchValue) => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT room_name,user_name,content,date FROM `review` WHERE room_id = ? LIMIT 5';
+        const sql = 'SELECT room_name,user_name,content,date FROM `review` WHERE room_id = ? ORDER BY id DESC LIMIT 5';
         connection.query(sql, searchValue, (err, row) => {
             if (err) throw  err;
 
