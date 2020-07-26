@@ -7,7 +7,6 @@ const router = express.Router();
 const getRoomList = (searchValue) => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT a.id,a.name,a.region,a.value,a.image,(SELECT COUNT(*) FROM `review` WHERE a.name = room_name) as count,(SELECT SUM(score) FROM `review` WHERE a.name = room_name) as score FROM `room` as a  WHERE a.region = ?';
-        // const sql = 'select id,name,region,value,image from `room` where region = ?';
         connection.query(sql, searchValue, (err, row) => {
             if (err) throw  err;
 
@@ -17,7 +16,7 @@ const getRoomList = (searchValue) => {
                 if (val.count === 0) {
                     val.score = 0;
                 } else {
-                    val.score = (val.score / val.count);
+                    val.score = (val.score / val.count).toFixed(1);
                 }
             });
             resolve(row);
