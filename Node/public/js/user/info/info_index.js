@@ -14,11 +14,14 @@ writtenReviewBtn.addEventListener("click", function () {
     location.href = '/info/review';
 });
 
-registerBtn.addEventListener("click",function () {
-    location.href = '/host/room/register';
-});
+// 호스트로 접속할때만 버튼리스너 활성화
+if (registerBtn) {
+    registerBtn.addEventListener("click", function () {
+        location.href = '/host/room/register';
+    });
+}
 
-withdrawalBtn.addEventListener("click",function () {
+withdrawalBtn.addEventListener("click", function () {
     return new Promise((resolve, reject) => {
         const baseUrl = "https://hotelbooking.kro.kr";
 
