@@ -39,14 +39,13 @@ const roomDetail = (searchValue) => {
 // 숙소 후기 가져오기
 const roomReview = (searchValue) => {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT b.* FROM `room` as a INNER JOIN  `review` as b ON a.name = b.room_name WHERE a.name = ?';
+        const sql = 'SELECT room_name,user_name,content,date FROM `review` WHERE room_id = ? LIMIT 5';
         connection.query(sql, searchValue, (err, row) => {
             if (err) throw  err;
 
             row.forEach(val => {
                 val.date = moment(val.date).format('LL');
             });
-
             resolve(row);
         });
     }).catch(error => {
@@ -54,21 +53,33 @@ const roomReview = (searchValue) => {
         return false;
     });
 };
+const roomScoreCount = (searchValue) => {
+    return new Promise(resolve => {
+        const sql = 'SELECT COUNT(*) as count, SUM(score) as score FROM `review` WHERE room_id = ?';
+        connection.query(sql, searchValue, (err, row) => {
+            if (err) throw  err;
 
+            row.forEach(function (val) {
+                if (val.count === 0) {
+                    val.score = 0;
+                } else {
+                    val.score = (val.score / val.count).toFixed(1);
+                }
+            });
+            resolve(row);
+        });
+    }).catch(error => {
+        console.log(`roomScore 에러 발생: ${error}`);
+        return false;
+    });
+};
 //방 세부 페이지 (쿼리스트링 지역이름 + 호텔방 이름)
 router.get('/:number', async (req, res) => {
     const searchValue = req.params.number; // 호텔 번호
 
     const detail = await roomDetail(searchValue);
-    const roomName = detail.name;
-    const review = await roomReview(roomName);
-
-    console.log(detail);
-    console.log(review);
-    let averageScore = 0;
-    review.forEach((val) => {
-        averageScore += val.score;
-    });
+    const review = await roomReview(searchValue);
+    const scoreCount = await roomScoreCount(searchValue);
 
     if (req.isAuthenticated()) {
         const nickname = req.user.nickname; // 유저 아이디
@@ -77,10 +88,10 @@ router.get('/:number', async (req, res) => {
             'roomsInfo': detail,
             'roomsReview': review,
             'nickname': nickname,
-            'average': averageScore
+            'scoreCount': scoreCount
         });
     } else {
-        res.render('room/detail', {'roomsInfo': detail, 'roomsReview': review, 'average': averageScore});
+        res.render('room/detail', {'roomsInfo': detail, 'roomsReview': review, 'scoreCount': scoreCount});
     }
 
 
