@@ -1,10 +1,8 @@
-/*class 언더바 id 낙타표기*/
 .row {
     width: 55%;
     margin: 30px auto;
 }
 
-/* Clear floats after the columns */
 .row:after {
     content: "";
     display: table;
@@ -23,10 +21,10 @@
     margin-bottom: 80px;
     border: 1px solid #E6E6E6;
     font-size: 20px;
+    font-weight: 400;
 }
 
 .item_title {
-    font-family: "Noto Sans KR";
     font-size: 30px;
     padding: 10px 0;
     margin: 0 2% auto;
@@ -86,12 +84,12 @@
     font-size: 14px;
     width: 70%;
     color: #767676;
-    word-break:break-all;
+    word-break: break-all;
 }
 
 .margin_top {
     margin-top: 10px;
-    word-break:break-all;
+    word-break: break-all;
 }
 
 .empty_card {
@@ -101,7 +99,6 @@
     overflow: hidden;
     position: relative;
     z-index: 1;
-    font-family: "Noto Sans KR";
     font-size: 35px;
     text-align: center;
     padding: 135px;
