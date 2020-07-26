@@ -1,6 +1,7 @@
 import express from 'express';
 import connection from '../../conf/dbInfo';
 import moment from "moment";
+import asyncHandler from "express-async-handler";
 
 const router = express.Router();
 
@@ -53,6 +54,8 @@ const roomReview = (searchValue) => {
         return false;
     });
 };
+
+// 숙소 평점, 후기개수 가져오기
 const roomScoreCount = (searchValue) => {
     return new Promise(resolve => {
         const sql = 'SELECT COUNT(*) as count, SUM(score) as score FROM `review` WHERE room_id = ?';
@@ -73,8 +76,34 @@ const roomScoreCount = (searchValue) => {
         return false;
     });
 };
+
+// 결제페이지 정보 가져오기
+const roomPaymentDetail = (searchValue) => {
+    return new Promise(resolve => {
+        const sql = 'SELECT a.name,a.simple_info,a.location,a.value,a.image,a.host_name,COUNT(b.room_id) as count, SUM(b.score) as score FROM `room` as a INNER JOIN `review` as b ON a.id = b.room_id WHERE a.id = ?';
+        connection.query(sql, searchValue, (err, row) => {
+            if (err) throw  err;
+
+            // 하루 숙박비 값 파싱
+            row[0].simple_info = JSON.parse(row[0].simple_info);
+            row[0].value = JSON.parse(row[0].value);
+
+            if (row[0].count === 0) {
+                row[0].score = 0;
+            } else {
+                row[0].score = (row[0].score / row[0].count).toFixed(1);
+            }
+            resolve(row);
+        });
+    }).catch(error => {
+        console.log(`roomPayment 에러 발생: ${error}`);
+        return false;
+    });
+
+};
+
 //방 세부 페이지 (쿼리스트링 지역이름 + 호텔방 이름)
-router.get('/:number', async (req, res) => {
+router.get('/:number', asyncHandler(async (req, res) => {
     const searchValue = req.params.number; // 호텔 번호
 
     const detail = await roomDetail(searchValue);
@@ -93,40 +122,21 @@ router.get('/:number', async (req, res) => {
     } else {
         res.render('room/detail', {'roomsInfo': detail, 'roomsReview': review, 'scoreCount': scoreCount});
     }
-
-
-});
+}));
 
 //방 확인 및 결제 페이지
-router.get('/:number/reservation/payment', checkAuth, (req, res) => {
+router.get('/:number/reservation/payment', checkAuth, asyncHandler(async (req, res) => {
     const searchValue = req.params.number; // 호텔 번호
 
+    const paymentDetail = await roomPaymentDetail(searchValue);
+
     const formData = {
-        // 'checkIn': req.query.checkin,
-        // 'checkOut': req.query.checkout,
-        'day': req.query.day,
-        'perDayFee': ""
+        // 날짜가 적용된 숙박요금(청소비 제외)
+        'perDayFee': paymentDetail[0].value.perDay * req.query.day,
+        'day': req.query.day
     };
 
-    const sql = 'SELECT a.*,COUNT(DISTINCT b.room_id) as count, SUM(b.score) as score FROM `room` as a INNER JOIN `review` as b ON a.id = b.room_id WHERE a.id = ?';
-    connection.query(sql, searchValue, (err, row) => {
-        if (err) throw  err;
-
-        // 하루 숙박비 값만 가져와서 재저장
-        row[0].simple_info = JSON.parse(row[0].simple_info);
-        row[0].value = JSON.parse(row[0].value);
-
-        if (row[0].count === 0) {
-            row[0].score = 0;
-        } else {
-            row[0].score = (row[0].score / row[0].count);
-        }
-
-        // 날짜가 적용된 숙박요금(청소비 제외)
-        formData.perDayFee = row[0].value.perDay * formData.day;
-
-        res.render('room/reservation', {'rooms': row, 'reservationInfo': formData});
-    });
-});
+    res.render('room/reservation', {'rooms': paymentDetail, 'reservationInfo': formData});
+}));
 
 export default router;
