@@ -84,14 +84,6 @@ XMLHttpRequest객체로로 AJAX 데이터 JSON 전송
 번역이전 기존 원문은 Hidden 처리후 다시 번역버튼 눌렀을때 보여주면서 DB요청하지않도록 함   
 언어코드가 존재하지않다면 언어감지요청 감지된 언어코드 DB저장 그리고 번역된 언어를 페이지에 보여줌
 
-<br/> <br/>
-
-<h4> 4. 리뷰 작성 </h4>
-<br/>
-<img src="https://user-images.githubusercontent.com/59405784/88657999-bc2bf980-d10d-11ea-8dca-07549ebc8fd9.png" width="500px" title="리뷰작성" alt="리뷰"></img>   
-
-다중 버튼 리스너로 숙소에 대한 평점을 직관적으로 줄 수 있도록 함
-
 <br/><br/>
 
 ## 후기
