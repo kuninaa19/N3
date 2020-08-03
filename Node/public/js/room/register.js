@@ -45,6 +45,8 @@ const uploadImages = () => {
         console.log(result);
         if (result.key === true) {
             return uploadInfo(result.image);
+        } else {
+            alert('이미지 업로드에 실패했습니다. 다시시도 해 주세요');
         }
     })
 };
