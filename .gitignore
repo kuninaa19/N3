@@ -6,10 +6,8 @@ Node/env/DB.env
 Node/env/redis.env
 Node/conf/config.json
 
-Node/.babelrc
 Node/public/images/
 
-package-lock.json
 yarn.lock
 
 Node/dist/
