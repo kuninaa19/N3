@@ -79,7 +79,7 @@ const storeMessages = (data) => {
 //결제완료후 정보 DB 저장
 const completePayment = (orderValue) => {
     return new Promise(resolve => {
-        const sql = 'insert into `order` set ?';
+        const sql = 'insert into `orders` set ?';
         connection.query(sql, orderValue, (err, row) => {
             if (err) throw  err;
 
@@ -149,7 +149,7 @@ const approvePayment = async (options, req, res) => {
 // DB저장된 주문 정보 삭제
 const deleteOrder = (data) => {
     return new Promise(resolve => {
-        const sql = 'DELETE from `order` WHERE tid=? AND item_name=?';
+        const sql = 'DELETE from `orders` WHERE tid=? AND item_name=?';
         connection.query(sql, [data.tid, data.item_name], (err, row) => {
             if (err) throw  err;
 

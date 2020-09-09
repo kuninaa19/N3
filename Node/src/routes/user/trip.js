@@ -17,7 +17,7 @@ const checkAuth = (req, res, next) => {
 
 const searchTripInfo = (nickname, res)=>{
     //숙소 예약 정보가져옴 날짜순으로 정렬해야할지 구매순으로 정렬해야할지 생각
-    const sql = 'select a.id, a.aid, a.item_name, a.date, b.region, b.image from `order` AS `a` INNER JOIN `room` AS `b` WHERE a.partner_user_id = ? AND a.item_name = b.name GROUP BY a.id ORDER BY a.id DESC';
+    const sql = 'select a.id, a.aid, a.item_name, a.date, b.region, b.image from `orders` AS `a` INNER JOIN `room` AS `b` WHERE a.partner_user_id = ? AND a.item_name = b.name GROUP BY a.id ORDER BY a.id DESC';
     connection.query(sql, nickname, (err, row) => {
         if (err) throw  err;
 
@@ -46,7 +46,7 @@ router.get('/:aid', checkAuth, (req, res) => {
     const nickname = req.user.nickname;
     const searchValue = req.params.aid;
 
-    const sql = 'select a.date, a.tid, a.amount, a.id AS message_id, b.location,b.name,b.id AS room_id, b.image from `order` AS `a` INNER JOIN `room` AS `b` WHERE a.aid = ? AND a.item_name = b.name';
+    const sql = 'select a.date, a.tid, a.amount, a.id AS message_id, b.location,b.name,b.id AS room_id, b.image from `orders` AS `a` INNER JOIN `room` AS `b` WHERE a.aid = ? AND a.item_name = b.name';
     connection.query(sql, [searchValue], (err, row) => {
         if (err) throw  err;
 
