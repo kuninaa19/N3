@@ -1,5 +1,5 @@
-import connection from "./dbInfo";
 import bCrypt from 'bcrypt';
+import connection from "./dbInfo";
 import config from './config';
 
 const LocalStrategy = require('passport-local').Strategy;

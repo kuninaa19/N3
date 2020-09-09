@@ -1,18 +1,18 @@
 import express from 'express';
 import logger from 'morgan';
 import path from 'path';
-import methodOverride from 'method-override'; // put, delete 메소드 지원하기위해서
+import methodOverride from 'method-override';
 import helmet from 'helmet';
 import passport from 'passport';
-import initPassport from './conf/passport';
 import flash from 'connect-flash';
-import socket from "./socket_io";
-import redisClient from './redis';
 import connectRedis from 'connect-redis';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
+import initPassport from './conf/passport';
+import socket from "./socket_io";
+import redisClient from './conf/redis';
 
-import indexRouter from './routes/index';
+import indexRouter from './routes';
 import uploadRouter from './routes/upload';
 import authRouter from "./routes/auth";
 import searchRouter from "./routes/room/search";
@@ -61,7 +61,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
-////
 // allow overriding methods in query (?_method=put)
 app.use(methodOverride('_method'));
 

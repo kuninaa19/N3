@@ -7,12 +7,12 @@ import passport from 'passport';
 import initPassport from './conf/passport';
 import flash from 'connect-flash';
 import socket from "./socket_io";
-import redisClient from './redis';
+import redisClient from './conf/redis';
 import connectRedis from 'connect-redis';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 
-import indexRouter from './routes/index';
+import indexRouter from './routes';
 import uploadRouter from './routes/upload';
 import authRouter from "./routes/auth";
 import searchRouter from "./routes/room/search";

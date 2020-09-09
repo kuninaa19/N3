@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "homepage": "/",
+  "bugs": {
+    "url": "https://github.com/kuninaa19/N3/issues",
+    "email": "minchan0527@naver.com"
+  },
   "scripts": {
-    "start": "nodemon app.js --exec babel-node --delay 3"
+    "start": "nodemon ./src/app.js --exec babel-node --delay 3"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
@@ -45,6 +49,7 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
+    "nodemon": "^2.0.4",
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/node": "^7.10.1",
