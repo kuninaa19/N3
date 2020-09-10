@@ -17,6 +17,16 @@ const totalCheck = charge => {
     return total;
 };
 
+//base URL 가져오기
+const getBaseUrl = () => {
+    const pathArray = location.href.split('/');
+    const protocol = pathArray[0];
+    const host = pathArray[2];
+    const url = protocol + '//' + host + '/';
+
+    return url;
+};
+
 const chargeDetail = () => {
     const charge = document.getElementsByName('charge');
     let total;
@@ -29,8 +39,10 @@ const chargeDetail = () => {
 // 이미지 저장
 const uploadImages = () => {
     const uploadImage = new Promise((resolve, reject) => {
+        const baseUrl = getBaseUrl();
+
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://hotelbooking.kro.kr/upload/images", true);
+        xhr.open("POST", baseUrl + 'upload/images', true);
 
         const formElement = document.getElementById('myForm');
         const formData = new FormData(formElement);
@@ -54,8 +66,11 @@ const uploadImages = () => {
 //이미지 업로드후에 모든 정보 업로드
 const uploadInfo = (image) => {
     const info = new Promise((resolve, reject) => {
+        const baseUrl = getBaseUrl();
+
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://hotelbooking.kro.kr/upload/info", true);
+
+        xhr.open("POST", baseUrl + 'upload/info', true);
         xhr.setRequestHeader("Content-type", "application/json");
 
         const hotelName = document.getElementsByName("hotel_name")[0].value;

@@ -23,10 +23,10 @@ if (registerBtn) {
 
 withdrawalBtn.addEventListener("click", function () {
     return new Promise((resolve, reject) => {
-        const baseUrl = "https://hotelbooking.kro.kr";
+        const baseUrl = getBaseUrl();
 
         const xhr = new XMLHttpRequest();
-        xhr.open('DELETE', baseUrl + '/auth/withdrawal', true);
+        xhr.open('DELETE', baseUrl + 'auth/withdrawal', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         xhr.onload = () => resolve(xhr.responseText);
@@ -36,14 +36,23 @@ withdrawalBtn.addEventListener("click", function () {
     }).then((response) => {
         const result = JSON.parse(response);
 
-        if(result.key===true){
+        if (result.key === true) {
             alert('회원탈퇴되었습니다.');
             location.replace("/");
-        }else{
+        } else {
             alert('다시 시도해주세요');
         }
     });
 });
+
+const getBaseUrl = () => {
+    const pathArray = location.href.split('/');
+    const protocol = pathArray[0];
+    const host = pathArray[2];
+    const url = protocol + '//' + host + '/';
+
+    return url;
+};
 
 const popUp = (e) => {
     const roomId = e.getAttribute('data-room-id');
