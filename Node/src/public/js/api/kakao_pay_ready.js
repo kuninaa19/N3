@@ -22,13 +22,21 @@ paymentBtn.addEventListener("click", () => {
     }
 });
 
+const getBaseUrl = () => {
+    const pathArray = location.href.split('/');
+    const protocol = pathArray[0];
+    const host = pathArray[2];
+    const url = protocol + '//' + host + '/';
+
+    return url;
+};
 
 const kakaoPayReady = () => {
     const payment = new Promise((resolve, reject) => {
-        const baseUrl = "https://hotelbooking.kro.kr";
+        const baseUrl = getBaseUrl();
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', baseUrl + '/kakao/payment/ready', true);
+        xhr.open('POST', baseUrl + 'kakao/payment/ready', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         const hotelName = document.getElementById("hotelName").innerHTML;

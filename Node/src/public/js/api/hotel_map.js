@@ -1,12 +1,21 @@
 // getLatLng() DB에 저장된 위도경도 가져오기
 // initMap()  구글맵스 API 위치 초기화
 
+const getBaseUrl = () => {
+    const pathArray = location.href.split('/');
+    const protocol = pathArray[0];
+    const host = pathArray[2];
+    const url = protocol + '//' + host + '/';
+
+    return url;
+};
+
 const getLatLng = async () => {
     return new Promise((resolve, reject) => {
-        const baseUrl = "https://hotelbooking.kro.kr";
+        const baseUrl = getBaseUrl();
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', baseUrl + '/location', true);
+        xhr.open('POST', baseUrl + 'location', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         const data = {

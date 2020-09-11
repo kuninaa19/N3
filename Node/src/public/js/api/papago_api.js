@@ -2,11 +2,21 @@
 // detectLng() 결제승인이후 전송할 메시지에 대한 언어감지, 채팅번역버튼 언어감지
 // translateLng() 언어번역
 
+const getBaseUrl = () => {
+    const pathArray = location.href.split('/');
+    const protocol = pathArray[0];
+    const host = pathArray[2];
+    const url = protocol + '//' + host + '/';
+
+    return url;
+};
+
 const detectLng = (data) => {
     return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
+        const baseUrl = getBaseUrl();
 
-        xhr.open("POST", "https://hotelbooking.kro.kr/papago/detectLangs", true);
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", baseUrl + 'papago/detectLangs', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         const chat = data;
