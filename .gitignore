@@ -1,9 +1,15 @@
 .idea
 
+mysql
+nginx
+docker-compose.yml
+
 Node/node_modules
 Node/sessions
 Node/src/env/DB.env
 Node/src/env/redis.env
 Node/src/conf/config.json
+Node/.dockerignore
+Node/Dockerfile
 
 Node/src/public/images/
