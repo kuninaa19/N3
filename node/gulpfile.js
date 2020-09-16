@@ -2,7 +2,7 @@ const gulp = require('gulp'); // Gulp 모듈 호출
 const concat = require('gulp-concat');
 
 gulp.task('combine:js', ['lint-js'], async function () {
-    return gulp.src('/Node/public/css/js/**/*.js')
+    return gulp.src('/node/public/css/js/**/*.js')
         .pipe(concat('scriptAll.js'))
         .pipe(gulp.dest('project/dist/js'));
 });

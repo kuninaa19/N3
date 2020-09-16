@@ -4,12 +4,12 @@ mysql
 nginx
 docker-compose.yml
 
-Node/node_modules
-Node/sessions
-Node/src/env/DB.env
-Node/src/env/redis.env
-Node/src/conf/config.json
-Node/.dockerignore
-Node/Dockerfile
+node/node_modules
+node/sessions
+node/src/env/DB.env
+node/src/env/redis.env
+node/src/conf/config.json
+node/.dockerignore
+node/Dockerfile
 
-Node/src/public/images/
+node/src/public/images/
