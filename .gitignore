@@ -8,7 +8,7 @@ node/node_modules
 node/sessions
 node/src/env/DB.env
 node/src/env/redis.env
-node/src/conf/config.json
+node/src/conf/config.js
 node/.dockerignore
 node/Dockerfile
 

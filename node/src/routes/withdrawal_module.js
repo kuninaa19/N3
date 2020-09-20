@@ -1,6 +1,6 @@
 import request from "request-promise-native";
-import connection from "../conf/dbInfo";
-import config from "../conf/config";
+import connection from "../conf/dbInfo.js";
+import config from "../conf/config.js";
 
 // 유저정보 DB 삭제
 const deleteUser = (data, req, res) => {

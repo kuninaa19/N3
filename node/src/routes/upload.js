@@ -1,10 +1,12 @@
 import express from "express";
-import connection from "../conf/dbInfo";
+import connection from "../conf/dbInfo.js";
 import path from "path";
 import multer from "multer";
 import asyncHandler from "express-async-handler";
 
 const router = express.Router();
+
+const __dirname = path.resolve();
 
 const filePath = path.join(__dirname, '../public/images/rooms');
 

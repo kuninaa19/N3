@@ -8,37 +8,39 @@ import flash from 'connect-flash';
 import connectRedis from 'connect-redis';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
-import initPassport from './conf/passport';
-import socket from "./socket_io";
-import redisClient from './conf/redis';
+import initPassport from './conf/passport.js';
+import socket from "./socket_io.js";
+import {redisClient, redisSecret} from './conf/redis.js';
 
-import indexRouter from './routes';
-import uploadRouter from './routes/upload';
-import authRouter from "./routes/auth";
-import searchRouter from "./routes/room/search";
-import detailRouter from "./routes/room/detail";
-import locationRouter from "./routes/room/location";
-import messageRouter from "./routes/user/message";
-import reservationRouter from "./routes/user/trip";
-import hostRouter from "./routes/user/host";
-import infoRouter from "./routes/user/info";
-import kakaoPayRouter from "./routes/api/kakao_pay";
-import papagoRouter from "./routes/api/papago_lang";
-import errorRouter from "./routes/error";
+import indexRouter from './routes/index.js';
+import uploadRouter from './routes/upload.js';
+import authRouter from "./routes/auth.js";
+import searchRouter from "./routes/room/search.js";
+import detailRouter from "./routes/room/detail.js";
+import locationRouter from "./routes/room/location.js";
+import messageRouter from "./routes/user/message.js";
+import reservationRouter from "./routes/user/trip.js";
+import hostRouter from "./routes/user/host.js";
+import infoRouter from "./routes/user/info.js";
+import kakaoPayRouter from "./routes/api/kakao_pay.js";
+import papagoRouter from "./routes/api/papago_lang.js";
+import errorRouter from "./routes/error.js";
 
 const app = express();
 
 const redisStore = connectRedis(session);
 
+const __dirname = path.resolve();
+
 app.use(helmet());
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'));
+app.set('views', path.join(__dirname, '/src/views'));
 
 //log
-if (!module.parent) app.use(logger('dev'));
+// if (!module.parent) app.use(logger('dev'));
 
-app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, '/src/public')));
 
 app.use(session({
     store: new redisStore({
@@ -48,8 +50,8 @@ app.use(session({
     }),
     saveUninitialized: false,
     resave: false,
-    secret: process.env.SESSION_KEY,
-    cookie: {maxAge: 5.256e+9, Secure: true, httpOnly:true} //2달
+    secret: redisSecret,
+    cookie: {maxAge: 5.256e+9, Secure: true, httpOnly: true} //2달
 }));
 
 app.use(passport.initialize());

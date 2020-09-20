@@ -1,6 +1,6 @@
 import express from "express";
-import connection from "../conf/dbInfo";
 import asyncHandler from "express-async-handler";
+import connection from "../conf/dbInfo.js";
 
 const router = express.Router();
 

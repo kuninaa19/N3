@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "homepage": "/",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/kuninaa19/N3/issues",
     "email": "minchan0527@naver.com"

@@ -1,11 +1,11 @@
 import socket_io from "socket.io";
-import connection from './conf/dbInfo';
 import moment from 'moment';
 import timezone from 'moment-timezone'; // require('moment-timezone');
+import connection from './conf/dbInfo.js';
 
 moment.tz.setDefault("Asia/Seoul");
 
-module.exports = (app) => {
+const socket = (app) => {
     const io = socket_io.listen(app);
     const socketList = [];
     // const userList = []; // 채팅방에 참여한 인원리스트
@@ -64,3 +64,5 @@ module.exports = (app) => {
         });
     });
 };
+
+export default socket;

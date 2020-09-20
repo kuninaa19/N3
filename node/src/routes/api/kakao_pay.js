@@ -1,11 +1,11 @@
 import express from 'express';
-import connection from '../../conf/dbInfo';
-import config from '../../conf/config';
+import connection from '../../conf/dbInfo.js';
+import config from '../../conf/config.js';
 import request from 'request-promise-native';
 // import request from 'request';
 import moment from 'moment';
 
-require('moment-timezone');
+import timezone from 'moment-timezone'; // require('moment-timezone');
 moment.tz.setDefault("Asia/Seoul");
 
 const router = express.Router();

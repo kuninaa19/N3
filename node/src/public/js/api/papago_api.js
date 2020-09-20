@@ -31,8 +31,10 @@ const detectLng = (data) => {
 const translateLng = (data) => {
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
+        const baseUrl = getBaseUrl();
 
-        xhr.open("POST", "https://hotelbooking.kro.kr/papago/translate", true);
+
+        xhr.open("POST", baseUrl + 'papago/translate', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         const chat = data;

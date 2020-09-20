@@ -1,11 +1,11 @@
 import express from "express";
 import passport from "passport";
-import initPassport from "../conf/passport";
-import config from "../conf/config";
+import initPassport from "../conf/passport.js";
+import config from "../conf/config.js";
 import jwt from "jsonwebtoken";
 import randToken from "rand-token";
-import checkToken from "./user/token_module";
-import userWithdrawal from "./withdrawal_module";
+import checkToken from "./user/token_module.js";
+import userWithdrawal from "./withdrawal_module.js";
 
 initPassport(passport);
 

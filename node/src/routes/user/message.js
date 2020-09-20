@@ -1,8 +1,8 @@
 import express from 'express';
-import connection from '../../conf/dbInfo';
+import connection from '../../conf/dbInfo.js';
 import moment from 'moment';
 import timezone from 'moment-timezone'; // require('moment-timezone');
-import checkToken from './token_module'; // 토큰 검증,재발급 관련 메서드
+import checkToken from './token_module.js'; // 토큰 검증,재발급 관련 메서드
 
 moment.tz.setDefault("Asia/Seoul");
 
