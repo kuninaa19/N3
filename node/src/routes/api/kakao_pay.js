@@ -196,6 +196,10 @@ router.post('/payment/ready', (req, res) => {
         'approval_url': 'https://hotelbooking.kro.kr/kakao/payment/approve',
         'fail_url': 'https://hotelbooking.kro.kr/kakao/payment/fail',
         'cancel_url': 'https://hotelbooking.kro.kr/kakao/payment/cancel',
+        //TEST
+        // 'approval_url': 'http://localhost/kakao/payment/approve',
+        // 'fail_url': 'http://localhost/kakao/payment/fail',
+        // 'cancel_url': 'http://localhost/kakao/payment/cancel',
     };
 
     const options = {
