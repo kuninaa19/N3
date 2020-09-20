@@ -35,16 +35,6 @@ const checkRate = async () => {
     }
 };
 
-//base URL 가져오기
-const getBaseUrl = () => {
-    const pathArray = location.href.split('/');
-    const protocol = pathArray[0];
-    const host = pathArray[2];
-    const url = protocol + '//' + host + '/';
-
-    return url;
-};
-
 //리뷰작성폼 전송
 const sendReview = (reviewRate, exId) => {
     return new Promise((resolve, reject) => {

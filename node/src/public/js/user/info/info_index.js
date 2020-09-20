@@ -45,15 +45,6 @@ withdrawalBtn.addEventListener("click", function () {
     });
 });
 
-const getBaseUrl = () => {
-    const pathArray = location.href.split('/');
-    const protocol = pathArray[0];
-    const host = pathArray[2];
-    const url = protocol + '//' + host + '/';
-
-    return url;
-};
-
 const popUp = (e) => {
     const roomId = e.getAttribute('data-room-id');
     const sibling = e.nextSibling.nextSibling;
