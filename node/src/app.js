@@ -66,7 +66,7 @@ app.use(cookieParser());
 // allow overriding methods in query (?_method=put)
 app.use(methodOverride('_method'));
 
-const server = app.listen(3000, () => console.log('port 3000 Server On CD'));
+const server = app.listen(3000, () => console.log('port 3000 Server On'));
 socket(server);
 
 app.use('/', indexRouter);
