@@ -1,4 +1,4 @@
-import config from "../../conf/config.js";
+import config from "../../../conf/config.js";
 import request from "request-promise-native";
 import jwt from 'jsonwebtoken';
 

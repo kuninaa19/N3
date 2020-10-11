@@ -1,5 +1,5 @@
 import express from 'express';
-import connection from '../../conf/dbInfo.js';
+import connection from '../../../conf/dbInfo.js';
 import moment from 'moment';
 import timezone from 'moment-timezone';
 import checkToken from './token_module.js'; // 토큰 검증,재발급 관련 메서드

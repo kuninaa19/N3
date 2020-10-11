@@ -12,19 +12,19 @@ import initPassport from './conf/passport.js';
 import socket from "./socket_io.js";
 import {redisClient, redisSecret} from './conf/redis.js';
 
-import indexRouter from './routes/index.js';
-import uploadRouter from './routes/upload.js';
-import authRouter from "./routes/auth.js";
-import searchRouter from "./routes/room/search.js";
-import detailRouter from "./routes/room/detail.js";
-import locationRouter from "./routes/room/location.js";
-import messageRouter from "./routes/user/message.js";
-import reservationRouter from "./routes/user/trip.js";
-import hostRouter from "./routes/user/host.js";
-import infoRouter from "./routes/user/info.js";
-import kakaoPayRouter from "./routes/api/kakao_pay.js";
-import papagoRouter from "./routes/api/papago_lang.js";
-import errorRouter from "./routes/error.js";
+import indexRouter from './api/routes/index.js';
+import uploadRouter from './api/routes/upload.js';
+import authRouter from "./api/routes/auth.js";
+import searchRouter from "./api/routes/room/search.js";
+import detailRouter from "./api/routes/room/detail.js";
+import locationRouter from "./api/routes/room/location.js";
+import messageRouter from "./api/routes/user/message.js";
+import reservationRouter from "./api/routes/user/trip.js";
+import hostRouter from "./api/routes/user/host.js";
+import infoRouter from "./api/routes/user/info.js";
+import kakaoPayRouter from "./api/routes/api/kakao_pay.js";
+import papagoRouter from "./api/routes/api/papago_lang.js";
+import errorRouter from "./api/routes/error.js";
 
 const app = express();
 

@@ -1,6 +1,6 @@
 import express from 'express';
-import connection from '../../conf/dbInfo.js';
-import config from '../../conf/config.js';
+import connection from '../../../conf/dbInfo.js';
+import config from '../../../conf/config.js';
 import request from 'request-promise-native';
 // import request from 'request';
 import moment from 'moment';

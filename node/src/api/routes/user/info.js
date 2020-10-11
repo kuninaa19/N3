@@ -1,5 +1,5 @@
 import express from 'express';
-import connection from '../../conf/dbInfo.js';
+import connection from '../../../conf/dbInfo.js';
 import checkToken from "./token_module.js";
 import moment from "moment";
 import moment_timezone from 'moment-timezone';

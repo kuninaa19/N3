@@ -1,5 +1,5 @@
 import express from "express";
-import connection from "../conf/dbInfo.js";
+import connection from "../../conf/dbInfo.js";
 import path from "path";
 import multer from "multer";
 import asyncHandler from "express-async-handler";
