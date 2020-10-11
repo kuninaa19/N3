@@ -19,6 +19,8 @@ Framework : Express
 
 Envrironment : AWS EC2, Amazon Linux
 
+DevOps : Docker, Jenkins
+
 <br/> <br/>
 
 ## 기능   
