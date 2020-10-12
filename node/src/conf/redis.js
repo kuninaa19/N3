@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 const __dirname = path.resolve();
 
-dotenv.config({path: path.join(__dirname, '/src/env/redis.env')});
+dotenv.config({path: path.join(__dirname, '/src/conf/redis.env')});
 
 const redisClient = redis.createClient({
     host: process.env.REDIS_HOST,

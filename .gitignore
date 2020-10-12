@@ -5,10 +5,10 @@ nginx
 docker-compose.yml
 
 node/node_modules
-node/sessions
-node/src/env/DB.env
-node/src/env/redis.env
+node/src/conf/DB.env
+node/src/conf/redis.env
 node/src/conf/config.js
+
 node/.dockerignore
 node/Dockerfile
 
