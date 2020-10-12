@@ -1,32 +1,15 @@
 import bCrypt from 'bcrypt';
 import connection from "./dbInfo.js";
 import config from './config.js';
-
-// const LocalStrategy = require('passport-local').Strategy;
-// const JwtStrategy = require('passport-jwt').Strategy;
-// const ExtractJwt = require('passport-jwt').ExtractJwt;
-// const KakaoStrategy = require('passport-kakao').Strategy;
-// const NaverStrategy = require('passport-naver').Strategy;
-// import {Strategy as LocalStrategy} from 'passport-local';
-// import {Strategy as JwtStrategy} from 'passport-jwt';
-// import {ExtractJwt as ExtractJwt} from 'passport-jwt';
-// import {Strategy as KakaoStrategy} from 'passport-kakao';
-// import {Strategy as NaverStrategy} from 'passport-naver';
 import local from 'passport-local';
-
-const {Strategy: LocalStrategy} = local;
-
 import jwt from 'passport-jwt';
-
-const {Strategy: JwtStrategy} = jwt;
-const {ExtractJwt: ExtractJwt} = jwt;
-
 import kakao from 'passport-kakao';
-
-const {Strategy: KakaoStrategy} = kakao;
-
 import naver from 'passport-naver';
 
+const {Strategy: LocalStrategy} = local;
+const {Strategy: JwtStrategy} = jwt;
+const {ExtractJwt: ExtractJwt} = jwt;
+const {Strategy: KakaoStrategy} = kakao;
 const {Strategy: NaverStrategy} = naver;
 
 //이미 가입된 회원인지 확인[local,naver,kakao]
