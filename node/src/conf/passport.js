@@ -101,7 +101,7 @@ const signIn = (dbRow, inputData, done) => {
 const initPassport = (passport) => {
     const opts = {};
     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-    opts.secretOrKey = config.JWT_SECRET;
+    opts.secretOrKey = config.jwt_secret;
 
     passport.use(new JwtStrategy(opts, (jwtPayload, next) => {
         console.log('payload received', jwtPayload);

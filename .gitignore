@@ -5,9 +5,7 @@ nginx
 docker-compose.yml
 
 node/node_modules
-node/src/conf/DB.env
-node/src/conf/redis.env
-node/src/conf/config.js
+node/src/conf/.env
 
 node/.dockerignore
 node/Dockerfile

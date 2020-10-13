@@ -4,8 +4,12 @@ import dotenv from 'dotenv';
 
 const __dirname = path.resolve();
 
-dotenv.config({path: path.join(__dirname, '/src/conf/DB.env')});
+const envFound = dotenv.config({path: path.join(__dirname, '/src/conf/.env')});
+if (envFound.error) {
+    // This error should crash whole process
 
+    throw new Error("⚠️  Couldn't find .env file  ⚠️");
+}
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
