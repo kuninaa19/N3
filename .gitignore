@@ -5,9 +5,15 @@ nginx
 docker-compose.yml
 
 node/node_modules
-node/src/conf/.env
-
+node/log_dir
 node/.dockerignore
 node/Dockerfile
 
+node/src/conf/.env
+node/src/conf/.env.development
 node/src/public/images/
+
+node/package-lock.json
+node/error.log
+
+node/tests
