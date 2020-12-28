@@ -1,40 +1,45 @@
-import express from "express";
-import asyncHandler from "express-async-handler";
-import connection from "../../conf/dbInfo.js";
+import {Router} from 'express';
+import RoomService from "../../services/room";
 
-const router = express.Router();
+const route = Router();
 
-// 메인페이지 하단 숙소카드를 위한 숙소정보가져오기
-const getRoomList = () => {
-    return new Promise(resolve => {
-        const sql = 'SELECT id,image,name,region FROM `room` ORDER BY id DESC LIMIT 4';
-        connection.query(sql, (err, row) => {
-            if (err) throw  err;
-            return resolve(row);
+export default (app) => {
+    app.use('/', route);
+
+    route.get('/', async (req, res) => {
+        const roomServiceInstance = new RoomService();
+        const result = await roomServiceInstance.index();
+
+        if (req.isAuthenticated()) {
+            const nickname = req.user.nickname;
+
+            res.render('index', {'nickname': nickname, 'rooms': result});
+        } else {
+            const flash = req.flash('error');
+
+            res.render('index', {'rooms': result, 'message': flash});
+        }
+    });
+
+    route.get('/logout', (req, res) => {
+        res.clearCookie('accessToken');
+        req.logout();
+        req.session.save(function () {
+            res.redirect('/');
         });
     });
-};
 
-router.get('/', asyncHandler(async (req, res) => {
-    const result = await getRoomList();
+    route.get('/search', async (req, res) => {
+        const searchValue = req.query.place; // 검색 지역이름
 
-    if (req.isAuthenticated()) {
-        const nickname = req.user.nickname;
+        const roomServiceInstance = new RoomService();
+        const roomList = await roomServiceInstance.getRoomList(searchValue);
 
-        res.render('index', {'nickname': nickname, 'rooms': result});
-    } else {
-        const flash = req.flash('error');
-
-        res.render('index', {'rooms': result, 'message': flash});
-    }
-}));
-
-router.get('/logout', (req, res) => {
-    res.clearCookie('accessToken');
-    req.logout();
-    req.session.save(function () {
-        res.redirect('/');
+        if (req.isAuthenticated()) {
+            const nickname = req.user.nickname; // 유저 아이디
+            res.render('room/search', {title: searchValue, 'nickname': nickname, 'rooms': roomList});
+        } else {
+            res.render('room/search', {title: searchValue, 'rooms': roomList});
+        }
     });
-});
-
-export default router;
+};

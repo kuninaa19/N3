@@ -1,25 +1,13 @@
-import express from 'express';
-import connection from '../../../conf/dbInfo.js';
+import {Router} from 'express';
 
-const router = express.Router();
+const route = Router();
 
-const checkAuth = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    //모달창 열기로 변경해야됨
+export default (app) => {
+    app.use('/host', route);
+
+    // 호스트 방 등록 페이지
+    route.get('/room/register', (req, res) => {
+
+        res.render('room/register');
+    });
 };
-
-// router.get('/', checkAuth, (req, res) => {
-// router.get('/',  (req, res) => {
-//     const nickname = req.user.nickname;
-//     res.render('user/message',{'nickname':nickname});
-// });
-
-// 호스트 방 등록 페이지
-router.get('/room/register', (req, res) => {
-
-    res.render('room/register');
-});
-
-export default router;

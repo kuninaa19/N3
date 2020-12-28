@@ -1,111 +1,124 @@
-import express from "express";
-import passport from "passport";
-import initPassport from "../../conf/passport.js";
-import config from "../../conf/config.js";
-import jwt from "jsonwebtoken";
-import randToken from "rand-token";
-import checkToken from "./user/token_module.js";
-import userWithdrawal from "./withdrawal_module.js";
+import {Router} from 'express';
+import passport from 'passport';
+import middlewares from '../middlewares';
+import AuthService from '../../services/auth';
+import refreshToken from "rand-token";
+import logger from '../../loaders/logger';
 
-initPassport(passport);
+const route = Router();
 
-const router = express.Router();
+export default (app) => {
+    app.use('/auth', route);
 
-// local- login, register
-const localLogin = (req, res) => {
-    const payload = {
-        'nickname': req.user.nickname,
-        'way': req.user.way
-    };
-
-    jwt.sign(payload, config.JWT_SECRET, (err, token) => {
-        const options = { //30분
-            maxAge: 1.8e+6,
-            secure: true,
-            httpOnly: true
-        };
-
-        req.session.refreshToken = randToken.uid(256); //리프레시 토큰
-        res.cookie(`accessToken`, token, options);
-
-        res.redirect('/');
-    });
-};
-
-router.post('/jwt',
-    passport.authenticate('jwt'), (req, res) => {
-        res.json({success: 'You are authenticated with JWT!', user: req.user})
-    });
-
-router.post('/login',
-    passport.authenticate('local-login', {
-        failureRedirect: '/',
-        failureFlash: true
-    }), (req, res) => localLogin(req, res)
-);
-
-router.post('/register',
-    passport.authenticate(
-        'local-register',
-        {
+    route.post('/login',
+        passport.authenticate('local-login', {
             failureRedirect: '/',
             failureFlash: true
-        }), (req, res) => localLogin(req, res)
-);
+        }), (req, res) => {
+            const userDTO = {
+                'nickname': req.user.nickname,
+                'way': req.user.way
+            };
 
-router.delete('/withdrawal', async (req, res) => {
-    try {
-        await checkToken(req, res);
+            const authServiceInstance = new AuthService();
+            const jwtToken = authServiceInstance.generateToken(userDTO);
 
-        const result = await userWithdrawal(req, res);
-        res.json({key: result});
-    } catch (e) {
-        console.log(e);
+            req.session.refreshToken = refreshToken.uid(256);
+            res.cookie(`accessToken`, jwtToken, {
+                maxAge: 1.8e+6, //30분
+                httpOnly: true
+            });
+            res.redirect('/');
+        }
+    );
 
-        res.json({key: false});
-    }
-});
+    route.post('/register',
+        passport.authenticate(
+            'local-register',
+            {
+                failureRedirect: '/',
+                failureFlash: true
+            }), (req, res) => {
+            const userDTO = {
+                'nickname': req.user.nickname,
+                'way': req.user.way
+            };
 
-// 네이버 로그인
-router.get('/naver',
-    passport.authenticate('naver'));
+            const authServiceInstance = new AuthService();
+            const jwtToken = authServiceInstance.generateToken(userDTO);
 
-router.get('/naver/callback',
-    passport.authenticate('naver', {
-        failureRedirect: '/',
-        failureFlash: true
-    }), (req, res) => {
-        const accessToken = req.user.accessToken;
-        const options = { //2시간
-            maxAge: 7.2e+6,
-            secure: true,
-            httpOnly: true
-        };
-        res.cookie(`accessToken`, accessToken, options);
+            req.session.refreshToken = refreshToken.uid(256);
+            res.cookie(`accessToken`, jwtToken, {
+                maxAge: 1.8e+6, //30분
+                // secure : true,
+                httpOnly: true
+            });
+            res.redirect('/');
+        }
+    );
 
-        res.redirect('/');
-    }
-);
+    route.delete('/withdrawal', middlewares.isAuth, async (req, res) => {
+        try {
+            const userDTO = {
+                token: req.cookies.accessToken,
+                platform: req.user.way,
+                nickname: req.user.nickname
+            };
 
-//카카오 로그인
-router.get('/kakao',
-    passport.authenticate('kakao'));
+            const authServiceInstance = new AuthService();
+            const result = await authServiceInstance.withdrawal(userDTO);
 
-router.get('/kakao/callback',
-    passport.authenticate('kakao', {
-        failureRedirect: '/',
-        failureFlash: true
-    }), (req, res) => {
-        const accessToken = req.user.accessToken;
-        const options = { //2시간 (네이버 1시간 카카오 6시간)
-            maxAge: 7.2e+6,
-            secure: true,
-            httpOnly: true
-        };
-        res.cookie(`accessToken`, accessToken, options);
+            res.clearCookie('accessToken');
+            req.logout();
+            req.session.destroy(function () {
+                req.session; //세션 삭제
+                res.json({key: result});
+            });
+        } catch (e) {
+            logger.error('회원탈퇴 오류 : %o', e);
+            res.json({key: false});
+        }
+    });
 
-        res.redirect('/');
-    }
-);
+    // 네이버 로그인
+    route.get('/naver',
+        passport.authenticate('naver'));
 
-export default router;
+    route.get('/naver/callback',
+        passport.authenticate('naver', {
+            failureRedirect: '/',
+            failureFlash: true
+        }), (req, res) => {
+            const accessToken = req.user.accessToken;
+            const cookieOptions = { //2시간
+                maxAge: 7.2e+6,
+                secure: true,
+                httpOnly: true
+            };
+            res.cookie(`accessToken`, accessToken, cookieOptions);
+
+            res.redirect('/');
+        }
+    );
+
+    //카카오 로그인
+    route.get('/kakao',
+        passport.authenticate('kakao'));
+
+    route.get('/kakao/callback',
+        passport.authenticate('kakao', {
+            failureRedirect: '/',
+            failureFlash: true
+        }), (req, res) => {
+            const accessToken = req.user.accessToken;
+            const cookieOptions = { //2시간 (네이버 1시간 카카오 6시간)
+                maxAge: 7.2e+6,
+                secure: true,
+                httpOnly: true
+            };
+            res.cookie(`accessToken`, accessToken, cookieOptions);
+
+            res.redirect('/');
+        }
+    );
+};
