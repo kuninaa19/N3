@@ -1,18 +1,18 @@
-import path from "path";
+import path from 'path';
 import dotenv from 'dotenv';
 
-const __dirname = path.resolve();
-
-const envFound = dotenv.config({path: path.join(__dirname, '/src/conf/.env')});
+const envFound = dotenv.config({
+    path: path.join(__dirname,
+        process.env.NODE_ENV === 'production' ? '../conf/.env' : '../conf/.env.development')
+});
 if (envFound.error) {
-    // This error should crash whole process
-
     throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
 
 export default {
+    base_url: process.env.BASE_URL,
+    port: process.env.PORT,
     jwt_secret: process.env.JWT_SECRET,
-
     oauth: {
         kakao: {
             rest_api_key: process.env.KAKAO_REST_API_KEY,
