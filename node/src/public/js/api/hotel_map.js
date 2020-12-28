@@ -6,7 +6,7 @@ const getLatLng = async () => {
         const baseUrl = getBaseUrl();
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', baseUrl + 'location', true);
+        xhr.open('POST', baseUrl + 'rooms/location', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         const data = {

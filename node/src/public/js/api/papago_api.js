@@ -7,11 +7,11 @@ const detectLng = (data) => {
         const baseUrl = getBaseUrl();
 
         const xhr = new XMLHttpRequest();
+
         xhr.open("POST", baseUrl + 'papago/detectLangs', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         const chat = data;
-
         xhr.onload = () => resolve(xhr.responseText);
         xhr.onerror = () => reject(xhr.statusText);
 
@@ -19,6 +19,7 @@ const detectLng = (data) => {
     }).then((response) => {
         const data = JSON.parse(response);
         if (data.key === 'afterPayment') {
+            //결제승인완료시 여행페이지로 이동
             location.replace('/trip');
         } else {
             return data.langCode;
@@ -30,9 +31,9 @@ const detectLng = (data) => {
 
 const translateLng = (data) => {
     return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
         const baseUrl = getBaseUrl();
 
+        const xhr = new XMLHttpRequest();
 
         xhr.open("POST", baseUrl + 'papago/translate', true);
         xhr.setRequestHeader("Content-Type", "application/json");

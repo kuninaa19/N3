@@ -32,6 +32,7 @@ const uploadImages = () => {
         const baseUrl = getBaseUrl();
 
         const xhr = new XMLHttpRequest();
+
         xhr.open("POST", baseUrl + 'upload/images', true);
 
         const formElement = document.getElementById('myForm');
@@ -59,7 +60,6 @@ const uploadInfo = (image) => {
         const baseUrl = getBaseUrl();
 
         let xhr = new XMLHttpRequest();
-
         xhr.open("POST", baseUrl + 'upload/info', true);
         xhr.setRequestHeader("Content-type", "application/json");
 
@@ -96,7 +96,7 @@ const uploadInfo = (image) => {
 
         const roomNumber = result.roomNum;
         if (result.key === true) {
-            location.href = `https://hotelbooking.kro.kr/rooms/${roomNumber}`;
+            location.href = `/rooms/${roomNumber}`;
         }
     })
 };
