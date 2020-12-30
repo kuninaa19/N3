@@ -2,9 +2,6 @@ import {Router} from 'express';
 import middlewares from '../../middlewares';
 import InfoService from "../../../services/info";
 import moment from "moment";
-import moment_timezone from 'moment-timezone';
-
-moment.tz.setDefault("Asia/Seoul");
 
 const route = Router();
 

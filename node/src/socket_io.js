@@ -1,14 +1,10 @@
 import socket_io from "socket.io";
 import connection from './loaders/mysql';
 import moment from 'moment';
-import timezone from 'moment-timezone';
-
-moment.tz.setDefault("Asia/Seoul");
 
 export default (app) => {
     const io = socket_io.listen(app);
     const socketList = [];
-    // const userList = []; // 채팅방에 참여한 인원리스트
 
     io.on('connection', (socket) => {
         socketList.push(socket);
@@ -16,17 +12,7 @@ export default (app) => {
         socket.on('joinRoom', (data) => {
             socket.join(data.room, () => {
                 console.log('joinRoom', data.room);
-                // userList.push({
-                //     socket : socket.id,  // 생성된 socket.id
-                //     room : data.room  // 접속한 채팅방의 이름
-                // });
-                // console.log(userList);
-                // console.log(socket.rooms);
-
-                // io.to(data).emit('data', `${data.room}에 접속했어요`);
             });
-            // console.log('방 현재인원',io.sockets.adapter.rooms[data.room].length);
-            // console.log('방 현재참여자',io.sockets.adapter.rooms[data.room]);
         });
 
         // 클라이언트가 채팅 내용 전송
@@ -51,7 +37,7 @@ export default (app) => {
             });
 
             const forUpdateSql = 'UPDATE message SET message=?,time=? WHERE room_id = ?';
-            connection.query(forUpdateSql, [msgInfo.content,msgInfo.time,msgInfo.room_id], (err, row) => {
+            connection.query(forUpdateSql, [msgInfo.content, msgInfo.time, msgInfo.room_id], (err) => {
                 if (err) throw  err;
             });
         });

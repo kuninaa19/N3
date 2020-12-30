@@ -3,9 +3,6 @@ import connection from '../loaders/mysql';
 import logger from '../loaders/logger';
 import config from '../conf/config';
 import moment from 'moment';
-import timezone from 'moment-timezone';
-
-moment.tz.setDefault("Asia/Seoul");
 
 export default class KakaoService {
     constructor() {

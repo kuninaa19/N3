@@ -1,9 +1,6 @@
 import moment from 'moment';
 import connection from '../loaders/mysql';
 import logger from '../loaders/logger';
-import timezone from 'moment-timezone';
-
-moment.tz.setDefault("Asia/Seoul");
 
 // 시간 45분 -> 60분 일 22시간 -> 24시간
 moment.relativeTimeThreshold('m', 60);
@@ -51,9 +48,7 @@ export default class MessageService {
                     // 년,월,일 한글 변환 적용
                     rows[i].date.startDay = moment(rows[i].date.startDay).format('LL');
                     rows[i].date.endDay = moment(rows[i].date.endDay).format('LL');
-
-                    // mysql에 저장된 시간에서 9시간을 빼고 비교해야 정확한 결과값이 나온다.
-                    rows[i].time = moment(rows[i].time).subtract(9, 'hours').fromNow();
+                    rows[i].time = moment(rows[i].time).fromNow();
 
                     // 접속자가 집주인이면 방문객 이름, 접속자가 방문객이면
                     // 집주인 이름
@@ -101,10 +96,10 @@ export default class MessageService {
 
                     for (let i = 0; i < rows.length; i++) {
                         // 날짜만 가져오기
-                        LLTime[i] = moment(rows[i].time).subtract(9, 'hours').format('LL');
+                        LLTime[i] = moment(rows[i].time).format('LL');
 
                         // 년,월,일 한글 변환 적용
-                        rows[i].time = moment(rows[i].time).subtract(9, 'hours').format('LT');
+                        rows[i].time = moment(rows[i].time).format('LT');
                     }
                     resolve({rows, LLTime, opponent});
                 }
