@@ -24,9 +24,9 @@ export default class KakaoService {
                 'total_amount': room.price,
                 'vat_amount': 0,
                 'tax_free_amount': 0,
-                'approval_url': 'http://localhost/kakao/payment/approve',
-                'fail_url': 'http://localhost/kakao/payment/fail',
-                'cancel_url': 'http://localhost/kakao/payment/cancel',
+                'approval_url': config.base_url + '/kakao/payment/approve',
+                'fail_url': config.base_url + '/kakao/payment/fail',
+                'cancel_url': config.base_url + '/kakao/payment/cancel',
             };
             const options = {
                 url: 'https://kapi.kakao.com/v1/payment/ready',
