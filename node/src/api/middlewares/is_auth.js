@@ -10,7 +10,7 @@ const notAuthenticated = (req, res) => {
     req.session.save(function () {
         res.redirect('/');
     });
-}
+};
 
 // verifyToken() 내부 API 요청 옵션 설정
 const setVerifyPlatformTokenOptions = (user) => {
@@ -21,7 +21,7 @@ const setVerifyPlatformTokenOptions = (user) => {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             },
             method: 'GET'
-        }
+        };
         if (user.platform === 'naver') {
             const options = Object.assign({
                 url: 'https://openapi.naver.com/v1/nid/me',
@@ -170,7 +170,7 @@ const getJwtToken = async (req, res) => {
             }, (err, token) => {
                 const options = { //30분
                     maxAge: 1.8e+6,
-                    // secure: true,
+                    secure: true,
                     httpOnly: true
                 };
                 logger.info('JWT getJwtToken');
@@ -192,7 +192,7 @@ const isAuth = async (req, res, next) => {
     const user = {
         token: req.cookies.accessToken,
         refreshToken: req.user.refreshToken,
-        platform: req.user.way
+        platform: req.user.platform
     };
 
     if (user.platform === 'general') {
