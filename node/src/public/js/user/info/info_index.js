@@ -48,7 +48,7 @@ withdrawalBtn.addEventListener("click", function () {
 const popUp = (e) => {
     const roomId = e.getAttribute('data-room-id');
     const sibling = e.nextSibling.nextSibling;
-    const orderId = sibling.getAttribute('data-order-id');
+    const bookingId = sibling.getAttribute('data-booking-id');
 
     const url = "/info/review/writing";
     const option = "width = 700, height = 600, top = 35%, left = 100%, location = no";
@@ -68,7 +68,7 @@ const popUp = (e) => {
     const roomData = document.createElement("input");
     roomData.setAttribute("type", "hidden");
     roomData.setAttribute("name", "order");
-    roomData.setAttribute("value", orderId);
+    roomData.setAttribute("value", bookingId);
 
 
     form.appendChild(orderData);

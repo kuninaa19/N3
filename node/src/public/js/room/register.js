@@ -47,7 +47,7 @@ const uploadImages = () => {
         const result = JSON.parse(response);
         console.log(result);
         if (result.key === true) {
-            return uploadInfo(result.image);
+            return uploadInfo(result.roomImageId);
         } else {
             alert('이미지 업로드에 실패했습니다. 다시시도 해 주세요');
         }
@@ -55,7 +55,7 @@ const uploadImages = () => {
 };
 
 //이미지 업로드후에 모든 정보 업로드
-const uploadInfo = (image) => {
+const uploadInfo = (roomImageId) => {
     const info = new Promise((resolve, reject) => {
         const baseUrl = getBaseUrl();
 
@@ -76,15 +76,15 @@ const uploadInfo = (image) => {
             map_let: document.getElementById('map_let').innerHTML,
             map_lng: document.getElementById('map_lng').innerHTML
         };
-        const introInfo = document.getElementsByClassName('message')[0].value;
+        const introduction = document.getElementsByClassName('message')[0].value;
 
-        const value = {
+        const price = {
             perDay: document.getElementsByName('charge')[0].value,
             cleanFee: document.getElementsByName('charge')[1].value,
             serviceFee: document.getElementsByName('charge')[2].value
         };
 
-        const roomInfo = new room(hotelName, country, region, location, simpleInfo, introInfo, value, image);
+        const roomInfo = new room(hotelName, country, region, location, simpleInfo, introduction, price, roomImageId);
 
         xhr.onload = () => resolve(xhr.responseText);
         xhr.onerror = () => reject(xhr.statusText);

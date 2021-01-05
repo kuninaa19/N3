@@ -25,17 +25,15 @@ const getLatLng = async () => {
 // 구글지도 위치 초기화
 const initMap = async () => {
     const hotelLocation = await getLatLng();
-    console.log(hotelLocation);
 
     const hotel = {lat: parseFloat(hotelLocation.map_let), lng: parseFloat(hotelLocation.map_lng)};
-    // const hotel = {lat: 3.1530914, lng: 101.7051983};
+
     const icons = {
         hotel: {
             icon: 'https://img.icons8.com/material-sharp/36/000000/cottage.png'
         },
         restaurant: {
             icon: 'https://img.icons8.com/plasticine/36/000000/restaurant.png'
-            // icon: 'https://img.icons8.com/ios-glyphs/36/000000/restaurant.png'
         },
         attraction: {
             icon: 'https://img.icons8.com/ios-filled/24/000000/camera.png'

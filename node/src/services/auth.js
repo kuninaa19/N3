@@ -16,8 +16,8 @@ export default class AuthService {
     }
 
     //이미 가입된 회원인지 확인[local,naver,kakao]
-    checkSignIn(inputData, done) {
-        connection.query('select * from `users` where `email` = ?', inputData.email, (err, rows) => {
+    checkSignIn(user, done) {
+        connection.query('select * from `person` where `email` = ?', user.email, (err, rows) => {
             if (err) {
                 console.log('checkSignIn : failure', err);
 
@@ -26,22 +26,22 @@ export default class AuthService {
             }
             // 아이디없음
             if (rows.length === 0) {
-                this.signUp(inputData, done);
+                this.signUp(user, done);
                 //아이디 있음
-            } else if (rows[0].email === inputData.email) {
-                if (rows[0].way === 'general') {
+            } else if (rows[0].email === user.email) {
+                if (rows[0].platform === 'general') {
                     return done(null, false, {message: `이미 가입된 회원입니다.`});
                 } else {
                     // [naver,kakao] 로그인
-                    this.signIn(rows, inputData, done);
+                    this.signIn(rows, user, done);
                 }
             }
         });
     }
 
     // 로컬 로그인 회원가입확인
-    checkLocalSignIn(inputData, done) {
-        connection.query('select * from `users` where `email` = ?', inputData.email, (err, rows) => {
+    checkLocalSignIn(user, done) {
+        connection.query('select * from `person` where `email` = ?', user.email, (err, rows) => {
             if (err) {
                 console.log('err :' + err);
                 throw err;
@@ -49,62 +49,62 @@ export default class AuthService {
             if (rows.length === 0) {
                 return done(false, null, {message: '없는 아이디 입니다.'});
                 //아이디 틀림
-            } else if (rows[0].way !== inputData.way) {
-                return done(null, false, {message: `이미 ${rows[0].way}로 가입된 회원입니다.`});
-            } else if (rows[0].email !== inputData.email) {
+            } else if (rows[0].platform !== user.platform) {
+                return done(null, false, {message: `이미 ${rows[0].platform}로 가입된 회원입니다.`});
+            } else if (rows[0].email !== user.email) {
                 console.log('아이디 틀림');
                 return done(null, false, {message: '틀린 이메일입니다.'})
                 //비번 틀림
-            } else if (!bCrypt.compareSync(inputData.password, rows[0].password)) {
+            } else if (!bCrypt.compareSync(user.password, rows[0].password)) {
                 console.log('비번 틀림');
                 return done(null, false, {message: '틀린 비밀번호 입니다.'})
             }
             return done(null, {
                 // email: rows[0].email,
                 nickname: rows[0].nickname,
-                way: rows[0].way
+                platform: rows[0].platform
             });
         });
     }
 
     //회원가입 [ local,kakao,naver]
-    signUp(inputData, done) {
-        if (inputData.way === 'general') {
-            connection.query('insert into `users` set ?', inputData, function (err) {
+    signUp(user, done) {
+        if (user.platform === 'general') {
+            connection.query('insert into `person` set ?', user, function (err) {
                 if (err) throw err;
                 return done(null, {
-                    // email: inputData.email,
-                    nickname: inputData.nickname,
-                    way: inputData.way
+                    // email: user.email,
+                    nickname: user.nickname,
+                    platform: user.platform
                 });
             });
         } else {
-            const user = {
-                email: inputData.email,
-                nickname: inputData.nickname,
-                way: inputData.way,
+            const userDAO = {
+                email: user.email,
+                nickname: user.nickname,
+                platform: user.platform,
             };
 
-            connection.query('insert into `users` set ?', user, function (err) {
+            connection.query('insert into `person` set ?', userDAO, function (err) {
                 if (err) throw err;
-                return done(null, inputData);
+                return done(null, user);
             });
         }
     }
 
     // naver kakao 로그인
-    signIn(dbRow, inputData, done) {
-        if (dbRow[0].way === inputData.way) {
-            return done(null, inputData);
+    signIn(dbRow, user, done) {
+        if (dbRow[0].platform === user.platform) {
+            return done(null, user);
         } else {
-            return done(null, false, {message: `이미 ${dbRow[0].way}로 가입된 회원입니다.`});
+            return done(null, false, {message: `이미 ${dbRow[0].platform}로 가입된 회원입니다.`});
         }
     }
 
     // 유저정보 DB 삭제
     async deleteUser(user) {
         return new Promise((resolve, reject) => {
-            const sql = 'DELETE FROM `users` WHERE nickname = ?';
+            const sql = 'DELETE FROM `person` WHERE nickname = ?';
             connection.query(sql, user, (err) => {
                 if (err) throw reject(err);
 

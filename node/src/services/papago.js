@@ -8,7 +8,7 @@ export default class PapagoService {
     }
 
     //언어감지 API
-    async detectLng(chat) {
+    async detectLang(chat) {
         try {
             const api_url = 'https://openapi.naver.com/v1/papago/detectLangs';
 
@@ -33,19 +33,19 @@ export default class PapagoService {
                 }
             });
             const resPapago = JSON.parse(detectResult);
-            const langResult = await this.storeLng(resPapago, chat);
+            const langResult = await this.storeLang(resPapago, chat);
 
             return langResult;
 
         } catch (error) {
-            console.log(`detectLng 에러 발생: ${error}`);
+            console.log(`detectLang 에러 발생: ${error}`);
             logger.error(error);
 
         }
     }
 
     // 언어감지된 값 저장
-    async storeLng(resPapago, chat) {
+    async storeLang(resPapago, chat) {
         // 멤버로 키를 가지고 있는지 확인
         if ("key" in chat) {
             return new Promise((resolve) => {
@@ -55,7 +55,7 @@ export default class PapagoService {
                 });
                 resolve({key: chat.key});
             }).catch(error => {
-                console.log(`storeLng if문 에러 발생: ${error}`);
+                console.log(`storeLang if문 에러 발생: ${error}`);
                 logger.error(error);
 
             });
@@ -67,14 +67,14 @@ export default class PapagoService {
                 });
                 resolve(resPapago);
             }).catch(error => {
-                console.log(`storeLng else문 에러 발생: ${error}`);
+                console.log(`storeLang else문 에러 발생: ${error}`);
                 logger.error(error);
             });
         }
     }
 
     //언어 번역
-    async transLng(chat) {
+    async transLang(chat) {
         try {
             const api_url = 'https://openapi.naver.com/v1/papago/n2mt';
 
@@ -111,7 +111,7 @@ export default class PapagoService {
 
             return transMsg;
         } catch (error) {
-            console.log(`transLng 에러 발생: ${error}`);
+            console.log(`transLang 에러 발생: ${error}`);
             logger.error(error);
         }
     }

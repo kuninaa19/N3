@@ -83,11 +83,11 @@ export default class KakaoService {
             resKakaoPay.date = JSON.stringify(session.date);
             resKakaoPay.amount = JSON.stringify(resKakaoPay.amount);
 
-            const orderId = await this.storeOrder(resKakaoPay);
+            const bookingId = await this.storeBooking(resKakaoPay);
 
-            await this.storeMsg(orderId, user, session);
+            await this.storeMsg(bookingId, user, session);
 
-            return orderId;
+            return bookingId;
         } catch (error) {
             console.log(`approveKakaoPay 에러 발생: ${error}`);
             logger.error(error);
@@ -95,15 +95,15 @@ export default class KakaoService {
     }
 
     //결제완료후 정보 DB 저장
-    async storeOrder(order) {
+    async storeBooking(reservation) {
         return new Promise(resolve => {
-            const sql = 'insert into `orders` set ?';
-            connection.query(sql, order, (err, rows) => {
+            const sql = 'insert into `booking` set ?';
+            connection.query(sql, reservation, (err, rows) => {
                 if (err) throw err;
 
-                const storedOrderId = rows.insertId;
+                const storedId = rows.insertId;
 
-                resolve(storedOrderId);
+                resolve(storedId);
             });
         }).catch(error => {
             console.log(`storeOrder 에러 발생: ${error}`);
@@ -112,19 +112,19 @@ export default class KakaoService {
     }
 
     // 메시지,채팅 DB 저장
-    async storeMsg(orderId, user, session) {
+    async storeMsg(bookingId, user, session) {
         const time = moment().format('YYYY-MM-DD HH:mm:ss');
 
         const storeMessage = new Promise((resolve) => {
             const msg = {
-                room_id: orderId,
+                room_id: bookingId,
                 user_name: user,
                 host_name: session.host_name,
                 message: session.message,
                 time: time
             };
 
-            const sql = 'insert into `message` set ?';
+            const sql = 'insert into `chat_window` set ?';
             connection.query(sql, msg, (err) => {
                 if (err) throw err;
 
@@ -137,7 +137,7 @@ export default class KakaoService {
 
         const storeChat = new Promise((resolve) => {
             const sendChat = {
-                room_id: orderId,
+                room_id: bookingId,
                 sender: user,
                 content: session.message,
                 time: time
@@ -160,9 +160,9 @@ export default class KakaoService {
     }
 
     // -- /payment/cancel 메서드, DB저장된 주문 정보 삭제
-    async cancelOrder(order) {
+    async cancelBooking(order) {
         return new Promise(resolve => {
-            const sql = 'DELETE from `orders` WHERE tid=? AND item_name=?';
+            const sql = 'DELETE from `booking` WHERE tid=? AND item_name=?';
             connection.query(sql, [order.tid, order.item_name], (err) => {
                 if (err) throw err;
                 resolve();
@@ -203,7 +203,7 @@ export default class KakaoService {
             const resKakaoPay = JSON.parse(cancelResult);
 
             //처리완료되면 DB에 예약 삭제
-            await this.cancelOrder(resKakaoPay);
+            await this.cancelBooking(resKakaoPay);
 
         } catch (error) {
             console.log(`cancelKakaoPay 에러 발생: ${error}`);

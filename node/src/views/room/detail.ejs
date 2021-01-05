@@ -67,7 +67,7 @@
         <div class="item" id="leftSideTop">
             <div class="hotel_info">
                 <div class="hotel_name">
-                    <%= roomsInfo.name %>
+                    <%= roomsInfo.room_name %>
                 </div>
                 <div style="font-size: 16px; margin-bottom:10px">
                     <%= roomsInfo.region %>
@@ -86,7 +86,7 @@
         <div class="item" id="leftSideMiddle">
             <div class="hotel_info">
                 <div class="hotel_description">
-                    <%- roomsInfo.intro_info %>
+                    <%- roomsInfo.introduction %>
                 </div>
             </div>
             <div class="line"></div>
@@ -146,7 +146,7 @@
                     <div class="empty_card">
                         작성된 후기가 없어요
                     </div>
-                <% } %>
+                    <% } %>
 
             </div>
         </div>
@@ -155,7 +155,7 @@
     <div class="right_column">
         <div class="item">
             <div>
-                <div class="per_day_charge">₩<%= roomsInfo.value.perDay %> / 박</div>
+                <div class="per_day_charge">₩<%= roomsInfo.price.perDay %> / 박</div>
                 <div style="margin: 20px 0 0 0; font-size: 14px">날짜</div>
                 <div class="reservation_tray">
                     <div style="font-size: 14px; text-align: center">
@@ -167,21 +167,21 @@
             <!--                요금표시-->
             <div class="receipt">
                 <div class="charge_detail">
-                    <span id="per_day_cost">₩<%= roomsInfo.value.perDay %></span>
+                    <span id="per_day_cost">₩<%= roomsInfo.price.perDay %></span>
                     <span id="per_date">x 1박</span>
-                    <span class="charge"><%= roomsInfo.value.perDay %></span>
+                    <span class="charge"><%= roomsInfo.price.perDay %></span>
                     <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail">
                     <span>청소비</span>
-                    <span class="charge"><%= roomsInfo.value.cleanFee %></span>
+                    <span class="charge"><%= roomsInfo.price.cleanFee %></span>
                     <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail">
                     <span>서비스 수수료</span>
-                    <span class="charge"><%= roomsInfo.value.serviceFee %></span>
+                    <span class="charge"><%= roomsInfo.price.serviceFee %></span>
                     <span class="currency_mark">₩</span>
                 </div>
 

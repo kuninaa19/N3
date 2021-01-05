@@ -1,13 +1,13 @@
 //  room/register.js 에서 방 정보를 담는 클래스
 class room {
-    constructor(name,country,region,location,simple_info,intro_info,value,image) {
-        this.name = name;
+    constructor(hotelName, country, region, location, simpleInfo, introduction, price, roomImageId) {
+        this.hotelName = hotelName;
         this.country = country;
         this.region = region;
         this.location = location;
-        this.simpleInfo=simple_info;
-        this.introInfo=intro_info;
-        this.value = value;
-        this.image = image;
+        this.simpleInfo = simpleInfo;
+        this.introduction = introduction;
+        this.price = price;
+        this.roomImageId = roomImageId;
     }
 }

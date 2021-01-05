@@ -7,11 +7,9 @@ export default class TripService {
     }
 
     // 유저의 숙소 예약 내역 가져오기
-    async searchTripInfo(nickname) {
+    async getUserReservation(nickname) {
         return new Promise((resolve) => {
-            //숙소 예약 정보가져옴 날짜순으로 정렬해야할지 구매순으로 정렬해야할지 생각
-            const sql =
-                "select a.id, a.aid, a.item_name, a.date, b.region, b.image from `orders` AS `a` INNER JOIN `room` AS `b` WHERE a.partner_user_id = ? AND a.item_name = b.name GROUP BY a.id ORDER BY a.id DESC";
+            const sql = 'SELECT booking.id, booking.aid, booking.item_name, booking.date, room.region, (SELECT image_1 FROM room_image WHERE room.room_image_id = room_image.id) AS image FROM `booking` INNER JOIN `room` WHERE booking.partner_user_id = ? AND booking.item_name = room.room_name ORDER BY booking.id DESC';
             connection.query(sql, nickname, (err, rows) => {
                 if (err) throw err;
 
@@ -38,10 +36,9 @@ export default class TripService {
     }
 
     // 유저 특정 예약 숙소 정보 가져오기
-    async searchTripDetail(searchValue) {
+    async getUserReservationDetail(searchValue) {
         return new Promise((resolve) => {
-            const sql =
-                "select a.date, a.tid, a.amount, a.id AS message_id, b.location,b.name,b.id AS room_id, b.image from `orders` AS `a` INNER JOIN `room` AS `b` WHERE a.aid = ? AND a.item_name = b.name";
+            const sql = 'SELECT booking.date, booking.tid, booking.amount, booking.id AS message_id,  room.room_name AS name, room.id AS room_id, (SELECT image_1 FROM room_image WHERE room.room_image_id = room_image.id) AS image FROM `booking` INNER JOIN `room` WHERE booking.aid = ? AND booking.item_name = room.room_name';
             connection.query(sql, [searchValue], (err, rows) => {
                 if (err) throw err;
 
@@ -53,9 +50,6 @@ export default class TripService {
                     // 날짜 JSON 파싱
                     val.date = JSON.parse(val.date);
 
-                    // 장소 위,경도 값 JSON 파싱
-                    val.location = JSON.parse(val.location);
-
                     val.reservedDay = moment(val.date.startDay).format("YYYY/MM/DD");
 
                     // 년,월,일 한글 변환 적용
@@ -66,7 +60,7 @@ export default class TripService {
                 resolve(rows);
             });
         }).catch((error) => {
-            console.log(`searchTripDetail 에러 발생: ${error}`);
+            console.log(`getUserReservationDetail 에러 발생: ${error}`);
             logger.error(error);
 
             const resData = {

@@ -11,7 +11,7 @@ export default (app) => {
         const nickname = req.user.nickname;
 
         const tripServiceInstance = new TripService();
-        const result = await tripServiceInstance.searchTripInfo(nickname);
+        const result = await tripServiceInstance.getUserReservation(nickname);
 
         res.render('user/trip/trip_index', {'nickname': nickname, 'rooms': result});
 
@@ -22,11 +22,8 @@ export default (app) => {
         const searchValue = req.params.aid;
 
         const tripServiceInstance = new TripService();
-        const result = await tripServiceInstance.searchTripDetail(searchValue);
+        const result = await tripServiceInstance.getUserReservationDetail(searchValue);
 
         res.render('user/trip/trip_detail', {'nickname': nickname, 'roomInfo': result});
     });
 };
-
-
-

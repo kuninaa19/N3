@@ -12,7 +12,7 @@ export default (app) => {
         const nickname = req.user.nickname;
 
         const messageServiceInstance = new MessageService();
-        const {rows, opponent} = await messageServiceInstance.searchMessages(nickname);
+        const {rows, opponent} = await messageServiceInstance.getMessages(nickname);
 
         res.render('user/message/message_index', {
             'nickname': nickname,
@@ -27,7 +27,7 @@ export default (app) => {
         const searchValue = req.params.message_id;
 
         const messageServiceInstance = new MessageService();
-        const {rows, LLTime, opponent} = await messageServiceInstance.searchMessagesDetail(searchValue, nickname);
+        const {rows, LLTime, opponent} = await messageServiceInstance.getMessagesDetail(searchValue, nickname);
 
         res.render('user/message/message_detail', {
             'nickname': nickname,

@@ -1,5 +1,6 @@
 // starOnOff() 클릭이벤트리스너 - 숙소평점주기
 // sendReview 폼전송 - 리뷰작성완료
+//base URL 가져오기
 // closeReview 창닫기
 
 const rateStarBtn = document.querySelectorAll('.rate_star'); // 평점
@@ -46,7 +47,7 @@ const sendReview = (reviewRate, exId) => {
 
         const data = {
             room_id: exId.room,
-            order_id: exId.order,
+            booking_id: exId.booking,
             score: reviewRate,
             room_name: document.querySelector('.interval').innerText,
             content: document.querySelector('.message').value
@@ -74,7 +75,7 @@ const readyToSend = async (e) => {
 
     if (rate) {
         const exId = {
-            order: e.target.getAttribute('data-order-id'),
+            booking: e.target.getAttribute('data-booking-id'),
             room: e.target.getAttribute('data-room-id')
         };
 

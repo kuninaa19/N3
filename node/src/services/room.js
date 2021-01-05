@@ -6,16 +6,16 @@ export default class RoomService {
     constructor() {
     }
 
-    async index() {
-        // 메인페이지 하단 숙소카드를 위한 숙소정보가져오기
+    // 메인페이지 하단 숙소카드를 위한 숙소정보가져오기
+    async getRecentRoomList() {
         return new Promise((resolve) => {
-            const sql = 'SELECT id,image,name,region FROM `room` ORDER BY id DESC LIMIT 4';
+            const sql = 'SELECT room.id, room.room_name AS name, room.region, room_image.image_1 AS image FROM `room` INNER JOIN `room_image` ON room.room_image_id = room_image.id ORDER BY id DESC LIMIT 4';
             connection.query(sql, (err, rows) => {
                 if (err) throw err;
                 resolve(rows);
             });
         }).catch(error => {
-            console.log(`index 에러 발생: ${error}`);
+            console.log(`getRecentRoomList() 에러 발생: ${error}`);
             logger.error(error);
         });
     }
@@ -23,13 +23,13 @@ export default class RoomService {
     // 검색한 지역 숙소정보 리스트 가져오기
     async getRoomList(searchValue) {
         return new Promise((resolve) => {
-            const sql = 'SELECT a.id,a.name,a.region,a.value,a.image,(SELECT COUNT(*) FROM `review` WHERE a.name = room_name) as count,(SELECT SUM(score) FROM `review` WHERE a.name = room_name) as score FROM `room` as a  WHERE a.region = ?';
+            const sql = 'SELECT room.id, room.room_name AS name, room.region, room.price, (SELECT image_1 FROM `room_image` WHERE room.room_image_id = room_image.id) AS image, (SELECT COUNT(*) FROM `review` WHERE room.room_name = room_name) AS count, (SELECT SUM(score) FROM `review` WHERE room.room_name = room_name) AS score FROM `room` WHERE room.region = ?';
             connection.query(sql, searchValue, (err, rows) => {
                 if (err) throw err;
 
                 // 하루 숙박비 값만 가져와서 재저장, 평점 재저장
                 rows.forEach(function (val) {
-                    val.value = JSON.parse(val.value).perDay;
+                    val.price = JSON.parse(val.price).perDay;
                     if (val.count === 0) {
                         val.score = 0;
                     } else {
@@ -46,18 +46,18 @@ export default class RoomService {
     }
 
     // 방 세부페이지정보 가져오기
-    async roomDetail(searchValue) {
+    async getRoomDetail(searchValue) {
         return new Promise((resolve) => {
             // 숙소정보 가져옴
-            const sql = 'SELECT a.*, b.image_1, b.image_2, b.image_3, b.image_4, b.image_5 FROM `room` as a INNER JOIN `images` as b ON a.image = b.image_1  WHERE a.id = ?';
+            const sql = 'SELECT room.*, img.image_1, img.image_2, img.image_3, img.image_4, img.image_5 FROM `room` INNER JOIN `room_image` as img  ON room.room_image_id = img.id  WHERE room.id = ?';
             connection.query(sql, searchValue, (err, rows) => {
                 if (err) throw err;
 
                 // 하루 숙박비 값만 가져와서 재저장
-                rows[0].value = JSON.parse(rows[0].value);
+                rows[0].price = JSON.parse(rows[0].price);
                 rows[0].simple_info = JSON.parse(rows[0].simple_info);
                 rows[0].location = JSON.parse(rows[0].location);
-                rows[0].intro_info = rows[0].intro_info.replace(/\n/g, '<br/>'); // 설명부분 엔터적용되서 나오도록 변경
+                rows[0].introduction = rows[0].introduction.replace(/\n/g, '<br/>'); // 설명부분 엔터적용되서 나오도록 변경
 
                 resolve(rows[0]);
             });
@@ -69,9 +69,9 @@ export default class RoomService {
     }
 
     // 숙소 후기 가져오기
-    async roomReview(searchValue) {
+    async getRoomReview(searchValue) {
         return new Promise((resolve) => {
-            const sql = 'SELECT room_name,user_name,content,date FROM `review` WHERE room_id = ? ORDER BY id DESC LIMIT 5';
+            const sql = 'SELECT user_name, content, date FROM `review` WHERE room_id = ? ORDER BY id DESC LIMIT 5';
             connection.query(sql, searchValue, (err, rows) => {
                 if (err) throw err;
 
@@ -88,7 +88,7 @@ export default class RoomService {
     }
 
     // 숙소 평점, 후기개수 가져오기
-    async roomScoreCount(searchValue) {
+    async getRoomScoreCount(searchValue) {
         return new Promise(resolve => {
             const sql = 'SELECT COUNT(*) as count, SUM(score) as score FROM `review` WHERE room_id = ?';
             connection.query(sql, searchValue, (err, rows) => {
@@ -111,15 +111,16 @@ export default class RoomService {
     }
 
     // 결제페이지 정보 가져오기
-    async roomPaymentDetail(searchValue) {
+    async getRoomPaymentDetail(searchValue) {
         return new Promise(resolve => {
-            const sql = 'SELECT a.name,a.simple_info,a.location,a.value,a.image,a.host_name,COUNT(b.room_id) as count, SUM(b.score) as score FROM `room` as a INNER JOIN `review` as b ON a.id = b.room_id WHERE a.id = ?';
+            const sql = 'SELECT room.room_name AS name, room.simple_info, room.price, room.host_name, room_image.image_1  AS image, COUNT(review.room_id) AS count, SUM(review.score) AS score from `room` INNER JOIN `room_image` ON room.room_image_id = room_image.id LEFT JOIN review ON room.id = review.room_id WHERE room.id = ?';
             connection.query(sql, searchValue, (err, rows) => {
                 if (err) throw err;
 
+                logger.info('getRoomPaymentDetail 정보 %o', rows);
                 // 하루 숙박비 값 파싱
                 rows[0].simple_info = JSON.parse(rows[0].simple_info);
-                rows[0].value = JSON.parse(rows[0].value);
+                rows[0].price = JSON.parse(rows[0].price);
 
                 if (rows[0].count === 0) {
                     rows[0].score = 0;
@@ -129,7 +130,7 @@ export default class RoomService {
                 resolve(rows);
             });
         }).catch(error => {
-            console.log(`roomPaymentDetail 에러 발생: ${error}`);
+            console.log(`getRoomPaymentDetail 에러 발생: ${error}`);
             logger.error(error);
 
             return false;
@@ -137,9 +138,9 @@ export default class RoomService {
     }
 
     // 위치정보얻기
-    async getLocation(data) {
+    async getRoomLocation(data) {
         return new Promise((resolve) => {
-            const sql = 'select location from room  WHERE name=?';
+            const sql = 'select location from `room`  WHERE room_name=?';
             connection.query(sql, data.hotelName, (err, rows) => {
                 if (err) throw err;
 

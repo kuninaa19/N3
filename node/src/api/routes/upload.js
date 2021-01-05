@@ -34,7 +34,7 @@ export default (app) => {
         };
 
         const uploadServiceInstance = new UploadService();
-        const result = await uploadServiceInstance.insertImages(imagesDTO);
+        const result = await uploadServiceInstance.storeImages(imagesDTO);
 
         return res.json(result);
     });
@@ -42,20 +42,20 @@ export default (app) => {
     // 방 정보 전체 업로드
     route.post('/info', async (req, res) => {
         const roomDTO = {
-            'name': req.body.name,
+            'room_name': req.body.hotelName,
             'country': req.body.country,
             'region': req.body.region,
             'simple_info': JSON.stringify(req.body.simpleInfo),
             'location': JSON.stringify(req.body.location),
-            'intro_info': req.body.introInfo,
-            'value': JSON.stringify(req.body.value),
-            'image': req.body.image,
+            'introduction': req.body.introduction,
+            'price': JSON.stringify(req.body.price),
+            'room_image_id': req.body.roomImageId,
             // 'host_name':req.user.nickname
             'host_name': 'Xerar' // 로그인없이 등록 할 수 있도록 수정
         };
 
         const uploadServiceInstance = new UploadService();
-        const result = await uploadServiceInstance.insertRoomInfo(roomDTO);
+        const result = await uploadServiceInstance.storeRoom(roomDTO);
 
         return res.json(result);
     });

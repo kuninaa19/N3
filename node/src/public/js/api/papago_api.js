@@ -2,12 +2,11 @@
 // detectLng() 결제승인이후 전송할 메시지에 대한 언어감지, 채팅번역버튼 언어감지
 // translateLng() 언어번역
 
-const detectLng = (data) => {
+const detectLang = (data) => {
     return new Promise((resolve, reject) => {
         const baseUrl = getBaseUrl();
 
         const xhr = new XMLHttpRequest();
-
         xhr.open("POST", baseUrl + 'papago/detectLangs', true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
@@ -29,7 +28,7 @@ const detectLng = (data) => {
     });
 };
 
-const translateLng = (data) => {
+const translateLang = (data) => {
     return new Promise((resolve, reject) => {
         const baseUrl = getBaseUrl();
 

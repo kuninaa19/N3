@@ -104,7 +104,7 @@
             <!--                요금표시-->
             <div class="receipt">
                 <div class="charge_detail">
-                    <span id="per_day_cost">₩<%= rooms[0].value.perDay %></span>
+                    <span id="per_day_cost">₩<%= rooms[0].price.perDay %></span>
                     <span id="per_date">x <%= reservationInfo.day %>박</span>
                     <span class="charge"><%= reservationInfo.perDayFee %></span>
                     <span class="currency_mark">₩</span>
@@ -112,13 +112,13 @@
 
                 <div class="charge_detail">
                     <span>청소비</span>
-                    <span class="charge"><%= rooms[0].value.cleanFee %></span>
+                    <span class="charge"><%= rooms[0].price.cleanFee %></span>
                     <span class="currency_mark">₩</span>
                 </div>
 
                 <div class="charge_detail">
                     <span>서비스 수수료</span>
-                    <span class="charge"><%= rooms[0].value.serviceFee %></span>
+                    <span class="charge"><%= rooms[0].price.serviceFee %></span>
                     <span class="currency_mark">₩</span>
                 </div>
 
@@ -134,8 +134,10 @@
 <div class="footer">
     <h5>Hotel reservation dummy site</h5>
 </div>
+
 <!--get_url-->
 <script src="/static/js/get_url.js"></script>
+
 <!--결제버튼, 카카오페이 API 결제하기-->
 <script src="/static/js/api/kakao_pay_ready.js"></script>
 

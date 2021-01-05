@@ -17,7 +17,7 @@ export default (app) => {
         }), (req, res) => {
             const userDTO = {
                 'nickname': req.user.nickname,
-                'way': req.user.way
+                'platform': req.user.platform
             };
 
             const authServiceInstance = new AuthService();
@@ -41,7 +41,7 @@ export default (app) => {
             }), (req, res) => {
             const userDTO = {
                 'nickname': req.user.nickname,
-                'way': req.user.way
+                'platform': req.user.platform
             };
 
             const authServiceInstance = new AuthService();
@@ -50,7 +50,7 @@ export default (app) => {
             req.session.refreshToken = refreshToken.uid(256);
             res.cookie(`accessToken`, jwtToken, {
                 maxAge: 1.8e+6, //30분
-                // secure : true,
+                secure: true,
                 httpOnly: true
             });
             res.redirect('/');
@@ -61,7 +61,7 @@ export default (app) => {
         try {
             const userDTO = {
                 token: req.cookies.accessToken,
-                platform: req.user.way,
+                platform: req.user.platform,
                 nickname: req.user.nickname
             };
 

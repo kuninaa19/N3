@@ -50,7 +50,7 @@ export default (app) => {
             const langDTO = JSON.stringify(msg);
 
             // 파파고 언어감지 메소드 실행요청
-            res.send(`<script>opener.location.href='javascript:detectLng(${langDTO});'; window.close();</script>`);
+            res.send(`<script>opener.location.href='javascript:detectLang(${langDTO});'; window.close();</script>`);
         });
     });
 

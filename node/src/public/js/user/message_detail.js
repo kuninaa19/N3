@@ -58,13 +58,13 @@ const forTranslation = async (e) => {
 
         //널이면 언어감지부터 널아니면 번역
         if (lngCode === 'none') {
-            const detectLngCode = await detectLng(data);
+            const detectLngCode = await detectLang(data);
 
             msgDetailClass[0].setAttribute('langCode', detectLngCode);
             data.lang = detectLngCode;
         }
 
-        const transMsg = await translateLng(data);
+        const transMsg = await translateLang(data);
 
         //번역처리이후 원문 가리기
         msgDetailClass[0].setAttribute('translate', 'yes');

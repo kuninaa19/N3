@@ -6,22 +6,22 @@ export default class UploadService {
     }
 
     // 이미지 DB 저장
-    async insertImages(images) {
+    async storeImages(images) {
         return new Promise((resolve) => {
-            const sql = 'INSERT INTO `images` SET ?';
-            connection.query(sql, images, (err) => {
+            const sql = 'INSERT INTO `room_image` SET ?';
+            connection.query(sql, images, (err, row) => {
                 if (err) throw err;
 
                 let resData = {
                     'key': true,
-                    'image': images.image_1
+                    'roomImageId': row.insertId
                 };
 
                 resolve(resData);
             });
         }).catch(error => {
-            logger.error(`insertImage 에러 발생: ${error}`);
-            console.log(`insertImage 에러 발생: ${error}`);
+            console.log(`addImages 에러 발생: ${error}`);
+            logger.error(error);
 
             const resData = {
                 'key': false
@@ -31,21 +31,21 @@ export default class UploadService {
     }
 
     //숙소정보DB 저장
-    async insertRoomInfo(room) {
+    async storeRoom(room) {
         return new Promise((resolve) => {
             const sql = 'INSERT INTO `room` SET ?';
-            connection.query(sql, room, (err, rows) => {
+            connection.query(sql, room, (err, row) => {
                 if (err) throw err;
 
                 const resData = {
                     'key': true,
-                    'roomNum': rows.insertId
+                    'roomNum': row.insertId
                 };
 
                 resolve(resData);
             });
         }).catch(error => {
-            console.log(`insertRoomInfo 에러 발생: ${error}`);
+            console.log(`addRoom 에러 발생: ${error}`);
             logger.error(error);
 
             const resData = {

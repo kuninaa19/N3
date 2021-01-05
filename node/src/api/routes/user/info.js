@@ -32,15 +32,15 @@ export default (app) => {
     route.post('/review/writing', middlewares.isAuth, async (req, res) => {
         const nickname = req.user.nickname;
         const roomId = req.body.room;
-        const orderId = req.body.order;
+        const bookingId = req.body.order;
 
         const infoServiceInstance = new InfoService();
-        const roomInfo = await infoServiceInstance.getRoomInfo(roomId);
+        const roomInfo = await infoServiceInstance.getInfoForReviewWriting(roomId);
 
         res.render('user/info/info_review_writing', {
             'nickname': nickname,
             'roomInfo': roomInfo,
-            'orderId': orderId,
+            'bookingId': bookingId,
             'roomId': roomId
         });
     });
@@ -56,5 +56,4 @@ export default (app) => {
 
         res.json({key: result});
     });
-
 };

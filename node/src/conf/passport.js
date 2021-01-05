@@ -12,7 +12,7 @@ export default (passport) => {
         let user = {
             'email': id,
             'password': password,
-            'way': 'general'
+            'platform': 'general'
         };
         const authServiceInstance = new AuthService();
         authServiceInstance.checkLocalSignIn(user, done);
@@ -26,7 +26,7 @@ export default (passport) => {
             'email': id,
             'password': bCrypt.hashSync(password, 10),
             'nickname': req.body.nickname,
-            'way': 'general'
+            'platform': 'general'
         };
         const authServiceInstance = new AuthService();
         authServiceInstance.checkSignIn(user, done);
@@ -41,7 +41,7 @@ export default (passport) => {
             const user = {
                 'email': profile._json.email,
                 'nickname': profile._json.nickname,
-                'way': profile.provider,
+                'platform': profile.provider,
                 'accessToken': accessToken,
                 'refreshToken': refreshToken
             };
@@ -60,7 +60,7 @@ export default (passport) => {
                 // 'id':profile._json.id
                 'email': profile._json.kakao_account.email,
                 'nickname': profile.username,
-                'way': profile.provider,
+                'platform': profile.provider,
                 'accessToken': accessToken,
                 'refreshToken': refreshToken
             };

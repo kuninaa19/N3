@@ -8,7 +8,7 @@ export default (app) => {
 
     route.get('/', async (req, res) => {
         const roomServiceInstance = new RoomService();
-        const result = await roomServiceInstance.index();
+        const result = await roomServiceInstance.getRecentRoomList();
 
         if (req.isAuthenticated()) {
             const nickname = req.user.nickname;

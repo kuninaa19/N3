@@ -12,9 +12,9 @@ export default (app) => {
         const searchValue = req.params.number; // 호텔 번호
 
         const roomServiceInstance = new RoomService();
-        const detail = await roomServiceInstance.roomDetail(searchValue);
-        const review = await roomServiceInstance.roomReview(searchValue);
-        const scoreCount = await roomServiceInstance.roomScoreCount(searchValue);
+        const detail = await roomServiceInstance.getRoomDetail(searchValue);
+        const review = await roomServiceInstance.getRoomReview(searchValue);
+        const scoreCount = await roomServiceInstance.getRoomScoreCount(searchValue);
 
         if (req.isAuthenticated()) {
             const nickname = req.user.nickname; // 유저 아이디
@@ -35,11 +35,11 @@ export default (app) => {
         const searchValue = req.params.number; // 호텔 번호
 
         const roomServiceInstance = new RoomService();
-        const paymentDetail = await roomServiceInstance.roomPaymentDetail(searchValue);
+        const paymentDetail = await roomServiceInstance.getRoomPaymentDetail(searchValue);
 
         const formData = {
             // 날짜가 적용된 숙박요금(청소비 제외)
-            'perDayFee': paymentDetail[0].value.perDay * req.query.day,
+            'perDayFee': paymentDetail[0].price.perDay * req.query.day,
             'day': req.query.day
         };
 
@@ -51,7 +51,7 @@ export default (app) => {
         const data = req.body;
 
         const roomServiceInstance = new RoomService();
-        const rows = await roomServiceInstance.getLocation(data);
+        const rows = await roomServiceInstance.getRoomLocation(data);
 
         res.json(rows);
     });

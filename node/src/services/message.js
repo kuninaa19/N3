@@ -30,11 +30,10 @@ export default class MessageService {
     constructor() {
     }
 
-    //메시지 최초 10개 전달
-    async searchMessages(nickname) {
+    //메시지 전달
+    async getMessages(nickname) {
         return new Promise((resolve) => {
-            // const sql = 'select  a.*, b.date, b.item_name,c.country,c.region from `message` AS `a` INNER JOIN `orders` AS `b` INNER JOIN `room` AS `c` ON a.user_name = ? OR a.host_name = ? WHERE a.room_id = b.id AND b.item_name = c.name   GROUP BY a.time ORDER BY a.time DESC LIMIT 10';
-            const sql = 'select  a.*, b.date, b.item_name,c.country,c.region from `message` AS `a` INNER JOIN `orders` AS `b` INNER JOIN `room` AS `c` ON a.user_name = ? OR a.host_name = ? WHERE a.room_id = b.id AND b.item_name = c.name   GROUP BY a.time ORDER BY a.time DESC';
+            const sql = 'select chat_window.*, booking.date, booking.item_name, room.country, room.region from `chat_window` INNER JOIN `booking` INNER JOIN `room` ON chat_window.user_name = ? OR chat_window.host_name = ? WHERE chat_window.room_id = booking.id AND booking.item_name = room.room_name ORDER BY chat_window.time DESC';
             connection.query(sql, [nickname, nickname], (err, rows) => {
                 if (err) throw err;
 
@@ -73,9 +72,9 @@ export default class MessageService {
     }
 
     // 채팅창(메시지 상세페이지)
-    async searchMessagesDetail(searchValue, nickname) {
+    async getMessagesDetail(searchValue, nickname) {
         return new Promise((resolve) => {
-            const sql = 'select  a.user_name,a.host_name,b.* from `message` AS `a` INNER JOIN `chat` AS `b` ON a.room_id=b.room_id WHERE b.room_id=? AND (a.user_name=? OR a.host_name=?) ORDER BY b.id asc';
+            const sql = 'SELECT chat_window.user_name, chat_window.host_name, chat.* FROM `chat_window` INNER JOIN `chat` ON chat_window.room_id=chat.room_id WHERE chat.room_id=? AND (chat_window.user_name=? OR chat_window.host_name=?) ORDER BY chat.id asc';
             connection.query(sql, [searchValue, nickname, nickname], (err, rows) => {
                 if (err) throw err;
 

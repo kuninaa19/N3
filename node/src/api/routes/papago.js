@@ -11,18 +11,17 @@ export default (app) => {
         const chatDTO = req.body;
 
         const papagoServiceInstance = new PapagoService();
-        const resPapago = await papagoServiceInstance.detectLng(chatDTO);
+        const resPapago = await papagoServiceInstance.detectLang(chatDTO);
 
         res.json(resPapago);
     });
-
 
     // 파파고 언어번역 API
     route.post('/translate', async (req, res) => {
         const chatDTO = req.body;
 
         const papagoServiceInstance = new PapagoService();
-        const resPapago = await papagoServiceInstance.transLng(chatDTO);
+        const resPapago = await papagoServiceInstance.transLang(chatDTO);
 
         res.json(resPapago);
     });

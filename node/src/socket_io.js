@@ -24,19 +24,19 @@ export default (app) => {
                 time: moment().format('YYYY-MM-DD HH:mm:ss')
             };
 
-            const sql = 'insert into `chat` set ?';
+            const sql = 'INSERT INTO `chat` SET ?';
             connection.query(sql, msgInfo, (err, row) => {
                 if (err) throw  err;
 
                 msgInfo.LLtime = moment(msgInfo.time).format('LL');
                 msgInfo.LTtime = moment(msgInfo.time).format('LT');
 
-                msgInfo.item_id =row.insertId;
+                msgInfo.item_id = row.insertId;
 
                 io.in(msgInfo.room_id).emit('msg', msgInfo); //자기자신포함 채팅방 전원에게 전송
             });
 
-            const forUpdateSql = 'UPDATE message SET message=?,time=? WHERE room_id = ?';
+            const forUpdateSql = 'UPDATE `chat_window` SET message=?, time=? WHERE room_id = ?';
             connection.query(forUpdateSql, [msgInfo.content, msgInfo.time, msgInfo.room_id], (err) => {
                 if (err) throw  err;
             });
