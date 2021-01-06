@@ -33,7 +33,7 @@ export default class MessageService {
     //메시지 전달
     async getMessages(nickname) {
         return new Promise((resolve) => {
-            const sql = 'select chat_window.*, booking.date, booking.item_name, room.country, room.region from `chat_window` INNER JOIN `booking` INNER JOIN `room` ON chat_window.user_name = ? OR chat_window.host_name = ? WHERE chat_window.room_id = booking.id AND booking.item_name = room.room_name ORDER BY chat_window.time DESC';
+            const sql = 'SELECT chat_window.*, booking.date, booking.item_name, room.country, room.region FROM `chat_window` INNER JOIN `booking` INNER JOIN `room` ON chat_window.user_name = ? OR chat_window.host_name = ? WHERE chat_window.room_id = booking.id AND booking.item_name = room.room_name ORDER BY chat_window.time DESC';
             connection.query(sql, [nickname, nickname], (err, rows) => {
                 if (err) throw err;
 
@@ -61,7 +61,7 @@ export default class MessageService {
             });
 
         }).catch(error => {
-            console.log(`searchMessages 에러 발생: ${error}`);
+            console.log(`getMessages 에러 발생: ${error}`);
             logger.error(error);
 
             const resData = {
@@ -106,7 +106,7 @@ export default class MessageService {
             });
 
         }).catch(error => {
-            console.log(`searchMessagesDetail 에러 발생: ${error}`);
+            console.log(`getMessagesDetail 에러 발생: ${error}`);
             logger.error(error);
 
             const resData = {

@@ -97,7 +97,7 @@ export default class KakaoService {
     //결제완료후 정보 DB 저장
     async storeBooking(reservation) {
         return new Promise(resolve => {
-            const sql = 'insert into `booking` set ?';
+            const sql = 'INSERT INTO `booking` SET ?';
             connection.query(sql, reservation, (err, rows) => {
                 if (err) throw err;
 
@@ -124,7 +124,7 @@ export default class KakaoService {
                 time: time
             };
 
-            const sql = 'insert into `chat_window` set ?';
+            const sql = 'INSERT INTO `chat_window` SET ?';
             connection.query(sql, msg, (err) => {
                 if (err) throw err;
 
@@ -142,7 +142,7 @@ export default class KakaoService {
                 content: session.message,
                 time: time
             };
-            const sql = 'insert into `chat` set ?';
+            const sql = 'INSERT INTO `chat` SET ?';
             connection.query(sql, sendChat, (err) => {
                 if (err) throw err;
 
@@ -162,7 +162,7 @@ export default class KakaoService {
     // -- /payment/cancel 메서드, DB저장된 주문 정보 삭제
     async cancelBooking(order) {
         return new Promise(resolve => {
-            const sql = 'DELETE from `booking` WHERE tid=? AND item_name=?';
+            const sql = 'DELETE FROM `booking` WHERE tid=? AND item_name=?';
             connection.query(sql, [order.tid, order.item_name], (err) => {
                 if (err) throw err;
                 resolve();

@@ -140,7 +140,7 @@ export default class RoomService {
     // 위치정보얻기
     async getRoomLocation(data) {
         return new Promise((resolve) => {
-            const sql = 'select location from `room`  WHERE room_name=?';
+            const sql = 'SELECT location FROM `room`  WHERE room_name=?';
             connection.query(sql, data.hotelName, (err, rows) => {
                 if (err) throw err;
 

@@ -17,7 +17,7 @@ export default class AuthService {
 
     //이미 가입된 회원인지 확인[local,naver,kakao]
     checkSignIn(user, done) {
-        connection.query('select * from `person` where `email` = ?', user.email, (err, rows) => {
+        connection.query('SELECT * FROM `person` WHERE `email` = ?', user.email, (err, rows) => {
             if (err) {
                 console.log('checkSignIn : failure', err);
 
@@ -41,7 +41,7 @@ export default class AuthService {
 
     // 로컬 로그인 회원가입확인
     checkLocalSignIn(user, done) {
-        connection.query('select * from `person` where `email` = ?', user.email, (err, rows) => {
+        connection.query('SELECT * FROM `person` WHERE `email` = ?', user.email, (err, rows) => {
             if (err) {
                 console.log('err :' + err);
                 throw err;
@@ -70,7 +70,7 @@ export default class AuthService {
     //회원가입 [ local,kakao,naver]
     signUp(user, done) {
         if (user.platform === 'general') {
-            connection.query('insert into `person` set ?', user, function (err) {
+            connection.query('INSERT INTO `person` SET ?', user, function (err) {
                 if (err) throw err;
                 return done(null, {
                     // email: user.email,
@@ -85,7 +85,7 @@ export default class AuthService {
                 platform: user.platform,
             };
 
-            connection.query('insert into `person` set ?', userDAO, function (err) {
+            connection.query('INSERT INTO `person` SET ?', userDAO, function (err) {
                 if (err) throw err;
                 return done(null, user);
             });
@@ -176,5 +176,4 @@ export default class AuthService {
             return key;
         }
     }
-
 }

@@ -20,7 +20,7 @@ export default class UploadService {
                 resolve(resData);
             });
         }).catch(error => {
-            console.log(`addImages 에러 발생: ${error}`);
+            console.log(`storeImages 에러 발생: ${error}`);
             logger.error(error);
 
             const resData = {
@@ -45,7 +45,7 @@ export default class UploadService {
                 resolve(resData);
             });
         }).catch(error => {
-            console.log(`addRoom 에러 발생: ${error}`);
+            console.log(`storeRoom 에러 발생: ${error}`);
             logger.error(error);
 
             const resData = {
