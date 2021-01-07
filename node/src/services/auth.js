@@ -1,8 +1,8 @@
 import request from "request-promise-native";
 import bCrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import connection from '../loaders/mysql';
 import config from "../conf/config";
+import personModel from '../models/person';
 
 export default class AuthService {
     constructor() {
@@ -15,105 +15,72 @@ export default class AuthService {
         });
     }
 
-    //이미 가입된 회원인지 확인[local,naver,kakao]
-    checkSignIn(user, done) {
-        connection.query('SELECT * FROM `person` WHERE `email` = ?', user.email, (err, rows) => {
-            if (err) {
-                console.log('checkSignIn : failure', err);
+    //로그인 시도 및 회원가입[local,naver,kakao]
+    async signIn(user, done) {
+        const result = await personModel.getPerson(user.email);
 
-                return done(null, false, {message: ` 이메일사용에 동의해주세요`});
-                // throw err;
-            }
-            // 아이디없음
-            if (rows.length === 0) {
-                this.signUp(user, done);
-                //아이디 있음
-            } else if (rows[0].email === user.email) {
-                if (rows[0].platform === 'general') {
-                    return done(null, false, {message: `이미 가입된 회원입니다.`});
-                } else {
-                    // [naver,kakao] 로그인
-                    this.signIn(rows, user, done);
-                }
-            }
-        });
-    }
-
-    // 로컬 로그인 회원가입확인
-    checkLocalSignIn(user, done) {
-        connection.query('SELECT * FROM `person` WHERE `email` = ?', user.email, (err, rows) => {
-            if (err) {
-                console.log('err :' + err);
-                throw err;
-            }
-            if (rows.length === 0) {
-                return done(false, null, {message: '없는 아이디 입니다.'});
-                //아이디 틀림
-            } else if (rows[0].platform !== user.platform) {
-                return done(null, false, {message: `이미 ${rows[0].platform}로 가입된 회원입니다.`});
-            } else if (rows[0].email !== user.email) {
-                console.log('아이디 틀림');
-                return done(null, false, {message: '틀린 이메일입니다.'})
-                //비번 틀림
-            } else if (!bCrypt.compareSync(user.password, rows[0].password)) {
-                console.log('비번 틀림');
+        if (user.platform === 'general') {
+            if (result.length === 0) {
+                return done(false, null, {message: '존재하지않는 아이디 입니다.'});
+            } else if (result[0].platform !== user.platform) {
+                return done(null, false, {message: `이미 가입된 회원입니다.`});
+            } else if (result[0].email !== user.email) {
+                return done(null, false, {message: '틀린 이메일입니다.'});
+            } else if (!bCrypt.compareSync(user.password, result[0].password)) {
                 return done(null, false, {message: '틀린 비밀번호 입니다.'})
             }
             return done(null, {
-                // email: rows[0].email,
-                nickname: rows[0].nickname,
-                platform: rows[0].platform
+                nickname: result[0].nickname,
+                platform: result[0].platform
             });
-        });
+        } else {
+            if (result === false) {
+                return done(null, false, {message: `이메일사용에 동의해주세요`});
+            }
+            // 아이디없음 혹은 회원가입
+            else if (result.length === 0) {
+                await this.signUp(user, done); // kakao, naver
+                //아이디 있음
+            } else if (result[0].email === user.email) {
+                // [naver,kakao] 로그인
+                if (result[0].platform === user.platform) {
+                    return done(null, user);
+                } else {
+                    return done(null, false, {message: `이미 ${result[0].platform}로 가입된 회원입니다.`});
+                }
+            }
+        }
     }
 
-    //회원가입 [ local,kakao,naver]
-    signUp(user, done) {
-        if (user.platform === 'general') {
-            connection.query('INSERT INTO `person` SET ?', user, function (err) {
-                if (err) throw err;
-                return done(null, {
-                    // email: user.email,
+    //회원가입 [ local, kakao, naver ]
+    async signUp(user, done) {
+        const getPersonResult = await personModel.getPerson(user.email);
+
+        if (getPersonResult.length === 0) {
+            let personDAO = user;
+
+            if (personDAO.platform !== 'general') { // naver, kakao signUp
+                personDAO = {
+                    email: user.email,
                     nickname: user.nickname,
                     platform: user.platform
-                });
-            });
+                };
+            }
+
+            await personModel.insertPerson(personDAO);
+
+            let person = user;
+            if (person.platform === 'general') {
+                person = {
+                    nickname: user.nickname,
+                    platform: user.platform
+                };
+            }
+            return done(null, person);
+
         } else {
-            const userDAO = {
-                email: user.email,
-                nickname: user.nickname,
-                platform: user.platform,
-            };
-
-            connection.query('INSERT INTO `person` SET ?', userDAO, function (err) {
-                if (err) throw err;
-                return done(null, user);
-            });
+            return done(null, false, {message: `이미 가입된 회원입니다.`});
         }
-    }
-
-    // naver kakao 로그인
-    signIn(dbRow, user, done) {
-        if (dbRow[0].platform === user.platform) {
-            return done(null, user);
-        } else {
-            return done(null, false, {message: `이미 ${dbRow[0].platform}로 가입된 회원입니다.`});
-        }
-    }
-
-    // 유저정보 DB 삭제
-    async deleteUser(user) {
-        return new Promise((resolve, reject) => {
-            const sql = 'DELETE FROM `person` WHERE nickname = ?';
-            connection.query(sql, user, (err) => {
-                if (err) throw reject(err);
-
-                resolve(true);
-            });
-        }).catch(err => {
-            console.log(err);
-            return false;
-        });
     }
 
     setOptions(user) {
@@ -163,14 +130,14 @@ export default class AuthService {
     //  회원탈퇴
     async withdrawal(user) {
         if (user.platform === 'general') {
-            const result = await this.deleteUser(user.nickname); // 일반로그인 회원젇보 삭제
+            const result = await personModel.deletePerson(user.nickname);// 일반로그인 회원젇보 삭제
             return result;
         } else {
             const options = this.setOptions(user); // 옵션설정
             const key = await this.unlinkPlatform(options); //  링크해제
 
             if (key) {
-                const result = await this.deleteUser(user.nickname);
+                const result = await personModel.deletePerson(user.nickname);
                 return result;
             }
             return key;
