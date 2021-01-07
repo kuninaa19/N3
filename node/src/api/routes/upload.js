@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import UploadService from "../../services/upload";
+import roomService from "../../services/room";
 import path from "path";
 import multer from "multer";
 
@@ -33,8 +33,8 @@ export default (app) => {
             'image_5': req.files[4].filename,
         };
 
-        const uploadServiceInstance = new UploadService();
-        const result = await uploadServiceInstance.storeImages(imagesDTO);
+        const roomServiceInstance = new RoomService();
+        const result = await roomServiceInstance.uploadImg(imagesDTO);
 
         return res.json(result);
     });
@@ -54,8 +54,8 @@ export default (app) => {
             'host_name': 'Xerar' // 로그인없이 등록 할 수 있도록 수정
         };
 
-        const uploadServiceInstance = new UploadService();
-        const result = await uploadServiceInstance.storeRoom(roomDTO);
+        const roomServiceInstance = new RoomService();
+        const result = await roomServiceInstance.uploadRoom(roomDTO);
 
         return res.json(result);
     });

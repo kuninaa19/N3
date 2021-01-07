@@ -1,7 +1,7 @@
 import request from 'request-promise-native';
-import connection from '../loaders/mysql';
 import logger from '../loaders/logger';
 import config from '../conf/config';
+import msgModel from '../models/message';
 
 export default class PapagoService {
     constructor() {
@@ -33,43 +33,13 @@ export default class PapagoService {
                 }
             });
             const resPapago = JSON.parse(detectResult);
-            const langResult = await this.storeLang(resPapago, chat);
+            const langResult = await msgModel.updateLang(resPapago, chat);
 
             return langResult;
 
         } catch (error) {
             console.log(`detectLang 에러 발생: ${error}`);
             logger.error(error);
-
-        }
-    }
-
-    // 언어감지된 값 저장
-    async storeLang(resPapago, chat) {
-        // 멤버로 키를 가지고 있는지 확인
-        if ("key" in chat) {
-            return new Promise((resolve) => {
-                const sql = 'UPDATE chat SET lang = ? WHERE room_id = ?';
-                connection.query(sql, [resPapago.langCode, chat.room_id], (err) => {
-                    if (err) throw err;
-                });
-                resolve({key: chat.key});
-            }).catch(error => {
-                console.log(`storeLang if문 에러 발생: ${error}`);
-                logger.error(error);
-
-            });
-        } else {
-            return new Promise((resolve) => {
-                const sql = 'UPDATE chat SET lang = ? WHERE room_id = ? AND id = ?';
-                connection.query(sql, [resPapago.langCode, chat.room_id, chat.item_id], (err) => {
-                    if (err) throw err;
-                });
-                resolve(resPapago);
-            }).catch(error => {
-                console.log(`storeLang else문 에러 발생: ${error}`);
-                logger.error(error);
-            });
         }
     }
 

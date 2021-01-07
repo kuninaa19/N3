@@ -8,16 +8,16 @@ export default (app) => {
 
     route.get('/', async (req, res) => {
         const roomServiceInstance = new RoomService();
-        const result = await roomServiceInstance.getRecentRoomList();
+        const roomList = await roomServiceInstance.showRecentRoomList();
 
         if (req.isAuthenticated()) {
             const nickname = req.user.nickname;
 
-            res.render('index', {'nickname': nickname, 'rooms': result});
+            res.render('index', {'nickname': nickname, 'rooms': roomList});
         } else {
             const flash = req.flash('error');
 
-            res.render('index', {'rooms': result, 'message': flash});
+            res.render('index', {'rooms': roomList, 'message': flash});
         }
     });
 
@@ -30,16 +30,16 @@ export default (app) => {
     });
 
     route.get('/search', async (req, res) => {
-        const searchValue = req.query.place; // 검색 지역이름
+        const searchPlace = req.query.place; // 검색 지역이름
 
         const roomServiceInstance = new RoomService();
-        const roomList = await roomServiceInstance.getRoomList(searchValue);
+        const roomList = await roomServiceInstance.showRoomList(searchPlace);
 
         if (req.isAuthenticated()) {
             const nickname = req.user.nickname; // 유저 아이디
-            res.render('room/search', {title: searchValue, 'nickname': nickname, 'rooms': roomList});
+            res.render('room/search', {title: searchPlace, 'nickname': nickname, 'rooms': roomList});
         } else {
-            res.render('room/search', {title: searchValue, 'rooms': roomList});
+            res.render('room/search', {title: searchPlace, 'rooms': roomList});
         }
     });
 };

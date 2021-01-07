@@ -11,19 +11,19 @@ export default (app) => {
         const nickname = req.user.nickname;
 
         const tripServiceInstance = new TripService();
-        const result = await tripServiceInstance.getUserReservation(nickname);
+        const reservation = await tripServiceInstance.showBooking(nickname);
 
-        res.render('user/trip/trip_index', {'nickname': nickname, 'rooms': result});
+        res.render('user/trip/trip_index', {'nickname': nickname, 'rooms': reservation});
 
     });
 
     route.get('/:aid', middlewares.isAuth, async (req, res) => {
         const nickname = req.user.nickname;
-        const searchValue = req.params.aid;
+        const bookingId = req.params.aid;
 
         const tripServiceInstance = new TripService();
-        const result = await tripServiceInstance.getUserReservationDetail(searchValue);
+        const reservation = await tripServiceInstance.showBookingDetail(bookingId);
 
-        res.render('user/trip/trip_detail', {'nickname': nickname, 'roomInfo': result});
+        res.render('user/trip/trip_detail', {'nickname': nickname, 'roomInfo': reservation});
     });
 };

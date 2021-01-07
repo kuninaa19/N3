@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import middlewares from '../../middlewares';
-import InfoService from "../../../services/info";
+import ReviewService from "../../../services/review";
 import moment from "moment";
 
 const route = Router();
@@ -12,8 +12,8 @@ export default (app) => {
     route.get('/', middlewares.isAuth, async (req, res) => {
         const nickname = req.user.nickname;
 
-        const infoServiceInstance = new InfoService();
-        const reviewInfo = await infoServiceInstance.getAvailableReviewList(nickname);
+        const reviewServiceInstance = new ReviewService();
+        const reviewInfo = await reviewServiceInstance.showWriteableReview(nickname);
 
         res.render('user/info/info_index', {'nickname': nickname, 'reviewList': reviewInfo});
     });
@@ -22,8 +22,8 @@ export default (app) => {
     route.get('/review', middlewares.isAuth, async (req, res) => {
         const nickname = req.user.nickname;
 
-        const infoServiceInstance = new InfoService();
-        const reviewInfo = await infoServiceInstance.getReviewList(nickname);
+        const reviewServiceInstance = new ReviewService();
+        const reviewInfo = await reviewServiceInstance.showWrittenReview(nickname);
 
         res.render('user/info/info_review', {'nickname': nickname, 'reviewList': reviewInfo});
     });
@@ -34,8 +34,8 @@ export default (app) => {
         const roomId = req.body.room;
         const bookingId = req.body.order;
 
-        const infoServiceInstance = new InfoService();
-        const roomInfo = await infoServiceInstance.getInfoForReviewWriting(roomId);
+        const reviewServiceInstance = new ReviewService();
+        const roomInfo = await reviewServiceInstance.showReviewInfoForWriting(roomId);
 
         res.render('user/info/info_review_writing', {
             'nickname': nickname,
@@ -47,12 +47,12 @@ export default (app) => {
 
     // 작성된 리뷰 저장
     route.post('/review/storage', middlewares.isAuth, async (req, res) => {
-        const reviewData = req.body;
-        reviewData.user_name = req.user.nickname;
-        reviewData.date = moment().format('YYYY-MM-DD HH:mm:ss');
+        let review = req.body;
+        review.user_name = req.user.nickname;
+        review.date = moment().format('YYYY-MM-DD HH:mm:ss');
 
-        const infoServiceInstance = new InfoService();
-        const result = await infoServiceInstance.storeReview(reviewData);
+        const reviewServiceInstance = new ReviewService();
+        const result = await reviewServiceInstance.uploadReview(review);
 
         res.json({key: result});
     });

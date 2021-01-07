@@ -19,7 +19,7 @@ async function getPerson(email) {
 }
 
 //회원가입 [ local,kakao,naver]
-async function insertPerson(person) {
+async function storePerson(person) {
     return new Promise((resolve, reject) => {
         const sql = 'INSERT INTO `person` SET ?';
         connection.query(sql, person, (err) => {
@@ -53,5 +53,5 @@ async function deletePerson(nickname) {
 }
 
 export default {
-    getPerson, insertPerson, deletePerson
+    getPerson, storePerson, deletePerson
 };

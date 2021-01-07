@@ -1,6 +1,5 @@
 import moment from 'moment';
-import connection from '../loaders/mysql';
-import logger from '../loaders/logger';
+import msgMdoel from '../models/message';
 
 // 시간 45분 -> 60분 일 22시간 -> 24시간
 moment.relativeTimeThreshold('m', 60);
@@ -30,89 +29,55 @@ export default class MessageService {
     constructor() {
     }
 
-    //메시지 전달
-    async getMessages(nickname) {
-        return new Promise((resolve) => {
-            const sql = 'SELECT chat_window.*, booking.date, booking.item_name, room.country, room.region FROM `chat_window` INNER JOIN `booking` INNER JOIN `room` ON chat_window.user_name = ? OR chat_window.host_name = ? WHERE chat_window.room_id = booking.id AND booking.item_name = room.room_name ORDER BY chat_window.time DESC';
-            connection.query(sql, [nickname, nickname], (err, rows) => {
-                if (err) throw err;
+    async showMsg(nickname) {
+        let msg = await msgMdoel.getMsg(nickname);
 
-                // 대화하는 상대방 아이디
-                let opponent = [];
+        // 대화하는 상대방 아이디
+        let opponent = [];
 
-                for (let i = 0; i < rows.length; i++) {
-                    // 숙박날짜 JSON 파싱
-                    rows[i].date = JSON.parse(rows[i].date);
+        for (let i = 0; i < msg.length; i++) {
+            // 숙박날짜 JSON 파싱
+            msg[i].date = JSON.parse(msg[i].date);
 
-                    // 년,월,일 한글 변환 적용
-                    rows[i].date.startDay = moment(rows[i].date.startDay).format('LL');
-                    rows[i].date.endDay = moment(rows[i].date.endDay).format('LL');
-                    rows[i].time = moment(rows[i].time).fromNow();
+            // 년,월,일 한글 변환 적용
+            msg[i].date.startDay = moment(msg[i].date.startDay).format('LL');
+            msg[i].date.endDay = moment(msg[i].date.endDay).format('LL');
+            msg[i].time = moment(msg[i].time).fromNow();
 
-                    // 접속자가 집주인이면 방문객 이름, 접속자가 방문객이면
-                    // 집주인 이름
-                    if (rows[i].host_name === nickname) {
-                        opponent[i] = rows[i].user_name;
-                    } else {
-                        opponent[i] = rows[i].host_name;
-                    }
-                }
-                resolve({rows, opponent});
-            });
-
-        }).catch(error => {
-            console.log(`getMessages 에러 발생: ${error}`);
-            logger.error(error);
-
-            const resData = {
-                'key': false
-            };
-            return resData;
-        });
+            // 접속자가 집주인이면 방문객 이름, 접속자가 방문객이면 집주인 이름
+            if (msg[i].host_name === nickname) {
+                opponent[i] = msg[i].user_name;
+            } else {
+                opponent[i] = msg[i].host_name;
+            }
+        }
+        return {msg, opponent};
     }
 
-    // 채팅창(메시지 상세페이지)
-    async getMessagesDetail(searchValue, nickname) {
-        return new Promise((resolve) => {
-            const sql = 'SELECT chat_window.user_name, chat_window.host_name, chat.* FROM `chat_window` INNER JOIN `chat` ON chat_window.room_id=chat.room_id WHERE chat.room_id=? AND (chat_window.user_name=? OR chat_window.host_name=?) ORDER BY chat.id asc';
-            connection.query(sql, [searchValue, nickname, nickname], (err, rows) => {
-                if (err) throw err;
+    async showMessageDetail(msgId, nickname) {
+        let msg = await msgMdoel.getMsgDetail(msgId, nickname);
 
-                if (rows.length === 0) {
-                    // res.send("<script>alert('접속할 수 없는 페이지 입니다.'); history.go(-1);</script>");
-                } else {
-                    // 대화하는 상대방 아이디
-                    let opponent;
+        if (msg.length === 0) {
+            // res.send("<script>alert('접속할 수 없는 페이지 입니다.'); history.go(-1);</script>");
+        } else {
+            // 대화하는 상대방 아이디
+            let opponent;
 
-                    if (rows[0].host_name === nickname) {
-                        opponent = rows[0].user_name;
-                    } else {
-                        opponent = rows[0].host_name;
-                    }
+            if (msg[0].host_name === nickname) {
+                opponent = msg[0].user_name;
+            } else {
+                opponent = msg[0].host_name;
+            }
+            // 날짜만 가져오기위한 배열
+            let LLTime = [];
 
-                    // 날짜만 가져오기위한 배열
-                    let LLTime = [];
-
-                    for (let i = 0; i < rows.length; i++) {
-                        // 날짜만 가져오기
-                        LLTime[i] = moment(rows[i].time).format('LL');
-
-                        // 년,월,일 한글 변환 적용
-                        rows[i].time = moment(rows[i].time).format('LT');
-                    }
-                    resolve({rows, LLTime, opponent});
-                }
-
-            });
-
-        }).catch(error => {
-            console.log(`getMessagesDetail 에러 발생: ${error}`);
-            logger.error(error);
-
-            const resData = {
-                'key': false
-            };
-            return resData;
-        });
+            for (let i = 0; i < msg.length; i++) {
+                // 날짜만 가져오기
+                LLTime[i] = moment(msg[i].time).format('LL');
+                // 년,월,일 한글 변환 적용
+                msg[i].time = moment(msg[i].time).format('LT');
+            }
+            return {msg, LLTime, opponent};
+        }
     }
 }

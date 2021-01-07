@@ -67,7 +67,7 @@ export default class AuthService {
                 };
             }
 
-            await personModel.insertPerson(personDAO);
+            await personModel.storePerson(personDAO);
 
             let person = user;
             if (person.platform === 'general') {
