@@ -13,11 +13,11 @@
 
 Front-end : HTML/CSS, JS ES6
 
-Back-end : Node.js, Nginx, Redis(AWS elastiCache), Mysql(AWS RDS)   
+Back-end : Node.js, Nginx, Redis, Mysql   
 
 Framework : Express   
 
-Envrironment : AWS EC2, Amazon Linux
+Envrironment : Oracle Cloud, Ubuntu
 
 DevOps : Docker, Jenkins
 
