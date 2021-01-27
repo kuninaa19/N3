@@ -1,14 +1,14 @@
-import request from "request-promise-native";
+import request from 'request-promise-native';
 import jwt from 'jsonwebtoken';
-import config from "../../conf/config";
-import logger from "../../loaders/logger";
+import config from '../../conf/config';
+import logger from '../../loaders/logger';
 
 // 토큰 인증 실패
 const notAuthenticated = (req, res) => {
     res.clearCookie('accessToken');
     req.logout();
     req.session.save(function () {
-        res.redirect('/');
+        res.send("<script>alert('로그인을 해주세요!'); history.go(-1);</script>");
     });
 };
 
@@ -17,26 +17,31 @@ const setVerifyPlatformTokenOptions = (user) => {
     return new Promise((resolve) => {
         const optionConfig = {
             headers: {
-                'Authorization': `Bearer ${user.token}`,
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                Authorization: `Bearer ${user.token}`,
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
-            method: 'GET'
+            method: 'GET',
         };
         if (user.platform === 'naver') {
-            const options = Object.assign({
-                url: 'https://openapi.naver.com/v1/nid/me',
-            }, optionConfig);
+            const options = Object.assign(
+                {
+                    url: 'https://openapi.naver.com/v1/nid/me',
+                },
+                optionConfig,
+            );
 
             resolve(options);
-
         } else if (user.platform === 'kakao') {
-            const options = Object.assign({
-                url: 'https://kapi.kakao.com/v1/user/access_token_info',
-            }, optionConfig);
+            const options = Object.assign(
+                {
+                    url: 'https://kapi.kakao.com/v1/user/access_token_info',
+                },
+                optionConfig,
+            );
 
             resolve(options);
         }
-    })
+    });
 };
 
 // getToken() 내부 API 요청 옵션 설정 [Naver, Kakao]
@@ -53,32 +58,43 @@ const setGetPlatformTokenOptions = async (user) => {
         };
 
         if (user.platform === 'naver') {
-            const params = Object.assign({
-                client_id: config.oauth.naver.client_id,
-                client_secret: config.oauth.naver.client_secret
-            }, paramsConfig);
+            const params = Object.assign(
+                {
+                    client_id: config.oauth.naver.client_id,
+                    client_secret: config.oauth.naver.client_secret,
+                },
+                paramsConfig,
+            );
 
-            const options = Object.assign({
-                url: 'https://nid.naver.com/oauth2.0/token',
-                form: params
-            }, optionsConfig);
+            const options = Object.assign(
+                {
+                    url: 'https://nid.naver.com/oauth2.0/token',
+                    form: params,
+                },
+                optionsConfig,
+            );
 
             resolve(options);
-
         } else if (user.platform === 'kakao') {
-            const params = Object.assign({
-                client_id: config.oauth.kakao.rest_api_key,
-                client_secret: config.oauth.kakao.client_secret
-            }, paramsConfig);
+            const params = Object.assign(
+                {
+                    client_id: config.oauth.kakao.rest_api_key,
+                    client_secret: config.oauth.kakao.client_secret,
+                },
+                paramsConfig,
+            );
 
-            const options = Object.assign({
-                url: 'https://kauth.kakao.com/oauth/token',
-                form: params
-            }, optionsConfig);
+            const options = Object.assign(
+                {
+                    url: 'https://kauth.kakao.com/oauth/token',
+                    form: params,
+                },
+                optionsConfig,
+            );
 
             resolve(options);
         }
-    })
+    });
 };
 
 // 유효한 토큰인지 검사
@@ -119,21 +135,23 @@ const getPlatformToken = async (options, req, res) => {
         const val = JSON.parse(result);
         logger.info('토큰 재발급 성공 : %o', val);
 
-        if (val.error) { // 리프레시토큰 오류 네이버
+        if (val.error) {
+            // 리프레시토큰 오류 네이버
             logger.error('🔥 Error getToken Naver : %o', val.error);
             notAuthenticated(req, res);
         }
 
-        const time = (val.expires_in) * 1000;
-        const cookieOptions = { // 초기로그인과 다르게 발급받는 만료시간에 맞게 저장 (네이버 1시간 카카오 6시간)
+        const time = val.expires_in * 1000;
+        const cookieOptions = {
+            // 초기로그인과 다르게 발급받는 만료시간에 맞게 저장 (네이버 1시간 카카오 6시간)
             maxAge: time,
-            secure: true
+            secure: true,
         };
         res.cookie(`accessToken`, val.access_token, cookieOptions);
 
         if (val.refresh_token) {
             req.user.refreshToken = val.refresh_token;
-            req.session.cookie.maxAge = 5.256e+9;
+            req.session.cookie.maxAge = 5.256e9;
 
             req.session.save(function () {
             });
@@ -164,19 +182,25 @@ const verifyJwtToken = async (data, req, res) => {
 const getJwtToken = async (req, res) => {
     try {
         if (req.session.refreshToken) {
-            jwt.sign(req.user, config.jwt_secret, {
-                expiresIn: '30m',
-                issuer: 'hotelbooking'
-            }, (err, token) => {
-                const options = { //30분
-                    maxAge: 1.8e+6,
-                    secure: true,
-                    httpOnly: true
-                };
-                logger.info('JWT getJwtToken');
+            jwt.sign(
+                req.user,
+                config.jwt_secret,
+                {
+                    expiresIn: '30m',
+                    issuer: 'hotelbooking',
+                },
+                (err, token) => {
+                    const options = {
+                        //30분
+                        maxAge: 1.8e6,
+                        // secure: true,
+                        httpOnly: true,
+                    };
+                    logger.info('JWT getJwtToken');
 
-                res.cookie(`accessToken`, token, options);
-            });
+                    res.cookie(`accessToken`, token, options);
+                },
+            );
         } else {
             logger.error('🔥 have no refreshToken');
             notAuthenticated(req, res);
@@ -189,28 +213,34 @@ const getJwtToken = async (req, res) => {
 
 // 어느 플랫폼의 토큰인지 확인
 const isAuth = async (req, res, next) => {
-    const user = {
-        token: req.cookies.accessToken,
-        refreshToken: req.user.refreshToken,
-        platform: req.user.platform
-    };
+    try {
+        const user = {
+            token: req.cookies.accessToken,
+            refreshToken: req.user.refreshToken,
+            platform: req.user.platform,
+        };
 
-    if (user.platform === 'general') {
-        if (user.token) { // local JWT 토큰 유무 확인
-            await verifyJwtToken(user, req, res);
+        if (user.platform === 'general') {
+            if (user.token) {
+                // local JWT 토큰 유무 확인
+                await verifyJwtToken(user, req, res);
+            } else {
+                await getJwtToken(req, res);
+            }
+            next();
         } else {
-            await getJwtToken(req, res);
+            if (user.token) {
+                // 액세스 토큰 유무 확인
+                const options = await setVerifyPlatformTokenOptions(user);
+                await verifyPlatformToken(options, user, req, res);
+            } else {
+                const options = await setGetPlatformTokenOptions(user);
+                await getPlatformToken(options, req, res);
+            }
+            next();
         }
-        next();
-    } else {
-        if (user.token) { // 액세스 토큰 유무 확인
-            const options = await setVerifyPlatformTokenOptions(user);
-            await verifyPlatformToken(options, user, req, res);
-        } else {
-            const options = await setGetPlatformTokenOptions(user);
-            await getPlatformToken(options, req, res);
-        }
-        next();
+    } catch {
+        notAuthenticated(req, res);
     }
 };
 
