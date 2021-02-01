@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import compression from 'compression';
 import path from 'path';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
@@ -14,6 +15,7 @@ export default async (app) => {
     app.use(helmet());
     app.enable('trust proxy');
     app.use(morgan("dev"));
+    app.use(compression());
 
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, '/views'));
