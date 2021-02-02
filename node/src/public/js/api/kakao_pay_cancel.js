@@ -19,7 +19,7 @@ cancelBtn.addEventListener("click", () => {
             kakaoPayCancel();
         }
     } else {
-        alert(`예약을 취소할 수 없어요.`);
+        alert(`시간이 지난 예약은 취소할 수 없어요.`);
     }
 });
 
