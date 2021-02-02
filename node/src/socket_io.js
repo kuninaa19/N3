@@ -1,5 +1,5 @@
-import socket_io from "socket.io";
-import connection from './loaders/mysql';
+import socket_io from 'socket.io';
+import db from './loaders/mysql';
 import moment from 'moment';
 
 export default (app) => {
@@ -21,24 +21,27 @@ export default (app) => {
                 room_id: data.room_id,
                 sender: data.sender,
                 content: data.content,
-                time: moment().format('YYYY-MM-DD HH:mm:ss')
+                time: moment().format('YYYY-MM-DD HH:mm:ss'),
             };
 
-            const sql = 'INSERT INTO `chat` SET ?';
-            connection.query(sql, msgInfo, (err, row) => {
-                if (err) throw  err;
+            db((err, connection) => {
+                const sql = 'INSERT INTO `chat` SET ?';
+                connection.query(sql, msgInfo, (err, row) => {
+                    if (err) throw err;
 
-                msgInfo.LLtime = moment(msgInfo.time).format('LL');
-                msgInfo.LTtime = moment(msgInfo.time).format('LT');
+                    msgInfo.LLtime = moment(msgInfo.time).format('LL');
+                    msgInfo.LTtime = moment(msgInfo.time).format('LT');
 
-                msgInfo.item_id = row.insertId;
+                    msgInfo.item_id = row.insertId;
 
-                io.in(msgInfo.room_id).emit('msg', msgInfo); //자기자신포함 채팅방 전원에게 전송
-            });
+                    io.in(msgInfo.room_id).emit('msg', msgInfo); //자기자신포함 채팅방 전원에게 전송
+                });
 
-            const forUpdateSql = 'UPDATE `chat_window` SET message=?, time=? WHERE room_id = ?';
-            connection.query(forUpdateSql, [msgInfo.content, msgInfo.time, msgInfo.room_id], (err) => {
-                if (err) throw  err;
+                const forUpdateSql = 'UPDATE `chat_window` SET message=?, time=? WHERE room_id = ?';
+                connection.query(forUpdateSql, [msgInfo.content, msgInfo.time, msgInfo.room_id], (err) => {
+                    connection.release();
+                    if (err) throw err;
+                });
             });
         });
 
