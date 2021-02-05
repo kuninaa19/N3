@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import roomService from "../../services/room";
+import RoomService from "../../services/room";
 import path from "path";
 import multer from "multer";
 
