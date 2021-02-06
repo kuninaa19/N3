@@ -12,6 +12,7 @@
   "scripts": {
     "build": "babel src -w -d lib",
     "start": "babel-node ./src/app.js",
+    "dev": "nodemon -L ./src/app --exec babel-node",
     "test": "eslint ./src/app.js"
   },
   "dependencies": {
