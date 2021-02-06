@@ -4,6 +4,11 @@
 프로젝트 목표는 다양한 외부 API를 사용해 보기 그리고 자바스크립트 비동기 제어에 대해 이해하기였습니다.
 
 사이트 링크 -> https://hotelbooking.kro.kr
+
+테스트
+ID : test12@test.com
+PW : test12!
+
 <br/> <br/>
 
 ## 프로젝트 정보   
