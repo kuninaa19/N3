@@ -12,8 +12,7 @@
   "scripts": {
     "build": "babel src -w -d lib",
     "start": "babel-node ./src/app.js",
-    "dev": "nodemon -L ./src/app --exec babel-node",
-    "test": "eslint ./src/app.js"
+    "test": "nodemon -L ./src/app --exec babel-node"
   },
   "dependencies": {
     "winston-daily-rotate-file": "4.5.0",
